@@ -1,13 +1,18 @@
 // Bring React in to build a component.
-import React from "react";
+import React from 'react';
 // Import from react-dom the ability to create a root render
-import { createRoot } from "react-dom/client";
+import { createRoot } from 'react-dom/client';
+import ViewMap from './components/ViewMap.jsx';
 
-const root = createRoot(document.getElementById("root"));
+const root = createRoot(document.getElementById('root'));
 
 // Huzzah for jsx!
-const App = () => {
-  return <h1>Hello World</h1>;
-};
+function App() {
+  return (
+    <div>
+      <ViewMap />
+    </div>
+  );
+}
 
 root.render(<App />);
