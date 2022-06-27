@@ -4,25 +4,16 @@ const url = '';
 
 /* *** GET REQUESTS *** */
 
-// GET fan profile information
-const getFanProfile = (fanId) => (
-  axios.get(`${url}/fan/profile/${fanId}`)
+// GET fan profile & dashboard information
+const getFanDetails = (fanId) => (
+  axios.get(`${url}/fan/details/${fanId}`)
 );
 
-// GET get fan dashboard
-const getFanDashboard = (fanId) => (
-  axios.get(`${url}/fan/dashboard/${fanId}`)
+// GET artist profile & dashboard information
+const getArtistDetails = (artistId) => (
+  axios.get(`${url}/artist/details/${artistId}`)
 );
 
-// GET artist profile information
-const getArtistProfile = (artistId) => (
-  axios.get(`${url}/artist/profile/${artistId}`)
-);
-
-// GET artist Dashboard
-const getArtistDashboard = (artistId) => (
-  axios.get(`${url}/artist/dashboard/${artistId}`)
-);
 // GET Homepage info based on location
 const getHomePageInfo = (latitude = 40.7484, longitude = -73.9857) => (
   axios.get(`${url}/homepage/${latitude}/${longitude}`)
@@ -57,7 +48,9 @@ const createEvent = (
   state,
   longitude,
   latitude,
-  timestamp,
+  date,
+  startTime,
+  endTime,
 ) => (
   axios.post(`${url}artists/event/${artistId}`, {
     name,
@@ -66,36 +59,38 @@ const createEvent = (
     state,
     longitude,
     latitude,
-    timestamp,
+    date,
+    start_time: startTime,
+    end_time: endTime,
   })
 );
 
 const saveEvent = (fanId, eventId) => (
-  axios.post(`${url}/fans/event/${fanId}`, {
+  axios.post(`${url}/fans/event`, {
+    id: fanId,
     event_id: eventId,
   })
 );
 
 const followArtist = (fanId, artistId) => (
-  axios.post(`${url}/fans/follow/${fanId}`, {
+  axios.post(`${url}/fans/follow`, {
+    id: fanId,
     artist_id: artistId,
   })
 );
 
-/* *** PATCH REQUESTS *** */
-const editFanProfile = (fanId) => (
-  axios.patch(`${url}/fan/update/${fanId}`)
+/* *** PUT REQUESTS *** */
+const editFanProfile = (fanId, fanProfile) => (
+  axios.put(`${url}/fan/update/${fanId}`, fanProfile)
 );
 
-const editArtistProfile = (artistId) => (
-  axios.patch(`${url}/artist/update/${artistId}`)
+const editArtistProfile = (artistId, artistProfile) => (
+  axios.put(`${url}/artist/update/${artistId}`, artistProfile)
 );
 
 const apiMasters = {
-  getFanProfile,
-  getFanDashboard,
-  getArtistProfile,
-  getArtistDashboard,
+  getFanDetails,
+  getArtistDetails,
   getHomePageInfo,
   getHomePageGenre,
   getUserInfo,
