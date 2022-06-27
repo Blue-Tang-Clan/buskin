@@ -3,10 +3,6 @@ import axios from 'axios';
 const url = '';
 
 /* *** GET REQUESTS *** */
-// POST user input is an obj that contains the username and password.
-const getUserInfo = (user) => (
-  axios.post(`${url}/login`, user)
-);
 
 // GET fan profile information
 const getFanProfile = (fanId) => (
@@ -36,15 +32,80 @@ const getHomePageInfo = (latitude = 40.7484, longitude = -73.9857) => (
 const getHomePageGenre = (genre) => (
   axios.get(`${url}/homepage/${genre}`)
 );
+// GET all events that are in the DB(we will need these to display them as pins on the map)
+const getEvents = (date) => (
+  axios.get(`${url}/events/${date}`)
+);
+
+/* *** POST REQUESTS *** */
+// POST user input is an obj that contains the username and password.
+const getUserInfo = (username, password) => (
+  axios.post(`${url}/login`, { username, password })
+);
+// POST user input is an obj that contains the username ,password , email and user_type.
+const registerUser = (username, password, email, userType) => (
+  axios.post(`${url}/register`, {
+    username, password, email, user_type: userType,
+  })
+);
+
+const createEvent = (
+  artistId,
+  name,
+  street,
+  city,
+  state,
+  longitude,
+  latitude,
+  timestamp,
+) => (
+  axios.post(`${url}artists/event/${artistId}`, {
+    name,
+    street,
+    city,
+    state,
+    longitude,
+    latitude,
+    timestamp,
+  })
+);
+
+const saveEvent = (fanId, eventId) => (
+  axios.post(`${url}/fans/event/${fanId}`, {
+    event_id: eventId,
+  })
+);
+
+const followArtist = (fanId, artistId) => (
+  axios.post(`${url}/fans/follow/${fanId}`, {
+    artist_id: artistId,
+  })
+);
+
+/* *** PATCH REQUESTS *** */
+const editFanProfile = (fanId) => (
+  axios.patch(`${url}/fan/update/${fanId}`)
+);
+
+const editArtistProfile = (artistId) => (
+  axios.patch(`${url}/artist/update/${artistId}`)
+);
 
 const apiMasters = {
-  getUserInfo,
   getFanProfile,
   getFanDashboard,
   getArtistProfile,
   getArtistDashboard,
   getHomePageInfo,
   getHomePageGenre,
+  getUserInfo,
+  getEvents,
+  registerUser,
+  createEvent,
+  saveEvent,
+  followArtist,
+  editFanProfile,
+  editArtistProfile,
 };
 
 export default apiMasters;
