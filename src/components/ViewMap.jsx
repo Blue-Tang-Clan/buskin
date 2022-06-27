@@ -5,7 +5,7 @@ import MapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
 // import { Room, Cancel } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
 
-const config = require('./config');
+const config = require('./config.js');
 
 export default function ViewMap() {
   const [viewport, setViewport] = useState({
@@ -31,24 +31,24 @@ export default function ViewMap() {
   );
 
   return (
-    <div className="map-div">
+    <div className='map-div'>
       <MapGL
         ref={mapRef}
         {...viewport}
-        width="100%"
-        height="100%"
+        width='100%'
+        height='100%'
         mapboxApiAccessToken={config.TOKEN}
         onViewportChange={handleViewportChange}
-        mapStyle="mapbox://styles/mapbox/streets-v11"
+        mapStyle='mapbox://styles/mapbox/streets-v11'
       >
         <Geocoder
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}
           mapboxApiAccessToken={config.TOKEN}
-          position="top-right"
+          position='top-right'
         />
         <div>
-        <GeolocateControl style={{background:'transparent' ,boxShadow:'none'}} />
+          <GeolocateControl style={{ background: 'transparent', boxShadow: 'none' }} />
         </div>
       </MapGL>
     </div>
