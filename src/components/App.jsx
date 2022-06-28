@@ -6,6 +6,8 @@ import UserProfile from './UserProfile.jsx';
 import Event from './Event.jsx';
 import ArtistUpdate from './ArtistUpdate.jsx';
 import FanDashBoard from './FanDashBoard.jsx';
+import EditFanProfile from './EditFanProfile.jsx';
+import EditArtistProfile from './EditArtistProfile.jsx';
 
 export const TopContext = React.createContext();
 
@@ -26,6 +28,8 @@ export default function App() {
         {page === 'event' ? <Event /> : <></>}
         {page === 'artistDashboard' ? <ArtistProfile /> : <></>}
         {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
+        {page === 'editArtistProfile' ? <EditArtistProfile /> : <></> }
+        {page === 'editFanProfile' ? <EditFanProfile /> : <></> }
       </TopContext.Provider>
     </>
   );
