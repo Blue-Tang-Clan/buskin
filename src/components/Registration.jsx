@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import apiMasters from './../apiMasters.js';
 
 export default function Registration() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [roles, setRoles] = useState('');
+  const [userType, setUserType] = useState('');
 
   const changeHandler = (e) => {
     if (e.target.id === 'username') {
@@ -15,12 +15,20 @@ export default function Registration() {
     } else if (e.target.id === 'password') {
       setPassword(e.target.value);
     } else if (e.target.id === 'roles') {
-      setRoles(e.target.value);
+      setUserType(e.target.value);
     }
   };
 
-  const registerNewUser = () => {
-
+  const registerNewUser = (e) => {
+    e.preventDefault();
+    apiMasters.registerUser(username, password, email, userType)
+      .then(() => {
+        alert('registered successfully!');
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('registered failed!');
+      });
   };
 
   return (
@@ -33,13 +41,13 @@ export default function Registration() {
         <br />
         <input type='password' required placeholder='password' value={password} id='password' onChange={changeHandler} />
         <br />
-        <select name='roles' id='roles' required onChange={changeHandler}>
-          <option value='' selected disabled hidden>Select your role</option>
+        <select name='roles' id='roles' required onChange={changeHandler} defaultValue=''>
+          <option value='' disabled hidden>Select your role</option>
           <option value='artist'>artist</option>
           <option value='fan'>fan</option>
         </select>
         <br />
-        <input type='submit' value='Register' onClick={registerNewUser} />
+        <input type='submit' value='Register' />
       </form>
     </div>
   );

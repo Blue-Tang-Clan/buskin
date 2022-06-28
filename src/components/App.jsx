@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// import Registration from './Registration.jsx';
-import SignUp from './registration2.jsx';
+import Registration from './Registration.jsx';
 
 export default function App() {
   const [registered, setRegistered] = useState(false);
@@ -8,7 +7,7 @@ export default function App() {
   return (
     <>
       {/* components */}
-      {!registered && <SignUp setRegistered={setRegistered} />}
+      {!registered && <Registration setRegistered={setRegistered} />}
     </>
   );
 }
