@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = '';
+const url = 'http://localhost:3000';
 
 /* *** GET REQUESTS *** */
 
@@ -40,30 +40,35 @@ const registerUser = (username, password, email, userType) => (
   })
 );
 
-const createEvent = (
-  artistId,
-  name,
-  street,
-  city,
-  state,
-  longitude,
-  latitude,
-  date,
-  startTime,
-  endTime,
-) => (
-  axios.post(`${url}artists/event/${artistId}`, {
-    name,
-    street,
-    city,
-    state,
-    longitude,
-    latitude,
-    date,
-    start_time: startTime,
-    end_time: endTime,
-  })
-);
+// const createEvent = (
+//   artistId,
+//   name,
+//   street,
+//   city,
+//   state,
+//   longitude,
+//   latitude,
+//   date,
+//   startTime,
+//   endTime,
+// ) => (
+//   axios.post(`${url}/artists/event/${artistId}`, {
+//     name,
+//     street,
+//     city,
+//     state,
+//     longitude,
+//     latitude,
+//     date,
+//     start_time: startTime,
+//     end_time: endTime,
+//   })
+// );
+
+const createEvent = (artistId, eventObj) => {
+  console.log(eventObj);
+  return axios.post(`${url}/artist/event/${artistId}`, eventObj);
+};
 
 const saveEvent = (fanId, eventId) => (
   axios.post(`${url}/fans/event`, {

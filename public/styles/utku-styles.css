@@ -23,3 +23,11 @@ box-shadow: none;
 background-color: rgba(134, 114, 17, 0.491);
 
 }
+
+.event-form {
+  width: 350px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
