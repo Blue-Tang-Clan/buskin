@@ -28,6 +28,11 @@ const getEvents = (date) => (
   axios.get(`${url}/events/${date}`)
 );
 
+// GET one event for single event page
+const getEvent = (eventId) => (
+  axios.get(`${url}/event/${eventId}`)
+);
+
 /* *** POST REQUESTS *** */
 // POST user input is an obj that contains the username and password.
 const getUserInfo = (username, password) => (
@@ -79,13 +84,21 @@ const followArtist = (fanId, artistId) => (
   })
 );
 
+const deleteEvent = (fanId, eventId) => (
+  axios.post(`${url}/fans/event/${fanId}/${eventId}`)
+);
+
+const unfollowArtist = (fanId, artistId) => (
+  axios.delete(`${url}/fans/follow/${fanId}/${artistId}`)
+);
+
 /* *** PUT REQUESTS *** */
 const editFanProfile = (fanId, fanProfile) => (
-  axios.put(`${url}/fan/update/${fanId}`, fanProfile)
+  axios.put(`${url}/fan/profile/${fanId}`, fanProfile)
 );
 
 const editArtistProfile = (artistId, artistProfile) => (
-  axios.put(`${url}/artist/update/${artistId}`, artistProfile)
+  axios.put(`${url}/artist/profile/${artistId}`, artistProfile)
 );
 
 const apiMasters = {
