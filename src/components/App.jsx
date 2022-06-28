@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import Registration from './Registration.jsx';
 import Home from './Home.jsx';
 import NavBar from './NavBar.jsx';
 
+
 export default function App() {
-  const [registered, setRegistered] = useState(false);
+  const [logedIn, setLogedIn] = useState(false);
 
   return (
     <>
       {/* components */}
       <div>
-        <NavBar />
+        <NavBar setLogedIn={setLogedIn} />
       </div>
       <Home />
-      {!registered && <Registration setRegistered={setRegistered} />}
     </>
   );
 }

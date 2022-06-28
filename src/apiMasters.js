@@ -41,7 +41,7 @@ const getUserInfo = (username, password) => (
 // POST user input is an obj that contains the username ,password , email and user_type.
 const registerUser = (username, password, email, userType) => (
   axios.post(`${url}/register`, {
-    username, password, email, user_type: userType,
+    username, password, email, userType,
   })
 );
 
