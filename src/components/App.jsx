@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Home from './Home.jsx';
 import NavBar from './NavBar.jsx';
+import FanDashBoard from './FanDashBoard.jsx';
 
 export default function App() {
   const [logedIn, setLogedIn] = useState(false);
+  const [showFanDashBoard, setShowFanDashBoard] = useState(true);
 
   return (
     <>
@@ -12,6 +14,7 @@ export default function App() {
         <NavBar setLogedIn={setLogedIn} />
       </div>
       <Home />
+      {showFanDashBoard && <FanDashBoard />}
     </>
   );
 }

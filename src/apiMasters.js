@@ -9,6 +9,11 @@ const getFanDetails = (fanId) => (
   axios.get(`${url}/fan/details/${fanId}`)
 );
 
+// GET fan dashboard info
+const getFanDashBoard = (fanId) => (
+  axios.get(`${url}/fan/dashboard/${fanId}`)
+);
+
 // GET artist profile & dashboard information
 const getArtistDetails = (artistId) => (
   axios.get(`${url}/artist/details/${artistId}`)
@@ -114,6 +119,7 @@ const apiMasters = {
   followArtist,
   editFanProfile,
   editArtistProfile,
+  getFanDashBoard,
 };
 
 export default apiMasters;
