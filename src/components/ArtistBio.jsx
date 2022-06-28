@@ -1,25 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
-const Img = styled.img`
-  height:200px;
-  width: 200px;
-  border-radius: 10px;
-`;
-
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 40% 60%;
-`;
-
-const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-`;
+import { Img, Container, InfoContainer } from './StyledComponents.js';
 
 export default function ArtistBio({ talent }) {
-
   return (
     <Container>
       <Img src="https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg" alt="Avatar" />

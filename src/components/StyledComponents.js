@@ -57,5 +57,5 @@ const InfoContainer = styled.div`
 `;
 
 export {
-  HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer, Img, InfoContainer,
+  HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer, Img, Container, InfoContainer,
 };
