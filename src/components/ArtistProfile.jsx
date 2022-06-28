@@ -44,14 +44,20 @@ const dummy = {
 //   },
 // ];
 
-export const EventContext = React.createContext();
+export const EventsContext = React.createContext();
 
 export default function ArtistProfile() {
+  const [events, setEvents] = useState([]);
   const [renderEvents, setRenderEvents] = useState(false);
 
-  function eventClick(view) {
-    setEventView(view);
-  }
+  useEffect(() => {
+    apiMasters.getArtistDetails(1)
+      .then((data) => {
+        const info = data.data.rows[0].json_build_object;
+        setEvents(info.events);
+      })
+      .catch((err) => console.log('aww didnt get any data? boohoo', err));
+  }, []);
 
   function toggleRenderEvents() {
     if (renderEvents) {
@@ -71,16 +77,12 @@ export default function ArtistProfile() {
       <p>{dummy.instrument}</p>
       {/* music clip */}
       <button type='button' onClick={() => toggleRenderEvents()}>Upcoming Events</button>
-      {/* {dumEvents.map((event) => (
-        <EventContext.Provider value={{ event }}>
-          {eventView === 'upcoming' ? <EventListItem /> : <> </>}
-        </EventContext.Provider>
-      ))} */}
-      {/* eventView === 'upcoming'
-        ? dumEvents.map((event) => <EventListItem event={event} />)
-      : dumEvents.map((event) => <EventListItem event={event} />) */}
       {renderEvents
-        ? <EventList />
+        ? (
+          <EventsContext.Provider value={events}>
+            <EventList />
+          </EventsContext.Provider>
+        )
         : undefined}
       <p>{dummy.venmo}</p>
       <p>{dummy.cashapp}</p>
