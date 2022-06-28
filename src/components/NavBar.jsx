@@ -27,7 +27,7 @@ const Search = styled.input`
 `;
 
 export default function NavBar({ setLogedIn }) {
-  const {setPage} = useContext(TopContext);
+  const { setPage } = useContext(TopContext);
 
   function goHome() {
     setPage('home');
@@ -35,9 +35,9 @@ export default function NavBar({ setLogedIn }) {
 
   return (
     <Nav>
-      <div onClick={goHome}>logo</div>
-      <div onClick={goHome}>BUSKIN'</div>
-      <div><Search type="text" name="searchQueryInput" placeholder="Search for new artists, events..." value="" /></div>
+      <div onClick={goHome} onKeyDown={() => {}} role='button' tabIndex={0}>logo</div>
+      <div onClick={goHome} onKeyDown={() => {}} role='button' tabIndex={0}>BUSKIN'</div>
+      <div><Search type='text' name='searchQueryInput' placeholder='Search for new artists, events...' value='' /></div>
       <GenreTag>
         <RegisterModal setLogedIn={setLogedIn} />
       </GenreTag>
