@@ -33,10 +33,16 @@ export default function NavBar({ setLogedIn }) {
     setPage('home');
   }
 
+  function keyDown(e) {
+    if (e.keyCode === 13) {
+      goHome();
+    }
+  }
+
   return (
     <Nav>
-      <div onClick={goHome} onKeyDown={() => {}} role='button' tabIndex={0}>logo</div>
-      <div onClick={goHome} onKeyDown={() => {}} role='button' tabIndex={0}>BUSKIN'</div>
+      <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>logo</div>
+      <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>BUSKIN'</div>
       <div><Search type='text' name='searchQueryInput' placeholder='Search for new artists, events...' value='' /></div>
       <GenreTag>
         <RegisterModal setLogedIn={setLogedIn} />
