@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import styled from 'styled-components';
 import { GenreTag } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
+import { TopContext } from './App.jsx';
 
 const Nav = styled.div`
   background: white;
@@ -26,10 +27,16 @@ const Search = styled.input`
 `;
 
 export default function NavBar({ setLogedIn }) {
+  const {setPage} = useContext(TopContext);
+
+  function goHome() {
+    setPage('home');
+  }
+
   return (
     <Nav>
-      <div>logo</div>
-      <div>BUSKIN'</div>
+      <div onClick={goHome}>logo</div>
+      <div onClick={goHome}>BUSKIN'</div>
       <div><Search type="text" name="searchQueryInput" placeholder="Search for new artists, events..." value="" /></div>
       <GenreTag>
         <RegisterModal setLogedIn={setLogedIn} />
