@@ -1,39 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 export default function Registration() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [roles, setRoles] = useState('');
+
+  const changeHandler = (e) => {
+    if (e.target.id === 'username') {
+      setUsername(e.target.value);
+    } else if (e.target.id === 'email') {
+      setEmail(e.target.value);
+    } else if (e.target.id === 'password') {
+      setPassword(e.target.value);
+    } else if (e.target.id === 'roles') {
+      setRoles(e.target.value);
+    }
+  };
+
+  const registerNewUser = () => {
+
+  };
+
   return (
     <div className='registration'>
       <h3>Registration</h3>
-      <form>
-        <label htmlFor='username'>
-          Username:
-          {' '}
-          <input type='text' placeholder='username' />
-        </label>
+      <form onSubmit={registerNewUser}>
+        <input type='text' required placeholder='username' value={username} id='username' onChange={changeHandler} />
         <br />
+        <input type='email' required placeholder='email' value={email} id='email' onChange={changeHandler} />
         <br />
-        <label htmlFor='email'>
-          Email:
-          {' '}
-          <input type='email' placeholder='email' />
-        </label>
+        <input type='password' required placeholder='password' value={password} id='password' onChange={changeHandler} />
         <br />
+        <select name='roles' id='roles' required onChange={changeHandler}>
+          <option value='' selected disabled hidden>Select your role</option>
+          <option value='artist'>artist</option>
+          <option value='fan'>fan</option>
+        </select>
         <br />
-        <label htmlFor='password'>
-          Password:
-          {' '}
-          <input type='password' placeholder='password' />
-        </label>
-        <br />
-        <br />
-        <label htmlFor='roles'>
-          Choose a role:
-          {' '}
-          <select name='roles' id='roles'>
-            <option value='artist'>artist</option>
-            <option value='fan'>fan</option>
-          </select>
-        </label>
+        <input type='submit' value='Register' onClick={registerNewUser} />
       </form>
     </div>
   );
