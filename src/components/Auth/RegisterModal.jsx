@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import SignUp from './SignUp.jsx';
+import LogIn from './Login.jsx';
 
 const style = {
   position: 'absolute',
@@ -17,14 +18,15 @@ const style = {
   p: 4,
 };
 
-export default function LogModal({ setLogedIn }) {
+export default function RegisterModal({ setLogedIn }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [showForm, setShowForm] = React.useState('Register');
 
   return (
     <div>
-      <Button onClick={handleOpen}>Register</Button>
+      <Button onClick={handleOpen}>Register / Log In</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -36,7 +38,23 @@ export default function LogModal({ setLogedIn }) {
             {/* Text in a modal */}
           </Typography>
           <Typography component='span' id='modal-modal-description' sx={{ mt: 2 }}>
-            <SignUp setLogedIn={setLogedIn} handleClose={handleClose} />
+            {
+              showForm === 'Register'
+                ? (
+                  <SignUp
+                    setLogedIn={setLogedIn}
+                    handleClose={handleClose}
+                    setShowForm={setShowForm}
+                  />
+                )
+                : (
+                  <LogIn
+                    setLogedIn={setLogedIn}
+                    handleClose={handleClose}
+                    setShowForm={setShowForm}
+                  />
+                )
+            }
           </Typography>
         </Box>
       </Modal>

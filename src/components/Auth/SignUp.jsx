@@ -31,12 +31,16 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp({ setLogedIn, handleClose }) {
+export default function SignUp({ setLogedIn, handleClose, setShowForm }) {
   const [role, setRole] = React.useState('');
   const [failed, setFailed] = React.useState(false);
 
   const handleChange = (event) => {
     setRole(event.target.value);
+  };
+
+  const ChangeForm = () => {
+    setShowForm('LogIn');
   };
 
   const handleSubmit = (event) => {
@@ -140,13 +144,13 @@ export default function SignUp({ setLogedIn, handleClose }) {
             >
               Sign Up
             </Button>
-            {/* <Grid container justifyContent='flex-end'>
+            <Grid container justifyContent='flex-end'>
               <Grid item>
-                <Link href='#' variant='body2'>
+                <Link href='#' variant='body2' onClick={ChangeForm}>
                   Already have an account? Sign in
                 </Link>
               </Grid>
-            </Grid> */}
+            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />

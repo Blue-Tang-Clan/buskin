@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import styled from 'styled-components';
 import { GenreTag } from './StyledComponents.js';
-import LogModal from './Auth/LogModal.jsx';
+import RegisterModal from './Auth/RegisterModal.jsx';
 
 const Nav = styled.div`
   background: white;
@@ -26,14 +26,13 @@ const Search = styled.input`
 `;
 
 export default function NavBar({ setLogedIn }) {
-
   return (
     <Nav>
       <div>logo</div>
       <div>BUSKIN'</div>
       <div><Search type="text" name="searchQueryInput" placeholder="Search for new artists, events..." value="" /></div>
       <GenreTag>
-        <LogModal setLogedIn={setLogedIn} />
+        <RegisterModal setLogedIn={setLogedIn} />
       </GenreTag>
     </Nav>
   );
