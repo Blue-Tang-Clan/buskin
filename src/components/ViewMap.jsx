@@ -8,6 +8,7 @@ import { Room, Cancel } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
+import moment from 'moment';
 import apiMasters from '../apiMasters.js';
 
 const config = require('./config.js');
@@ -58,6 +59,7 @@ export default function ViewMap() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (eventName && street && city && state && date && startTime && endTime) {
+      const formatDate = moment(date).format('L');
       const eventObj = {
         name: eventName,
         street,
@@ -65,15 +67,14 @@ export default function ViewMap() {
         state,
         longitude: newEvent.lng,
         latitude: newEvent.lat,
-        date,
-        startTime,
-        endTime,
+        date: formatDate,
+        start_time: startTime,
+        end_time: endTime,
       };
-      console.log(eventObj);
-      // apiMasters
-      //   .createEvent(artistId, eventObj)
-      //   .then((res) => console.log(res))
-      //   .catch((err) => console.log(err));
+      apiMasters
+        .createEvent(artistId, eventObj)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     } else {
       alert('Enter all details to submit an event!');
     }
