@@ -11,8 +11,7 @@ export default function EventList() {
     <div>
       {events.map((event) => (
         <EventContext.Provider value={event}>
-
-          <EventListItem />
+          <EventListItem key={event.name} />
         </EventContext.Provider>
       ))}
     </div>
