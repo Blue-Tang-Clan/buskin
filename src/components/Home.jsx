@@ -5,10 +5,12 @@ import { HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer } 
 import { TopContext } from './App.jsx';
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
+import { ArtistImgList, EventImgList } from './HomePageImg.jsx';
 
-export default function Home() {
+export default function Home({ setPage, setPageId }) {
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
   const [artists, setArtists] = useState([]);
+  const [poplarArtist, setPopolarArtist] = useState([]);
   const [talent, setTalent] = useState({
     name: 'Monica',
     bio: 'ssssssssssssssssssssssss',
@@ -22,13 +24,16 @@ export default function Home() {
 
   useEffect(() => {
     apiMasters.getHomePageInfo()
-      .then((result) => setTalent({
-        name: result.data.talent.artist_name,
-        bio: result.data.talent.bio,
-        genre: result.data.talent.genre,
-        instrument: result.data.talent.instrument,
-        pic: result.data.talent.pic,
-      }))
+      .then((result) => {
+        setTalent({
+          name: result.data.talent.artist_name,
+          bio: result.data.talent.bio,
+          genre: result.data.talent.genre,
+          instrument: result.data.talent.instrument,
+          pic: result.data.talent.pic,
+        });
+        setPopolarArtist(result.data.artists);
+      })
       .then(() => {
         apiMasters.getHomePageGenre()
           .then((result) => {
@@ -44,6 +49,7 @@ export default function Home() {
       <div>
         <h3>Map</h3>
         <HomeMap />
+        <EventImgList EventArr={poplarArtist} xs={12} setPage={setPage} setPageId={setPageId} />
       </div>
       <div>
         <div onClick={() => { setPage('artistProfile'); }}>
@@ -59,14 +65,7 @@ export default function Home() {
               <GenreTag key={i} value={genre} onClick={handleFilterGenre}>{genre}</GenreTag>
             )}
           </TagContainer>
-          <ArtistImgContainer>
-            {artists.map((artist, i) => 
-              <>
-                <ArtistImg src={artist.pic} key={i} alt="Avatar" />
-                <label>{artist.artist_name}</label>
-              </>
-            )} 
-          </ArtistImgContainer>
+          <ArtistImgList ArtistArr={artists} xs={12} setPage={setPage} setPageId={setPageId} />
         </div>
       </div>
     </HomeContainer>
