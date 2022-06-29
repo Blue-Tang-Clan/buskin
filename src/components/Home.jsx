@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ArtistBio from './ArtistBio.jsx';
 import { HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer } from './StyledComponents.js';
 import {TopContext} from './App.jsx';
+import HomeMap from './HomeMap.jsx';
 
 export default function Home() {
   const {page, setPage} = useContext(TopContext);
@@ -22,6 +23,7 @@ export default function Home() {
     <HomeContainer>
       <div>
         <h3>Map</h3>
+        <HomeMap />
       </div>
       <div>
         <div onClick={() => {setPage('artistProfile');}}>
