@@ -12,7 +12,7 @@ import {
 import RegisterModal from './Auth/RegisterModal.jsx';
 
 export default function NavBar({ setUserType, setUserId }) {
-  const { setPage } = useContext(TopContext);
+  const { setPage, userType } = useContext(TopContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
