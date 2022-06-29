@@ -3,18 +3,16 @@ import { TotalFollowers } from './DashBoardTag.jsx';
 import apiMasters from '../apiMasters.js';
 import ViewMap from './ArtistViewMap.jsx';
 
-export default function ArtistDashBoard({pageId}) {
+export default function ArtistDashBoard({userId}) {
   const [fanCount, setFanCount] = useState(0);
   const [events, setEvents] = useState([]);
   const [artistName, setArtistName] = useState('');
   const [artistId, setArtistId] = useState();
 
   useEffect(() => {
-    // needs to change artist_id dynamically
-    apiMasters.getArtistDetails(pageId)
+    apiMasters.getArtistDetails(userId)
       .then((response) => {
-        let artistInfo = response.data.rows[0].json_build_object;
-        console.log(artistInfo);
+        const artistInfo = response.data.rows[0].json_build_object;
         setFanCount(artistInfo.fan_num);
         setEvents(artistInfo.events);
         setArtistName(artistInfo.name);
@@ -23,7 +21,7 @@ export default function ArtistDashBoard({pageId}) {
       .catch((err) => {
         console.log('getArtistDashBoard err', err);
       });
-  }, [pageId]);
+  }, [userId]);
 
   return (
     <>
@@ -31,8 +29,8 @@ export default function ArtistDashBoard({pageId}) {
       {TotalFollowers(fanCount)}
       {events.map((event) => (
         <div key={event.id}>
-        <h5>{`${event.date} ${event.start_time}`}</h5>
-        <h5>{`${event.street}, ${event.city}, ${event.state}`}</h5>
+          <h5>{`${event.date} ${event.start_time}`}</h5>
+          <h5>{`${event.street}, ${event.city}, ${event.state}`}</h5>
         </div>
       ))}
       <ViewMap ArtistName={artistName} ArtistId={artistId} />

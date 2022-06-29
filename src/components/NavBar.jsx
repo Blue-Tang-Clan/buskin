@@ -64,7 +64,7 @@ export default function NavBar({ userType, setUserType, setUserId }) {
             setUserId={setUserId}
             setUserName={setUserName}
             setUserPic={setUserPic}
-            />
+          />
         </GenreTag>
       ) : (
         <UserSettingContainer>
