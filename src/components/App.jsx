@@ -13,14 +13,14 @@ export const TopContext = React.createContext();
 
 export default function App() {
   const [userType, setUserType] = useState('anonymous');
-  const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState(1);
   const [page, setPage] = useState('home');
   const [pageId, setPageId] = useState(1);
 
   return (
     <>
       {/* components */}
-      <TopContext.Provider value={{page, setPage, pageId, setPageId}}>
+      <TopContext.Provider value={{page, setPage, pageId, setPageId, userId, setUserId}}>
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
         </div>
