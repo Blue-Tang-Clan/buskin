@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <HomeContainer>
       <div>
-        <h3>Trending</h3>
+        <h3>Map</h3>
       </div>
       <div>
         <div onClick={() => {setPage('artistProfile');}}>
