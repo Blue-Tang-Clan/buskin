@@ -11,10 +11,10 @@ import {
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
 
-export default function NavBar({ userType, setUserType, setUserId }) {
+export default function NavBar({ setUserType, setUserId }) {
   const [userName, setUserName] = useState('');
   const [userPic, setUserPic] = useState('');
-  const { setPage } = useContext(TopContext);
+  const { setPage, userType } = useContext(TopContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

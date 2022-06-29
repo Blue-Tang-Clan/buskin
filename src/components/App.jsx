@@ -8,12 +8,14 @@ import ArtistUpdate from './ArtistUpdate.jsx';
 import FanDashBoard from './FanDashBoard.jsx';
 import EditFanProfile from './EditFanProfile.jsx';
 import EditArtistProfile from './EditArtistProfile.jsx';
+import RegisterModal from './Auth/RegisterModal.jsx';
 import ArtistDashBoard from './ArtistDashBoard.jsx';
 
 export const TopContext = React.createContext();
 
 export default function App() {
   const [userType, setUserType] = useState('anonymous');
+  const [login, setLogin] = useState(false);
   const [userId, setUserId] = useState();
   const [page, setPage] = useState('home');
   const [pageId, setPageId] = useState(1);
@@ -21,7 +23,7 @@ export default function App() {
   return (
     <>
       {/* components */}
-      <TopContext.Provider value={{page, setPage, pageId, setPageId}}>
+      <TopContext.Provider value={{page, setPage, pageId, setPageId, userType, setLogin}}>
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
         </div>
@@ -34,6 +36,9 @@ export default function App() {
         {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
         {page === 'editArtistProfile' ? <EditArtistProfile /> : <></> }
         {page === 'editFanProfile' ? <EditFanProfile /> : <></> }
+        {login
+          ? <RegisterModal setUserType={setUserType} setUserId={setUserId} anonymous={login} />
+          : null}
       </TopContext.Provider>
     </>
   );
