@@ -42,6 +42,10 @@ const getEvent = (eventId) => (
   axios.get(`${url}/event/${eventId}`)
 );
 
+const checkEventRadius = (latitude,longitude,date,start_time) => (
+  axios.get(`${url}/check/events?latitude=${encodeURI(latitude)}&longitude=${encodeURI(longitude)}&date=${encodeURI(date)}&start_time=${encodeURI(start_time)}`)
+)
+
 /* *** POST REQUESTS *** */
 // POST user input is an obj that contains the username and password.
 const getUserInfo = (username, password) => (
@@ -138,6 +142,7 @@ const apiMasters = {
   editArtistProfile,
   getFanDashBoard,
   search,
+  checkEventRadius,
 };
 
 export default apiMasters;

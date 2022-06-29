@@ -109,4 +109,5 @@ node_modules
 config.js
 package-lock.json
 vendors-node_modules_mapbox-gl_dist_mapbox-gl_js.bundle.js
+.DS_Store
 

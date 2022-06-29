@@ -7,7 +7,6 @@ import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
 
 export default function Home() {
-  const { page, setPage } = useContext(TopContext);
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
   const [artists, setArtists] = useState([]);
   const [talent, setTalent] = useState({
