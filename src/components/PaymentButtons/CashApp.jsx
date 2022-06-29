@@ -8,10 +8,10 @@ export default function Venmo() {
 
   return (
     <div>
-      {artist.cashapp !== undefined && artist.cashapp !== 'undefined'
+      {artist.cashapp !== undefined && artist.cashapp !== 'undefined' && artist.cashapp.length > 0
         ? (
           <button type='button'>
-            <a href={`https://cash.app/$${artist.cashapp}`} target='_blank' rel='noreferrer'>VENMO</a>
+            <a href={`https://cash.app/$${artist.cashapp}`} target='_blank' rel='noreferrer'>CASHAPP</a>
           </button>
         ) : <></> }
     </div>
