@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { TotalFollowers } from './DashBoardTag.jsx';
 import apiMasters from '../apiMasters.js';
-// import ViewMap from './ArtistViewMap.js';
+import ViewMap from './ArtistViewMap.jsx';
 
 export default function ArtistDashBoard({pageId}) {
   const [fanCount, setFanCount] = useState(0);
   const [events, setEvents] = useState([]);
   const [artistName, setArtistName] = useState('');
-  const [artistId, setArtistId] = useState(1);
+  const [artistId, setArtistId] = useState();
 
   useEffect(() => {
     // needs to change artist_id dynamically
@@ -35,7 +35,7 @@ export default function ArtistDashBoard({pageId}) {
         <h5>{`${event.street}, ${event.city}, ${event.state}`}</h5>
         </div>
       ))}
-      {/* <ViewMap ArtistName={artistName} ArtistId={artistId} /> */}
+      <ViewMap ArtistName={artistName} ArtistId={artistId} />
     </>
   );
 }

@@ -10,7 +10,6 @@ import EditFanProfile from './EditFanProfile.jsx';
 import EditArtistProfile from './EditArtistProfile.jsx';
 import ArtistDashBoard from './ArtistDashBoard.jsx';
 
-
 export const TopContext = React.createContext();
 
 export default function App() {
