@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <HomeContainer>
       <div>
-        <h3>Trending</h3>
+        <h3>Map</h3>
       </div>
       <div>
         <h3>Fresh Talent</h3>

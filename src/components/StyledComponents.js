@@ -27,8 +27,8 @@ const TagContainer = styled.div`
 `;
 
 const ArtistImg = styled.img`
-  height:60px;
-  width: 60px;
+  height:150px;
+  width: 150px;
   border-radius: 50%;
 `;
 
@@ -39,9 +39,9 @@ const ArtistImgContainer = styled.div`
   gap: 20px
 `;
 
-const Img = styled.img`
-  height:200px;
-  width: 200px;
+const EventImg = styled.img`
+  height: 180px;
+  width: 180px;
   border-radius: 10px;
 `;
 
@@ -57,5 +57,5 @@ const InfoContainer = styled.div`
 `;
 
 export {
-  HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer, Img, Container, InfoContainer,
+  HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer, EventImg, Container, InfoContainer,
 };
