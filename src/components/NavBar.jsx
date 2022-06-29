@@ -21,6 +21,7 @@ export default function NavBar({ setUserType, setUserId }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const goHome = () => {
     setPage('home');
   };
@@ -28,6 +29,22 @@ export default function NavBar({ setUserType, setUserId }) {
     if (e.keyCode === 13) {
       goHome();
     }
+  };
+  const goArtistProfile = () => {
+    setPage('artistProfile');
+    setAnchorEl(null);
+  };
+  const goArtistDashboard = () => {
+    setPage('artistDashboard');
+    setAnchorEl(null);
+  };
+  const goFanProfile = () => {
+    setPage('fanProfile');
+    setAnchorEl(null);
+  };
+  const goFanDashboard = () => {
+    setPage('fanDashboard');
+    setAnchorEl(null);
   };
 
   return (
@@ -64,8 +81,8 @@ export default function NavBar({ setUserType, setUserId }) {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+                <MenuItem onClick={goArtistProfile}>Profile</MenuItem>
+                <MenuItem onClick={goArtistDashboard}>Dashboard</MenuItem>
               </Menu>
             </UserSettingContainer>
           ) : (
@@ -89,8 +106,8 @@ export default function NavBar({ setUserType, setUserId }) {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+                <MenuItem onClick={goFanProfile}>Profile</MenuItem>
+                <MenuItem onClick={goFanDashboard}>Dashboard</MenuItem>
               </Menu>
             </UserSettingContainer>
           )}
@@ -98,9 +115,6 @@ export default function NavBar({ setUserType, setUserId }) {
           <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={() => setUserType('anonymous')} />
         </UserSettingContainer>
       )}
-      <GenreTag>
-        <RegisterModal setUserType={setUserType} setUserId={setUserId} />
-      </GenreTag>
     </Nav>
   );
 }
