@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import FormData from 'form-data';
 import apiMasters from '../apiMasters.js';
 
-export default function EditProfile ({ artist_id = 1 }) {
+export default function EditProfile ({ artistId = 1 }) {
   const [displayName, setDisplayName ] = useState('');
   const [genre, setGenre ] = useState('');
   const [instrument, setInstrument ] = useState('');
@@ -47,7 +46,7 @@ export default function EditProfile ({ artist_id = 1 }) {
     } else if (paymentOptions === 'cashapp') {
       cashapp = paymentMethod;
     }
-    apiMasters.editArtistProfile(artist_id, {
+    apiMasters.editArtistProfile(artistId, {
       displayName,
       genre,
       instrument,

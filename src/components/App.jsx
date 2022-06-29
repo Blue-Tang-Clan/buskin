@@ -6,7 +6,8 @@ import UserProfile from './UserProfile.jsx';
 import Event from './Event.jsx';
 import ArtistUpdate from './ArtistUpdate.jsx';
 import EditFanProfile from './EditFanProfile.jsx';
-import EditArtistProfile from './EditArtistProfile.jsx'
+import EditArtistProfile from './EditArtistProfile.jsx';
+import Qr from './Qr.jsx';
 
 export const TopContext = React.createContext();
 
@@ -29,6 +30,7 @@ export default function App() {
         {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
         {page === 'editArtistProfile' ? <EditArtistProfile /> : <></> }
         {page === 'editFanProfile' ? <EditFanProfile /> : <></> }
+        <Qr />
       </TopContext.Provider>
     </>
   );
