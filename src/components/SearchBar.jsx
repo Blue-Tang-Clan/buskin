@@ -125,7 +125,7 @@ export default function SearchBar() {
         {eventsArr.length
           ? eventsArr.map((result) =>
             (
-              <IndividualResult name='eventPage' key={result.id} onClick={(e) => handleClick(e, result.id)}>
+              <IndividualResult name='event' key={result.id} onClick={(e) => handleClick(e, result.id)}>
                 {`${result.name} - `}
                 City:
                 {` ${result.city}, `}

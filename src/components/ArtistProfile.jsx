@@ -41,7 +41,7 @@ export default function ArtistProfile() {
         setEvents(info.events);
       })
       .catch((err) => console.log('aww didnt get any data? boohoo', err));
-  }, []);
+  }, [pageId]);
 
   function toggleRenderEvents() {
     if (renderEvents) {
