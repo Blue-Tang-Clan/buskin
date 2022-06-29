@@ -49,15 +49,14 @@ font-size: 1.5rem;
 let searchId;
 
 export default function SearchBar() {
-  const { setPage, setPageId } = useContext(TopContext);
+  const { setPage } = useContext(TopContext);
   const [search, setSearch] = useState('');
   const [artistsArr, setArtistsArr] = useState([]);
   const [eventsArr, setEventsArr] = useState([]);
   const [noResults, setNoResults] = useState(false);
 
   function handleClick(e, id) {
-    setPage(e.target.attributes.name.nodeValue);
-    setPageId(id);
+    setPage(e.target.name, id);
     setSearch(e.target.value);
     setNoResults(false);
     setArtistsArr([]);
@@ -104,7 +103,6 @@ export default function SearchBar() {
     }
   }
 
-
   return (
     <>
       <Search type='text' onChange={(e) => handleSearch(e)} name='searchQueryInput' placeholder='Search for new artists, events...' value={search} />
@@ -125,7 +123,7 @@ export default function SearchBar() {
         {eventsArr.length
           ? eventsArr.map((result) =>
             (
-              <IndividualResult name='eventPage' key={result.id} onClick={(e) => handleClick(e, result.id)}>
+              <IndividualResult name='events' key={result.id} onClick={(e) => handleClick(e, result.id)}>
                 {`${result.name} - `}
                 City:
                 {` ${result.city}, `}
