@@ -7,7 +7,6 @@ export default function Venmo() {
   const { artist } = useContext(ArtistContext);
   return (
     <div>
-      {console.log(artist)}
       {artist.venmo !== undefined && artist.venmo !== 'undefined'
         ? (
           <button type='button'>
