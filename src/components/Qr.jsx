@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 const QrCode = require('qrcode');
 
-export default function Qr({ artistId = 1, artistName = 'Teck' }) {
-  // Change url to deployed site url
+export default function Qr({ artistId, artistName }) {
   const artistUrl = `http://localhost:3000/artist/details/${artistId}`;
   const [img, setImg] = useState('');
   // component should mount first to make reference to an element
@@ -18,7 +17,7 @@ export default function Qr({ artistId = 1, artistName = 'Teck' }) {
       <canvas id="qr">
       </canvas>
       {
-        img && <a href={img} download={artistName} >Download</a>
+        img && <a href={img} download={artistName}>Download</a>
       }
     </div>
   );
