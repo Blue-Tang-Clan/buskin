@@ -18,8 +18,14 @@ const style = {
   p: 4,
 };
 
-export default function RegisterModal({ setUserType, setUserId, setUserName, setUserPic}) {
-  const [open, setOpen] = React.useState(false);
+export default function RegisterModal({
+  setUserType,
+  setUserId,
+  anonymous,
+  setUserName,
+  setUserPic,
+}) {
+  const [open, setOpen] = React.useState(!!anonymous);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [showForm, setShowForm] = React.useState('Register');
