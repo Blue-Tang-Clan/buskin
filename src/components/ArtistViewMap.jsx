@@ -2,7 +2,9 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
-import React, { useState, useRef, useCallback } from 'react';
+import React, {
+  useState, useRef, useCallback, useEffect,
+} from 'react';
 import MapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
 import { Room, Cancel } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
@@ -13,7 +15,7 @@ import apiMasters from '../apiMasters.js';
 
 const config = require('./config.js');
 
-export default function ViewMap() {
+export default function ViewMap({ ArtistName, ArtistId }) {
   const [viewport, setViewport] = useState({
     latitude: 40.7484,
     longitude: -73.9857,
@@ -21,14 +23,32 @@ export default function ViewMap() {
   });
   const [newEvent, setNewEvent] = useState(null);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
   const [eventName, setEventName] = useState(null);
   const [street, setStreet] = useState(null);
+  const [pins, setPins] = useState([]);
   const [city, setCity] = useState(null);
   const [state, setState] = useState(null);
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState('10:00');
   const [endTime, setEndTime] = useState('10:00');
-  const [artistId, setArtistId] = useState('1');
+  const [artistId, setArtistId] = useState(null);
+  const [artistName , setArtistName] = useState(ArtistName);
+
+  useEffect(() => {
+    const getPins = async () => {
+      try {
+        const res = await apiMasters.getEvents(new Date());
+        console.log(res.data);
+        setPins(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    setArtistName(ArtistName);
+    setArtistId(ArtistId);
+    getPins();
+  }, [ArtistName]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -37,7 +57,7 @@ export default function ViewMap() {
   );
   const handleGeocoderViewportChange = useCallback(
     (newViewport) => {
-      const geocoderDefaultOverrides = { transitionDuration: 1000 };
+      const geocoderDefaultOverrides = { transitionDuration: 200 };
 
       return handleViewportChange({
         ...newViewport,
@@ -71,13 +91,27 @@ export default function ViewMap() {
         start_time: startTime,
         end_time: endTime,
       };
+      eventObj.display_name = artistName;
       apiMasters
         .createEvent(artistId, eventObj)
-        .then((res) => console.log(res))
+        .then((res) => {
+           setPins([...pins, eventObj]);
+          console.log(res.data);
+        })
+        .then(() => setNewEvent(null))
         .catch((err) => console.log(err));
     } else {
       alert('Enter all details to submit an event!');
     }
+  };
+
+  const handleMarkerClick = (id, event, lat, long) => {
+    event.stopPropagation();
+    setCurrentPlaceId(id);
+    setViewport({
+      ...viewport, latitude: Number(lat), longitude: Number(long),
+    });
+    setShowPopup(true);
   };
 
   return (
@@ -103,21 +137,78 @@ export default function ViewMap() {
             style={{ background: 'transparent', boxShadow: 'none' }}
           />
         </div>
-        <Marker
-          latitude={40.7484}
-          longitude={-73.9857}
-          offsetLeft={-20}
-          offsetTop={-10}
-        >
-          <Room style={{ fontSize: viewport.zoom * 7, cursor: 'pointer' }} />
-        </Marker>
+        { pins.map((p) => (
+          <>
+            <Marker
+              latitude={Number(p.latitude)}
+              longitude={Number(p.longitude)}
+              offsetLeft={- viewport.zoom * 3.5}
+              offsetTop={- viewport.zoom * 5.5}
+            >
+              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer' }} className='pin' onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)}  />
+            </Marker>
+            {p.id === currentPlaceId
+              ? (
+
+                <Popup
+                  latitude={Number(p.latitude)}
+                  longitude={Number(p.longitude)}
+                  closeButton
+                  closeOnClick={false}
+                  anchor='right'
+                  onClose={() => setCurrentPlaceId(null)}
+                >
+                  <div className='card'>
+                  <label className='eventLabel'>Artist Name</label>
+                    <p className='artist'>
+                      {' '}
+                      <b>{p.display_name}</b>
+                    </p>
+                    <label className='eventLabel'>Event Name</label>
+                    <p className='event'>
+                      {' '}
+                      <b>{p.name}</b>
+                    </p>
+                    <label className='eventLabel'>Event Address</label>
+                    <p className='address'>
+                      {p.street}
+                      {' '}
+                      -
+                      {' '}
+                      {p.city}
+                      {' '}
+                      /
+                      {' '}
+                      {p.state}
+                      {' '}
+                    </p>
+                    <label className='eventLabel'>Date</label>
+                    <p className='date'>{p.date}</p>
+                    <label className='eventLabel'>Time</label>
+                    <span className='startTime'>
+                      Start Time&nbsp;
+                      <b>{p.start_time}</b>
+                    </span>
+                    <span className='endTime'>
+                      End Time&nbsp;
+                      <b>
+                        {p.end_time}
+                      </b>
+
+                    </span>
+                  </div>
+                </Popup>
+              )
+              : null }
+          </>
+        ))}
         {newEvent && (
         <Popup
           latitude={newEvent.lat}
           longitude={newEvent.lng}
           closeButton
           closeOnClick={false}
-          anchor='right'
+          anchor='top'
           onClose={() => setNewEvent(null)}
         >
           <div>
@@ -143,7 +234,7 @@ export default function ViewMap() {
                 onChange={(e) => setState(e.target.value)}
               />
               <label>Event Date</label>
-              <DatePicker onChange={setDate} value={date} format="y-MM-dd" />
+              <DatePicker onChange={setDate} value={date} format='y-MM-dd' />
               <label>Event Start Time</label>
               <TimePicker onChange={setStartTime} value={startTime} />
               <label>Event End Time</label>
