@@ -23,7 +23,7 @@ export default function App() {
         </div>
         {page === 'home' ? <Home /> : <></>}
         {page === 'artistProfile' ? <ArtistProfile /> : <></>}
-        {page === 'fanDashboard' ? <FanDashBoard /> : <></>}
+        {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} /> : <></>}
         {page === 'userProfile' ? <UserProfile /> : <></>}
         {page === 'event' ? <Event /> : <></>}
         {page === 'artistDashboard' ? <ArtistProfile /> : <></>}
