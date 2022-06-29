@@ -15,7 +15,7 @@ const Nav = styled.div`
   gap: 30px;
 `;
 
-export default function NavBar({ setLogedIn }) {
+export default function NavBar({ setUserType, setUserId }) {
   const { setPage } = useContext(TopContext);
 
   function goHome() {
@@ -36,7 +36,7 @@ export default function NavBar({ setLogedIn }) {
         <SearchBar />
       </div>
       <GenreTag>
-        <RegisterModal setLogedIn={setLogedIn} />
+        <RegisterModal setUserType={setUserType} setUserId={setUserId} />
       </GenreTag>
     </Nav>
   );

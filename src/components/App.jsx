@@ -12,15 +12,17 @@ import EditArtistProfile from './EditArtistProfile.jsx'
 export const TopContext = React.createContext();
 
 export default function App() {
-  const [logedIn, setLogedIn] = useState(false);
-  const [page, setPage] = useState('fanDashboard');
+  const [userType, setUserType] = useState('anonymous');
+  const [userId, setUserId] = useState();
+  const [page, setPage] = useState('home');
   const [pageId, setPageId] = useState(1);
+
   return (
     <>
       {/* components */}
       <TopContext.Provider value={{page, setPage, pageId, setPageId}}>
         <div>
-          <NavBar setLogedIn={setLogedIn} />
+          <NavBar setUserType={setUserType} setUserId={setUserId} />
         </div>
         {page === 'home' ? <Home /> : <></>}
         {page === 'artistProfile' ? <ArtistProfile /> : <></>}
