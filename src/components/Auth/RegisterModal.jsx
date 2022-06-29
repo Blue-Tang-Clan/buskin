@@ -24,11 +24,17 @@ export default function RegisterModal({
   anonymous,
   setUserName,
   setUserPic,
+  setLogin,
 }) {
   const [open, setOpen] = React.useState(!!anonymous);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [showForm, setShowForm] = React.useState('Register');
+  function handleClick() {
+    if (anonymous) {
+      setLogin(false);
+    }
+  }
 
   return (
     <div>
@@ -36,6 +42,8 @@ export default function RegisterModal({
       <Modal
         open={open}
         onClose={handleClose}
+        // eslint-disable-next-line react/jsx-no-bind
+        onClick={handleClick}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
