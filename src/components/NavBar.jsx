@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { GenreTag } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import { TopContext } from './App.jsx';
+import SearchBar from './SearchBar.jsx';
 
 const Nav = styled.div`
   background: white;
@@ -14,30 +15,26 @@ const Nav = styled.div`
   gap: 30px;
 `;
 
-const Search = styled.input`
-  width: 60%;
-  height: 2.8rem;
-  background: white;
-  outline: none;
-  border: none;
-  border-radius: 1.625rem;
-  padding: 0 3.5rem 0 1.5rem;
-  font-size: 1rem;
-  box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
-`;
-
 export default function NavBar({ setLogedIn }) {
-  const {setPage} = useContext(TopContext);
+  const { setPage } = useContext(TopContext);
 
   function goHome() {
     setPage('home');
   }
 
+  function keyDown(e) {
+    if (e.keyCode === 13) {
+      goHome();
+    }
+  }
+
   return (
     <Nav>
-      <div onClick={goHome}>logo</div>
-      <div onClick={goHome}>BUSKIN'</div>
-      <div><Search type="text" name="searchQueryInput" placeholder="Search for new artists, events..." value="" /></div>
+      <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>logo</div>
+      <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>BUSKIN'</div>
+      <div>
+        <SearchBar />
+      </div>
       <GenreTag>
         <RegisterModal setLogedIn={setLogedIn} />
       </GenreTag>

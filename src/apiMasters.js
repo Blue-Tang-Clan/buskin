@@ -106,6 +106,10 @@ const editArtistProfile = (artistId, artistProfile) => (
   axios.put(`${url}/artist/profile/${artistId}`, artistProfile)
 );
 
+const search = (query) => (
+  axios.get(`${url}/search?query=${query}`)
+);
+
 const apiMasters = {
   getFanDetails,
   getArtistDetails,
@@ -113,12 +117,16 @@ const apiMasters = {
   getHomePageGenre,
   getUserInfo,
   getEvents,
+  getEvent,
   registerUser,
   createEvent,
   saveEvent,
   followArtist,
+  deleteEvent,
+  unfollowArtist,
   editFanProfile,
   editArtistProfile,
+  search,
 };
 
 export default apiMasters;
