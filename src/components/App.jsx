@@ -7,7 +7,7 @@ import Event from './Event.jsx';
 import ArtistUpdate from './ArtistUpdate.jsx';
 import FanDashBoard from './FanDashBoard.jsx';
 import EditFanProfile from './EditFanProfile.jsx';
-import EditArtistProfile from './EditArtistProfile.jsx'
+import EditArtistProfile from './EditArtistProfile.jsx';
 
 export const TopContext = React.createContext();
 
