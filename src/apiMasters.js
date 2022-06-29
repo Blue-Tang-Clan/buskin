@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000';
+const url = 'http://localhost:3001';
 
 /* *** GET REQUESTS *** */
 
@@ -32,6 +32,10 @@ const getEvents = (date) => (
 const getEvent = (eventId) => (
   axios.get(`${url}/event/${eventId}`)
 );
+
+const checkEventRadius = (latitude,longitude,date,start_time) => (
+  axios.get(`${url}/check/events?latitude=${encodeURI(latitude)}&longitude=${encodeURI(longitude)}&date=${encodeURI(date)}&start_time=${encodeURI(start_time)}`)
+)
 
 /* *** POST REQUESTS *** */
 // POST user input is an obj that contains the username and password.
@@ -127,6 +131,7 @@ const apiMasters = {
   editFanProfile,
   editArtistProfile,
   search,
+  checkEventRadius,
 };
 
 export default apiMasters;
