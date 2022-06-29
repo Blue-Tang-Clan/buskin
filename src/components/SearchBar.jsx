@@ -5,8 +5,8 @@ import apiMasters from '../apiMasters.js';
 
 
 const Search = styled.input`
-width: 60%;
-height: 2.8rem;
+width: 70%;
+height: 3.6rem;
 background: white;
 outline: none;
 border: none;
@@ -123,7 +123,11 @@ export default function SearchBar() {
         {eventsArr.length
           ? eventsArr.map((result) =>
             (
+<<<<<<< HEAD
               <IndividualResult name='events' key={result.id} onClick={(e) => handleClick(e, result.id)}>
+=======
+              <IndividualResult name='event' key={result.id} onClick={(e) => handleClick(e, result.id)}>
+>>>>>>> 19406e3cfe99c622c6cd97989c49e4c3ece5dbe7
                 {`${result.name} - `}
                 City:
                 {` ${result.city}, `}

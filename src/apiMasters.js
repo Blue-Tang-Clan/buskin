@@ -1,12 +1,17 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000';
+const url = 'http://localhost:3001';
 
 /* *** GET REQUESTS *** */
 
 // GET fan profile & dashboard information
 const getFanDetails = (fanId) => (
   axios.get(`${url}/fan/details/${fanId}`)
+);
+
+// GET fan dashboard info
+const getFanDashBoard = (fanId) => (
+  axios.get(`${url}/fan/dashboard/${fanId}`)
 );
 
 // GET artist profile & dashboard information
@@ -20,7 +25,11 @@ const getHomePageInfo = (latitude = 40.7484, longitude = -73.9857) => (
 );
 
 // GET Homepage genre selection
-const getHomePageGenre = (genre) => (
+const getHomePageGenre = () => (
+  axios.get(`${url}/homepage/genre`)
+);
+// search Homepage genre selection
+const searchHomePageGenre = (genre) => (
   axios.get(`${url}/homepage/${genre}`)
 );
 // GET all events that are in the DB(we will need these to display them as pins on the map)
@@ -32,6 +41,10 @@ const getEvents = (date) => (
 const getEvent = (eventId) => (
   axios.get(`${url}/event/${eventId}`)
 );
+
+const checkEventRadius = (latitude,longitude,date,start_time) => (
+  axios.get(`${url}/check/events?latitude=${encodeURI(latitude)}&longitude=${encodeURI(longitude)}&date=${encodeURI(date)}&start_time=${encodeURI(start_time)}`)
+)
 
 /* *** POST REQUESTS *** */
 // POST user input is an obj that contains the username and password.
@@ -115,6 +128,7 @@ const apiMasters = {
   getArtistDetails,
   getHomePageInfo,
   getHomePageGenre,
+  searchHomePageGenre,
   getUserInfo,
   getEvents,
   getEvent,
@@ -126,7 +140,9 @@ const apiMasters = {
   unfollowArtist,
   editFanProfile,
   editArtistProfile,
+  getFanDashBoard,
   search,
+  checkEventRadius,
 };
 
 export default apiMasters;
