@@ -49,7 +49,7 @@ font-size: 1.5rem;
 let searchId;
 
 export default function SearchBar() {
-  const { setPage, setArtistId } = useContext(TopContext);
+  const { setPage, setPageId } = useContext(TopContext);
   const [search, setSearch] = useState('');
   const [artistsArr, setArtistsArr] = useState([]);
   const [eventsArr, setEventsArr] = useState([]);
@@ -57,7 +57,7 @@ export default function SearchBar() {
 
   function handleClick(e, id) {
     setPage(e.target.attributes.name.nodeValue);
-    setArtistId(id);
+    setPageId(id);
     setSearch(e.target.value);
     setNoResults(false);
     setArtistsArr([]);

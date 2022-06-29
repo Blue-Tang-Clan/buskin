@@ -19,16 +19,15 @@ const dummy = {
 export const ArtistContext = React.createContext();
 
 export default function ArtistProfile() {
-  const { artistId } = useContext(TopContext);
+  const { pageId } = useContext(TopContext);
   const [artist, setArtist] = useState({});
   const [events, setEvents] = useState([]);
   const [renderEvents, setRenderEvents] = useState(false);
 
   useEffect(() => {
-    apiMasters.getArtistDetails(artistId)
+    apiMasters.getArtistDetails(pageId)
       .then((data) => {
         const info = data.data.rows[0].json_build_object;
-        console.log('INFO', info);
         setArtist({
           id: info.id,
           name: info.name,
