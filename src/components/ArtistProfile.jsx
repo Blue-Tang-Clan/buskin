@@ -54,7 +54,7 @@ export default function ArtistProfile() {
   return (
     <div>
       <ArtistContext.Provider value={{events, artist}}>
-        <img src={dummy.pic} alt='busker' style={{ height: '100px' }} />
+        <img src={artist.pic} alt='busker' style={{ height: '100px' }} />
         <h1>{artist.name}</h1>
         <FavoriteIcon />
         <p>
