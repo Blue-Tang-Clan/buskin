@@ -15,7 +15,7 @@ import apiMasters from '../apiMasters.js';
 
 const config = require('./config.js');
 
-export default function ViewMap({ ArtistName, ArtistId }) {
+export default function ViewMap() {
   const [viewport, setViewport] = useState({
     latitude: 40.7484,
     longitude: -73.9857,
@@ -32,8 +32,8 @@ export default function ViewMap({ ArtistName, ArtistId }) {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState('10:00');
   const [endTime, setEndTime] = useState('10:00');
-  const [artistId, setArtistId] = useState(null);
-  const [artistName , setArtistName] = useState(ArtistName);
+  const [artistId, setArtistId] = useState('1');
+  const [artistName , setArtistName] = useState('Lil Uzzy');
 
   useEffect(() => {
     const getPins = async () => {
@@ -45,10 +45,8 @@ export default function ViewMap({ ArtistName, ArtistId }) {
         console.log(err);
       }
     };
-    setArtistName(ArtistName);
-    setArtistId(ArtistId);
     getPins();
-  }, [ArtistName]);
+  }, []);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -145,7 +143,7 @@ export default function ViewMap({ ArtistName, ArtistId }) {
               offsetLeft={- viewport.zoom * 3.5}
               offsetTop={- viewport.zoom * 7}
             >
-              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer' }} className='pin' onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)}  />
+              <Room style={{ fontSize: viewport.zoom * 7, cursor: 'pointer', color: 'tomato' }} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)}  />
             </Marker>
             {p.id === currentPlaceId
               ? (
@@ -196,6 +194,15 @@ export default function ViewMap({ ArtistName, ArtistId }) {
                       </b>
 
                     </span>
+                    <button
+                      type='button'
+                      className='saveEventBtn'
+                    >
+                      {' '}
+                      Save Event
+                      {' '}
+
+                    </button>
                   </div>
                 </Popup>
               )
@@ -208,7 +215,7 @@ export default function ViewMap({ ArtistName, ArtistId }) {
           longitude={newEvent.lng}
           closeButton
           closeOnClick={false}
-          anchor='top'
+          anchor='right'
           onClose={() => setNewEvent(null)}
         >
           <div>

@@ -1,13 +1,14 @@
 .map-div {
-  /* position: absolute; */
+  position: absolute;
   top: 0;
-  left:20%;
+  left:25%;
   bottom: 0;
   width: 40vw;
-  margin-top: 20vh;
+  margin-top: 13vh;
   margin-left: 30vw;
   height:60vh;
   z-index: 1000;
+  box-shadow: 0 4px 15px 0 rgba(12, 47, 225, 0.75);
 }
 
 .mapboxgl-ctrl-group{
@@ -25,8 +26,8 @@ background-color: rgba(134, 114, 17, 0.491);
 }
 
 .event-form {
-  width: 350px;
-  height: 350px;
+  width: 250px;
+  /* height: 275px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -65,4 +66,28 @@ background-color: rgba(134, 114, 17, 0.491);
 }
 .mapboxgl-popup{
   z-index: 1000;
+}
+
+.artist-map{
+
+}
+.artist-profile{
+display: flex;
+flex-direction: row;
+}
+
+.pin{
+  color:rgba(232, 8, 64, 0.75);
+}
+
+.submitButton{
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 17px;
+  color: white;
+  background-color: darkgreen;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #667eea, #764ba2);
+  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
 }
