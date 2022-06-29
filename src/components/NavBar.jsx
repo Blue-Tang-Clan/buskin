@@ -31,7 +31,7 @@ export default function NavBar({ userType, setUserType, setUserId }) {
     }
   };
   const goArtistProfile = () => {
-    setPage('artistProfile');
+    setPage('editArtistProfile');
     setAnchorEl(null);
   };
   const goArtistDashboard = () => {
@@ -39,12 +39,16 @@ export default function NavBar({ userType, setUserType, setUserId }) {
     setAnchorEl(null);
   };
   const goFanProfile = () => {
-    setPage('fanProfile');
+    setPage('editFanProfile');
     setAnchorEl(null);
   };
   const goFanDashboard = () => {
     setPage('fanDashboard');
     setAnchorEl(null);
+  };
+  const goLogout = () => {
+    setPage('home');
+    setUserType('anonymous');
   };
 
   return (
@@ -112,7 +116,7 @@ export default function NavBar({ userType, setUserType, setUserId }) {
             </UserSettingContainer>
           )}
           <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
-          <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={() => setUserType('anonymous')} />
+          <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
         </UserSettingContainer>
       )}
     </Nav>

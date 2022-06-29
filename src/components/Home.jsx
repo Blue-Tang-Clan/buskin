@@ -6,7 +6,7 @@ import { TopContext } from './App.jsx';
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
 
-export default function Home() {
+export default function Home({ setPage }) {
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
   const [artists, setArtists] = useState([]);
   const [talent, setTalent] = useState({
@@ -60,12 +60,12 @@ export default function Home() {
             )}
           </TagContainer>
           <ArtistImgContainer>
-            {artists.map((artist, i) => 
+            {artists.map((artist, i) =>
               <>
                 <ArtistImg src={artist.pic} key={i} alt="Avatar" />
                 <label>{artist.artist_name}</label>
               </>
-            )} 
+            )}
           </ArtistImgContainer>
         </div>
       </div>
