@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export default function RegisterModal({ setLogedIn }) {
+export default function RegisterModal({ setUserType, setUserId }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -42,16 +42,18 @@ export default function RegisterModal({ setLogedIn }) {
               showForm === 'Register'
                 ? (
                   <SignUp
-                    setLogedIn={setLogedIn}
+                    setUserType={setUserType}
                     handleClose={handleClose}
                     setShowForm={setShowForm}
+                    setUserId={setUserId}
                   />
                 )
                 : (
                   <LogIn
-                    setLogedIn={setLogedIn}
+                    setUserType={setUserType}
                     handleClose={handleClose}
                     setShowForm={setShowForm}
+                    setUserId={setUserId}
                   />
                 )
             }

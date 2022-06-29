@@ -1,12 +1,17 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000';
+const url = 'http://localhost:3001';
 
 /* *** GET REQUESTS *** */
 
 // GET fan profile & dashboard information
 const getFanDetails = (fanId) => (
   axios.get(`${url}/fan/details/${fanId}`)
+);
+
+// GET fan dashboard info
+const getFanDashBoard = (fanId) => (
+  axios.get(`${url}/fan/dashboard/${fanId}`)
 );
 
 // GET artist profile & dashboard information
@@ -126,6 +131,7 @@ const apiMasters = {
   unfollowArtist,
   editFanProfile,
   editArtistProfile,
+  getFanDashBoard,
   search,
 };
 
