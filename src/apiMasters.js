@@ -25,7 +25,11 @@ const getHomePageInfo = (latitude = 40.7484, longitude = -73.9857) => (
 );
 
 // GET Homepage genre selection
-const getHomePageGenre = (genre) => (
+const getHomePageGenre = () => (
+  axios.get(`${url}/homepage/genre`)
+);
+// search Homepage genre selection
+const searchHomePageGenre = (genre) => (
   axios.get(`${url}/homepage/${genre}`)
 );
 // GET all events that are in the DB(we will need these to display them as pins on the map)
@@ -124,6 +128,7 @@ const apiMasters = {
   getArtistDetails,
   getHomePageInfo,
   getHomePageGenre,
+  searchHomePageGenre,
   getUserInfo,
   getEvents,
   getEvent,
