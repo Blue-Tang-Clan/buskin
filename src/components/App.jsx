@@ -13,7 +13,7 @@ export const TopContext = React.createContext();
 export default function App() {
   const [logedIn, setLogedIn] = useState(false);
   const [page, setPage] = useState('home');
-  const [artistId, setArtistId] = useState();
+  const [artistId, setArtistId] = useState(1);
   return (
     <>
       {/* components */}
