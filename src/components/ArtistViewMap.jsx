@@ -13,7 +13,7 @@ import TimePicker from 'react-time-picker';
 import moment from 'moment';
 import apiMasters from '../apiMasters.js';
 
-const config = require('./config.js');
+const config = require('../../config.js');
 
 export default function ViewMap({ ArtistName, ArtistId }) {
   const [viewport, setViewport] = useState({
