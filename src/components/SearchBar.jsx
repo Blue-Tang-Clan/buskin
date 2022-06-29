@@ -5,7 +5,7 @@ import apiMasters from '../apiMasters.js';
 
 
 const Search = styled.input`
-z-index: 9999;
+z-index: 200;
 position: fixed;
 width: 30%;
 height: 3.6rem;
@@ -19,7 +19,7 @@ box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
 `;
 
 const SearchResultsModal = styled.div`
-z-index: 9000;
+z-index: 199;
 display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: absolute;
 top: 0;
@@ -30,7 +30,7 @@ background: rgba(0,0,0,0.5);
 `;
 
 const SearchResults = styled.div`
-z-index: 9999;
+z-index: 200;
 display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: absolute;
 width: 50%;
