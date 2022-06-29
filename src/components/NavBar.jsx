@@ -15,8 +15,6 @@ const Nav = styled.div`
   gap: 30px;
 `;
 
-let searchId;
-
 export default function NavBar({ setLogedIn }) {
   const { setPage } = useContext(TopContext);
 
