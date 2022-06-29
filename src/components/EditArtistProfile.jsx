@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
+import Qr from './Qr.jsx';
 import apiMasters from '../apiMasters.js';
 
-export default function EditProfile ({ artistId = 1 }) {
+export default function EditProfile () {
+  // We need artistId here from artist profile where the user is the artist themselves
+  const artistId = 6;
+  const artistName = 'Luke'
+  //
+
+
+
   const [displayName, setDisplayName ] = useState('');
   const [genre, setGenre ] = useState('');
   const [instrument, setInstrument ] = useState('');
@@ -76,6 +84,7 @@ export default function EditProfile ({ artistId = 1 }) {
         <input onChange={handleInput} placeholder="your bio" name="bio" required /> <br />
         <input type="submit" />
       </form>
+      <Qr artistId={artistId} artistName={artistName} />
     </div>
   );
 }
