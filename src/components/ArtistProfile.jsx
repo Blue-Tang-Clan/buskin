@@ -78,9 +78,6 @@ export default function ArtistProfile() {
             <EventList />
           )
           : undefined}
-        <p>{artist.venmo}</p>
-        <p>{artist.cashapp}</p>
-        <p>{artist.paypal}</p>
         <Payments />
       </ArtistContext.Provider>
     </div>

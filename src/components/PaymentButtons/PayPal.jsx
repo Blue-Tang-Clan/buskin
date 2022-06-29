@@ -7,7 +7,7 @@ export default function PayPal() {
   const { artist } = useContext(ArtistContext);
   return (
     <div>
-      {artist.paypal !== undefined && artist.paypal.length > 0
+      {artist.paypal !== undefined && artist.paypal !== 'undefined'
         ? (
           <button type='button'>
             <a href={`${artist.paypal}`} target='_blank' rel='noreferrer'>PAYPAL</a>
