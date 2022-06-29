@@ -13,12 +13,8 @@ export const TopContext = React.createContext();
 
 export default function App() {
   const [logedIn, setLogedIn] = useState(false);
-<<<<<<< HEAD
   const [page, setPage] = useState('fanDashboard');
-=======
-  const [page, setPage] = useState('home');
   const [pageId, setPageId] = useState(1);
->>>>>>> d75ff68da78e38db8dbd347dd30b58b86270a478
   return (
     <>
       {/* components */}
@@ -28,7 +24,7 @@ export default function App() {
         </div>
         {page === 'home' ? <Home /> : <></>}
         {page === 'artistProfile' ? <ArtistProfile /> : <></>}
-        {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} /> : <></>}
+        {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} /> : <></>}
         {page === 'userProfile' ? <UserProfile /> : <></>}
         {page === 'event' ? <Event /> : <></>}
         {page === 'artistDashboard' ? <ArtistProfile /> : <></>}
