@@ -3,6 +3,7 @@ import EventList from './EventList.jsx';
 import Payments from './Payments.jsx';
 import apiMasters from '../apiMasters.js';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { TopContext } from './App.jsx';
 
 const dummy = {
   pic: 'https://cdn.shopify.com/s/files/1/0203/9334/files/Busking_Musicians_1024x1024.jpeg?v=1521795106',
@@ -18,14 +19,16 @@ const dummy = {
 export const ArtistContext = React.createContext();
 
 export default function ArtistProfile() {
+  const { artistId } = useContext(TopContext);
   const [artist, setArtist] = useState({});
   const [events, setEvents] = useState([]);
   const [renderEvents, setRenderEvents] = useState(false);
 
   useEffect(() => {
-    apiMasters.getArtistDetails(1)
+    apiMasters.getArtistDetails(artistId)
       .then((data) => {
         const info = data.data.rows[0].json_build_object;
+        console.log('INFO', info);
         setArtist({
           id: info.id,
           name: info.name,
@@ -37,7 +40,6 @@ export default function ArtistProfile() {
           paypal: info.paypal,
           cashapp: info.cashapp,
         });
-
         setEvents(info.events);
       })
       .catch((err) => console.log('aww didnt get any data? boohoo', err));
