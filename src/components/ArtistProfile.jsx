@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import EventList from './EventList.jsx';
-import EventListItem from './EventListItem.jsx';
+import Payments from './Payments.jsx';
 import apiMasters from '../apiMasters.js';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const dummy = {
   pic: 'https://cdn.shopify.com/s/files/1/0203/9334/files/Busking_Musicians_1024x1024.jpeg?v=1521795106',
@@ -14,7 +15,7 @@ const dummy = {
   paypal: 'paypal',
 };
 
-export const EventsContext = React.createContext();
+export const ArtistContext = React.createContext();
 
 export default function ArtistProfile() {
   const [artist, setArtist] = useState({});
@@ -52,36 +53,34 @@ export default function ArtistProfile() {
 
   return (
     <div>
-      <img src={dummy.pic} alt='busker' style={{ height: '100px' }} />
-      <h1>{artist.name}</h1>
-      <p>Heart icon goes here</p>
-      <p>
-        About me:
-        <br />
-        {artist.bio}
-      </p>
-      <p>
-        Genre:
-        <br />
-        {artist.genre}
-      </p>
-      <p>
-        Instrument:
-        <br />
-        {artist.instrument}
-      </p>
-      {/* music clip */}
-      <button type='button' onClick={() => toggleRenderEvents()}>Upcoming Events</button>
-      {renderEvents
-        ? (
-          <EventsContext.Provider value={events}>
+      <ArtistContext.Provider value={{events, artist}}>
+        <img src={dummy.pic} alt='busker' style={{ height: '100px' }} />
+        <h1>{artist.name}</h1>
+        <FavoriteIcon />
+        <p>
+          About me:
+          <br />
+          {artist.bio}
+        </p>
+        <p>
+          Genre:
+          <br />
+          {artist.genre}
+        </p>
+        <p>
+          Instrument:
+          <br />
+          {artist.instrument}
+        </p>
+        {/* music clip */}
+        <button type='button' onClick={() => toggleRenderEvents()}>Upcoming Events</button>
+        {renderEvents
+          ? (
             <EventList />
-          </EventsContext.Provider>
-        )
-        : undefined}
-      <p>{artist.venmo}</p>
-      <p>{artist.cashapp}</p>
-      <p>{artist.paypal}</p>
+          )
+          : undefined}
+        <Payments />
+      </ArtistContext.Provider>
     </div>
   );
 }
