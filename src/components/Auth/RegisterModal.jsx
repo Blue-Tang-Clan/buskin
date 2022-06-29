@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export default function RegisterModal({ setUserType, setUserId }) {
+export default function RegisterModal({ setUserType, setUserId, setUserName, setUserPic}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -46,6 +46,8 @@ export default function RegisterModal({ setUserType, setUserId }) {
                     handleClose={handleClose}
                     setShowForm={setShowForm}
                     setUserId={setUserId}
+                    setUserName={setUserName}
+                    setUserPic={setUserPic}
                   />
                 )
                 : (
@@ -54,6 +56,8 @@ export default function RegisterModal({ setUserType, setUserId }) {
                     handleClose={handleClose}
                     setShowForm={setShowForm}
                     setUserId={setUserId}
+                    setUserName={setUserName}
+                    setUserPic={setUserPic}
                   />
                 )
             }

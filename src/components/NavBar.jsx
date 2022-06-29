@@ -12,6 +12,8 @@ import {
 import RegisterModal from './Auth/RegisterModal.jsx';
 
 export default function NavBar({ userType, setUserType, setUserId }) {
+  const [userName, setUserName] = useState('');
+  const [userPic, setUserPic] = useState('');
   const { setPage } = useContext(TopContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -57,7 +59,12 @@ export default function NavBar({ userType, setUserType, setUserId }) {
       </div>
       {userType === 'anonymous' ? (
         <GenreTag>
-          <RegisterModal setUserType={setUserType} />
+          <RegisterModal
+            setUserType={setUserType}
+            setUserId={setUserId}
+            setUserName={setUserName}
+            setUserPic={setUserPic}
+            />
         </GenreTag>
       ) : (
         <UserSettingContainer>
