@@ -9,7 +9,7 @@ import { Room, Cancel } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
 import apiMasters from '../apiMasters.js';
 
-const config = require('./config.js');
+const config = require('../../config.js');
 
 export default function ViewMap() {
   const [viewport, setViewport] = useState({
@@ -28,7 +28,6 @@ export default function ViewMap() {
     const getPins = async () => {
       try {
         const res = await apiMasters.getEvents(new Date());
-        console.log(res.data);
         setPins(res.data);
       } catch (err) {
         console.log(err);
@@ -64,11 +63,9 @@ export default function ViewMap() {
   };
 
   const handleSaveClick = (fId, eventId) => {
-    console.log(fId, eventId);
     apiMasters.saveEvent(fId, eventId)
       .then(() => {
         setSaved(true);
-        console.log('SUCCESS!');
       })
       .catch(((err) => console.log(err)));
   };
