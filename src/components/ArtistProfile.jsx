@@ -28,7 +28,6 @@ export default function ArtistProfile() {
     apiMasters.getArtistDetails(artistId)
       .then((data) => {
         const info = data.data.rows[0].json_build_object;
-        console.log('INFO', info);
         setArtist({
           id: info.id,
           name: info.name,
