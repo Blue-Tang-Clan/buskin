@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import EventList from './EventList.jsx';
 import Payments from './Payments.jsx';
 import apiMasters from '../apiMasters.js';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const dummy = {
   pic: 'https://cdn.shopify.com/s/files/1/0203/9334/files/Busking_Musicians_1024x1024.jpeg?v=1521795106',
@@ -55,7 +56,7 @@ export default function ArtistProfile() {
       <ArtistContext.Provider value={{events, artist}}>
         <img src={dummy.pic} alt='busker' style={{ height: '100px' }} />
         <h1>{artist.name}</h1>
-        <p>Heart icon goes here</p>
+        <FavoriteIcon />
         <p>
           About me:
           <br />
