@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import { TopContext } from './App.jsx';
 import apiMasters from '../apiMasters.js';
 
 
@@ -48,10 +49,19 @@ font-size: 1.5rem;
 let searchId;
 
 export default function SearchBar() {
+  const { setPage } = useContext(TopContext);
   const [search, setSearch] = useState('');
   const [artistsArr, setArtistsArr] = useState([]);
   const [eventsArr, setEventsArr] = useState([]);
   const [noResults, setNoResults] = useState(false);
+
+  function handleClick(e, id) {
+    setPage(e.target.name, id);
+    setSearch(e.target.value);
+    setNoResults(false);
+    setArtistsArr([]);
+    setEventsArr([]);
+  }
 
   function handleSearch(e) {
     if (e.target.value) {
@@ -105,7 +115,7 @@ export default function SearchBar() {
         {artistsArr.length
           ? artistsArr.map((result) =>
             (
-              <IndividualResult key={result.id}>
+              <IndividualResult name='artistProfile' key={result.id} onClick={(e) => handleClick(e, result.id)}>
                 {result.name}
               </IndividualResult>
             ))
@@ -114,7 +124,7 @@ export default function SearchBar() {
         {eventsArr.length
           ? eventsArr.map((result) =>
             (
-              <IndividualResult key={result.id}>
+              <IndividualResult name='eventPage' key={result.id} onClick={(e) => handleClick(e, result.id)}>
                 {`${result.name} - `}
                 City:
                 {` ${result.city}, `}
