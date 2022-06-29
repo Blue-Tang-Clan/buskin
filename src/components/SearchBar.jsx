@@ -72,14 +72,18 @@ export default function SearchBar() {
   const [noResults, setNoResults] = useState(false);
   const [searching, setSearching] = useState(false);
 
+  function handleSearchDisplay(displaySearch, displayNone, artists, event, slice) {
+    setSearching(displaySearch);
+    setNoResults(displayNone);
+    setArtistsArr([...artists.slice(0, slice)]);
+    setEventsArr([...event.slice(0, slice)]);
+  }
+
   function handleClick(e, id) {
-    setSearching(false);
     setPage(e.target.name);
     setPageId(id);
     setSearch('');
-    setNoResults(false);
-    setArtistsArr([]);
-    setEventsArr([]);
+    handleSearchDisplay(false, false, [], [], 0);
   }
 
   function clearResults(e) {
@@ -100,25 +104,13 @@ export default function SearchBar() {
           .then((data) => {
             const { artists, event } = data.data.json_build_object;
             if (artists && event) {
-              setSearching(true);
-              setNoResults(false);
-              setArtistsArr([...artists.slice(0, 5)]);
-              setEventsArr([...event.slice(0, 5)]);
+              handleSearchDisplay(true, false, artists, event, 5);
             } else if (artists) {
-              setSearching(true);
-              setNoResults(false);
-              setArtistsArr([...artists.slice(0, 10)]);
-              setEventsArr([]);
+              handleSearchDisplay(true, false, artists, [], 10);
             } else if (event) {
-              setSearching(true);
-              setNoResults(false);
-              setEventsArr([...event.slice(0, 10)]);
-              setArtistsArr([]);
+              handleSearchDisplay(true, false, [], event, 10);
             } else {
-              setSearching(false);
-              setNoResults(true);
-              setArtistsArr([]);
-              setEventsArr([]);
+              handleSearchDisplay(false, false, [], [], 0);
             }
           })
           .catch((err) => {
@@ -128,10 +120,7 @@ export default function SearchBar() {
     } else {
       clearTimeout(searchId);
       setSearch('');
-      setSearching(false);
-      setNoResults(false);
-      setArtistsArr([]);
-      setEventsArr([]);
+      handleSearchDisplay(false, false, [], [], 0);
     }
   }
 
