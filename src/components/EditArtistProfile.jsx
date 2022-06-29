@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
+import Qr from './Qr.jsx';
+import apiMasters from '../apiMasters.js';
 
-export default function EditProfile ( { type } ) {
-  const [artistName, setArtistName] = useState('');
+export default function EditProfile () {
+  // We need artistId here from artist profile where the user is the artist themselves
+  const artistId = 6;
+  const artistName = 'Luke'
+  //
+
+
+
   const [displayName, setDisplayName ] = useState('');
   const [genre, setGenre ] = useState('');
   const [instrument, setInstrument ] = useState('');
   const [bio, setBio ] = useState('');
-  const [picture, setPicture] = useState('');
-  const [soundClip, setSoundClip ] = useState('');
-  const [paymentMethod, setPaymentMethod ] = useState('');
+  const [pic, setPicture] = useState(null);
+  // const [soundClip, setSoundClip ] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [paymentOptions, setPaymentOptions] = useState('');
 
   function handleInput(e) {
     const name = e.target.name;
+    if (e.target.files !== null) {
+      const file = e.target.files[0] || null;
+    }
     const value = e.target.value;
-    if (name === 'artistname') {
-      setArtistName(value);
-      console.log('Picture: ', picture)
-    } else if (name === 'displayname') {
+    if (name === 'displayname') {
       setDisplayName(value);
     } else if (name === 'genre') {
       setGenre(value);
@@ -30,26 +39,52 @@ export default function EditProfile ( { type } ) {
       setSoundClip(value);
     } else if (name === 'paymentmethod') {
       setPaymentMethod(value);
+    } else if (name === 'paymentoptions') {
+      setPaymentOptions(value);
     }
   }
   function handleSubmit() {
     // take all the states and call some api
+    // First upload image, get url for that image then post these
+    let venmo, cashapp, paypal;
+    if (paymentOptions === 'venmo') {
+      venmo = paymentMethod;
+    } else if (paymentOptions === 'paypal') {
+      paypal = paymentMethod;
+    } else if (paymentOptions === 'cashapp') {
+      cashapp = paymentMethod;
+    }
+    apiMasters.editArtistProfile(artistId, {
+      displayName,
+      genre,
+      instrument,
+      bio,
+      pic,
+      cashapp,
+      paypal,
+      venmo,
+    });
   }
 
   return (
     <div>
       <label>Edit profile</label>
-      <form onSubmit={handleSubmit}>
-        <label>address</label> <br />
-        <input onChange={handleInput} placeholder="name" type="text" name="artistname" /> <br />
+      <form onSubmit={handleSubmit} enctype="multipart/form-data">
         <input onChange={handleInput} placeholder="stage name" name="displayname" required /> <br />
         <input onChange={handleInput} placeholder="instrument you play" name="instrument" required /> <br />
         <input onChange={handleInput} placeholder="your picture" type="file" accept="image/*" name="picture" required /> <br />
-        <input onChange={handleInput} placeholder="your sound clip" name="soundclip" required /> <br />
-        <input onChange={handleInput} placeholder="tipping link(paypay, venmo)" name="paymentmethod" required /> <br />
+        {/* <input onChange={handleInput} placeholder="your sound clip" name="soundclip" required /> <br /> */}
+        <label for="cars">Choose a payment option:</label>
+        <select name="paymentoptions" onChange={handleInput}>
+          <option value="venmo">venmo</option>
+          <option value="cashapp">cashapp</option>
+          <option value="paypal">paypal</option>
+        </select> <br />
+        <input onChange={handleInput} placeholder="payment link" name="paymentmethod" required /> <br />
         <input onChange={handleInput} placeholder="your bio" name="bio" required /> <br />
         <input type="submit" />
       </form>
+      <Qr artistId={artistId} artistName={artistName} />
     </div>
   );
 }

@@ -55,11 +55,9 @@ export default function ViewMap({ ArtistName, ArtistId }) {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState('10:00');
   const [endTime, setEndTime] = useState('10:00');
-  const [artistId, setArtistId] = useState('1');
-  const [artistName, setArtistName] = useState('Wei');
+  const [artistId, setArtistId] = useState(null);
+  const [artistName, setArtistName] = useState(null);
   const [warning, setWarning] = useState(false);
-
-
 
   useEffect(() => {
     const getPins = async () => {
@@ -71,10 +69,10 @@ export default function ViewMap({ ArtistName, ArtistId }) {
         console.log(err);
       }
     };
-    // setArtistName(ArtistName);
-    // setArtistId(ArtistId);
+    setArtistName(ArtistName);
+    setArtistId(ArtistId);
     getPins();
-  }, []);
+  }, [ArtistId]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(

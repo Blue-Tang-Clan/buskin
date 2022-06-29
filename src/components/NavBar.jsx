@@ -11,8 +11,10 @@ import {
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
 
-export default function NavBar({ userType, setUserType, setUserId }) {
-  const { setPage } = useContext(TopContext);
+export default function NavBar({ setUserType, setUserId }) {
+  const [userName, setUserName] = useState('');
+  const [userPic, setUserPic] = useState('');
+  const { setPage, userType } = useContext(TopContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -57,7 +59,12 @@ export default function NavBar({ userType, setUserType, setUserId }) {
       </div>
       {userType === 'anonymous' ? (
         <GenreTag>
-          <RegisterModal setUserType={setUserType} />
+          <RegisterModal
+            setUserType={setUserType}
+            setUserId={setUserId}
+            setUserName={setUserName}
+            setUserPic={setUserPic}
+            />
         </GenreTag>
       ) : (
         <UserSettingContainer>

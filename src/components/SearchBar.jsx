@@ -5,7 +5,9 @@ import apiMasters from '../apiMasters.js';
 
 
 const Search = styled.input`
-width: 70%;
+z-index: 9999;
+position: fixed;
+width: 30%;
 height: 3.6rem;
 background: white;
 outline: none;
@@ -16,11 +18,24 @@ font-size: 1rem;
 box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
 `;
 
+const SearchResultsModal = styled.div`
+z-index: 9000;
+display: ${({ searching }) => (searching ? 'block' : 'none')};
+position: absolute;
+top: 0;
+left: 0;
+height: 100vh;
+width:100vw;
+background: rgba(0,0,0,0.5);
+`;
+
 const SearchResults = styled.div`
 z-index: 9999;
+display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: absolute;
 width: 50%;
 background: transparent;
+margin-top: 3.6rem;
 `;
 
 const ResultsSection = styled.div`
@@ -44,6 +59,7 @@ border-left-style: double;
 border-bottom-width: 1px;
 border-bottom-style: solid;
 font-size: 1.5rem;
+cursor: pointer;
 `;
 
 let searchId;
@@ -54,14 +70,28 @@ export default function SearchBar() {
   const [artistsArr, setArtistsArr] = useState([]);
   const [eventsArr, setEventsArr] = useState([]);
   const [noResults, setNoResults] = useState(false);
+  const [searching, setSearching] = useState(false);
+
+  function handleSearchDisplay(displaySearch, displayNone, artists, event, slice) {
+    setSearching(displaySearch);
+    setNoResults(displayNone);
+    setArtistsArr([...artists.slice(0, slice)]);
+    setEventsArr([...event.slice(0, slice)]);
+  }
 
   function handleClick(e, id) {
-    setPage(e.target.attributes.name.nodeValue);
+    setPage(e.target.name);
     setPageId(id);
-    setSearch(e.target.value);
-    setNoResults(false);
-    setArtistsArr([]);
-    setEventsArr([]);
+    setSearch('');
+    handleSearchDisplay(false, false, [], [], 0);
+  }
+
+  function clearResults(e) {
+    if (e.target.name === 'searchQueryInput' && search) {
+      setSearching(true);
+    } else {
+      setSearching(false);
+    }
   }
 
   function handleSearch(e) {
@@ -74,21 +104,13 @@ export default function SearchBar() {
           .then((data) => {
             const { artists, event } = data.data.json_build_object;
             if (artists && event) {
-              setNoResults(false);
-              setArtistsArr([...artists.slice(0, 5)]);
-              setEventsArr([...event.slice(0, 5)]);
+              handleSearchDisplay(true, false, artists, event, 5);
             } else if (artists) {
-              setNoResults(false);
-              setArtistsArr([...artists.slice(0, 10)]);
-              setEventsArr([]);
+              handleSearchDisplay(true, false, artists, [], 10);
             } else if (event) {
-              setNoResults(false);
-              setEventsArr([...event.slice(0, 10)]);
-              setArtistsArr([]);
+              handleSearchDisplay(true, false, [], event, 10);
             } else {
-              setNoResults(true);
-              setArtistsArr([]);
-              setEventsArr([]);
+              handleSearchDisplay(false, false, [], [], 0);
             }
           })
           .catch((err) => {
@@ -97,18 +119,16 @@ export default function SearchBar() {
       }, 300);
     } else {
       clearTimeout(searchId);
-      setSearch(e.target.value);
-      setNoResults(false);
-      setArtistsArr([]);
-      setEventsArr([]);
+      setSearch('');
+      handleSearchDisplay(false, false, [], [], 0);
     }
   }
 
-
   return (
     <>
-      <Search type='text' onChange={(e) => handleSearch(e)} name='searchQueryInput' placeholder='Search for new artists, events...' value={search} />
-      <SearchResults>
+      <Search type='text' onChange={(e) => handleSearch(e)} name='searchQueryInput' placeholder='Search for new artists, events...' value={search} onClick={(e) => clearResults(e)} />
+      <SearchResultsModal searching={searching} onClick={clearResults} />
+      <SearchResults searching={searching} >
         {noResults
           ? <ResultsSection>No search results match your criteria</ResultsSection>
           : null}
