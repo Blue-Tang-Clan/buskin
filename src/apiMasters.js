@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:8000';
+const url = 'http://localhost:3001';
 
 /* *** GET REQUESTS *** */
 
@@ -111,6 +111,10 @@ const editArtistProfile = (artistId, artistProfile) => (
   axios.put(`${url}/artist/profile/${artistId}`, artistProfile)
 );
 
+const search = (query) => (
+  axios.get(`${url}/search?query=${query}`)
+);
+
 const apiMasters = {
   getFanDetails,
   getArtistDetails,
@@ -118,13 +122,17 @@ const apiMasters = {
   getHomePageGenre,
   getUserInfo,
   getEvents,
+  getEvent,
   registerUser,
   createEvent,
   saveEvent,
   followArtist,
+  deleteEvent,
+  unfollowArtist,
   editFanProfile,
   editArtistProfile,
   getFanDashBoard,
+  search,
 };
 
 export default apiMasters;
