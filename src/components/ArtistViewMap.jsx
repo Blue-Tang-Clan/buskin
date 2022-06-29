@@ -143,7 +143,7 @@ export default function ViewMap({ ArtistName, ArtistId }) {
               latitude={Number(p.latitude)}
               longitude={Number(p.longitude)}
               offsetLeft={- viewport.zoom * 3.5}
-              offsetTop={- viewport.zoom * 7}
+              offsetTop={- viewport.zoom * 5.5}
             >
               <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer' }} className='pin' onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)}  />
             </Marker>

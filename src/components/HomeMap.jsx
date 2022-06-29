@@ -1,16 +1,12 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
 import React, {
   useState, useRef, useCallback, useEffect,
 } from 'react';
 import MapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
 import { Room, Cancel } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
-import DatePicker from 'react-date-picker';
-import TimePicker from 'react-time-picker';
-import moment from 'moment';
 import apiMasters from '../apiMasters.js';
 
 const config = require('./config.js');
@@ -21,19 +17,12 @@ export default function ViewMap() {
     longitude: -73.9857,
     zoom: 13,
   });
-  const [newEvent, setNewEvent] = useState(null);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
-  const [eventName, setEventName] = useState(null);
-  const [street, setStreet] = useState(null);
   const [pins, setPins] = useState([]);
-  const [city, setCity] = useState(null);
-  const [state, setState] = useState(null);
-  const [date, setDate] = useState(new Date());
-  const [startTime, setStartTime] = useState('10:00');
-  const [endTime, setEndTime] = useState('10:00');
-  const [artistId, setArtistId] = useState('1');
-  const [artistName , setArtistName] = useState('Lil Uzzy');
+  const [fanId, setFanId] = useState('1');
+  const [saved, setSaved] = useState(false);
+  const [artistName, setArtistName] = useState('Lil Uzzy');
 
   useEffect(() => {
     const getPins = async () => {
@@ -65,44 +54,6 @@ export default function ViewMap() {
     [handleViewportChange],
   );
 
-  const handleAddClick = (e) => {
-    console.log(e);
-    const [lng, lat] = e.lngLat;
-    setNewEvent({
-      lat,
-      lng,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (eventName && street && city && state && date && startTime && endTime) {
-      const formatDate = moment(date).format('L');
-      const eventObj = {
-        name: eventName,
-        street,
-        city,
-        state,
-        longitude: newEvent.lng,
-        latitude: newEvent.lat,
-        date: formatDate,
-        start_time: startTime,
-        end_time: endTime,
-      };
-      eventObj.display_name = artistName;
-      apiMasters
-        .createEvent(artistId, eventObj)
-        .then((res) => {
-           setPins([...pins, eventObj]);
-          console.log(res.data);
-        })
-        .then(() => setNewEvent(null))
-        .catch((err) => console.log(err));
-    } else {
-      alert('Enter all details to submit an event!');
-    }
-  };
-
   const handleMarkerClick = (id, event, lat, long) => {
     event.stopPropagation();
     setCurrentPlaceId(id);
@@ -112,8 +63,18 @@ export default function ViewMap() {
     setShowPopup(true);
   };
 
+  const handleSaveClick = (fId, eventId) => {
+    console.log(fId, eventId);
+    apiMasters.saveEvent(fId, eventId)
+      .then(() => {
+        setSaved(true);
+        console.log('SUCCESS!');
+      })
+      .catch(((err) => console.log(err)));
+  };
+
   return (
-    <div className='map-div'>
+    <div className='home-map-div'>
       <MapGL
         ref={mapRef}
         {...viewport}
@@ -122,7 +83,6 @@ export default function ViewMap() {
         mapboxApiAccessToken={config.TOKEN}
         onViewportChange={handleViewportChange}
         mapStyle='mapbox://styles/mapbox/streets-v11'
-        onDblClick={(e) => handleAddClick(e)}
       >
         <Geocoder
           mapRef={mapRef}
@@ -140,10 +100,10 @@ export default function ViewMap() {
             <Marker
               latitude={Number(p.latitude)}
               longitude={Number(p.longitude)}
-              offsetLeft={- viewport.zoom * 3.5}
-              offsetTop={- viewport.zoom * 7}
+              offsetLeft={-viewport.zoom * 3.5}
+              offsetTop={-viewport.zoom * 5.5}
             >
-              <Room style={{ fontSize: viewport.zoom * 7, cursor: 'pointer', color: 'tomato' }} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)}  />
+              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer', color: 'tomato' }} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
             </Marker>
             {p.id === currentPlaceId
               ? (
@@ -154,10 +114,13 @@ export default function ViewMap() {
                   closeButton
                   closeOnClick={false}
                   anchor='right'
-                  onClose={() => setCurrentPlaceId(null)}
+                  onClose={() => {
+                    setSaved(false);
+                    setCurrentPlaceId(null);
+                  }}
                 >
                   <div className='card'>
-                  <label className='eventLabel'>Artist Name</label>
+                    <label className='eventLabel'>Artist Name</label>
                     <p className='artist'>
                       {' '}
                       <b>{p.display_name}</b>
@@ -194,65 +157,24 @@ export default function ViewMap() {
                       </b>
 
                     </span>
-                    <button
-                      type='button'
-                      className='saveEventBtn'
-                    >
-                      {' '}
-                      Save Event
-                      {' '}
+                    {saved ? <p style={{color:'green'}}> Event Saved!</p> : (
+                      <button
+                        type='button'
+                        className='saveEventBtn'
+                        onClick={() => handleSaveClick(fanId, p.id)}
+                      >
+                        {' '}
+                        Save Event
+                        {' '}
 
-                    </button>
+                      </button>
+                    )}
                   </div>
                 </Popup>
               )
               : null }
           </>
         ))}
-        {newEvent && (
-        <Popup
-          latitude={newEvent.lat}
-          longitude={newEvent.lng}
-          closeButton
-          closeOnClick={false}
-          anchor='right'
-          onClose={() => setNewEvent(null)}
-        >
-          <div>
-            <form className='event-form' onSubmit={(e) => handleSubmit(e)}>
-              <label>Event Name</label>
-              <input
-                placeholder='Enter Event Name'
-                onChange={(e) => setEventName(e.target.value)}
-              />
-              <label>Street</label>
-              <input
-                placeholder='Add Street Details'
-                onChange={(e) => setStreet(e.target.value)}
-              />
-              <label>City</label>
-              <input
-                placeholder='Add City Name'
-                onChange={(e) => setCity(e.target.value)}
-              />
-              <label>State</label>
-              <input
-                placeholder='Add State Name'
-                onChange={(e) => setState(e.target.value)}
-              />
-              <label>Event Date</label>
-              <DatePicker onChange={setDate} value={date} format='y-MM-dd' />
-              <label>Event Start Time</label>
-              <TimePicker onChange={setStartTime} value={startTime} />
-              <label>Event End Time</label>
-              <TimePicker onChange={setEndTime} value={endTime} />
-              <button className='submitButton' type='submit'>
-                Add Event
-              </button>
-            </form>
-          </div>
-        </Popup>
-        )}
       </MapGL>
     </div>
   );

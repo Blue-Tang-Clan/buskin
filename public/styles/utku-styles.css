@@ -11,6 +11,15 @@
   box-shadow: 0 4px 15px 0 rgba(12, 47, 225, 0.75);
 }
 
+.home-map-div {
+  top: 0;
+  bottom: 0;
+  width: 40vw;
+  height:60vh;
+  z-index: 1000;
+  box-shadow: 0 4px 15px 0 rgba(12, 47, 225, 0.75);
+}
+
 .mapboxgl-ctrl-group{
   background: none;
   margin-top: 1.2vh;
