@@ -11,7 +11,7 @@ import {
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
 
-export default function NavBar({ userType, setUserType, userId }) {
+export default function NavBar({ setUserType, setUserId }) {
   const { setPage } = useContext(TopContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -98,6 +98,9 @@ export default function NavBar({ userType, setUserType, userId }) {
           <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={() => setUserType('anonymous')} />
         </UserSettingContainer>
       )}
+      <GenreTag>
+        <RegisterModal setUserType={setUserType} setUserId={setUserId} />
+      </GenreTag>
     </Nav>
   );
 }

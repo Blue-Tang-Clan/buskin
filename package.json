@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "webpack --watch --mode=development",
+    "start": "nodemon server.js",
     "build": "webpack --mode=production",
     "dev": "webpack serve --open"
   },
@@ -27,6 +27,7 @@
     "@mui/material": "^5.8.6",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
+    "express": "^4.18.1",
     "mapbox-gl": "^2.9.1",
     "moment": "^2.29.3",
     "qrcode": "^1.5.0",

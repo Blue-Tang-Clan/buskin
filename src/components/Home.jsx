@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ArtistBio from './ArtistBio.jsx';
 import { HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer } from './StyledComponents.js';
+import {TopContext} from './App.jsx';
+import HomeMap from './HomeMap.jsx';
 
 export default function Home() {
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
@@ -20,6 +22,7 @@ export default function Home() {
     <HomeContainer>
       <div>
         <h3>Map</h3>
+        <HomeMap />
       </div>
       <div>
         <h3>Fresh Talent</h3>
