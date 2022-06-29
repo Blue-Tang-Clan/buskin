@@ -8,7 +8,10 @@ import ArtistUpdate from './ArtistUpdate.jsx';
 import FanDashBoard from './FanDashBoard.jsx';
 import EditFanProfile from './EditFanProfile.jsx';
 import EditArtistProfile from './EditArtistProfile.jsx';
+<<<<<<< HEAD
 import ArtistDashBoard from './ArtistDashBoard.jsx';
+=======
+>>>>>>> f8d07060d224cecc643bd5de4592fc7dd9db5b07
 
 export const TopContext = React.createContext();
 

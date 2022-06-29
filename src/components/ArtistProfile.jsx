@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import EventList from './EventList.jsx';
 import Payments from './Payments.jsx';
+import Qr from './Qr.jsx';
 import apiMasters from '../apiMasters.js';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { TopContext } from './App.jsx';
@@ -73,6 +74,9 @@ export default function ArtistProfile() {
           <br />
           {artist.instrument}
         </p>
+        {
+          artist.name && <Qr artistId={artist.id} artistName={artist.name} />
+        }
         {/* music clip */}
         <button type='button' onClick={() => toggleRenderEvents()}>Upcoming Events</button>
         {renderEvents
