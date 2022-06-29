@@ -56,6 +56,26 @@ const InfoContainer = styled.div`
   gap: 20px;
 `;
 
+const UserImg = styled.img`
+height: 70px;
+width: 70px;
+border-radius: 50%;
+`;
+
+const Nav = styled.div`
+  background: white;
+  height: 75px;
+  display: grid;
+  grid-template-columns: 300px auto 400px;
+  padding-top: 20px;
+  gap: 30px;
+`;
+
+const UserSettingContainer = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
 export {
-  HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer, EventImg, Container, InfoContainer,
+  HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer, EventImg, Container, InfoContainer, UserImg, Nav, UserSettingContainer
 };

@@ -3,7 +3,7 @@ import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import React, {
-  useState, useRef, useCallback, useEffect,
+  useState, useRef, useCallback, useEffect, useTheme,
 } from 'react';
 import MapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
 import { Room, Cancel } from '@mui/icons-material';
@@ -11,10 +11,33 @@ import Geocoder from 'react-map-gl-geocoder';
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import moment from 'moment';
+import styled from 'styled-components';
 import apiMasters from '../apiMasters.js';
 
 const config = require('../../config.js');
 
+const Modal = styled.div`
+z-index:9999;
+position:fixed;
+top:0;
+left:0;
+height:100vh;
+width:100vw;
+background: rgba(0,0,0,0.5);
+display: ${({ warning }) => (warning ? 'block' : 'none')};
+`;
+
+const WarningMessage = styled.div`
+  background: rgba(250,250,250,1);
+  height:30rem;
+  width:30rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+let eventObj = {};
 export default function ViewMap({ ArtistName, ArtistId }) {
   const [viewport, setViewport] = useState({
     latitude: 40.7484,
@@ -32,8 +55,11 @@ export default function ViewMap({ ArtistName, ArtistId }) {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState('10:00');
   const [endTime, setEndTime] = useState('10:00');
-  const [artistId, setArtistId] = useState(null);
-  const [artistName , setArtistName] = useState(ArtistName);
+  const [artistId, setArtistId] = useState('1');
+  const [artistName, setArtistName] = useState('Wei');
+  const [warning, setWarning] = useState(false);
+
+
 
   useEffect(() => {
     const getPins = async () => {
@@ -45,10 +71,10 @@ export default function ViewMap({ ArtistName, ArtistId }) {
         console.log(err);
       }
     };
-    setArtistName(ArtistName);
-    setArtistId(ArtistId);
+    // setArtistName(ArtistName);
+    // setArtistId(ArtistId);
     getPins();
-  }, [ArtistName]);
+  }, []);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -76,11 +102,24 @@ export default function ViewMap({ ArtistName, ArtistId }) {
     });
   };
 
+  const eventCreation = (artistId, eventObj) => {
+    console.log('artistId', artistId);
+    console.log('eventObj', eventObj);
+    apiMasters
+      .createEvent(artistId, eventObj)
+      .then((res) => {
+        setPins([...pins, eventObj]);
+        console.log(res.data);
+      })
+      .then(() => setNewEvent(null))
+      .catch((err) => console.log(err));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (eventName && street && city && state && date && startTime && endTime) {
       const formatDate = moment(date).format('L');
-      const eventObj = {
+
+      eventObj = {
         name: eventName,
         street,
         city,
@@ -92,13 +131,15 @@ export default function ViewMap({ ArtistName, ArtistId }) {
         end_time: endTime,
       };
       eventObj.display_name = artistName;
-      apiMasters
-        .createEvent(artistId, eventObj)
+      // check if any events in 30 yard radius, date and time
+      apiMasters.checkEventRadius(newEvent.lat, newEvent.lng, formatDate, startTime)
         .then((res) => {
-           setPins([...pins, eventObj]);
-          console.log(res.data);
+          if (res.data.length) {
+             setWarning(true);
+          } else {
+            eventCreation(artistId, eventObj);
+          }
         })
-        .then(() => setNewEvent(null))
         .catch((err) => console.log(err));
     } else {
       alert('Enter all details to submit an event!');
@@ -114,8 +155,21 @@ export default function ViewMap({ ArtistName, ArtistId }) {
     setShowPopup(true);
   };
 
+  const handleWarningClick = (e) => {
+    e.preventDefault();
+    setWarning(false);
+    e.target.name && eventCreation(artistId,eventObj);
+  };
+
   return (
     <div className='map-div'>
+      <Modal warning={warning}>
+        <WarningMessage>
+          Your Performance is Within 30 Yards of Another Performance at the Same Time, Do you still want to schedule this performance?
+          <button name='yes' onClick={(e) => handleWarningClick(e)}>Yes</button>
+          <button onClick={(e) => handleWarningClick(e)}>No</button>
+        </WarningMessage>
+      </Modal>
       <MapGL
         ref={mapRef}
         {...viewport}
@@ -142,10 +196,10 @@ export default function ViewMap({ ArtistName, ArtistId }) {
             <Marker
               latitude={Number(p.latitude)}
               longitude={Number(p.longitude)}
-              offsetLeft={- viewport.zoom * 3.5}
-              offsetTop={- viewport.zoom * 5.5}
+              offsetLeft={-viewport.zoom * 3.5}
+              offsetTop={-viewport.zoom * 5.5}
             >
-              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer' }} className='pin' onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)}  />
+              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer' }} className='pin' onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
             </Marker>
             {p.id === currentPlaceId
               ? (
@@ -159,7 +213,7 @@ export default function ViewMap({ ArtistName, ArtistId }) {
                   onClose={() => setCurrentPlaceId(null)}
                 >
                   <div className='card'>
-                  <label className='eventLabel'>Artist Name</label>
+                    <label className='eventLabel'>Artist Name</label>
                     <p className='artist'>
                       {' '}
                       <b>{p.display_name}</b>
