@@ -22,7 +22,7 @@ export default function App() {
       {/* components */}
       <TopContext.Provider value={{page, setPage, pageId, setPageId}}>
         <div>
-          <NavBar setUserType={setUserType} setUserId={setUserId} />
+          <NavBar userType={userType} setUserType={setUserType} />
         </div>
         {page === 'home' ? <Home /> : <></>}
         {page === 'artistProfile' ? <ArtistProfile /> : <></>}
