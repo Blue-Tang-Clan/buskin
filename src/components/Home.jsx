@@ -1,11 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ArtistBio from './ArtistBio.jsx';
 import { HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer } from './StyledComponents.js';
-import {TopContext} from './App.jsx';
 
 export default function Home() {
-  const {page, setPage} = useContext(TopContext);
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
   const [artists, setArtists] = useState([]);
   const [talent, setTalent] = useState({
@@ -24,11 +22,9 @@ export default function Home() {
         <h3>Map</h3>
       </div>
       <div>
-        <div onClick={() => {setPage('artistProfile');}}>
-          <h3>Fresh Talent</h3>
-          <div>
-            <ArtistBio talent={talent} />
-          </div>
+        <h3>Fresh Talent</h3>
+        <div>
+          <ArtistBio talent={talent} />
         </div>
         <div>
           <h3>Popular Genres</h3>

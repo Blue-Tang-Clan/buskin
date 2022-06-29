@@ -12,13 +12,14 @@ export const TopContext = React.createContext();
 
 export default function App() {
   const [logedIn, setLogedIn] = useState(false);
+
   const [page, setPage] = useState('home');
   return (
     <>
       {/* components */}
       <TopContext.Provider value={{page, setPage}}>
         <div>
-          <NavBar setLogedIn={setLogedIn} />
+          <NavBar logedIn={logedIn} setLogedIn={setLogedIn} />
         </div>
         {page === 'home' ? <Home /> : <></>}
         {page === 'artistProfile' ? <ArtistProfile /> : <></>}

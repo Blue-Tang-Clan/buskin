@@ -5,8 +5,8 @@ import apiMasters from '../apiMasters.js';
 
 
 const Search = styled.input`
-width: 60%;
-height: 2.8rem;
+width: 70%;
+height: 3.6rem;
 background: white;
 outline: none;
 border: none;
