@@ -27,7 +27,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function LogIn({ setLogedIn, handleClose, setShowForm }) {
+export default function LogIn({ setUserType, handleClose, setShowForm, setUserId }) {
   const [failed, setFailed] = React.useState(false);
 
   const ChangeForm = () => {
@@ -45,7 +45,8 @@ export default function LogIn({ setLogedIn, handleClose, setShowForm }) {
     apiMasters.getUserInfo(userInfo.username, userInfo.password)
       .then((response) => {
         console.log(response);
-        setLogedIn(true);
+        setUserType(response.data.userType);
+        setUserId(response.data.id);
         setShowForm('Register');
         handleClose();
       })
