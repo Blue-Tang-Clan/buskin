@@ -80,10 +80,6 @@ background-color: rgba(134, 114, 17, 0.491);
 .artist-map{
 
 }
-.artist-profile{
-display: flex;
-flex-direction: row;
-}
 
 .pin{
   color:rgba(232, 8, 64, 0.75);

@@ -3,7 +3,6 @@ import EventList from './EventList.jsx';
 import Payments from './Payments.jsx';
 import apiMasters from '../apiMasters.js';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ArtistViewMap from './ArtistViewMap.jsx';
 const dummy = {
   pic: 'https://cdn.shopify.com/s/files/1/0203/9334/files/Busking_Musicians_1024x1024.jpeg?v=1521795106',
   display_name: 'Yau Yu',
@@ -54,7 +53,6 @@ export default function ArtistProfile() {
   return (
     <div>
       <ArtistContext.Provider value={{events, artist}}>
-        <div className="artist-profile">
         <div>
         <img src={artist.pic} alt='busker' style={{ height: '100px' }} />
         <h1>{artist.name}</h1>
@@ -83,10 +81,6 @@ export default function ArtistProfile() {
           : undefined}
         <Payments />
           </div>
-          <div className='artist-map'>
-          <ArtistViewMap ArtistName={artist.name} ArtistId={artist.id} />
-        </div>
-        </div>
       </ArtistContext.Provider>
     </div>
   );
