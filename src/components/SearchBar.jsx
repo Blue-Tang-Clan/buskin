@@ -44,20 +44,22 @@ border-left-style: double;
 border-bottom-width: 1px;
 border-bottom-style: solid;
 font-size: 1.5rem;
+cursor: pointer;
 `;
 
 let searchId;
 
 export default function SearchBar() {
-  const { setPage } = useContext(TopContext);
+  const { setPage, setPageId } = useContext(TopContext);
   const [search, setSearch] = useState('');
   const [artistsArr, setArtistsArr] = useState([]);
   const [eventsArr, setEventsArr] = useState([]);
   const [noResults, setNoResults] = useState(false);
 
   function handleClick(e, id) {
-    setPage(e.target.name, id);
-    setSearch(e.target.value);
+    setPage(e.target.name);
+    setPageId(id);
+    setSearch('');
     setNoResults(false);
     setArtistsArr([]);
     setEventsArr([]);
@@ -123,11 +125,7 @@ export default function SearchBar() {
         {eventsArr.length
           ? eventsArr.map((result) =>
             (
-<<<<<<< HEAD
-              <IndividualResult name='events' key={result.id} onClick={(e) => handleClick(e, result.id)}>
-=======
               <IndividualResult name='event' key={result.id} onClick={(e) => handleClick(e, result.id)}>
->>>>>>> 19406e3cfe99c622c6cd97989c49e4c3ece5dbe7
                 {`${result.name} - `}
                 City:
                 {` ${result.city}, `}
