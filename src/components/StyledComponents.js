@@ -174,21 +174,11 @@ const MemberC = styled.div`
   flex-direction: row;
   gap: 10px;
 `;
-// const MemberD = styled.div`
-//   grid-area: d;
-// `;
-// const MemberE = styled.div`
-//   grid-area: e;
-// `;
-// const MemberF = styled.div`
-//   grid-area: f;
-// `;
-// const MemberG = styled.div`
-//   grid-area: g;
-// `;
-// const MemberH = styled.div`
-//   grid-area: h;
-// `;
+
+const Audio = styled.audio`
+  width: 100%;
+  display: block;
+`;
 
 // EVENT PAGE SPECIFIC STYLING
 const EventPageContainer = styled.div`
@@ -243,9 +233,5 @@ export {
   MemberA,
   MemberB,
   MemberC,
-  // MemberD,
-  // MemberE,
-  // MemberF,
-  // MemberG,
-  // MemberH,
+  Audio,
 };
