@@ -35,7 +35,6 @@ export default function ViewMap() {
         setPins(res.data);
         setFanId(Number(userId));
         const resDos = await apiMasters.getFanDashBoard(fanId);
-        console.log(resDos.data);
         setSavedEvents(resDos.data.events);
       } catch (err) {
         console.log(err);
@@ -155,7 +154,7 @@ export default function ViewMap() {
             >
               <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer', color:
               JSON.stringify(savedEvents).includes(p.street) ? 'blue' : 'tomato'
-            }}  value={JSON.stringify(savedEvents).includes(p.street) ? '1' : '2'} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
+            }} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
             </Marker>
             {p.id === currentPlaceId
               ? (
@@ -177,7 +176,7 @@ export default function ViewMap() {
                       {' '}
                       <b>{p.display_name}</b>
                     </p>
-                    <label className='eventLabel' id={p.id} onClick={(e) => eventPage(e)}>Event Name</label>
+                    <label className='eventLabelName' id={p.id} onClick={(e) => eventPage(e)}>Event Name</label>
                     <p className='event'>
                       {' '}
                       <b>{p.name}</b>
