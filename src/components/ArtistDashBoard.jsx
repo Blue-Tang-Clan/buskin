@@ -58,6 +58,10 @@ const DateDiv = styled.div`
   margin: auto;
 `;
 
+const DateText = styled.h4`
+  margin: 5px;
+`;
+
 const AddressDiv = styled.div`
   grid-column-start: 2;
   grid-column-end: 3;
@@ -82,6 +86,7 @@ const TrashBoxDiv = styled.div`
 const EventText = styled.h4`
     font-weight: bold;
     color: #2D2D2D;
+    margin: 5px;
 `;
 
 const AddressText = styled.p`
@@ -103,7 +108,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     apiMasters.getArtistDetails(id)
       .then((response) => {
         const artistInfo = response.data.rows[0].json_build_object;
-        // console.log(artistInfo);
+        console.log(artistInfo);
         if (artistInfo.followers) {
           setFanCount(artistInfo.followers.length);
         }
@@ -121,7 +126,6 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     // console.log('userId', userId);
     // console.log('eventId', e.target.id);
     if (e.target.id) {
-      console.log('here');
       apiMasters.artistDeleteEvent(userId, e.target.id)
         .then(() => {
           getArtistDashBoard(userId);
@@ -146,18 +150,17 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
         {events && events.map((event) => (
           <EventDiv id={event.id} onClick={clickHandler}>
             <DateDiv>
-              <h4>{`${event.date}`}</h4>
+              <DateText>{`${event.date}`}</DateText>
+              <p>{`${event.start_time}`}</p>
             </DateDiv>
             <AddressDiv>
               <EventText>{event.name}</EventText>
               <AddressText>{`${event.city}, ${event.state}`}</AddressText>
             </AddressDiv>
             <TrashBoxDiv onClick={(e) => e.stopPropagation()}>
-              {/* <div onClick={deleteEvent} id={event.id} > */}
               <Button onClick={deleteEvent} id={event.id}>
                 <DeleteIcon sx={{ color: ' #259998' }} />
               </Button>
-              {/* </div> */}
             </TrashBoxDiv>
           </EventDiv>
         ))}
