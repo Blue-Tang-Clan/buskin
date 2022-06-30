@@ -4,17 +4,37 @@ body {
   background-color: #F8F8FB;
 }
 
-
-h1, h2, h3, h4, h5, h6 {
+h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
-h1 { font-size: 42px;}
+h1 {
+  font-size: 50px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 700;
+  color: #2E3B52;
+}
+
 h2 { font-size: 36px;}
-h3 { font-size: 30px;}
-h4 { font-size: 23px;}
-h5 { font-size: 16px;}
-h6 { font-size: 10px;}
+h3 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #3F4B5E;
+}
+h4 {
+  font-size: 20px;
+  color: #A6ACBE;
+}
+
+h5 {
+  font-size: 10px;
+  color: #A6ACBE;
+}
+
+p {
+  font-size: 16px;
+  color: #A6ACBE;
+}
 
 .flip-card-container {
   width: 180px;
@@ -22,7 +42,6 @@ h6 { font-size: 10px;}
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  
 }
 
 .flip-card {
@@ -35,6 +54,7 @@ h6 { font-size: 10px;}
 
 .flip-card-container:hover .flip-card {
   transform: rotateY(180deg);
+  cursor: pointer;
 }
 
 .flip-card-front, .flip-card-back {
@@ -51,7 +71,7 @@ h6 { font-size: 10px;}
 .flip-card-back {
   display: flex;
   flex-direction: column;
-  background-color: #517fa4;
+  background-color: #6db6e2;
   color: #fff;
   transform: rotateY(180deg);
 }

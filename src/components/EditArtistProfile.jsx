@@ -5,7 +5,7 @@ import apiMasters from '../apiMasters.js';
 export default function EditProfile () {
   // We need artistId here from artist profile where the user is the artist themselves
   const artistId = 6;
-  const artistName = 'Luke'
+  const artistName = 'Luke';
   //
 
 
@@ -74,7 +74,7 @@ export default function EditProfile () {
         <input onChange={handleInput} placeholder="instrument you play" name="instrument" required /> <br />
         <input onChange={handleInput} placeholder="your picture" type="file" accept="image/*" name="picture" required /> <br />
         {/* <input onChange={handleInput} placeholder="your sound clip" name="soundclip" required /> <br /> */}
-        <label for="cars">Choose a payment option:</label>
+        <label for="payment">Choose a payment option:</label>
         <select name="paymentoptions" onChange={handleInput}>
           <option value="venmo">venmo</option>
           <option value="cashapp">cashapp</option>
