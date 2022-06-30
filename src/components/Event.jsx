@@ -13,7 +13,7 @@ export const ArtistContext = React.createContext();
 export const EventLocationContext = React.createContext();
 
 export default function Event() {
-  const { pageId, userId } = useContext(TopContext);
+  const { pageId, userId, userType, setLogin } = useContext(TopContext);
   const [eventInfo, setEventInfo] = useState({});
   const [artistInfo, setArtistInfo] = useState({});
 
@@ -60,8 +60,11 @@ export default function Event() {
   }, [eventInfo]);
 
   const saveEvent = () => {
-    console.log('SAVING EVEMT');
-    apiMasters.saveEvent(userId, pageId);
+    if (userType === 'anonymous') {
+      setLogin(true);
+    } else {
+      apiMasters.saveEvent(userId, pageId);
+    }
   };
 
   return (

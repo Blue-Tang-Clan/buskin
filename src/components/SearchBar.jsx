@@ -1,20 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { TopContext } from './App.jsx';
 import apiMasters from '../apiMasters.js';
 
-
 const Search = styled.input`
 z-index: ${({ searching }) => (searching ? '9999' : '1001')};
-// position: fixed;
-width: 40%;
+position: fixed;
+width: 43%;
 height: 4rem;
 background: white;
 color: #C4C4C4;
 outline: none;
 border: none;
 border-radius: 2rem;
-padding: 0 3.5rem 0 3.5rem;
+padding: 15px 3.5rem 0 3.5rem;
 font-size: 1.2rem;
 box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
 `;
@@ -22,11 +21,11 @@ box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
 const SearchResultsModal = styled.div`
 z-index: 9998;
 display: ${({ searching }) => (searching ? 'block' : 'none')};
-position: absolute;
+position: fixed;
 top: 0;
 left: 0;
-height: 100vh;
-width:100vw;
+height: 4000px;
+width: 4000px;
 background: rgba(0,0,0,0.5);
 `;
 
@@ -36,7 +35,7 @@ display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: absolute;
 width: 50%;
 background: transparent;
-margin-top: 3.6rem;
+margin-top: 5rem;
 `;
 
 const ResultsSection = styled.div`
@@ -66,7 +65,7 @@ cursor: pointer;
 let searchId;
 
 export default function SearchBar() {
-  const { setPage, setPageId } = useContext(TopContext);
+  const { setPage, setPageId, page } = useContext(TopContext);
   const [search, setSearch] = useState('');
   const [artistsArr, setArtistsArr] = useState([]);
   const [eventsArr, setEventsArr] = useState([]);
@@ -80,8 +79,8 @@ export default function SearchBar() {
     setEventsArr([...event.slice(0, slice)]);
   }
 
-  function handleClick(page, id) {
-    setPage(page);
+  function handleClick(pageName, id) {
+    setPage(pageName);
     setPageId(id);
     setSearch('');
     handleSearchDisplay(false, false, [], [], 0);
@@ -124,6 +123,11 @@ export default function SearchBar() {
       handleSearchDisplay(false, false, [], [], 0);
     }
   }
+
+  useEffect(() => {
+    setSearch('');
+    handleSearchDisplay(false, false, [], [], 0);
+  }, [page]);
 
   return (
     <>

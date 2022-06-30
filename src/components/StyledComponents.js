@@ -102,12 +102,21 @@ const UserImg = styled.img`
 `;
 
 const Nav = styled.div`
+  z-index: 1001;
   background: white;
+  position: fixed;
+  width: 100vw;
   height: 85px;
   display: grid;
-  grid-template-columns: 25% auto 20%;
-  padding-top: 20px;
+  grid-template-columns: 25% auto 25%;
+  margin-top: -10px;
+  margin-left: -10px;
   gap: 30px;
+`;
+
+const NavSpacer = styled.div`
+  width: 100%;
+  height: 85px;
 `;
 
 const UserSettingContainer = styled.div`
@@ -217,6 +226,7 @@ export {
   InfoContainer,
   UserImg,
   Nav,
+  NavSpacer,
   UserSettingContainer,
   ArtistInfoContainer,
   HomePageGenreTag,

@@ -87,7 +87,8 @@ export default function EditProfile( { artistId, artistName } ) {
         <input onChange={handleInput} placeholder="payment link" name="paymentmethod" required /> <br />
         <input onChange={handleInput} placeholder="your bio" name="bio" required /> <br /> */}
       {/* <input type="submit" /> */}
-      <Box component='form' Validate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: '(2, 2)' }}>
+      <Box component='form' Validate onSubmit={handleSubmit} sx={{ mt: 3, }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -123,6 +124,7 @@ export default function EditProfile( { artistId, artistName } ) {
               accept="image/*"
               name="picture"
             /> */}
+
             <input
               onChange={handleInput}
               required
@@ -132,11 +134,11 @@ export default function EditProfile( { artistId, artistName } ) {
               type="file"
               name="picture"
             />
-            <label htmlFor="raised-button-file">
-              <Button variant="raised" component="span">
-                Upload
-              </Button>
-            </label>
+          {/* <label htmlFor="picture">
+            <Button variant="raised" component="span">
+              Upload
+            </Button>
+          </label> */}
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -149,7 +151,7 @@ export default function EditProfile( { artistId, artistName } ) {
               onChange={handleInput}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={{paddingBottom: '20px'}}>
             <FormControl fullWidth>
               <InputLabel id='demo-simple-select-label'>Choose a payment option*</InputLabel>
               <Select
@@ -168,7 +170,7 @@ export default function EditProfile( { artistId, artistName } ) {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{paddingBottom: '20px'}}>
           <TextField
             required
             fullWidth
@@ -179,7 +181,7 @@ export default function EditProfile( { artistId, artistName } ) {
             onChange={handleInput}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{paddingBottom: '20px'}}>
           <TextField
             required
             fullWidth
@@ -199,9 +201,10 @@ export default function EditProfile( { artistId, artistName } ) {
           Submit
         </Button>
       </Box>
-      <div style={{float: 'right'}}>
+      <Box>
         <Qr artistId={artistId} artistName={artistName} />
-      </div>
+      </Box>
+      </Box>
     </div>
   );
 }

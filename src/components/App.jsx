@@ -10,14 +10,14 @@ import EditProfile from './EditArtistProfile_styled.jsx';
 import EditArtistProfile from './EditArtistProfile.jsx';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import ArtistDashBoard from './ArtistDashBoard.jsx';
-import { PageContainer } from './StyledComponents.js';
+import { PageContainer, NavSpacer } from './StyledComponents.js';
 
 export const TopContext = React.createContext();
 
 export default function App() {
   const [userType, setUserType] = useState('anonymous');
   const [login, setLogin] = useState(false);
-  const [userId, setUserId] = useState(1);
+  const [userId, setUserId] = useState(null);
   const [page, setPage] = useState('home');
   const [pageId, setPageId] = useState(1);
 
@@ -28,6 +28,7 @@ export default function App() {
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
         </div>
+        <NavSpacer />
         <PageContainer>
           {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : <></>}
           {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
@@ -37,6 +38,16 @@ export default function App() {
           {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
           {page === 'editArtistProfile' ? <EditProfile artistId={userId} /> : <></>}
           {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
+          {login
+            ? (
+              <RegisterModal
+                setUserType={setUserType}
+                setUserId={setUserId}
+                anonymous={login}
+                setLogin={setLogin}
+              />
+            )
+            : null}
         </PageContainer>
       </TopContext.Provider>
     </>
