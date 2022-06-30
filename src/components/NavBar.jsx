@@ -10,12 +10,15 @@ import {
   GenreTag, UserImg, Nav, UserSettingContainer,
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
+import Alert from '@mui/material/Alert';
 
 export default function NavBar({ setUserType, setUserId }) {
   const [userName, setUserName] = useState('');
   const [userPic, setUserPic] = useState('');
   const { setPage, userType } = useContext(TopContext);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [alert, setAlert] = useState(false);
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -56,7 +59,7 @@ export default function NavBar({ setUserType, setUserId }) {
   return (
     <Nav>
       <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
-        <img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/9dd5c510445465.560e519c94453.jpg' alt='logo' height='90px' style={{ cursor: "pointer" }} />
+        <img src='https://i.ibb.co/kMc2nsf/Screen-Shot-2022-06-30-at-10-52-20-AM-copy.png' alt='logo' height='85px' style={{ cursor: "pointer" }} />
       </div>
       <div>
         <SearchBar />
@@ -121,8 +124,12 @@ export default function NavBar({ setUserType, setUserId }) {
               </Menu>
             </UserSettingContainer>
           )}
+
           <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
-          <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+          <div style={{ cursor: 'pointer' }} onmouseover='getAlert(this)'>
+            <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+          </div>
+          <Alert severity="success">This is a success alert — check it out!</Alert>
         </UserSettingContainer>
       )}
     </Nav>

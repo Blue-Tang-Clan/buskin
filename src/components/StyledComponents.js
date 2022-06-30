@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
 const PageContainer = styled.div`
-  margin: 0 5% 0 5%;
+  margin: 0 5% 0;
+  width: 90%;
 `;
 
 const HomeContainer = styled.div`
   display: grid;
   grid-template-columns: 60% 40%;
+  grid-template-areas: "a b" "c c";
+  grid-template-rows: 1fr min-content;
 `;
 
 const Button = styled.div`
@@ -71,9 +74,19 @@ const EventImg = styled.img`
   };
 `;
 
+const FreshTalentImg = styled.img`
+  height: 250px;
+  width: 250px;
+  border-radius: 10px;
+  &:hover {
+    cursor: pointer;
+  };
+`;
+
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 40% 60%;
+  display: flex;
+  gap: 30px;
+  margin-bottom: 100px;
 `;
 
 const InfoContainer = styled.div`
@@ -92,7 +105,7 @@ const Nav = styled.div`
   background: white;
   height: 85px;
   display: grid;
-  grid-template-columns: 25% auto 10%;
+  grid-template-columns: 25% auto 20%;
   padding-top: 20px;
   gap: 30px;
 `;
@@ -106,16 +119,90 @@ const ArtistInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const StyleP = styled.p`
-  color: #808080;
-  font-size: 0.75em;
+
+const MapInfo = styled.div`
+  grid-area: a;
+  grid-template-rows: auto;
 `;
 
-const GenreTitle = styled.div`
-  padding: 0;
-  margin: 0;
-  color: #808080;
-  font-size: 0.75em;
+const ArtistInfo = styled.div`
+  grid-area: b;
+  grid-template-rows: auto;
+`;
+
+const TeamInfo = styled.div`
+  grid-area: c;
+  display: grid;
+  left: 50%;
+  grid-template-areas: "title title title" "a a a" "b b b";
+`;
+const Title = styled.div`
+  grid-area: title;
+`;
+const Line1 = styled.div`
+  grid-area: a;
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+`;
+const Line2 = styled.div`
+  grid-area: b;
+  display: grid;
+  grid-template-areas: "A B C";
+`;
+
+const MemberA = styled.div`
+  grid-area: A;
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  gap: 10px;
+`;
+const MemberB = styled.div`
+  grid-area: B;
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  gap: 10px;
+`;
+const MemberC = styled.div`
+  grid-area: C;
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  gap: 10px;
+`;
+
+const Audio = styled.audio`
+  width: 100%;
+  display: block;
+`;
+
+// EVENT PAGE SPECIFIC STYLING
+const EventPageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-right: 5%;
+`;
+
+const EventHeaderContainer = styled.div`
+display: flex;
+max-height: 500px;
+flex-direction: row;
+justify-content: flex-start;
+align-items: flex-start;
+`;
+
+const EventPageArtistPic = styled.img`
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
 `;
 
 export {
@@ -132,7 +219,19 @@ export {
   Nav,
   UserSettingContainer,
   ArtistInfoContainer,
-  StyleP,
-  GenreTitle,
   HomePageGenreTag,
+  EventPageContainer,
+  EventHeaderContainer,
+  EventPageArtistPic,
+  FreshTalentImg,
+  MapInfo,
+  ArtistInfo,
+  TeamInfo,
+  Title,
+  Line1,
+  Line2,
+  MemberA,
+  MemberB,
+  MemberC,
+  Audio,
 };
