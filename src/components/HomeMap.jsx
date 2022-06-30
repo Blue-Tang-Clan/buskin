@@ -23,23 +23,26 @@ export default function ViewMap() {
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [pins, setPins] = useState([]);
-  const [fanId, setFanId] = useState('1');
+  const [fanId, setFanId] = useState(1);
   const [saved, setSaved] = useState(false);
-  const [artistName, setArtistName] = useState('Lil Uzzy');
-  const { setPage, setLogin, userType, userId } = useContext(TopContext);
+  const [savedEvents, setSavedEvents] = useState([]);
+  const { setPage, setPageId, setLogin, userType, userId } = useContext(TopContext);
 
   useEffect(() => {
     const getPins = async () => {
       try {
         const res = await apiMasters.getEvents(new Date());
         setPins(res.data);
-        setFanId(userId);
+        setFanId(Number(userId));
+        const resDos = await apiMasters.getFanDashBoard(fanId);
+        console.log(resDos.data);
+        setSavedEvents(resDos.data.events);
       } catch (err) {
         console.log(err);
       }
     };
     getPins();
-  }, []);
+  }, [fanId, userId]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -77,6 +80,11 @@ export default function ViewMap() {
         })
         .catch(((err) => console.log(err)));
     }
+  };
+
+  const eventPage = (e) => {
+    setPageId(e.target.id);
+    setPage('event');
   };
 
   const parkLayer = {
@@ -145,7 +153,9 @@ export default function ViewMap() {
               offsetLeft={-viewport.zoom * 3.5}
               offsetTop={-viewport.zoom * 5.5}
             >
-              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer', color: 'tomato' }} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
+              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer', color:
+              JSON.stringify(savedEvents).includes(p.street) ? 'blue' : 'tomato'
+            }}  value={JSON.stringify(savedEvents).includes(p.street) ? '1' : '2'} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
             </Marker>
             {p.id === currentPlaceId
               ? (
@@ -167,7 +177,7 @@ export default function ViewMap() {
                       {' '}
                       <b>{p.display_name}</b>
                     </p>
-                    <label className='eventLabel'>Event Name</label>
+                    <label className='eventLabel' id={p.id} onClick={(e) => eventPage(e)}>Event Name</label>
                     <p className='event'>
                       {' '}
                       <b>{p.name}</b>
@@ -200,10 +210,10 @@ export default function ViewMap() {
 
                     </span>
                     {saved ? <p style={{ color: 'green' }}> Event Saved!</p> : (
-                      <button
+                     <button
                         type='button'
                         className='saveEventBtn'
-                        onClick={() => handleSaveClick(fanId, p.id)}
+                        onClick={() => handleSaveClick(fanId, Number(p.id))}
                       >
                         {' '}
                         Save Event
