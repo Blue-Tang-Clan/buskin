@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import React, {
   useState, useRef, useCallback, useEffect, useTheme,
 } from 'react';
-import MapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
+import MapGL, { Marker, Popup, GeolocateControl, Layer } from 'react-map-gl';
 import { Room, Cancel } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
 import DatePicker from 'react-date-picker';
@@ -63,7 +63,6 @@ export default function ViewMap({ ArtistName, ArtistId }) {
     const getPins = async () => {
       try {
         const res = await apiMasters.getEvents(new Date());
-        console.log(res.data);
         setPins(res.data);
       } catch (err) {
         console.log(err);
@@ -159,6 +158,41 @@ export default function ViewMap({ ArtistName, ArtistId }) {
     e.target.name && eventCreation(artistId,eventObj);
   };
 
+  const parkLayer = {
+    id: 'add-3d-buildings',
+    source: 'composite',
+    'source-layer': 'building',
+    filter: ['==', 'extrude', 'true'],
+    type: 'fill-extrusion',
+    minzoom: 15,
+    paint: {
+      'fill-extrusion-color': '#aaa',
+
+      // Use an 'interpolate' expression to
+      // add a smooth transition effect to
+      // the buildings as the user zooms in.
+      'fill-extrusion-height': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        15,
+        0,
+        15.05,
+        ['get', 'height'],
+      ],
+      'fill-extrusion-base': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        15,
+        0,
+        15.05,
+        ['get', 'min_height'],
+      ],
+      'fill-extrusion-opacity': 0.6,
+    },
+  };
+
   return (
     <div className='map-div'>
       <Modal warning={warning}>
@@ -178,6 +212,7 @@ export default function ViewMap({ ArtistName, ArtistId }) {
         mapStyle='mapbox://styles/mapbox/streets-v11'
         onDblClick={(e) => handleAddClick(e)}
       >
+        <Layer {...parkLayer} />
         <Geocoder
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}

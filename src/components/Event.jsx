@@ -6,7 +6,7 @@ import { TopContext } from './App.jsx';
 export const ArtistContext = React.createContext();
 
 export default function Event() {
-  const { pageId } = useContext(TopContext);
+  const { pageId, userId } = useContext(TopContext);
   const [eventInfo, setEventInfo] = useState({});
 
   useEffect(() => {
@@ -32,6 +32,10 @@ export default function Event() {
       .catch((err) => console.log('aww didnt get any data? boohoo', err));
   }, [pageId]);
 
+  const saveEvent = () => {
+    apiMasters.saveEvent(userId, pageId);
+  };
+
   return (
     <div>
       <img src={eventInfo.pic} alt='Event' />
@@ -40,6 +44,7 @@ export default function Event() {
       <p>{`${eventInfo.street} ${eventInfo.city}, ${eventInfo.state}`}</p>
       <p>{`${eventInfo.date} ${eventInfo.start_time} ~ ${eventInfo.end_time}`}</p>
       <p>{eventInfo.description}</p>
+      <button type='button' onClick={saveEvent}>Save Event</button>
     </div>
   );
 }
