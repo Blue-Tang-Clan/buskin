@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ArtistBio from './ArtistBio.jsx';
-import { HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer, ArtistInfoContainer } from './StyledComponents.js';
+import { HomeContainer, HomePageGenreTag, TagContainer, ArtistImg, ArtistImgContainer, ArtistInfoContainer } from './StyledComponents.js';
 import { TopContext } from './App.jsx';
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
 import { ArtistImgList, EventImgList } from './HomePageImg.jsx';
-
-const Container = styled.div`
-  margin-left: 5%;
-`;
 
 export default function Home({ setPage, setPageId }) {
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
@@ -53,13 +49,11 @@ export default function Home({ setPage, setPageId }) {
   return (
     <HomeContainer>
       <div>
-        <Container>
-          <h3>Map</h3>
-          <HomeMap />
-          <br></br>
-          <h3>Upcoming Performances</h3>
-          <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
-        </Container>
+        <h3>Map</h3>
+        <HomeMap />
+        <br></br>
+        <h3>Upcoming Performances</h3>
+        <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
       </div>
       <div>
         <div onClick={() => { setPage('artistProfile'); }}>
@@ -72,7 +66,7 @@ export default function Home({ setPage, setPageId }) {
           <h3>Popular Genres</h3>
           <TagContainer>
             {genres.map((genre, i) =>
-              <GenreTag key={i} value={genre} onClick={handleFilterGenre}>{genre}</GenreTag>
+              <HomePageGenreTag key={i} value={genre} onClick={handleFilterGenre}>{genre}</HomePageGenreTag>
             )}
           </TagContainer>
           <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
