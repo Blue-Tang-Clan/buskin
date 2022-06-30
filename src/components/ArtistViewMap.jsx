@@ -39,7 +39,7 @@ const WarningMessage = styled.div`
 `;
 
 let eventObj = {};
-export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
+export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, events }) {
   const [viewport, setViewport] = useState({
     latitude: 40.7484,
     longitude: -73.9857,
@@ -72,7 +72,7 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
     setArtistName(ArtistName);
     setArtistId(ArtistId);
     getPins();
-  }, [ArtistId,ArtistName]);
+  }, [ArtistId, ArtistName, events]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
