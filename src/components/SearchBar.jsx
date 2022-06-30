@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { TopContext } from './App.jsx';
 import apiMasters from '../apiMasters.js';
@@ -65,7 +65,7 @@ cursor: pointer;
 let searchId;
 
 export default function SearchBar() {
-  const { setPage, setPageId } = useContext(TopContext);
+  const { setPage, setPageId, page } = useContext(TopContext);
   const [search, setSearch] = useState('');
   const [artistsArr, setArtistsArr] = useState([]);
   const [eventsArr, setEventsArr] = useState([]);
@@ -79,8 +79,8 @@ export default function SearchBar() {
     setEventsArr([...event.slice(0, slice)]);
   }
 
-  function handleClick(page, id) {
-    setPage(page);
+  function handleClick(pageName, id) {
+    setPage(pageName);
     setPageId(id);
     setSearch('');
     handleSearchDisplay(false, false, [], [], 0);
@@ -123,6 +123,11 @@ export default function SearchBar() {
       handleSearchDisplay(false, false, [], [], 0);
     }
   }
+
+  useEffect(() => {
+    setSearch('');
+    handleSearchDisplay(false, false, [], [], 0);
+  }, [page]);
 
   return (
     <>
