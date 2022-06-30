@@ -6,7 +6,7 @@ import { TopContext } from './App.jsx';
 export const ArtistContext = React.createContext();
 
 export default function Event() {
-  const { pageId, userId } = useContext(TopContext);
+  const { pageId, userId, userType, setLogin } = useContext(TopContext);
   const [eventInfo, setEventInfo] = useState({});
 
   useEffect(() => {
@@ -33,7 +33,11 @@ export default function Event() {
   }, [pageId]);
 
   const saveEvent = () => {
-    apiMasters.saveEvent(userId, pageId);
+    if (userType === 'anonymous') {
+      setLogin(true);
+    } else {
+      apiMasters.saveEvent(userId, pageId);
+    }
   };
 
   return (
