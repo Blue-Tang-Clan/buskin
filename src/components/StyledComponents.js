@@ -118,6 +118,61 @@ const GenreTitle = styled.div`
   font-size: 0.75em;
 `;
 
+// EVENT PAGE SPECIFIC STYLING
+const EventPageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-right: 5%;
+`;
+
+const EventHeaderContainer = styled.div`
+display: flex;
+width: 100%;
+max-height: 500px;
+flex-direction: row;
+justify-content: flex-start;
+align-items: flex-start;
+`;
+
+const EventPageImg = styled.img`
+  width: 100%;
+  max-height: 500px;
+  max-width: 500px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+`;
+
+const SaveEventButton = styled.button`
+  background-color: lightblue;
+  border-style: none;
+  width: 100%;
+  max-width: 500px;
+  &:hover {
+    background-color: pink;
+    cursor: pointer;
+  };
+`;
+
+const EventPageArtistPic = styled.img`
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+`;
+
+const EventButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  max-height: 500px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+`;
+
 export {
   PageContainer,
   HomeContainer,
@@ -135,4 +190,10 @@ export {
   StyleP,
   GenreTitle,
   HomePageGenreTag,
+  EventPageContainer,
+  EventHeaderContainer,
+  EventPageImg,
+  SaveEventButton,
+  EventPageArtistPic,
+  EventButtonContainer,
 };
