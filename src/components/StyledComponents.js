@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+const PageContainer = styled.div`
+  margin: 0 5% 0 5%;
+`;
+
 const HomeContainer = styled.div`
   display: grid;
   grid-template-columns: 60% 40%;
@@ -98,7 +102,7 @@ const ArtistInfoContainer = styled.div`
 `;
 const StyleP = styled.p`
   color: #808080;
-  font-size: 0.75em; 
+  font-size: 0.75em;
 `;
 
 const GenreTitle = styled.div`
@@ -109,6 +113,7 @@ const GenreTitle = styled.div`
 `;
 
 export {
+  PageContainer,
   HomeContainer,
   GenreTag,
   TagContainer,
