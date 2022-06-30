@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { TopContext } from './App.jsx';
 import apiMasters from '../apiMasters.js';
 
-
 const Search = styled.input`
-z-index: ${({ searching }) => (searching ? '9999' : '0')};
+z-index: ${({ searching }) => (searching ? '9999' : '1001')};
 position: fixed;
 width: 43%;
 height: 4rem;
