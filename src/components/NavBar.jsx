@@ -12,8 +12,8 @@ import {
 import RegisterModal from './Auth/RegisterModal.jsx';
 
 export default function NavBar({ setUserType, setUserId }) {
-  const [userName, setUserName] = useState('');
-  const [userPic, setUserPic] = useState('');
+  const [userName, setUserName] = useState('Nikko');
+  const [userPic, setUserPic] = useState('https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg');
   const { setPage, userType } = useContext(TopContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -56,7 +56,7 @@ export default function NavBar({ setUserType, setUserId }) {
   return (
     <Nav>
       <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
-        <img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/9dd5c510445465.560e519c94453.jpg' alt='thumbnail' height='90px' />
+        <img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/9dd5c510445465.560e519c94453.jpg' alt='logo' height='90px' />
       </div>
       <div>
         <SearchBar />
@@ -76,12 +76,13 @@ export default function NavBar({ setUserType, setUserId }) {
             <UserSettingContainer>
               <div>
                 <div>
-                  <label>Name</label>
+                  <label>{userName}</label>
                 </div>
                 <div>
                   <label>Artist</label>
                 </div>
               </div>
+              <UserImg src={userPic} alt='thumbnail' />
               <ArrowDropDownIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
               <Menu
                 id="basic-menu"
@@ -100,13 +101,13 @@ export default function NavBar({ setUserType, setUserId }) {
             <UserSettingContainer>
               <div>
                 <div>
-                  <span>Name</span>
+                  <span>{userName}</span>
                 </div>
                 <div>
                   <span>Fan</span>
                 </div>
               </div>
-              <UserImg src='https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg' alt='Avatar' />
+              <UserImg src={userPic} alt='thumbnail' />
               <ArrowDropDownIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={handleClick} />
               <Menu
                 id='basic-menu'
