@@ -10,7 +10,7 @@ import EditProfile from './EditArtistProfile_styled.jsx';
 import EditArtistProfile from './EditArtistProfile.jsx';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import ArtistDashBoard from './ArtistDashBoard.jsx';
-import { PageContainer } from './StyledComponents.js';
+import { PageContainer, NavSpacer } from './StyledComponents.js';
 
 export const TopContext = React.createContext();
 
@@ -28,6 +28,7 @@ export default function App() {
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
         </div>
+        <NavSpacer />
         {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : <></>}
         {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
         {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
