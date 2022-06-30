@@ -125,4 +125,4 @@ function TotalFollowers(number) {
   );
 }
 
-export { SavedEvents, FollowedArtists, TotalFollowers };
+export { SavedEvents, FollowedArtists, TotalFollowers, Tag, Container, SavedEventsTag, Icon };
