@@ -129,7 +129,7 @@ export default function NavBar({ setUserType, setUserId }) {
           <div style={{ cursor: 'pointer' }} onmouseover='getAlert(this)'>
             <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
           </div>
-          <Alert severity="success">This is a success alert — check it out!</Alert>
+          {/* <Alert severity="success">This is a success alert — check it out!</Alert> */}
         </UserSettingContainer>
       )}
     </Nav>
