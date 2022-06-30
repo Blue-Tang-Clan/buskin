@@ -37,7 +37,14 @@ export default function App() {
         {page === 'editArtistProfile' ? <EditArtistProfile /> : <></> }
         {page === 'editFanProfile' ? <EditFanProfile /> : <></> }
         {login
-          ? <RegisterModal setUserType={setUserType} setUserId={setUserId} anonymous={login} />
+          ? (
+            <RegisterModal
+              setUserType={setUserType}
+              setUserId={setUserId}
+              anonymous={login}
+              setLogin={setLogin}
+            />
+          )
           : null}
       </TopContext.Provider>
     </>

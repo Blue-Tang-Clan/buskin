@@ -5,7 +5,7 @@ import apiMasters from '../apiMasters.js';
 
 
 const Search = styled.input`
-z-index: 9999;
+z-index: ${({ searching }) => (searching ? '9999' : '0')};
 position: fixed;
 width: 30%;
 height: 3.6rem;
@@ -19,7 +19,7 @@ box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
 `;
 
 const SearchResultsModal = styled.div`
-z-index: 9000;
+z-index: 9998;
 display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: absolute;
 top: 0;
@@ -79,8 +79,8 @@ export default function SearchBar() {
     setEventsArr([...event.slice(0, slice)]);
   }
 
-  function handleClick(e, id) {
-    setPage(e.target.name);
+  function handleClick(page, id) {
+    setPage(page);
     setPageId(id);
     setSearch('');
     handleSearchDisplay(false, false, [], [], 0);
@@ -126,9 +126,9 @@ export default function SearchBar() {
 
   return (
     <>
-      <Search type='text' onChange={(e) => handleSearch(e)} name='searchQueryInput' placeholder='Search for new artists, events...' value={search} onClick={(e) => clearResults(e)} />
+      <Search type='text' onChange={(e) => handleSearch(e)} name='searchQueryInput' placeholder='Search for artists, events...' value={search} onClick={(e) => clearResults(e)} searching={searching} />
       <SearchResultsModal searching={searching} onClick={clearResults} />
-      <SearchResults searching={searching} >
+      <SearchResults searching={searching}>
         {noResults
           ? <ResultsSection>No search results match your criteria</ResultsSection>
           : null}
@@ -136,7 +136,7 @@ export default function SearchBar() {
         {artistsArr.length
           ? artistsArr.map((result) =>
             (
-              <IndividualResult name='artistProfile' key={result.id} onClick={(e) => handleClick(e, result.id)}>
+              <IndividualResult key={result.id} onClick={() => handleClick('artistProfile', result.id)}>
                 {result.name}
               </IndividualResult>
             ))
@@ -145,7 +145,7 @@ export default function SearchBar() {
         {eventsArr.length
           ? eventsArr.map((result) =>
             (
-              <IndividualResult name='event' key={result.id} onClick={(e) => handleClick(e, result.id)}>
+              <IndividualResult key={result.id} onClick={() => handleClick('event', result.id)}>
                 {`${result.name} - `}
                 City:
                 {` ${result.city}, `}
