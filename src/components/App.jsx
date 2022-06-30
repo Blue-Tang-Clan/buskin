@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Home from './Home.jsx';
 import ArtistProfile from './ArtistProfile.jsx';
 import NavBar from './NavBar.jsx';
@@ -27,15 +27,14 @@ export default function App() {
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
         </div>
-        {page === 'home' ? <Home /> : <></>}
-        {page === 'artistProfile' ? <ArtistProfile /> : <></>}
-        {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} /> : <></>}
-        {page === 'fanProfile' ? <FanProfile /> : <></>}
+        {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : <></>}
+        {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
+        {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
         {page === 'event' ? <Event /> : <></>}
-        {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId}/> : <></>}
+        {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
         {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
-        {page === 'editArtistProfile' ? <EditArtistProfile /> : <></> }
-        {page === 'editFanProfile' ? <EditFanProfile /> : <></> }
+        {page === 'editArtistProfile' ? <EditArtistProfile /> : <></>}
+        {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
         {login
           ? (
             <RegisterModal
