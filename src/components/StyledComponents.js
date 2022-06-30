@@ -76,6 +76,35 @@ const UserSettingContainer = styled.div`
   gap: 20px;
 `;
 
+const ArtistInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const StyleP = styled.p`
+  color: #808080;
+  font-size: 0.75em; 
+`;
+
+const GenreTitle = styled.div`
+  padding: 0;
+  margin: 0;
+  color: #808080;
+  font-size: 0.75em;
+`;
+
 export {
-  HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer, EventImg, Container, InfoContainer, UserImg, Nav, UserSettingContainer
+  HomeContainer,
+  GenreTag,
+  TagContainer,
+  ArtistImg,
+  ArtistImgContainer,
+  EventImg,
+  Container,
+  InfoContainer,
+  UserImg,
+  Nav,
+  UserSettingContainer,
+  ArtistInfoContainer,
+  StyleP,
+  GenreTitle,
 };
