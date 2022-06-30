@@ -35,6 +35,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     apiMasters.getArtistDetails(userId)
       .then((response) => {
         const artistInfo = response.data.rows[0].json_build_object;
+        console.log(artistInfo);
         setFanCount(artistInfo.fan_num);
         setEvents(artistInfo.events);
         setArtistName(artistInfo.name);
@@ -49,11 +50,11 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     <>
       <h2 style={{ color: '#373B53', fontWeight: '700' }}>DashBoard</h2>
       {TotalFollowers(fanCount)}
-      {events.map((event) => (
-      <EventList id={event.id} onClick={clickHandler}>
-        <h5>{`${event.date}`}</h5>
-        <h5>{`${event.street}, ${event.city}, ${event.state}`}</h5>
-      </EventList>
+      {events && events.map((event) => (
+        <EventList id={event.id} onClick={clickHandler}>
+          <h5>{`${event.date}`}</h5>
+          <h5>{`${event.street}, ${event.city}, ${event.state}`}</h5>
+        </EventList>
       ))}
       <ViewMap ArtistName={artistName} ArtistId={artistId} />
     </>
