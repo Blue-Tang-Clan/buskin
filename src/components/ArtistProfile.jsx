@@ -32,7 +32,12 @@ const ArtistProfileContainer = styled.div`
 
 const ArtistDescription = styled.div`
   width: 40rem;
-  padding-left: 6px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 4px 4px 5px 5px rgba(0,0,0, .08);
+  border-radius: 10px;
+  min-height: 150px;
+  margin-bottom: 10px;
 `;
 
 const Schedule = styled.div`
@@ -83,26 +88,23 @@ export default function ArtistProfile({ setPage, setPageId }) {
             <ArtistImg src={artist.pic} alt='busker' style={{ width: '300px', height: '300px', marginRight: '40px' }} />
             <div>
               <div style={{ width: 'auto', display: 'flex', flexDirection: 'row' }}>
-                <h1>
+                <h1 style={{marginTop: '0' }}>
                   {artist.name}
                 </h1>
-                <FavoriteBorderIcon style={{ width: '40px', height: '40px', marginLeft: '40px', marginTop: '35px' }} />
+                <div title='follow me plz' style={{width: 'auto', height: 'auto'}}>
+                  <FavoriteBorderIcon title='follow' style={{ width: '40px', height: '40px', marginLeft: '40px', marginTop: '35px' }} />
+                </div>
                 <Payments />
               </div>
               <ArtistDescription>
+                <bold>Genre: </bold> {artist.genre} <br />
+                <bold>Instrument: </bold> {artist.instrument} <br /><br />
                 {artist.bio}
               </ArtistDescription>
+              <audio src="retrosoul.mp3" type="audio/mp3" controls></audio>
             </div>
 
           </div>
-          <TagContainer style={{ marginTop: '15px', marginLeft: '10px' }}>
-            <HomePageGenreTag>
-              {artist.genre}
-            </HomePageGenreTag>
-            <HomePageGenreTag>
-              {artist.instrument}
-            </HomePageGenreTag>
-          </TagContainer>
         </div>
         <Schedule>
           <h3>Upcoming Events:</h3>

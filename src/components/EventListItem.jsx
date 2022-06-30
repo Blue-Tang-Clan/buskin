@@ -12,6 +12,10 @@ const EventTag = styled(Tag)`
   height: auto;
   width: 500px;
   margin-bottom: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Number = styled.div`
@@ -34,11 +38,8 @@ export default function EventListItem({ setPage, setPageId }) {
     setPage('event');
   };
 
-  // <p>{event.name}</p>
-  // <p>{`${event.street} ${event.city}, ${event.state}`}</p>
-  // <p>{`${event.date} ${event.start_time} ~ ${event.end_time}`}</p>
   return (
-    <EventTag>
+    <EventTag onClick={renderEventPage}>
       <Container>
         <SavedEventsTag>
           <Icon>

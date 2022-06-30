@@ -32,12 +32,13 @@ function ArtistImgList({ArtistArr, xs, setPage, setPageId}) {
 
   return (
     <Grid item xs={xs}>
-      {ArtistArr.map((artist) => (
+      {ArtistArr ? ArtistArr.map((artist) => (
         <Card key={artist.pic}>
           <ArtistMImg alt='artist pic' src={artist.pic} onClick={showArtist} id={artist.id} />
           <h5>{artist.artist_name}</h5>
         </Card>
-      ))}
+      ))
+        : null}
     </Grid>
   );
 }
@@ -50,7 +51,7 @@ function EventImgList({ EventArr, xs, setPage, setPageId }) {
 
   return (
     <Grid item xs={xs}>
-      {EventArr.map((event) => (
+      {EventArr ? EventArr.map((event) => (
         <Card key={event.pic}>
           <div className='flip-card-container' key={event.id}>
             <div className='flip-card'>
@@ -66,7 +67,8 @@ function EventImgList({ EventArr, xs, setPage, setPageId }) {
             </div>
           </div>
         </Card>
-      ))}
+      ))
+        : null}
     </Grid>
   );
 }
