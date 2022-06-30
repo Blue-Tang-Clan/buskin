@@ -23,12 +23,12 @@ export default function App() {
   return (
     <>
       {/* components */}
-      <TopContext.Provider value={{page, setPage, pageId, setPageId, userType, setLogin}}>
+      <TopContext.Provider value={{page, setPage, pageId, setPageId, userType, setLogin, userId, setUserId }}>
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
         </div>
         {page === 'home' ? <Home /> : <></>}
-        {page === 'artistProfile' ? <ArtistProfile /> : <></>}
+        {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
         {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
         {page === 'fanProfile' ? <FanProfile /> : <></>}
         {page === 'event' ? <Event /> : <></>}
