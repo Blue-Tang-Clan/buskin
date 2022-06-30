@@ -60,6 +60,7 @@ const DateDiv = styled.div`
 
 const DateText = styled.h4`
   margin: 5px;
+  color: #259998;
 `;
 
 const AddressDiv = styled.div`
@@ -147,11 +148,12 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
       {TotalFollowers(fanCount)}
       </DashBoardCard>
       <EventList>
+        <h4>Upcoming Events</h4>
         {events && events.map((event) => (
           <EventDiv id={event.id} onClick={clickHandler}>
             <DateDiv>
               <DateText>{`${event.date}`}</DateText>
-              <p>{`${event.start_time}`}</p>
+              <p style={{ color: '#259998'}}>{`${event.start_time}`}</p>
             </DateDiv>
             <AddressDiv>
               <EventText>{event.name}</EventText>
