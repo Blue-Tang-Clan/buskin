@@ -29,7 +29,8 @@ display: ${({ warning }) => (warning ? 'block' : 'none')};
 
 const WarningMessage = styled.div`
   background: rgba(250,250,250,1);
-  height:30rem;
+  height:12rem;
+  border-radius:10px;
   width:30rem;
   position: absolute;
   left: 50%;
@@ -56,7 +57,7 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
   const [startTime, setStartTime] = useState('10:00');
   const [endTime, setEndTime] = useState('10:00');
   const [artistId, setArtistId] = useState(null);
-  const [artistName, setArtistName] = useState(null);
+  const [artistName, setArtistName] = useState('');
   const [warning, setWarning] = useState(false);
 
   useEffect(() => {
@@ -71,7 +72,7 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
     setArtistName(ArtistName);
     setArtistId(ArtistId);
     getPins();
-  }, [ArtistId]);
+  }, [ArtistId,ArtistName]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -91,7 +92,6 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
   );
 
   const handleAddClick = (e) => {
-    console.log(e);
     const [lng, lat] = e.lngLat;
     setNewEvent({
       lat,
@@ -100,13 +100,10 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
   };
 
   const eventCreation = (artistId, eventObj) => {
-    console.log('artistId', artistId);
-    console.log('eventObj', eventObj);
     apiMasters
       .createEvent(artistId, eventObj)
       .then((res) => {
         setPins([...pins, eventObj]);
-        console.log(res.data);
       })
       .then(() => setNewEvent(null))
       .then(() => getArtistDashBoard(artistId))
@@ -127,6 +124,7 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
         date: formatDate,
         start_time: startTime,
         end_time: endTime,
+        display_name: artistName,
       };
       eventObj.display_name = artistName;
       // check if any events in 30 yard radius, date and time
@@ -198,9 +196,13 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
     <div className='map-div'>
       <Modal warning={warning}>
         <WarningMessage>
+          <div className="warning-msg">
           Your Performance is Within 30 Yards of Another Performance at the Same Time, Do you still want to schedule this performance?
-          <button name='yes' onClick={(e) => handleWarningClick(e)}>Yes</button>
-          <button onClick={(e) => handleWarningClick(e)}>No</button>
+          </div>
+          <div className="btn-div">
+          <button name='yes' className="yesBtn" onClick={(e) => handleWarningClick(e)}>Yes</button>
+          <button className="noBtn"  onClick={(e) => handleWarningClick(e)}>No</button>
+          </div>
         </WarningMessage>
       </Modal>
       <MapGL
