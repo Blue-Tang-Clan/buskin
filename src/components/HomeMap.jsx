@@ -4,7 +4,9 @@ import 'react-date-picker/dist/DatePicker.css';
 import React, {
   useState, useRef, useCallback, useEffect, useContext,
 } from 'react';
-import MapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
+import MapGL, {
+  Marker, Popup, GeolocateControl, Layer,
+} from 'react-map-gl';
 import { Room, Cancel } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
 import { TopContext } from './App.jsx';
@@ -21,22 +23,25 @@ export default function ViewMap() {
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [pins, setPins] = useState([]);
-  const [fanId, setFanId] = useState('1');
+  const [fanId, setFanId] = useState(1);
   const [saved, setSaved] = useState(false);
-  const [artistName, setArtistName] = useState('Lil Uzzy');
-  const { setPage, setLogin, userType } = useContext(TopContext);
+  const [savedEvents, setSavedEvents] = useState([]);
+  const { setPage, setPageId, setLogin, userType, userId } = useContext(TopContext);
 
   useEffect(() => {
     const getPins = async () => {
       try {
         const res = await apiMasters.getEvents(new Date());
         setPins(res.data);
+        setFanId(Number(userId));
+        const resDos = await apiMasters.getFanDashBoard(fanId);
+        setSavedEvents(resDos.data.events);
       } catch (err) {
         console.log(err);
       }
     };
     getPins();
-  }, []);
+  }, [fanId, userId]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -76,6 +81,46 @@ export default function ViewMap() {
     }
   };
 
+  const eventPage = (e) => {
+    setPageId(e.target.id);
+    setPage('event');
+  };
+
+  const parkLayer = {
+    id: 'add-3d-buildings',
+    source: 'composite',
+    'source-layer': 'building',
+    filter: ['==', 'extrude', 'true'],
+    type: 'fill-extrusion',
+    minzoom: 15,
+    paint: {
+      'fill-extrusion-color': '#aaa',
+
+      // Use an 'interpolate' expression to
+      // add a smooth transition effect to
+      // the buildings as the user zooms in.
+      'fill-extrusion-height': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        15,
+        0,
+        15.05,
+        ['get', 'height'],
+      ],
+      'fill-extrusion-base': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        15,
+        0,
+        15.05,
+        ['get', 'min_height'],
+      ],
+      'fill-extrusion-opacity': 0.6,
+    },
+  };
+
   return (
     <div className='home-map-div'>
       <MapGL
@@ -87,6 +132,7 @@ export default function ViewMap() {
         onViewportChange={handleViewportChange}
         mapStyle='mapbox://styles/mapbox/streets-v11'
       >
+        <Layer {...parkLayer} />
         <Geocoder
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}
@@ -106,7 +152,9 @@ export default function ViewMap() {
               offsetLeft={-viewport.zoom * 3.5}
               offsetTop={-viewport.zoom * 5.5}
             >
-              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer', color: 'tomato' }} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
+              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer', color:
+              JSON.stringify(savedEvents).includes(p.street) ? 'blue' : 'tomato'
+            }} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
             </Marker>
             {p.id === currentPlaceId
               ? (
@@ -128,7 +176,7 @@ export default function ViewMap() {
                       {' '}
                       <b>{p.display_name}</b>
                     </p>
-                    <label className='eventLabel'>Event Name</label>
+                    <label className='eventLabelName' id={p.id} onClick={(e) => eventPage(e)}>Event Name</label>
                     <p className='event'>
                       {' '}
                       <b>{p.name}</b>
@@ -160,11 +208,11 @@ export default function ViewMap() {
                       </b>
 
                     </span>
-                    {saved ? <p style={{color:'green'}}> Event Saved!</p> : (
-                      <button
+                    {saved ? <p style={{ color: 'green' }}> Event Saved!</p> : (
+                     <button
                         type='button'
                         className='saveEventBtn'
-                        onClick={() => handleSaveClick(fanId, p.id)}
+                        onClick={() => handleSaveClick(fanId, Number(p.id))}
                       >
                         {' '}
                         Save Event
