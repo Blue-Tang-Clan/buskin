@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TotalFollowers } from './DashBoardTag.jsx';
 import apiMasters from '../apiMasters.js';
 import ViewMap from './ArtistViewMap.jsx';
+import EventList from './EventList.jsx';
 
 export default function ArtistDashBoard({userId}) {
   const [fanCount, setFanCount] = useState(0);

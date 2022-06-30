@@ -5,15 +5,21 @@ import { EventImg, ArtistImg } from './StyledComponents.js';
 
 const ArtistMImg = styled(ArtistImg)`
   margin: 5px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const EventsMImg = styled(EventImg)`
   margin: 5px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Card = styled.div`
   text-align: center;
-  width: 20%;
+  width: 25%;
   display: inline-block;
 `;
 
