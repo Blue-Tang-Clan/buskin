@@ -1,30 +1,34 @@
 import styled from 'styled-components';
 
+const PageContainer = styled.div`
+  margin: 0 5% 0 5%;
+`;
+
 const HomeContainer = styled.div`
   display: grid;
   grid-template-columns: 60% 40%;
 `;
 
-const GenreTag = styled.div`
-  padding: 10px 14px;
-  color: 373B53;
-  font-size: 14px;
+const Button = styled.div`
+  padding: 20px;
+  width: 150px;
+  color: #373B53;
+  font-size: 18px;
   box-shadow: 0px 0px 3px 3px rgba(0,0,0, .1);
   border-radius: 3px;
-  font-family: Arial, Helvetica Neue Thin, sans-serif;
   &:hover {
     background-color: #0094B6;
     color: white;
     cursor: pointer;
   };
 `;
+
 const HomePageGenreTag = styled.div`
   padding: 10px 14px;
-  color: 373B53;
+  color: #373B53;
   font-size: 14px;
   box-shadow: 0px 0px 3px 3px rgba(0,0,0, .1);
   border-radius: 10px;
-  font-family: Arial, Helvetica Neue Thin, sans-serif;
   &:hover {
     background-color: #0094B6;
     color: white;
@@ -46,6 +50,9 @@ const ArtistImg = styled.img`
   height:150px;
   width: 150px;
   border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+  };
 `;
 
 const ArtistImgContainer = styled.div`
@@ -59,6 +66,9 @@ const EventImg = styled.img`
   height: 180px;
   width: 180px;
   border-radius: 10px;
+  &:hover {
+    cursor: pointer;
+  };
 `;
 
 const Container = styled.div`
@@ -80,9 +90,9 @@ const UserImg = styled.img`
 
 const Nav = styled.div`
   background: white;
-  height: 75px;
+  height: 85px;
   display: grid;
-  grid-template-columns: 300px auto 400px;
+  grid-template-columns: 25% auto 10%;
   padding-top: 20px;
   gap: 30px;
 `;
@@ -98,7 +108,7 @@ const ArtistInfoContainer = styled.div`
 `;
 const StyleP = styled.p`
   color: #808080;
-  font-size: 0.75em; 
+  font-size: 0.75em;
 `;
 
 const GenreTitle = styled.div`
@@ -109,8 +119,9 @@ const GenreTitle = styled.div`
 `;
 
 export {
+  PageContainer,
   HomeContainer,
-  GenreTag,
+  Button,
   TagContainer,
   ArtistImg,
   ArtistImgContainer,
