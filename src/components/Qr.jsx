@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 const QrCode = require('qrcode');
 
 export default function Qr({ artistId, artistName }) {
+  console.log('artigst: ', artistId)
   const artistUrl = `http://localhost:3000/artist/details/${artistId}`;
   const [img, setImg] = useState('');
   // component should mount first to make reference to an element
