@@ -37,7 +37,8 @@ function ArtistImgList({ArtistArr, xs, setPage, setPageId}) {
           <ArtistMImg alt='artist pic' src={artist.pic} onClick={showArtist} id={artist.id} />
           <h5>{artist.artist_name}</h5>
         </Card>
-      )) : null}
+      ))
+        : null}
     </Grid>
   );
 }
@@ -66,7 +67,8 @@ function EventImgList({ EventArr, xs, setPage, setPageId }) {
             </div>
           </div>
         </Card>
-      )) : null}
+      ))
+        : null}
     </Grid>
   );
 }
