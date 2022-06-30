@@ -51,7 +51,7 @@ export default function Home({ setPage, setPageId }) {
       <div>
         <h3>Map</h3>
         <HomeMap />
-        <br></br>
+        <br />
         <h3>Upcoming Performances</h3>
         <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
         <div>
