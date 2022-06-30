@@ -67,12 +67,8 @@ function EventImgList({ EventArr, xs, setPage, setPageId }) {
             </div>
           </div>
         </Card>
-<<<<<<< HEAD
       ))
         : null}
-=======
-      )) : null}
->>>>>>> development
     </Grid>
   );
 }
