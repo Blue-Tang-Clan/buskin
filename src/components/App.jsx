@@ -17,7 +17,7 @@ export default function App() {
   const [userType, setUserType] = useState('anonymous');
   const [login, setLogin] = useState(false);
   const [userId, setUserId] = useState(1);
-  const [page, setPage] = useState('artistDashboard');
+  const [page, setPage] = useState('home');
   const [pageId, setPageId] = useState(1);
 
   return (
@@ -27,7 +27,7 @@ export default function App() {
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
         </div>
-        {page === 'home' ? <Home /> : <></>}
+        {page === 'home' ? <Home setPage={setPage} setPageId={setPageId}/> : <></>}
         {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
         {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
         {page === 'fanProfile' ? <FanProfile /> : <></>}
