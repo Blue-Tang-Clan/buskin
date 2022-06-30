@@ -57,6 +57,19 @@ background-color: rgba(134, 114, 17, 0.491);
   margin: 3px 0;
 }
 
+.eventLabelName{
+  width: max-content;
+  color:darkblue;
+  font-size:20px;
+  border-bottom: 0.5px solid darkblue;
+  margin: 3px 0;
+  cursor: pointer;
+}
+
+.eventLabelName:hover{
+  color:#afb1ba;
+}
+
 .event{
   font-size: 17px;
   margin: 0;
