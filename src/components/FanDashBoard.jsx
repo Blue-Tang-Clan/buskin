@@ -6,25 +6,23 @@ import apiMasters from '../apiMasters.js';
 import { ArtistImgList, EventImgList } from './ListOfImg.jsx';
 // import FlipCard from './FlipCard.jsx';
 
-export default function FanDashBoard({ setPage, setPageId }) {
+export default function FanDashBoard({ setPage, setPageId, userId }) {
   const [artistsFollowed, setArtistsFollowed] = useState([]);
   const [eventsSaved, setEventsSaved] = useState([]);
 
   useEffect(() => {
-    // needs to change fan_id dynamically
-    apiMasters.getFanDashBoard(1)
+    apiMasters.getFanDashBoard(userId)
       .then((response) => {
-        console.log(response.data);
         setArtistsFollowed(response.data.artists);
         setEventsSaved(response.data.events);
       })
       .catch((err) => {
         console.log('getFanDashBoard err', err);
       });
-  }, []);
+  }, [userId]);
 
   return (
-    <Box sx={{ width: '90%', margin: '5%' }}>
+    <Box sx={{ width: '80%', margin: '5%' }}>
       <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12}>
           <h2 style={{ color: '#373B53', fontWeight: '700' }}>DashBoard</h2>

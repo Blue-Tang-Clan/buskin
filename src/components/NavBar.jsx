@@ -33,7 +33,7 @@ export default function NavBar({ setUserType, setUserId }) {
     }
   };
   const goArtistProfile = () => {
-    setPage('artistProfile');
+    setPage('editArtistProfile');
     setAnchorEl(null);
   };
   const goArtistDashboard = () => {
@@ -41,18 +41,22 @@ export default function NavBar({ setUserType, setUserId }) {
     setAnchorEl(null);
   };
   const goFanProfile = () => {
-    setPage('fanProfile');
+    setPage('editFanProfile');
     setAnchorEl(null);
   };
   const goFanDashboard = () => {
     setPage('fanDashboard');
     setAnchorEl(null);
   };
+  const goLogout = () => {
+    setPage('home');
+    setUserType('anonymous');
+  };
 
   return (
     <Nav>
       <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
-        <img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/9dd5c510445465.560e519c94453.jpg' alt='thumbnail' height='90px' />
+        <img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/9dd5c510445465.560e519c94453.jpg' alt='logo' height='90px' />
       </div>
       <div>
         <SearchBar />
@@ -64,7 +68,7 @@ export default function NavBar({ setUserType, setUserId }) {
             setUserId={setUserId}
             setUserName={setUserName}
             setUserPic={setUserPic}
-            />
+          />
         </GenreTag>
       ) : (
         <UserSettingContainer>
@@ -72,12 +76,13 @@ export default function NavBar({ setUserType, setUserId }) {
             <UserSettingContainer>
               <div>
                 <div>
-                  <label>Name</label>
+                  <label>{userName}</label>
                 </div>
                 <div>
                   <label>Artist</label>
                 </div>
               </div>
+              <UserImg src={userPic.length ? userPic : 'https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc='} alt='thumbnail' />
               <ArrowDropDownIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
               <Menu
                 id="basic-menu"
@@ -88,7 +93,7 @@ export default function NavBar({ setUserType, setUserId }) {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={goArtistProfile}>Profile</MenuItem>
+                <MenuItem onClick={goArtistProfile}>Edit profile</MenuItem>
                 <MenuItem onClick={goArtistDashboard}>Dashboard</MenuItem>
               </Menu>
             </UserSettingContainer>
@@ -96,13 +101,13 @@ export default function NavBar({ setUserType, setUserId }) {
             <UserSettingContainer>
               <div>
                 <div>
-                  <span>Name</span>
+                  <span>{userName}</span>
                 </div>
                 <div>
                   <span>Fan</span>
                 </div>
               </div>
-              <UserImg src='https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg' alt='Avatar' />
+              <UserImg src={userPic.length ? userPic : 'https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg'} alt='thumbnail' />
               <ArrowDropDownIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={handleClick} />
               <Menu
                 id='basic-menu'
@@ -113,13 +118,13 @@ export default function NavBar({ setUserType, setUserId }) {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={goFanProfile}>Profile</MenuItem>
+                <MenuItem onClick={goFanProfile}>Edit profile</MenuItem>
                 <MenuItem onClick={goFanDashboard}>Dashboard</MenuItem>
               </Menu>
             </UserSettingContainer>
           )}
           <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
-          <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={() => setUserType('anonymous')} />
+          <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
         </UserSettingContainer>
       )}
     </Nav>
