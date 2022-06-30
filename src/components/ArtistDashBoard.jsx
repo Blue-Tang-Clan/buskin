@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
 import ViewMap from './ArtistViewMap.jsx';
 import { TotalFollowers } from './DashBoardTag.jsx';
 import apiMasters from '../apiMasters.js';
@@ -43,7 +44,7 @@ const EventDiv = styled.div`
   display: grid;
   grid-template-columns: 30% 60% 10%;
   margin: 10px;
-  border-bottom: solid 	#D8D8D8 2px;
+  border-bottom: solid #D8D8D8 2px;
   &:hover {
     cursor: pointer;
   }
@@ -102,8 +103,10 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     apiMasters.getArtistDetails(id)
       .then((response) => {
         const artistInfo = response.data.rows[0].json_build_object;
-        console.log(artistInfo);
-        setFanCount(artistInfo.fan_num);
+        // console.log(artistInfo);
+        if (artistInfo.followers) {
+          setFanCount(artistInfo.followers.length);
+        }
         setEvents(artistInfo.events);
         setArtistName(artistInfo.name);
         setArtistId(artistInfo.id);
@@ -114,16 +117,16 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
   };
 
   const deleteEvent = (e) => {
-    console.log(e.target);
-    console.log('userId', userId);
-    console.log('eventId', e.target.id);
+    // console.log(e.target);
+    // console.log('userId', userId);
+    // console.log('eventId', e.target.id);
     if (e.target.id) {
       console.log('here');
       apiMasters.artistDeleteEvent(userId, e.target.id)
         .then(() => {
           getArtistDashBoard(userId);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log('getArtistDashboard err again', err);
         });
     }
@@ -150,11 +153,12 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
               <AddressText>{`${event.city}, ${event.state}`}</AddressText>
             </AddressDiv>
             <TrashBoxDiv onClick={(e) => e.stopPropagation()}>
-              <div onClick={deleteEvent} id={event.id} >
+              {/* <div onClick={deleteEvent} id={event.id} > */}
+              <Button onClick={deleteEvent} id={event.id}>
                 <DeleteIcon sx={{ color: ' #259998' }} />
-              </div>
+              </Button>
+              {/* </div> */}
             </TrashBoxDiv>
-
           </EventDiv>
         ))}
       </EventList>
