@@ -82,7 +82,7 @@ export default function Home({ setPage, setPageId }) {
             )}
           </TagContainer>
           <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
-          <h4>Popular Artists</h4>
+          <h3>Popular Artists</h3>
           <ArtistImgList ArtistArr={poplarArtist} xs={1} setPage={setPage} setPageId={setPageId} />
         </div>
       </div>

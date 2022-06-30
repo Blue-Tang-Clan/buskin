@@ -35,7 +35,7 @@ export default function App() {
           {page === 'event' ? <Event /> : <></>}
           {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
           {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
-          {page === 'editArtistProfile' ? <EditProfile artistId={Number(userId)} pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId}/> : <></>}
+          {page === 'editArtistProfile' ? <EditArtistProfile /> : <></>}
           {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
         </PageContainer>
       </TopContext.Provider>

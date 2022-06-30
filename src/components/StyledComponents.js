@@ -103,7 +103,7 @@ const Nav = styled.div`
   background: white;
   height: 85px;
   display: grid;
-  grid-template-columns: 25% auto 10%;
+  grid-template-columns: 25% auto 20%;
   padding-top: 20px;
   gap: 30px;
 `;
