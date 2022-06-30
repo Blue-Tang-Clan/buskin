@@ -46,14 +46,6 @@ export default function ArtistProfileQR() {
       .catch((err) => console.log('aww didnt get any data? boohoo', err));
   }, []);
 
-  function toggleRenderEvents() {
-    if (renderEvents) {
-      setRenderEvents(false);
-    } else {
-      setRenderEvents(true);
-    }
-  }
-
   return (
     <div>
       <Link to='/'>
