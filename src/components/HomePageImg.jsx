@@ -61,14 +61,18 @@ function EventImgList({ EventArr, xs, setPage, setPageId }) {
                   : <EventsMImg alt='event pic' src={event.pic} />}
               </div>
               <div className='flip-card-back' onClick={showEvent} id={event.id}>
-                <h5>Event Name:<br/>{event.event_name}</h5>
+                <p>Event Name:<br/>{event.event_name}</p>
                 <StyleSpan>Time:<br/>{`${event.date} ${event.start_time}`}</StyleSpan>
               </div>
             </div>
           </div>
         </Card>
+<<<<<<< HEAD
       ))
         : null}
+=======
+      )) : null}
+>>>>>>> development
     </Grid>
   );
 }

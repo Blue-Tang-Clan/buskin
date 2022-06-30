@@ -28,24 +28,16 @@ export default function App() {
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
         </div>
-        {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : <></>}
-        {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
-        {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
-        {page === 'event' ? <Event /> : <></>}
-        {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
-        {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
-        {page === 'editArtistProfile' ? <EditProfile artistId={userId}/> : <></>}
-        {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
-        {login
-          ? (
-            <RegisterModal
-              setUserType={setUserType}
-              setUserId={setUserId}
-              anonymous={login}
-              setLogin={setLogin}
-            />
-          )
-          : null}
+        <PageContainer>
+          {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : <></>}
+          {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
+          {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
+          {page === 'event' ? <Event /> : <></>}
+          {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
+          {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
+          {page === 'editArtistProfile' ? <EditProfile artistId={userId} /> : <></>}
+          {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
+        </PageContainer>
       </TopContext.Provider>
     </>
   );
