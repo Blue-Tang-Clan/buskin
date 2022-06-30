@@ -32,7 +32,7 @@ export default function App() {
         {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
         {page === 'fanProfile' ? <FanProfile /> : <></>}
         {page === 'event' ? <Event /> : <></>}
-        {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId}  userId={userId} /> : <></>}
+        {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
         {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
         {page === 'editArtistProfile' ? <EditArtistProfile /> : <></> }
         {page === 'editFanProfile' ? <EditFanProfile /> : <></> }
