@@ -5,8 +5,8 @@ import apiMasters from '../apiMasters.js';
 
 
 const Search = styled.input`
-z-index: ${({ searching }) => (searching ? '9999' : '0')};
-position: fixed;
+z-index: ${({ searching }) => (searching ? '9999' : '1001')};
+// position: fixed;
 width: 40%;
 height: 4rem;
 background: white;
