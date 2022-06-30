@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteOutlinedIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import ViewMap from './ArtistViewMap.jsx';
 import { TotalFollowers } from './DashBoardTag.jsx';
@@ -161,7 +161,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
             </AddressDiv>
             <TrashBoxDiv onClick={(e) => e.stopPropagation()}>
               <Button onClick={deleteEvent} id={event.id}>
-                <DeleteIcon sx={{ color: ' #259998' }} />
+                <DeleteOutlinedIcon sx={{ color: ' #259998' }} />
               </Button>
             </TrashBoxDiv>
           </EventDiv>
