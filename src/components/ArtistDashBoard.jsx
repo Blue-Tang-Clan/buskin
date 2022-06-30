@@ -3,6 +3,7 @@ import { TotalFollowers } from './DashBoardTag.jsx';
 import apiMasters from '../apiMasters.js';
 import styled from 'styled-components';
 import ViewMap from './ArtistViewMap.jsx';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const EventList = styled.div`
   width:30%;
@@ -26,16 +27,21 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
   const [artistId, setArtistId] = useState();
 
   const clickHandler = (e) => {
-    console.log(e.target.id);
     setPage('event');
     setPageId(e.target.id);
-  }
+  };
+
+  const deleteEvent = (e) => {
+    console.log(e.target);
+    console.log('userId', userId);
+    console.log('eventId', e.target.id);
+    apiMasters.artistDeleteEvent(userId, e.target.id);
+  };
 
   useEffect(() => {
     apiMasters.getArtistDetails(userId)
       .then((response) => {
         const artistInfo = response.data.rows[0].json_build_object;
-        console.log(artistInfo);
         setFanCount(artistInfo.fan_num);
         setEvents(artistInfo.events);
         setArtistName(artistInfo.name);
@@ -54,6 +60,11 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
         <EventList id={event.id} onClick={clickHandler}>
           <h5>{`${event.date}`}</h5>
           <h5>{`${event.street}, ${event.city}, ${event.state}`}</h5>
+          <div onClick={e => e.stopPropagation()}>
+            <div onClick={deleteEvent} id={event.id} >
+              <DeleteIcon />
+             </div>
+          </div>
         </EventList>
       ))}
       <ViewMap ArtistName={artistName} ArtistId={artistId} />
