@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Home from './Home.jsx';
 import ArtistProfile from './ArtistProfile.jsx';
 import NavBar from './NavBar.jsx';
-import FanProfile from './FanProfile.jsx';
 import Event from './Event.jsx';
 import ArtistUpdate from './ArtistUpdate.jsx';
 import FanDashBoard from './FanDashBoard.jsx';
@@ -30,7 +29,6 @@ export default function App() {
         {page === 'home' ? <Home setPage={setPage} setPageId={setPageId}/> : <></>}
         {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
         {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
-        {page === 'fanProfile' ? <FanProfile /> : <></>}
         {page === 'event' ? <Event /> : <></>}
         {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
         {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
