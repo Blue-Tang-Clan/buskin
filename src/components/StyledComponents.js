@@ -16,7 +16,23 @@ const GenreTag = styled.div`
     background-color: #0094B6;
     color: white;
     cursor: pointer;
-  }
+  };
+`;
+const HomePageGenreTag = styled.div`
+  padding: 10px 14px;
+  color: 373B53;
+  font-size: 14px;
+  box-shadow: 0px 0px 3px 3px rgba(0,0,0, .1);
+  border-radius: 10px;
+  font-family: Arial, Helvetica Neue Thin, sans-serif;
+  &:hover {
+    background-color: #0094B6;
+    color: white;
+    cursor: pointer;
+  };
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
 `;
 
 const TagContainer = styled.div`
@@ -76,6 +92,36 @@ const UserSettingContainer = styled.div`
   gap: 20px;
 `;
 
+const ArtistInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const StyleP = styled.p`
+  color: #808080;
+  font-size: 0.75em; 
+`;
+
+const GenreTitle = styled.div`
+  padding: 0;
+  margin: 0;
+  color: #808080;
+  font-size: 0.75em;
+`;
+
 export {
-  HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer, EventImg, Container, InfoContainer, UserImg, Nav, UserSettingContainer
+  HomeContainer,
+  GenreTag,
+  TagContainer,
+  ArtistImg,
+  ArtistImgContainer,
+  EventImg,
+  Container,
+  InfoContainer,
+  UserImg,
+  Nav,
+  UserSettingContainer,
+  ArtistInfoContainer,
+  StyleP,
+  GenreTitle,
+  HomePageGenreTag,
 };

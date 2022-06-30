@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ArtistBio from './ArtistBio.jsx';
-import { HomeContainer, GenreTag, TagContainer, ArtistImg, ArtistImgContainer } from './StyledComponents.js';
+import { HomeContainer, HomePageGenreTag, TagContainer, ArtistImg, ArtistImgContainer, ArtistInfoContainer } from './StyledComponents.js';
 import { TopContext } from './App.jsx';
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
@@ -52,10 +52,8 @@ export default function Home({ setPage, setPageId }) {
         <h3>Map</h3>
         <HomeMap />
         <br></br>
-        <h4>Popular Atrists</h4>
-        <ArtistImgList ArtistArr={poplarArtist} xs={3} setPage={setPage} setPageId={setPageId} />
-        <h4>Upcoming Performances</h4>
-        <EventImgList EventArr={comingEvent} xs={3} setPage={setPage} setPageId={setPageId} />
+        <h3>Upcoming Performances</h3>
+        <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
       </div>
       <div>
         <div onClick={() => { setPage('artistProfile'); }}>
@@ -68,10 +66,12 @@ export default function Home({ setPage, setPageId }) {
           <h3>Popular Genres</h3>
           <TagContainer>
             {genres.map((genre, i) =>
-              <GenreTag key={i} value={genre} onClick={handleFilterGenre}>{genre}</GenreTag>
+              <HomePageGenreTag key={i} value={genre} onClick={handleFilterGenre}>{genre}</HomePageGenreTag>
             )}
           </TagContainer>
-          <ArtistImgList ArtistArr={artists} xs={3} setPage={setPage} setPageId={setPageId} />
+          <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
+          <h4>Popular Artists</h4>
+          <ArtistImgList ArtistArr={poplarArtist} xs={1} setPage={setPage} setPageId={setPageId} />
         </div>
       </div>
     </HomeContainer>
