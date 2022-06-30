@@ -2,11 +2,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import 'react-date-picker/dist/DatePicker.css';
 import React, {
-  useState, useRef, useCallback, useEffect,
+  useState, useRef, useCallback, useEffect, useContext,
 } from 'react';
 import MapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
 import { Room, Cancel } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
+import { TopContext } from './App.jsx';
 import apiMasters from '../apiMasters.js';
 
 const config = require('../../config.js');
@@ -23,6 +24,7 @@ export default function ViewMap() {
   const [fanId, setFanId] = useState('1');
   const [saved, setSaved] = useState(false);
   const [artistName, setArtistName] = useState('Lil Uzzy');
+  const { setPage, setLogin, userType } = useContext(TopContext);
 
   useEffect(() => {
     const getPins = async () => {
@@ -63,11 +65,15 @@ export default function ViewMap() {
   };
 
   const handleSaveClick = (fId, eventId) => {
-    apiMasters.saveEvent(fId, eventId)
-      .then(() => {
-        setSaved(true);
-      })
-      .catch(((err) => console.log(err)));
+    if (userType === 'anonymous') {
+      setLogin(true);
+    } else {
+      apiMasters.saveEvent(fId, eventId)
+        .then(() => {
+          setSaved(true);
+        })
+        .catch(((err) => console.log(err)));
+    }
   };
 
   return (
