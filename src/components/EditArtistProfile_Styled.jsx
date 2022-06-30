@@ -18,16 +18,13 @@ export default function EditProfile( { artistId, artistName } ) {
   const [genre, setGenre] = useState('');
   const [instrument, setInstrument] = useState('');
   const [bio, setBio] = useState('');
-  const [pic, setPicture] = useState(null);
+  const [image, setPicture] = useState(null);
   // const [soundClip, setSoundClip ] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [paymentOptions, setPaymentOptions] = useState('');
 
   function handleInput(e) {
     const name = e.target.name;
-    if (e.target.files[0] !== null) {
-      const file = e.target.files[0] || null;
-    }
     const value = e.target.value;
     if (name === 'displayname') {
       setDisplayName(value);
@@ -38,7 +35,7 @@ export default function EditProfile( { artistId, artistName } ) {
     } else if (name === 'bio') {
       setBio(value);
     } else if (name === 'picture') {
-      setPicture(value);
+      setPicture(e.target.files[0]);
     } else if (name === 'soundclip') {
       setSoundClip(value);
     } else if (name === 'paymentmethod') {
@@ -47,9 +44,10 @@ export default function EditProfile( { artistId, artistName } ) {
       setPaymentOptions(value);
     }
   }
-  function handleSubmit() {
+  function handleSubmit(e) {
     // take all the states and call some api
     // First upload image, get url for that image then post these
+    e.preventDefault();
     let venmo, cashapp, paypal;
     if (paymentOptions === 'venmo') {
       venmo = paymentMethod;
@@ -63,7 +61,7 @@ export default function EditProfile( { artistId, artistName } ) {
       genre,
       instrument,
       bio,
-      pic,
+      image,
       cashapp,
       paypal,
       venmo,
@@ -125,9 +123,9 @@ export default function EditProfile( { artistId, artistName } ) {
               name="picture"
             /> */}
             <input
+              onChange={handleInput}
               required
               accept="image/*"
-              style={{ display: 'none' }}
               id="picture"
               multiple
               type="file"
@@ -143,10 +141,10 @@ export default function EditProfile( { artistId, artistName } ) {
             <TextField
               required
               fullWidth
-              id='displayname'
-              label='displayname'
-              name='displayname'
-              autoComplete='displayname'
+              id='genre'
+              label='genre'
+              name='genre'
+              autoComplete='genre'
               onChange={handleInput}
             />
           </Grid>
