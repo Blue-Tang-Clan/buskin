@@ -37,16 +37,6 @@ export default function App() {
           {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
           {page === 'editArtistProfile' ? <EditProfile artistId={Number(userId)} pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId}/> : <></>}
           {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
-          {login
-            ? (
-              <RegisterModal
-                setUserType={setUserType}
-                setUserId={setUserId}
-                anonymous={login}
-                setLogin={setLogin}
-              />
-            )
-            : null}
         </PageContainer>
       </TopContext.Provider>
     </>

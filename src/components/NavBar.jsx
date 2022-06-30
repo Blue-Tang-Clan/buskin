@@ -56,20 +56,18 @@ export default function NavBar({ setUserType, setUserId }) {
   return (
     <Nav>
       <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
-        <img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/9dd5c510445465.560e519c94453.jpg' alt='logo' height='90px' />
+        <img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/9dd5c510445465.560e519c94453.jpg' alt='logo' height='90px' style={{ cursor: "pointer" }} />
       </div>
       <div>
         <SearchBar />
       </div>
       {userType === 'anonymous' ? (
-        <GenreTag>
-          <RegisterModal
-            setUserType={setUserType}
-            setUserId={setUserId}
-            setUserName={setUserName}
-            setUserPic={setUserPic}
-          />
-        </GenreTag>
+        <RegisterModal
+          setUserType={setUserType}
+          setUserId={setUserId}
+          setUserName={setUserName}
+          setUserPic={setUserPic}
+        />
       ) : (
         <UserSettingContainer>
           {userType === 'artist' ? (

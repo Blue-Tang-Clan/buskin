@@ -106,6 +106,10 @@ const deleteEvent = (fanId, eventId) => (
   axios.post(`${url}/fans/event/${fanId}/${eventId}`)
 );
 
+const artistDeleteEvent = (artistId, eventId) => (
+  axios.delete(`${url}/artists/event/${artistId}/${eventId}`)
+);
+
 const unfollowArtist = (fanId, artistId) => (
   axios.delete(`${url}/fans/follow/${fanId}/${artistId}`)
 );
@@ -143,6 +147,7 @@ const apiMasters = {
   getFanDashBoard,
   search,
   checkEventRadius,
+  artistDeleteEvent,
 };
 
 export default apiMasters;
