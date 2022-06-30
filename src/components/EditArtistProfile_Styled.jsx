@@ -67,7 +67,7 @@ export default function EditProfile( { artistId, artistName, setPage } ) {
       paypal,
       venmo,
     }).then((photoUrl) => {
-      setPage('artistProfile');
+      setPage('artistDashboard');
       // set page id to something, then set image to the url
     });
   }
