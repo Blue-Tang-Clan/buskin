@@ -15,7 +15,7 @@ function Copyright(props) {
   return (
     <Typography variant='body2' color='text.secondary' align='center' {...props}>
       {'Copyright © '}
-      <Link color='inherit' href='https://mui.com/'>
+      <Link color='inherit' href='#'>
         Blue Tang
       </Link>
       {' '}
@@ -44,7 +44,7 @@ export default function LogIn({ setUserType, handleClose, setShowForm, setUserId
     };
     apiMasters.getUserInfo(userInfo.username, userInfo.password)
       .then((response) => {
-        console.log(response);
+        console.log('login response: ', response);
         setUserType(response.data.userType);
         setUserId(response.data.id);
         setShowForm('Register');

@@ -18,7 +18,7 @@ const dummy = {
 
 export const ArtistContext = React.createContext();
 
-export default function ArtistProfile() {
+export default function ArtistProfile({ setPage, setPageId }) {
   const { pageId } = useContext(TopContext);
   const [artist, setArtist] = useState({});
   const [events, setEvents] = useState([]);
@@ -81,7 +81,7 @@ export default function ArtistProfile() {
         <button type='button' onClick={() => toggleRenderEvents()}>Upcoming Events</button>
         {renderEvents
           ? (
-            <EventList />
+            <EventList setPage={setPage} setPageId={setPageId} />
           )
           : undefined}
         <Payments />
