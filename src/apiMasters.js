@@ -119,7 +119,11 @@ const editFanProfile = (fanId, fanProfile) => (
 );
 
 const editArtistProfile = (artistId, artistProfile) => (
-  axios.put(`${url}/artist/profile/${artistId}`, artistProfile)
+  axios.put(`${url}/artist/profile/${artistId}`, artistProfile, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  })
 );
 
 const search = (query) => (
