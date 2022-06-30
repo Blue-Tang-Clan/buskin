@@ -2,12 +2,17 @@ import React, { useState, useContext, useEffect } from 'react';
 import apiMasters from '../apiMasters.js';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { TopContext } from './App.jsx';
-
+import { EventPageContainer, EventHeaderContainer, FreshTalentImg, TagContainer, HomePageGenreTag, SaveEventButton, EventPageArtistPic, EventButtonContainer } from './StyledComponents.js';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import PinDropIcon from '@mui/icons-material/PinDrop';
+import ViewMap from './HomeMap.jsx';
 export const ArtistContext = React.createContext();
 
 export default function Event() {
-  const { pageId, userId } = useContext(TopContext);
+  const { pageId, userId, userType, setLogin } = useContext(TopContext);
   const [eventInfo, setEventInfo] = useState({});
+  const [artistInfo, setArtistInfo] = useState({});
 
   useEffect(() => {
     apiMasters.getEvent(pageId)
@@ -32,19 +37,71 @@ export default function Event() {
       .catch((err) => console.log('aww didnt get any data? boohoo', err));
   }, [pageId]);
 
+  useEffect(() => {
+    apiMasters.getArtistDetails(eventInfo.art_id)
+      .then((data) => {
+        const info = data.data.rows[0].json_build_object;
+        setArtistInfo({
+          id: info.id,
+          name: info.name,
+          bio: info.bio,
+          genre: info.genre,
+          instrument: info.instrument,
+          pic: info.pic,
+          venmo: info.venmo,
+          paypal: info.paypal,
+          cashapp: info.cashapp,
+        });
+      })
+      .catch((err) => console.log('aww didnt get any data? boohoo', err));
+  }, [eventInfo]);
+
   const saveEvent = () => {
-    apiMasters.saveEvent(userId, pageId);
+    if (userType === 'anonymous') {
+      setLogin(true);
+    } else {
+      apiMasters.saveEvent(userId, pageId);
+    }
   };
 
   return (
-    <div>
-      <img src={eventInfo.pic} alt='Event' />
-      <h1>{eventInfo.name}</h1>
-      <p>{eventInfo.display_name}</p>
-      <p>{`${eventInfo.street} ${eventInfo.city}, ${eventInfo.state}`}</p>
-      <p>{`${eventInfo.date} ${eventInfo.start_time} ~ ${eventInfo.end_time}`}</p>
-      <p>{eventInfo.description}</p>
-      <button type='button' onClick={saveEvent}>Save Event</button>
-    </div>
+    <EventPageContainer style={{ marginTop: '50px' }}>
+      <EventHeaderContainer>
+        <EventPageContainer>
+          <FreshTalentImg src={eventInfo.pic} alt='Event' />
+        </EventPageContainer>
+        <FavoriteBorderIcon sx={{ color: '#FFB800' }} fontSize='large' onClick={saveEvent} />
+        <EventPageContainer>
+          <h1 style={{ marginTop: -10 }}>{eventInfo.name}</h1>
+          <p>
+            <EventPageArtistPic src={artistInfo.pic} alt={artistInfo.name} />
+            {` ${eventInfo.display_name}`}
+          </p>
+          <p>
+            <PinDropIcon />
+            {` ${eventInfo.street} ${eventInfo.city}, ${eventInfo.state}`}
+          </p>
+          <p>
+            <DateRangeIcon />
+            {` ${eventInfo.date} ${eventInfo.start_time} ~ ${eventInfo.end_time}`}
+          </p>
+        </EventPageContainer>
+      </EventHeaderContainer>
+      <TagContainer style={{ marginTop: '30px' }}>
+        <HomePageGenreTag value={artistInfo.genre}>
+          {artistInfo.genre}
+        </HomePageGenreTag>
+        <HomePageGenreTag value={artistInfo.instrument}>
+          {artistInfo.instrument}
+        </HomePageGenreTag>
+      </TagContainer>
+      <EventHeaderContainer style={{ marginTop: '50px' }}>
+        <EventPageContainer style={{ width: '250px' }}>
+          <h2>About This Event</h2>
+          <p>{eventInfo.description}</p>
+        </EventPageContainer>
+        <ViewMap />
+      </EventHeaderContainer>
+    </EventPageContainer>
   );
 }

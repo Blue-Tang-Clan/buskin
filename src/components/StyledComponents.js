@@ -102,12 +102,21 @@ const UserImg = styled.img`
 `;
 
 const Nav = styled.div`
+  z-index: 1001;
   background: white;
+  position: fixed;
+  width: 100vw;
   height: 85px;
   display: grid;
-  grid-template-columns: 25% auto 20%;
-  padding-top: 20px;
+  grid-template-columns: 25% auto 10%;
+  margin-top: -10px;
+  margin-left: -10px;
   gap: 30px;
+`;
+
+const NavSpacer = styled.div`
+  width: 100%;
+  height: 85px;
 `;
 
 const UserSettingContainer = styled.div`
@@ -174,21 +183,36 @@ const MemberC = styled.div`
   flex-direction: row;
   gap: 10px;
 `;
-// const MemberD = styled.div`
-//   grid-area: d;
-// `;
-// const MemberE = styled.div`
-//   grid-area: e;
-// `;
-// const MemberF = styled.div`
-//   grid-area: f;
-// `;
-// const MemberG = styled.div`
-//   grid-area: g;
-// `;
-// const MemberH = styled.div`
-//   grid-area: h;
-// `;
+
+const Audio = styled.audio`
+  width: 100%;
+  display: block;
+`;
+
+// EVENT PAGE SPECIFIC STYLING
+const EventPageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-right: 5%;
+`;
+
+const EventHeaderContainer = styled.div`
+display: flex;
+max-height: 500px;
+flex-direction: row;
+justify-content: flex-start;
+align-items: flex-start;
+`;
+
+const EventPageArtistPic = styled.img`
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+`;
 
 export {
   PageContainer,
@@ -202,9 +226,13 @@ export {
   InfoContainer,
   UserImg,
   Nav,
+  NavSpacer,
   UserSettingContainer,
   ArtistInfoContainer,
   HomePageGenreTag,
+  EventPageContainer,
+  EventHeaderContainer,
+  EventPageArtistPic,
   FreshTalentImg,
   MapInfo,
   ArtistInfo,
@@ -215,9 +243,5 @@ export {
   MemberA,
   MemberB,
   MemberC,
-  // MemberD,
-  // MemberE,
-  // MemberF,
-  // MemberG,
-  // MemberH,
+  Audio,
 };

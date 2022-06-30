@@ -32,12 +32,13 @@ function ArtistImgList({ArtistArr, xs, setPage, setPageId}) {
 
   return (
     <Grid item xs={xs}>
-      { ArtistArr ? ArtistArr.map((artist) => (
+      {ArtistArr ? ArtistArr.map((artist) => (
         <Card key={artist.pic}>
           <ArtistMImg alt='artist pic' src={artist.pic} onClick={showArtist} id={artist.id} />
           <h5>{artist.artist_name}</h5>
         </Card>
-      )) : null}
+      ))
+        : null}
     </Grid>
   );
 }
@@ -50,7 +51,7 @@ function EventImgList({ EventArr, xs, setPage, setPageId }) {
 
   return (
     <Grid item xs={xs}>
-      { EventArr ? EventArr.map((event) => (
+      {EventArr ? EventArr.map((event) => (
         <Card key={event.pic}>
           <div className='flip-card-container' key={event.id}>
             <div className='flip-card'>
@@ -60,13 +61,14 @@ function EventImgList({ EventArr, xs, setPage, setPageId }) {
                   : <EventsMImg alt='event pic' src={event.pic} />}
               </div>
               <div className='flip-card-back' onClick={showEvent} id={event.id}>
-                <h5>Event Name:<br/>{event.event_name}</h5>
+                <p>Event Name:<br/>{event.event_name}</p>
                 <StyleSpan>Time:<br/>{`${event.date} ${event.start_time}`}</StyleSpan>
               </div>
             </div>
           </div>
         </Card>
-      )) : null}
+      ))
+        : null}
     </Grid>
   );
 }

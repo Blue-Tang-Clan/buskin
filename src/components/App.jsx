@@ -10,7 +10,7 @@ import EditProfile from './EditArtistProfile_styled.jsx';
 import EditArtistProfile from './EditArtistProfile.jsx';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import ArtistDashBoard from './ArtistDashBoard.jsx';
-import { PageContainer } from './StyledComponents.js';
+import { PageContainer, NavSpacer } from './StyledComponents.js';
 
 export const TopContext = React.createContext();
 
@@ -28,16 +28,15 @@ export default function App() {
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
         </div>
-        <PageContainer>
-          {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : <></>}
-          {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
-          {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
-          {page === 'event' ? <Event /> : <></>}
-          {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
-          {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
-          {page === 'editArtistProfile' ? <EditProfile artistId={userId} /> : <></>}
-          {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
-        </PageContainer>
+        <NavSpacer />
+        {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : <></>}
+        {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
+        {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
+        {page === 'event' ? <Event /> : <></>}
+        {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
+        {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
+        {page === 'editArtistProfile' ? <EditProfile artistId={userId}/> : <></>}
+        {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
         {login
           ? (
             <RegisterModal
