@@ -12,7 +12,6 @@ export default function ArtistBio({ talent }) {
           <h4>{talent.genre}{' - '}{talent.instrument}</h4>
           <h1>{talent.name}</h1>
           <p>{talent.bio}</p>
-        <audio src="retrosoul.mp3" type="audio/mp3" controls></audio>
       </ArtistInfoContainer>
     </Container>
   );
