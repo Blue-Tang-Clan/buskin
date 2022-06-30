@@ -73,9 +73,9 @@ const InfoContainer = styled.div`
 `;
 
 const UserImg = styled.img`
-height: 70px;
-width: 70px;
-border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
 `;
 
 const Nav = styled.div`
