@@ -54,6 +54,18 @@ export default function Home({ setPage, setPageId }) {
         <br></br>
         <h3>Upcoming Performances</h3>
         <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
+        <div>
+          <h2>Development Team</h2>
+          <h3>PM</h3>
+          <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AWEUQWA1-ffb9775b3a6b-512' />
+          <h3>DB</h3>
+          <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZBGUUBD-f8c035e2c3aa-512' />
+          <h3>Architect</h3>
+          <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AJP0K0BH-eb4e28704fac-512' />
+          <h3>UI</h3>
+          <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03BBV9T3LZ-64df3c9dd915-512' />
+          <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZB62PFC-338e8412806f-512' />
+        </div>
       </div>
       <div>
         <div onClick={() => { setPage('artistProfile'); }}>
