@@ -56,7 +56,7 @@ export default function NavBar({ setUserType, setUserId }) {
   return (
     <Nav>
       <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
-        <img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/9dd5c510445465.560e519c94453.jpg' alt='logo' height='90px' style={{ cursor: "pointer" }} />
+        <img src='https://i.ibb.co/kMc2nsf/Screen-Shot-2022-06-30-at-10-52-20-AM-copy.png' alt='logo' height='85px' style={{ cursor: "pointer" }} />
       </div>
       <div>
         <SearchBar />

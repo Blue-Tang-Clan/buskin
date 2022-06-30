@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const PageContainer = styled.div`
-  margin: 0 5% 0 5%;
+  margin: 0 5% 0;
+  width: 90%;
 `;
 
 const HomeContainer = styled.div`
@@ -71,9 +72,19 @@ const EventImg = styled.img`
   };
 `;
 
+const FreshTalentImg = styled.img`
+  height: 250px;
+  width: 250px;
+  border-radius: 10px;
+  &:hover {
+    cursor: pointer;
+  };
+`;
+
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 40% 60%;
+  display: flex;
+  gap: 30px;
+  margin-bottom: 100px;
 `;
 
 const InfoContainer = styled.div`
@@ -106,17 +117,6 @@ const ArtistInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const StyleP = styled.p`
-  color: #808080;
-  font-size: 0.75em;
-`;
-
-const GenreTitle = styled.div`
-  padding: 0;
-  margin: 0;
-  color: #808080;
-  font-size: 0.75em;
-`;
 
 export {
   PageContainer,
@@ -132,7 +132,6 @@ export {
   Nav,
   UserSettingContainer,
   ArtistInfoContainer,
-  StyleP,
-  GenreTitle,
   HomePageGenreTag,
+  FreshTalentImg,
 };
