@@ -60,12 +60,12 @@ export default function Home() {
             )}
           </TagContainer>
           <ArtistImgContainer>
-            {artists.map((artist, i) => 
+            {artists.map((artist, i) =>
               <>
                 <ArtistImg src={artist.pic} key={i} alt="Avatar" />
                 <label>{artist.artist_name}</label>
               </>
-            )} 
+            )}
           </ArtistImgContainer>
         </div>
       </div>
