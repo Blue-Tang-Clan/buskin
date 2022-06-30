@@ -27,8 +27,8 @@ export default function App() {
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
         </div>
-        {page === 'home' ? <Home /> : <></>}
-        {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
+        {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : <></>}
+        {page === 'artistProfile' ? <ArtistProfile /> : <></>}
         {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} /> : <></>}
         {page === 'fanProfile' ? <FanProfile /> : <></>}
         {page === 'event' ? <Event /> : <></>}
