@@ -88,11 +88,11 @@ export default function ArtistProfile({ setPage, setPageId }) {
             <ArtistImg src={artist.pic} alt='busker' style={{ width: '300px', height: '300px', marginRight: '40px' }} />
             <div>
               <div style={{ width: 'auto', display: 'flex', flexDirection: 'row' }}>
-                <h1 style={{marginTop: '0' }}>
+                <h1 style={{ marginTop: '0' }}>
                   {artist.name}
                 </h1>
                 <div title='follow me plz' style={{width: 'auto', height: 'auto'}}>
-                  <FavoriteBorderIcon title='follow' style={{ width: '40px', height: '40px', marginLeft: '40px', marginTop: '35px' }} />
+                  <FavoriteBorderIcon title='follow' style={{ width: '40px', height: '40px', marginLeft: '40px', marginTop: '10px' }} />
                 </div>
                 <Payments />
               </div>

@@ -11,7 +11,7 @@ export default function Venmo() {
       {artist.venmo !== undefined && artist.venmo !== 'undefined' && artist.venmo.length > 0
         ? (
           <a href={`https://account.venmo.com/u/${artist.venmo}`} target='_blank' rel='noreferrer'>
-            <AttachMoneyIcon style={{ width: '40px', height: '40px', marginTop: '35px', marginLeft: '10px' }} />
+            <AttachMoneyIcon style={{ width: '40px', height: '40px', marginTop: '10px', marginLeft: '10px' }} />
           </a>
         ) : undefined }
     </div>
