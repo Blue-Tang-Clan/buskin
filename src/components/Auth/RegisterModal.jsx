@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import { Button } from '../StyledComponents.js';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import SignUp from './SignUp.jsx';
@@ -38,7 +38,7 @@ export default function RegisterModal({
 
   return (
     <div>
-      <Button onClick={handleOpen}>Register / Log In</Button>
+      {anonymous ? null : <Button onClick={handleOpen}>Register / Log In</Button>}
       <Modal
         open={open}
         onClose={handleClose}

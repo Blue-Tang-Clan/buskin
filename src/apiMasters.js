@@ -84,7 +84,6 @@ const registerUser = (username, password, email, userType) => (
 // );
 
 const createEvent = (artistId, eventObj) => {
-  console.log(eventObj);
   return axios.post(`${url}/artist/event/${artistId}`, eventObj);
 };
 
@@ -106,6 +105,10 @@ const deleteEvent = (fanId, eventId) => (
   axios.post(`${url}/fans/event/${fanId}/${eventId}`)
 );
 
+const artistDeleteEvent = (artistId, eventId) => (
+  axios.delete(`${url}/artists/event/${artistId}/${eventId}`)
+);
+
 const unfollowArtist = (fanId, artistId) => (
   axios.delete(`${url}/fans/follow/${fanId}/${artistId}`)
 );
@@ -116,7 +119,11 @@ const editFanProfile = (fanId, fanProfile) => (
 );
 
 const editArtistProfile = (artistId, artistProfile) => (
-  axios.put(`${url}/artist/profile/${artistId}`, artistProfile)
+  axios.put(`${url}/artist/profile/${artistId}`, artistProfile, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  })
 );
 
 const search = (query) => (
@@ -143,6 +150,7 @@ const apiMasters = {
   getFanDashBoard,
   search,
   checkEventRadius,
+  artistDeleteEvent,
 };
 
 export default apiMasters;

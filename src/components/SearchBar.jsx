@@ -3,29 +3,29 @@ import styled from 'styled-components';
 import { TopContext } from './App.jsx';
 import apiMasters from '../apiMasters.js';
 
-
 const Search = styled.input`
-z-index: ${({ searching }) => (searching ? '9999' : '0')};
+z-index: ${({ searching }) => (searching ? '9999' : '1001')};
 position: fixed;
-width: 30%;
-height: 3.6rem;
+width: 43%;
+height: 4rem;
 background: white;
+color: #C4C4C4;
 outline: none;
 border: none;
-border-radius: 1.625rem;
-padding: 0 3.5rem 0 1.5rem;
-font-size: 1rem;
+border-radius: 2rem;
+padding: 15px 3.5rem 0 3.5rem;
+font-size: 1.2rem;
 box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
 `;
 
 const SearchResultsModal = styled.div`
 z-index: 9998;
 display: ${({ searching }) => (searching ? 'block' : 'none')};
-position: absolute;
+position: fixed;
 top: 0;
 left: 0;
-height: 100vh;
-width:100vw;
+height: 4000px;
+width: 4000px;
 background: rgba(0,0,0,0.5);
 `;
 
@@ -35,7 +35,7 @@ display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: absolute;
 width: 50%;
 background: transparent;
-margin-top: 3.6rem;
+margin-top: 5rem;
 `;
 
 const ResultsSection = styled.div`

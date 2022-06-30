@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import React, {
   useState, useRef, useCallback, useEffect, useTheme,
 } from 'react';
-import MapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
+import MapGL, { Marker, Popup, GeolocateControl, Layer } from 'react-map-gl';
 import { Room, Cancel } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
 import DatePicker from 'react-date-picker';
@@ -29,7 +29,8 @@ display: ${({ warning }) => (warning ? 'block' : 'none')};
 
 const WarningMessage = styled.div`
   background: rgba(250,250,250,1);
-  height:30rem;
+  height:12rem;
+  border-radius:10px;
   width:30rem;
   position: absolute;
   left: 50%;
@@ -56,14 +57,13 @@ export default function ViewMap({ ArtistName, ArtistId }) {
   const [startTime, setStartTime] = useState('10:00');
   const [endTime, setEndTime] = useState('10:00');
   const [artistId, setArtistId] = useState(null);
-  const [artistName, setArtistName] = useState(null);
+  const [artistName, setArtistName] = useState('');
   const [warning, setWarning] = useState(false);
 
   useEffect(() => {
     const getPins = async () => {
       try {
         const res = await apiMasters.getEvents(new Date());
-        console.log(res.data);
         setPins(res.data);
       } catch (err) {
         console.log(err);
@@ -72,7 +72,7 @@ export default function ViewMap({ ArtistName, ArtistId }) {
     setArtistName(ArtistName);
     setArtistId(ArtistId);
     getPins();
-  }, [ArtistId]);
+  }, [ArtistId,ArtistName]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -92,7 +92,6 @@ export default function ViewMap({ ArtistName, ArtistId }) {
   );
 
   const handleAddClick = (e) => {
-    console.log(e);
     const [lng, lat] = e.lngLat;
     setNewEvent({
       lat,
@@ -101,13 +100,10 @@ export default function ViewMap({ ArtistName, ArtistId }) {
   };
 
   const eventCreation = (artistId, eventObj) => {
-    console.log('artistId', artistId);
-    console.log('eventObj', eventObj);
     apiMasters
       .createEvent(artistId, eventObj)
       .then((res) => {
         setPins([...pins, eventObj]);
-        console.log(res.data);
       })
       .then(() => setNewEvent(null))
       .catch((err) => console.log(err));
@@ -127,13 +123,14 @@ export default function ViewMap({ ArtistName, ArtistId }) {
         date: formatDate,
         start_time: startTime,
         end_time: endTime,
+        display_name: artistName,
       };
       eventObj.display_name = artistName;
       // check if any events in 30 yard radius, date and time
       apiMasters.checkEventRadius(newEvent.lat, newEvent.lng, formatDate, startTime)
         .then((res) => {
           if (res.data.length) {
-             setWarning(true);
+            setWarning(true);
           } else {
             eventCreation(artistId, eventObj);
           }
@@ -159,13 +156,52 @@ export default function ViewMap({ ArtistName, ArtistId }) {
     e.target.name && eventCreation(artistId,eventObj);
   };
 
+  const parkLayer = {
+    id: 'add-3d-buildings',
+    source: 'composite',
+    'source-layer': 'building',
+    filter: ['==', 'extrude', 'true'],
+    type: 'fill-extrusion',
+    minzoom: 15,
+    paint: {
+      'fill-extrusion-color': '#aaa',
+
+      // Use an 'interpolate' expression to
+      // add a smooth transition effect to
+      // the buildings as the user zooms in.
+      'fill-extrusion-height': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        15,
+        0,
+        15.05,
+        ['get', 'height'],
+      ],
+      'fill-extrusion-base': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        15,
+        0,
+        15.05,
+        ['get', 'min_height'],
+      ],
+      'fill-extrusion-opacity': 0.6,
+    },
+  };
+
   return (
     <div className='map-div'>
       <Modal warning={warning}>
         <WarningMessage>
+          <div className="warning-msg">
           Your Performance is Within 30 Yards of Another Performance at the Same Time, Do you still want to schedule this performance?
-          <button name='yes' onClick={(e) => handleWarningClick(e)}>Yes</button>
-          <button onClick={(e) => handleWarningClick(e)}>No</button>
+          </div>
+          <div className="btn-div">
+          <button name='yes' className="yesBtn" onClick={(e) => handleWarningClick(e)}>Yes</button>
+          <button className="noBtn"  onClick={(e) => handleWarningClick(e)}>No</button>
+          </div>
         </WarningMessage>
       </Modal>
       <MapGL
@@ -178,6 +214,7 @@ export default function ViewMap({ ArtistName, ArtistId }) {
         mapStyle='mapbox://styles/mapbox/streets-v11'
         onDblClick={(e) => handleAddClick(e)}
       >
+        <Layer {...parkLayer} />
         <Geocoder
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}

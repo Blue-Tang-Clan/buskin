@@ -1,24 +1,52 @@
 import React, { useState, useContext, useEffect } from 'react';
 import EventList from './EventList.jsx';
 import Payments from './Payments.jsx';
-import Qr from './Qr.jsx';
 import apiMasters from '../apiMasters.js';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import PaymentIcon from '@mui/icons-material/Payment';
+import { TagContainer, HomePageGenreTag } from './StyledComponents.js';
 import { TopContext } from './App.jsx';
-const dummy = {
-  pic: 'https://cdn.shopify.com/s/files/1/0203/9334/files/Busking_Musicians_1024x1024.jpeg?v=1521795106',
-  display_name: 'Yau Yu',
-  bio: 'I play music really well!',
-  genre: 'Rock',
-  instrument: 'Accordian',
-  venmo: 'venmo',
-  cashapp: 'Cashapp',
-  paypal: 'paypal',
-};
+import { ArtistImg } from './StyledComponents.js';
+import styled from 'styled-components';
+
+// const dummy = {
+//   pic: 'https://cdn.shopify.com/s/files/1/0203/9334/files/Busking_Musicians_1024x1024.jpeg?v=1521795106',
+//   display_name: 'Yau Yu',
+//   bio: 'I play music really well!',
+//   genre: 'Rock',
+//   instrument: 'Accordian',
+//   venmo: 'venmo',
+//   cashapp: 'Cashapp',
+//   paypal: 'paypal',
+// };
+
+const ArtistProfileContainer = styled.div`
+  margin-top: 8rem;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+`;
+
+const ArtistDescription = styled.div`
+  width: 40rem;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 4px 4px 5px 5px rgba(0,0,0, .08);
+  border-radius: 10px;
+  min-height: 150px;
+  margin-bottom: 10px;
+`;
+
+const Schedule = styled.div`
+  width: auto;
+`;
 
 export const ArtistContext = React.createContext();
 
-export default function ArtistProfile() {
+export default function ArtistProfile({ setPage, setPageId }) {
   const { pageId } = useContext(TopContext);
   const [artist, setArtist] = useState({});
   const [events, setEvents] = useState([]);
@@ -53,40 +81,38 @@ export default function ArtistProfile() {
   }
 
   return (
-    <div>
-      <ArtistContext.Provider value={{events, artist}}>
+    <ArtistContext.Provider value={{events, artist}}>
+      <ArtistProfileContainer>
         <div>
-        <img src={artist.pic} alt='busker' style={{ height: '100px' }} />
-        <h1>{artist.name}</h1>
-        <FavoriteIcon />
-        <p>
-          About me:
-          <br />
-          {artist.bio}
-        </p>
-        <p>
-          Genre:
-          <br />
-          {artist.genre}
-        </p>
-        <p>
-          Instrument:
-          <br />
-          {artist.instrument}
-        </p>
-        {
-          artist.name && <Qr artistId={artist.id} artistName={artist.name} />
-        }
-        {/* music clip */}
-        <button type='button' onClick={() => toggleRenderEvents()}>Upcoming Events</button>
-        {renderEvents
-          ? (
-            <EventList />
-          )
-          : undefined}
-        <Payments />
+          <div style={{ width: 'auto', display: 'flex', flexDirection: 'row' }}>
+            <ArtistImg src={artist.pic} alt='busker' style={{ width: '300px', height: '300px', marginRight: '40px' }} />
+            <div>
+              <div style={{ width: 'auto', display: 'flex', flexDirection: 'row' }}>
+                <h1 style={{ marginTop: '0' }}>
+                  {artist.name}
+                </h1>
+                <div title='follow me plz' style={{width: 'auto', height: 'auto'}}>
+                  <FavoriteBorderIcon title='follow' style={{ width: '40px', height: '40px', marginLeft: '40px', marginTop: '10px' }} />
+                </div>
+                <Payments />
+              </div>
+              <ArtistDescription>
+                <bold>Genre: </bold> {artist.genre} <br />
+                <bold>Instrument: </bold> {artist.instrument} <br /><br />
+                {artist.bio}
+              </ArtistDescription>
+              <audio src="retrosoul.mp3" type="audio/mp3" controls></audio>
+            </div>
+
           </div>
-      </ArtistContext.Provider>
-    </div>
+        </div>
+        <Schedule>
+          <h3>Upcoming Events:</h3>
+          {events
+            ? <EventList setPage={setPage} setPageId={setPageId} />
+            : undefined}
+        </Schedule>
+      </ArtistProfileContainer>
+    </ArtistContext.Provider>
   );
 }
