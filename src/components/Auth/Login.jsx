@@ -44,7 +44,7 @@ export default function LogIn({ setUserType, handleClose, setShowForm, setUserId
     };
     apiMasters.getUserInfo(userInfo.username, userInfo.password)
       .then((response) => {
-        console.log(response);
+        console.log('login response: ', response);
         setUserType(response.data.userType);
         setUserId(response.data.id);
         setShowForm('Register');
