@@ -7,7 +7,10 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import ViewMap from './HomeMap.jsx';
+import EventMap from './EventMap.jsx';
 export const ArtistContext = React.createContext();
+
+export const EventLocationContext = React.createContext();
 
 export default function Event() {
   const { pageId, userId } = useContext(TopContext);
@@ -97,7 +100,9 @@ export default function Event() {
           <h2>About This Event</h2>
           <p>{eventInfo.description}</p>
         </EventPageContainer>
-        <ViewMap />
+        <EventLocationContext.Provider value={{eventInfo, pageId}}>
+          <EventMap />
+        </EventLocationContext.Provider>
       </EventHeaderContainer>
     </EventPageContainer>
   );
