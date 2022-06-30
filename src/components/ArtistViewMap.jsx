@@ -132,7 +132,7 @@ export default function ViewMap({ ArtistName, ArtistId }) {
       apiMasters.checkEventRadius(newEvent.lat, newEvent.lng, formatDate, startTime)
         .then((res) => {
           if (res.data.length) {
-             setWarning(true);
+            setWarning(true);
           } else {
             eventCreation(artistId, eventObj);
           }
