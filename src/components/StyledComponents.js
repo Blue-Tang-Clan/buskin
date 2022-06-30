@@ -7,6 +7,8 @@ const PageContainer = styled.div`
 const HomeContainer = styled.div`
   display: grid;
   grid-template-columns: 60% 40%;
+  grid-template-areas: "a b" "c c";
+  grid-template-rows: 1fr min-content;
 `;
 
 const Button = styled.div`
@@ -118,6 +120,73 @@ const GenreTitle = styled.div`
   font-size: 0.75em;
 `;
 
+const MapInfo = styled.div`
+  grid-area: a;
+  grid-template-rows: auto;
+`;
+
+const ArtistInfo = styled.div`
+  grid-area: b;
+  grid-template-rows: auto;
+`;
+
+const TeamInfo = styled.div`
+  grid-area: c;
+  display: grid;
+  left: 50%;
+  grid-template-areas: "title title title" "a a a" "b b b";
+`;
+const Title = styled.div`
+  grid-area: title;
+`;
+const Line1 = styled.div`
+  grid-area: a;
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+const Line2 = styled.div`
+  grid-area: b;
+  display: grid;
+  grid-template-areas: "A B C";
+`;
+
+const MemberA = styled.div`
+  grid-area: A;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
+const MemberB = styled.div`
+  grid-area: B;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
+const MemberC = styled.div`
+  grid-area: C;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
+// const MemberD = styled.div`
+//   grid-area: d;
+// `;
+// const MemberE = styled.div`
+//   grid-area: e;
+// `;
+// const MemberF = styled.div`
+//   grid-area: f;
+// `;
+// const MemberG = styled.div`
+//   grid-area: g;
+// `;
+// const MemberH = styled.div`
+//   grid-area: h;
+// `;
+
 export {
   PageContainer,
   HomeContainer,
@@ -135,4 +204,18 @@ export {
   StyleP,
   GenreTitle,
   HomePageGenreTag,
+  MapInfo,
+  ArtistInfo,
+  TeamInfo,
+  Title,
+  Line1,
+  Line2,
+  MemberA,
+  MemberB,
+  MemberC,
+  // MemberD,
+  // MemberE,
+  // MemberF,
+  // MemberG,
+  // MemberH,
 };
