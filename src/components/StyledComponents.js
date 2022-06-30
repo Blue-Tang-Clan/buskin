@@ -203,46 +203,16 @@ const EventPageContainer = styled.div`
 
 const EventHeaderContainer = styled.div`
 display: flex;
-width: 100%;
 max-height: 500px;
 flex-direction: row;
 justify-content: flex-start;
 align-items: flex-start;
 `;
 
-const EventPageImg = styled.img`
-  width: 100%;
-  max-height: 500px;
-  max-width: 500px;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-`;
-
-const SaveEventButton = styled.button`
-  background-color: lightblue;
-  border-style: none;
-  width: 100%;
-  max-width: 500px;
-  &:hover {
-    background-color: pink;
-    cursor: pointer;
-  };
-`;
-
 const EventPageArtistPic = styled.img`
   height: 30px;
   width: 30px;
   border-radius: 50px;
-`;
-
-const EventButtonContainer = styled.div`
-  display: flex;
-  width: 100%;
-  max-height: 500px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
 `;
 
 export {
@@ -260,14 +230,9 @@ export {
   UserSettingContainer,
   ArtistInfoContainer,
   HomePageGenreTag,
-<<<<<<< HEAD
   EventPageContainer,
   EventHeaderContainer,
-  EventPageImg,
-  SaveEventButton,
   EventPageArtistPic,
-  EventButtonContainer,
-=======
   FreshTalentImg,
   MapInfo,
   ArtistInfo,
@@ -283,5 +248,4 @@ export {
   // MemberF,
   // MemberG,
   // MemberH,
->>>>>>> cff1f7a833d62d885dd31b8c491cb13f09e3d5ff
 };

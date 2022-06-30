@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import apiMasters from '../apiMasters.js';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { TopContext } from './App.jsx';
-import { EventPageContainer, EventHeaderContainer, EventImg, TagContainer, HomePageGenreTag, SaveEventButton, EventPageArtistPic, EventButtonContainer } from './StyledComponents.js';
+import { EventPageContainer, EventHeaderContainer, FreshTalentImg, TagContainer, HomePageGenreTag, SaveEventButton, EventPageArtistPic, EventButtonContainer } from './StyledComponents.js';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import PinDropIcon from '@mui/icons-material/PinDrop';
@@ -64,15 +64,10 @@ export default function Event() {
   return (
     <EventPageContainer style={{ marginTop: '50px' }}>
       <EventHeaderContainer>
-        <EventPageContainer style={{ maxWidth: '500px' }}>
-          <EventImg src={eventInfo.pic} alt='Event' />
-          <SaveEventButton type='button' onClick={saveEvent}>
-            <EventButtonContainer>
-              <FavoriteBorderIcon sx={{ color: '#FFB800' }} fontSize='large' />
-              <h4>Save Event</h4>
-            </EventButtonContainer>
-          </SaveEventButton>
+        <EventPageContainer>
+          <FreshTalentImg src={eventInfo.pic} alt='Event' />
         </EventPageContainer>
+        <FavoriteBorderIcon sx={{ color: '#FFB800' }} fontSize='large' onClick={saveEvent} />
         <EventPageContainer>
           <h1 style={{ marginTop: -10 }}>{eventInfo.name}</h1>
           <p>
