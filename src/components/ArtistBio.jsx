@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { EventImg, Container, InfoContainer } from './StyledComponents.js';
+import { ArtistInfoContainer, StyleP, GenreTitle } from './StyledComponents.js';
 
 export default function ArtistBio({ talent }) {
   return (
     <Container>
       <EventImg src={talent.pic} alt="Avatar" />
-      <InfoContainer>
-        <div>
+      <ArtistInfoContainer>
+        <GenreTitle>
           {talent.genre}
           {' - '}
           {talent.instrument}
-        </div>
+        </GenreTitle>
         <div>
-          <h4>{talent.name}</h4>
+          <h3>{talent.name}</h3>
+          <StyleP>{talent.bio}</StyleP>
         </div>
-        <div>
-          <p>{talent.bio}</p>
-        </div>
-      </InfoContainer>
+      </ArtistInfoContainer>
     </Container>
   );
 }
