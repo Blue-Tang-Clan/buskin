@@ -6,6 +6,7 @@ import Event from './Event.jsx';
 import ArtistUpdate from './ArtistUpdate.jsx';
 import FanDashBoard from './FanDashBoard.jsx';
 import EditFanProfile from './EditFanProfile.jsx';
+import EditProfile from './EditArtistProfile_styled.jsx';
 import EditArtistProfile from './EditArtistProfile.jsx';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import ArtistDashBoard from './ArtistDashBoard.jsx';
@@ -34,7 +35,7 @@ export default function App() {
           {page === 'event' ? <Event /> : <></>}
           {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
           {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
-          {page === 'editArtistProfile' ? <EditArtistProfile /> : <></>}
+          {page === 'editArtistProfile' ? <EditProfile artistId={Number(userId)} pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId}/> : <></>}
           {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
           {login
             ? (

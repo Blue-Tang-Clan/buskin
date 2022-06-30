@@ -11,14 +11,9 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
-export default function EditProfile() {
+export default function EditProfile( { artistId, artistName } ) {
   // We need artistId here from artist profile where the user is the artist themselves
-  const artistId = 6;
-  const artistName = 'Luke'
-  //
-
-
-
+  artistName = 'no name';
   const [displayName, setDisplayName] = useState('');
   const [genre, setGenre] = useState('');
   const [instrument, setInstrument] = useState('');
@@ -30,7 +25,7 @@ export default function EditProfile() {
 
   function handleInput(e) {
     const name = e.target.name;
-    if (e.target.files !== null) {
+    if (e.target.files[0] !== null) {
       const file = e.target.files[0] || null;
     }
     const value = e.target.value;
