@@ -8,7 +8,8 @@
     "start": "webpack --watch --mode=development",
     "build": "webpack --mode=production",
     "server": "nodemon server.js",
-    "dev": "webpack serve --open"
+    "dev": "webpack serve --open",
+    "prod": "webpack && nodemon server.js"
   },
   "repository": {
     "type": "git",
