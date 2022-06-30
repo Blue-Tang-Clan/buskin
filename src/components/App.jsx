@@ -6,6 +6,7 @@ import Event from './Event.jsx';
 import ArtistUpdate from './ArtistUpdate.jsx';
 import FanDashBoard from './FanDashBoard.jsx';
 import EditFanProfile from './EditFanProfile.jsx';
+import EditProfile from './EditArtistProfile_styled.jsx';
 import EditArtistProfile from './EditArtistProfile.jsx';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import ArtistDashBoard from './ArtistDashBoard.jsx';
