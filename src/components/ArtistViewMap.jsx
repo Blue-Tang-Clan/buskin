@@ -38,7 +38,7 @@ const WarningMessage = styled.div`
 `;
 
 let eventObj = {};
-export default function ViewMap({ ArtistName, ArtistId }) {
+export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
   const [viewport, setViewport] = useState({
     latitude: 40.7484,
     longitude: -73.9857,
@@ -109,6 +109,7 @@ export default function ViewMap({ ArtistName, ArtistId }) {
         console.log(res.data);
       })
       .then(() => setNewEvent(null))
+      .then(() => getArtistDashBoard(artistId))
       .catch((err) => console.log(err));
   };
   const handleSubmit = (e) => {

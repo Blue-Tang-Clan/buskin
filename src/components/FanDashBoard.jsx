@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { SavedEvents, FollowedArtists } from './DashBoardTag.jsx';
 import apiMasters from '../apiMasters.js';
 import { EventImg, ArtistImg } from './StyledComponents.js';
-// import FlipCard from './FlipCard.jsx';
 
 const ArtistMImg = styled(ArtistImg)`
   margin: 5px;
@@ -27,6 +26,10 @@ const Card = styled.div`
   display: inline-block;
 `;
 
+const StyleSpan = styled.span`
+  font-size: 0.75em;
+`;
+
 export default function FanDashBoard({ setPage, setPageId, userId }) {
   const [artistsFollowed, setArtistsFollowed] = useState([]);
   const [eventsSaved, setEventsSaved] = useState([]);
@@ -44,7 +47,6 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
   useEffect(() => {
     apiMasters.getFanDashBoard(userId)
       .then((response) => {
-        console.log(response.data.events);
         setArtistsFollowed(response.data.artists);
         setEventsSaved(response.data.events);
       })
@@ -54,7 +56,7 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
   }, [userId]);
 
   return (
-    <Box sx={{ width: '80%', margin: '5%' }}>
+    <Box sx={{ width: '100%', margin: '5%' }}>
       <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12}>
           <h2 style={{ color: '#373B53', fontWeight: '700' }}>DashBoard</h2>
@@ -76,9 +78,17 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
         <Grid item xs={7}>
           {eventsSaved && eventsSaved.map((event) => (
             <Card key={event.event_pic}>
-              <EventsMImg alt='event pic' src={event.event_pic ? event.event_pic : 'https://cdn.choosechicago.com/uploads/2019/05/Belmont_Sheffield_Music_Fest_c698582a-9aec-4738-807f-5f7061c698f1-1024x612.png'} onClick={showEvent} id={event.event_id} />
-              <h5>{event.event_name}</h5>
-              <h5>{`${event.event_date} ${event.event_start_time}`}</h5>
+              <div className='flip-card-container' key={event.id}>
+                <div className='flip-card'>
+                  <div className='flip-card-front'>
+                    <EventsMImg alt='event pic' src={event.event_pic ? event.event_pic : 'https://cdn.choosechicago.com/uploads/2019/05/Belmont_Sheffield_Music_Fest_c698582a-9aec-4738-807f-5f7061c698f1-1024x612.png'} />
+                  </div>
+                  <div className='flip-card-back' onClick={showEvent} id={event.event_id}>
+                    <h5>Event Name:<br/>{event.event_name}</h5>
+                    <StyleSpan>Time:<br/>{`${event.date} ${event.start_time}`}</StyleSpan>
+                  </div>
+                </div>
+              </div>
             </Card>
           ))}
         </Grid>
