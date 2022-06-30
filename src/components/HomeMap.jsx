@@ -4,7 +4,9 @@ import 'react-date-picker/dist/DatePicker.css';
 import React, {
   useState, useRef, useCallback, useEffect, useContext,
 } from 'react';
-import MapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
+import MapGL, {
+  Marker, Popup, GeolocateControl, Layer,
+} from 'react-map-gl';
 import { Room, Cancel } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
 import { TopContext } from './App.jsx';
@@ -24,13 +26,14 @@ export default function ViewMap() {
   const [fanId, setFanId] = useState('1');
   const [saved, setSaved] = useState(false);
   const [artistName, setArtistName] = useState('Lil Uzzy');
-  const { setPage, setLogin, userType } = useContext(TopContext);
+  const { setPage, setLogin, userType, userId } = useContext(TopContext);
 
   useEffect(() => {
     const getPins = async () => {
       try {
         const res = await apiMasters.getEvents(new Date());
         setPins(res.data);
+        setFanId(userId);
       } catch (err) {
         console.log(err);
       }
@@ -76,6 +79,41 @@ export default function ViewMap() {
     }
   };
 
+  const parkLayer = {
+    id: 'add-3d-buildings',
+    source: 'composite',
+    'source-layer': 'building',
+    filter: ['==', 'extrude', 'true'],
+    type: 'fill-extrusion',
+    minzoom: 15,
+    paint: {
+      'fill-extrusion-color': '#aaa',
+
+      // Use an 'interpolate' expression to
+      // add a smooth transition effect to
+      // the buildings as the user zooms in.
+      'fill-extrusion-height': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        15,
+        0,
+        15.05,
+        ['get', 'height'],
+      ],
+      'fill-extrusion-base': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        15,
+        0,
+        15.05,
+        ['get', 'min_height'],
+      ],
+      'fill-extrusion-opacity': 0.6,
+    },
+  };
+
   return (
     <div className='home-map-div'>
       <MapGL
@@ -87,6 +125,7 @@ export default function ViewMap() {
         onViewportChange={handleViewportChange}
         mapStyle='mapbox://styles/mapbox/streets-v11'
       >
+        <Layer {...parkLayer} />
         <Geocoder
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}
@@ -160,7 +199,7 @@ export default function ViewMap() {
                       </b>
 
                     </span>
-                    {saved ? <p style={{color:'green'}}> Event Saved!</p> : (
+                    {saved ? <p style={{ color: 'green' }}> Event Saved!</p> : (
                       <button
                         type='button'
                         className='saveEventBtn'
