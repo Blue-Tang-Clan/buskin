@@ -10,12 +10,15 @@ import {
   GenreTag, UserImg, Nav, UserSettingContainer,
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
+import Alert from '@mui/material/Alert';
 
 export default function NavBar({ setUserType, setUserId }) {
   const [userName, setUserName] = useState('');
   const [userPic, setUserPic] = useState('');
   const { setPage, userType } = useContext(TopContext);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [alert, setAlert] = useState(false);
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -121,8 +124,12 @@ export default function NavBar({ setUserType, setUserId }) {
               </Menu>
             </UserSettingContainer>
           )}
+
           <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
-          <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+          <div style={{ cursor: 'pointer' }} onmouseover='getAlert(this)'>
+            <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+          </div>
+          <Alert severity="success">This is a success alert — check it out!</Alert>
         </UserSettingContainer>
       )}
     </Nav>

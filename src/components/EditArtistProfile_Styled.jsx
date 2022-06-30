@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 export default function EditProfile( { artistId, artistName } ) {
   // We need artistId here from artist profile where the user is the artist themselves
+  console.log(artistId)
   artistName = 'no name';
   const [displayName, setDisplayName] = useState('');
   const [genre, setGenre] = useState('');
@@ -198,7 +199,7 @@ export default function EditProfile( { artistId, artistName } ) {
           Submit
         </Button>
       </Box>
-      <div>
+      <div style={{float: 'right'}}>
         <Qr artistId={artistId} artistName={artistName} />
       </div>
     </div>
