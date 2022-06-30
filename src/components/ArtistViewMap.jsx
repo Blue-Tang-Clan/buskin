@@ -44,6 +44,8 @@ export default function ViewMap({ ArtistName, ArtistId }) {
     longitude: -73.9857,
     zoom: 13,
   });
+  // will hold conflicting emails
+  let receivers;
   const [newEvent, setNewEvent] = useState(null);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -133,7 +135,9 @@ export default function ViewMap({ ArtistName, ArtistId }) {
       apiMasters.checkEventRadius(newEvent.lat, newEvent.lng, formatDate, startTime)
         .then((res) => {
           if (res.data.length) {
-             setWarning(true);
+            receivers = res.data.join(', ');
+            // receviver = ...
+            setWarning(true);
           } else {
             eventCreation(artistId, eventObj);
           }
@@ -157,6 +161,19 @@ export default function ViewMap({ ArtistName, ArtistId }) {
     e.preventDefault();
     setWarning(false);
     e.target.name && eventCreation(artistId,eventObj);
+    if (e.target.innerText === 'Yes') {
+      const text = 'A fellow busker has scheduled an event at the same time less than 30 yards from your event.\n'
+      + 'We just wanted to let you know!\n'
+      + 'The event details are:\n'
+      + `${eventObj.name}\n${eventObj.street} ${eventObj.city}, ${eventObj.state}\n`
+      + `${eventObj.date} ${eventObj.start_time} ~ ${eventObj.end_time}\n-The Buskin' Team`;
+      const subject = 'Buskin\' Event Scheduled Near You';
+      apiMasters.notifyEmail(receivers, text, subject)
+        .then((res) => {
+          res.sendStatus(201);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (

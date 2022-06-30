@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3001';
+const url = 'http://localhost:3000';
 
 /* *** GET REQUESTS *** */
 
@@ -42,7 +42,7 @@ const getEvent = (eventId) => (
   axios.get(`${url}/event/${eventId}`)
 );
 
-const checkEventRadius = (latitude,longitude,date,start_time) => (
+const checkEventRadius = (latitude, longitude, date, start_time) => (
   axios.get(`${url}/check/events?latitude=${encodeURI(latitude)}&longitude=${encodeURI(longitude)}&date=${encodeURI(date)}&start_time=${encodeURI(start_time)}`)
 )
 
@@ -110,6 +110,9 @@ const unfollowArtist = (fanId, artistId) => (
   axios.delete(`${url}/fans/follow/${fanId}/${artistId}`)
 );
 
+const notifyEmail = (receivers, text, subject) => {
+  axios.post(`${url}/eventnotification`);
+};
 /* *** PUT REQUESTS *** */
 const editFanProfile = (fanId, fanProfile) => (
   axios.put(`${url}/fan/profile/${fanId}`, fanProfile)
