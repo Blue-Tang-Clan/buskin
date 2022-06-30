@@ -153,7 +153,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
           <EventDiv id={event.id} onClick={clickHandler}>
             <DateDiv>
               <DateText>{`${event.date}`}</DateText>
-              <p style={{ color: '#259998'}}>{`${event.start_time}`}</p>
+              <p style={{ color: '#259998' }}>{`${event.start_time}`}</p>
             </DateDiv>
             <AddressDiv>
               <EventText>{event.name}</EventText>
