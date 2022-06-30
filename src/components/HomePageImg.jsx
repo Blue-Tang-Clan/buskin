@@ -44,10 +44,10 @@ function EventImgList({EventArr, xs, setPage, setPageId}) {
   return (
     <Grid item xs={xs}>
       {EventArr.map((event) => (
-        <Card key={event.event_pic}>
-          <EventsMImg alt='event pic' src={event.event_pic} onClick={showEvent} id={event.event_id} />
+        <Card key={event.pic}>
+          <EventsMImg alt='event pic' src={event.pic} onClick={showEvent} id={event.id} />
           <h5>{event.event_name}</h5>
-          <h5>{`${event.event_date} ${event.event_start_time}`}</h5>
+          <h5>{`${event.event_date} ${event.start_time}`}</h5>
         </Card>
       ))}
     </Grid>

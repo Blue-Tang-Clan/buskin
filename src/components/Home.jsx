@@ -11,6 +11,7 @@ export default function Home({ setPage, setPageId }) {
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
   const [artists, setArtists] = useState([]);
   const [poplarArtist, setPopolarArtist] = useState([]);
+  const [upEvent, setUpEvent] = useState([]);
   const [talent, setTalent] = useState({
     name: 'Monica',
     bio: 'ssssssssssssssssssssssss',
@@ -49,7 +50,11 @@ export default function Home({ setPage, setPageId }) {
       <div>
         <h3>Map</h3>
         <HomeMap />
-        <EventImgList EventArr={poplarArtist} xs={12} setPage={setPage} setPageId={setPageId} />
+        <br></br>
+        <h4>Popular Atrists</h4>
+        <ArtistImgList ArtistArr={poplarArtist} xs={3} setPage={setPage} setPageId={setPageId} />
+        <h4>Upcoming Performances</h4>
+        <EventImgList EventArr={artists} xs={3} setPage={setPage} setPageId={setPageId} />
       </div>
       <div>
         <div onClick={() => { setPage('artistProfile'); }}>
@@ -65,7 +70,7 @@ export default function Home({ setPage, setPageId }) {
               <GenreTag key={i} value={genre} onClick={handleFilterGenre}>{genre}</GenreTag>
             )}
           </TagContainer>
-          <ArtistImgList ArtistArr={artists} xs={12} setPage={setPage} setPageId={setPageId} />
+          <ArtistImgList ArtistArr={artists} xs={3} setPage={setPage} setPageId={setPageId} />
         </div>
       </div>
     </HomeContainer>
