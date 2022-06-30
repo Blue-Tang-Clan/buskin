@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ArtistBio from './ArtistBio.jsx';
-import { HomeContainer, HomePageGenreTag, TagContainer, ArtistImg, MapInfo, ArtistInfo, TeamInfo, Title, Line1, Line2, MemberA, MemberB, MemberC } from './StyledComponents.js';
+import { HomeContainer, HomePageGenreTag, TagContainer, ArtistImg, MapInfo, ArtistInfo, TeamInfo, Title, Line1, Line2, MemberA, MemberB, MemberC, Audio } from './StyledComponents.js';
 import { TopContext } from './App.jsx';
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
@@ -65,6 +65,7 @@ export default function Home({ setPage, setPageId }) {
           <h3>Fresh Talent</h3>
           <div>
             <ArtistBio talent={talent} />
+            <Audio src="retrosoul.mp3" type="audio/mp3" controls />
           </div>
         </div>
         <div>
