@@ -180,6 +180,31 @@ const Audio = styled.audio`
   display: block;
 `;
 
+// EVENT PAGE SPECIFIC STYLING
+const EventPageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-right: 5%;
+`;
+
+const EventHeaderContainer = styled.div`
+display: flex;
+max-height: 500px;
+flex-direction: row;
+justify-content: flex-start;
+align-items: flex-start;
+`;
+
+const EventPageArtistPic = styled.img`
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+`;
+
 export {
   PageContainer,
   HomeContainer,
@@ -195,6 +220,9 @@ export {
   UserSettingContainer,
   ArtistInfoContainer,
   HomePageGenreTag,
+  EventPageContainer,
+  EventHeaderContainer,
+  EventPageArtistPic,
   FreshTalentImg,
   MapInfo,
   ArtistInfo,
