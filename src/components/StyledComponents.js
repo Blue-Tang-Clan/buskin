@@ -144,7 +144,7 @@ const Line1 = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: row;
-  align-items: center;
+  text-align: center;
   justify-content: center;
 `;
 const Line2 = styled.div`
@@ -156,18 +156,21 @@ const Line2 = styled.div`
 const MemberA = styled.div`
   grid-area: A;
   display: flex;
+  text-align: center;
   flex-direction: row;
   gap: 10px;
 `;
 const MemberB = styled.div`
   grid-area: B;
   display: flex;
+  text-align: center;
   flex-direction: row;
   gap: 10px;
 `;
 const MemberC = styled.div`
   grid-area: C;
   display: flex;
+  text-align: center;
   flex-direction: row;
   gap: 10px;
 `;

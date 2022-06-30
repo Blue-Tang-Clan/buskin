@@ -17,6 +17,7 @@ export default function ArtistBio({ talent }) {
           <h3>{talent.name}</h3>
           <StyleP>{talent.bio}</StyleP>
         </div>
+        <audio src="retrosoul.mp3" type="audio/mp3" controls></audio>
       </ArtistInfoContainer>
     </Container>
   );

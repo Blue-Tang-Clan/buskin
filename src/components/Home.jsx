@@ -12,6 +12,7 @@ export default function Home({ setPage, setPageId }) {
   const [artists, setArtists] = useState([]);
   const [poplarArtist, setPopolarArtist] = useState([]);
   const [comingEvent, setComingEvent] = useState([]);
+  const [localEvent, setLocalEvent] = useState([]);
   const [talent, setTalent] = useState({
     name: 'Monica',
     bio: 'ssssssssssssssssssssssss',
@@ -34,7 +35,8 @@ export default function Home({ setPage, setPageId }) {
           pic: result.data.talent.pic,
         });
         setPopolarArtist(result.data.artists);
-        setComingEvent(result.data.events);
+        setComingEvent(result.data.coming_events);
+        setLocalEvent(result.data.local_events);
       })
       .then(() => {
         apiMasters.getHomePageGenre()
@@ -51,6 +53,9 @@ export default function Home({ setPage, setPageId }) {
       <MapInfo>
         <h3>Map</h3>
         <HomeMap />
+        <br />
+        <h3>New York City, NY / Popular Events</h3>
+        <EventImgList EventArr={localEvent} xs={1} setPage={setPage} setPageId={setPageId} />
         <br />
         <h3>Upcoming Performances</h3>
         <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
@@ -80,45 +85,51 @@ export default function Home({ setPage, setPageId }) {
         </Title>
         <Line1>
           <div>
-            <h3>PM</h3>
-            <h4>Nikko</h4>
+            <h4>PM</h4>
             <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AWEUQWA1-ffb9775b3a6b-512' />
+            <h5>Nikko Elliott</h5>
           </div>
           <div>
-            <h3>DB</h3>
-            <h4>Yaokai</h4>
+            <h4>DB</h4>
             <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZBGUUBD-f8c035e2c3aa-512' />
+            <h5>Yaokai Dong</h5>
           </div>
         </Line1>
         <Line2>
           <MemberA>
             <div>
-              <h3>Architect</h3>
+              <h4>Architect</h4>
               <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AJP0K0BH-eb4e28704fac-512' />
+              <h5>Utku Ozkan</h5>
             </div>
             <div>
-              <h3>Architect</h3>
+              <h4>Architect</h4>
               <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AJP0K0BH-eb4e28704fac-512' />
+              <h5>Fangzhuo Xi</h5>
             </div>
           </MemberA>
           <MemberB>
             <div>
-              <h3>UI</h3>
+              <h4>UI</h4>
               <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03BBV9T3LZ-64df3c9dd915-512' />
+              <h5>Yao Yu</h5>
             </div>
             <div>
-              <h3>UI</h3>
+              <h4>UI</h4>
               <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03BBV9T3LZ-64df3c9dd915-512' />
+              <h5>Val Pizzo</h5>
             </div>
           </MemberB>
           <MemberC>
             <div>
-              <h3>UI</h3>
+              <h4>UI</h4>
               <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZB62PFC-338e8412806f-512' />
+              <h5>Kedir Zeinu</h5>
             </div>
             <div>
-              <h3>UI</h3>
+              <h4>UI</h4>
               <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZB62PFC-338e8412806f-512' />
+              <h5>Yuki Ogawa</h5>
             </div>
           </MemberC>
         </Line2>
