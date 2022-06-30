@@ -23,7 +23,7 @@ export default function ViewMap() {
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [pins, setPins] = useState([]);
-  const [fanId, setFanId] = useState(1);
+  const [fanId, setFanId] = useState(null);
   const [saved, setSaved] = useState(false);
   const [savedEvents, setSavedEvents] = useState([]);
   const { setPage, setPageId, setLogin, userType, userId } = useContext(TopContext);
@@ -41,7 +41,7 @@ export default function ViewMap() {
       }
     };
     getPins();
-  }, [fanId, userId]);
+  }, [fanId, userId, saved]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -70,7 +70,7 @@ export default function ViewMap() {
   };
 
   const handleSaveClick = (fId, eventId) => {
-    if (userType === 'anonymous') {
+    if (!fId) {
       setLogin(true);
     } else {
       apiMasters.saveEvent(fId, eventId)
@@ -153,7 +153,7 @@ export default function ViewMap() {
               offsetTop={-viewport.zoom * 5.5}
             >
               <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer', color:
-              JSON.stringify(savedEvents).includes(p.street) ? 'blue' : 'tomato'
+              JSON.stringify(savedEvents).includes(p.street) ? '#FFB800' : '#0094B6'
             }} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
             </Marker>
             {p.id === currentPlaceId

@@ -16,7 +16,7 @@ export const TopContext = React.createContext();
 export default function App() {
   const [userType, setUserType] = useState('anonymous');
   const [login, setLogin] = useState(false);
-  const [userId, setUserId] = useState(1);
+  const [userId, setUserId] = useState(null);
   const [page, setPage] = useState('home');
   const [pageId, setPageId] = useState(1);
 
@@ -37,6 +37,16 @@ export default function App() {
           {page === 'editArtistProfile' ? <EditArtistProfile /> : <></>}
           {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
         </PageContainer>
+        {login
+          ? (
+            <RegisterModal
+              setUserType={setUserType}
+              setUserId={setUserId}
+              anonymous={login}
+              setLogin={setLogin}
+            />
+          )
+          : null}
       </TopContext.Provider>
     </>
   );

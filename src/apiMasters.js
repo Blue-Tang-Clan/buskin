@@ -84,7 +84,6 @@ const registerUser = (username, password, email, userType) => (
 // );
 
 const createEvent = (artistId, eventObj) => {
-  console.log(eventObj);
   return axios.post(`${url}/artist/event/${artistId}`, eventObj);
 };
 
