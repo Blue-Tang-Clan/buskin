@@ -297,7 +297,7 @@ font-size: xx-large;
   width: 100%;
 }
 
-body {
+/* body {
   background: linear-gradient(-45deg, #6fb1d6, #ffbf5f, #73dbed, #9b7af1);
   background-size: 400% 400%;
   background-attachment: fixed;
@@ -313,4 +313,4 @@ body {
     100% {
         background-position: 0% 50%;
     }
-}
+} */
