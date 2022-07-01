@@ -11,7 +11,7 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 const FollowedArtistsModified = ({number}) => {
   return (
     <Tag>
-      <Container style={{position: 'absolute', top:'28%'}}>
+      <Container style={{position: 'absolute', top:'24%'}}>
         <FollowedArtistsTag>
           <Icon>
             <FavoriteBorderIcon sx={{ color: "#FFB800" }} />
@@ -33,7 +33,7 @@ const FollowedArtistsModified = ({number}) => {
 const SavedEventsModified = ({number}) => {
   return (
   <Tag>
-      <Container style={{position: 'absolute', top:'48%'}}>
+      <Container style={{position: 'absolute', top:'40%'}}>
         <SavedEventsTag>
           <Icon>
             <DateRangeIcon sx={{ color: "#2ED297" }} />
@@ -95,6 +95,7 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
   useEffect(() => {
     apiMasters.getFanDashBoard(userId)
       .then((response) => {
+        console.log('events', response.data.events);
         setArtistsFollowed(response.data.artists);
         setEventsSaved(response.data.events);
       })
@@ -141,9 +142,9 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
                     {event.event_name}
                     <br />
                     <br />
-                    {`${event.date}`}
+                    {`${event.event_date}`}
                     <br />
-                    {`${event.start_time}`}
+                    {`${event.event_start_time}`}
                   </StyleSpan>
                   </div>
                 </div>
