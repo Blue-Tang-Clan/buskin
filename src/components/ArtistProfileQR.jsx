@@ -102,6 +102,7 @@ export default function ArtistProfileQR() {
                 <ArtistDescription>
                   {artist.bio}
                 </ArtistDescription>
+                <div>Support your local artists.</div>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: '20px 0', width: '100%' }}>
                   <Payments />
                 </div>
