@@ -15,10 +15,10 @@ import { PageContainer, NavSpacer } from './StyledComponents.js';
 export const TopContext = React.createContext();
 
 export default function App() {
-  const [userType, setUserType] = useState('anonymous');
+  const [userType, setUserType] = useState('artist');
   const [login, setLogin] = useState(false);
   const [userId, setUserId] = useState(2);
-  const [page, setPage] = useState('artistDashboard');
+  const [page, setPage] = useState('home');
   const [pageId, setPageId] = useState(1);
 
   return (

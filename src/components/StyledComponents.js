@@ -37,8 +37,10 @@ const HomePageGenreTag = styled.div`
   border-radius: 6px;
   &:hover {
     background-color: #0094B6;
+    background-image: linear-gradient(to right, #667eea, #764ba2);
     color: white;
     cursor: pointer;
+    border:  1.5px transparent;
   };
   white-space: nowrap;
   display: inline-block;
@@ -125,8 +127,14 @@ const NavSpacer = styled.div`
 `;
 
 const UserSettingContainer = styled.div`
+  margin-top: 5px;
+  flex-direction: row;
   display: flex;
   gap: 20px;
+`;
+
+const UserNav = styled.div`
+  margin-top: 10px;
 `;
 
 const ArtistInfoContainer = styled.div`
@@ -249,4 +257,5 @@ export {
   MemberB,
   MemberC,
   Audio,
+  UserNav,
 };
