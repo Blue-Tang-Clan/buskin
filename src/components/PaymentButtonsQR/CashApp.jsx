@@ -6,14 +6,19 @@ import { ArtistContext } from '../ArtistProfileQR.jsx';
 export default function Venmo() {
   const { artist } = useContext(ArtistContext);
 
+  if (artist.cashapp) {
+    return (
+      <div>
+        {artist.cashapp !== 'undefined'
+          ? (
+            <button type='button'>
+              <a href={`https://cash.app/$${artist.cashapp}`} target='_blank' rel='noreferrer'>CASHAPP</a>
+            </button>
+          ) : <></> }
+      </div>
+    );
+  }
   return (
-    <div>
-      {artist.cashapp !== undefined && artist.cashapp !== 'undefined' && artist.cashapp.length > 0
-        ? (
-          <button type='button'>
-            <a href={`https://cash.app/$${artist.cashapp}`} target='_blank' rel='noreferrer'>CASHAPP</a>
-          </button>
-        ) : <></> }
-    </div>
+    <div />
   );
 }
