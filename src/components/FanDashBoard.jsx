@@ -28,6 +28,7 @@ const Card = styled.div`
 
 const StyleSpan = styled.span`
   font-size: 0.75em;
+  pointer-events: none;
 `;
 
 export default function FanDashBoard({ setPage, setPageId, userId }) {
@@ -84,7 +85,7 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
                     <EventsMImg alt='event pic' src={event.event_pic ? event.event_pic : 'https://cdn.choosechicago.com/uploads/2019/05/Belmont_Sheffield_Music_Fest_c698582a-9aec-4738-807f-5f7061c698f1-1024x612.png'} />
                   </div>
                   <div className='flip-card-back' onClick={showEvent} id={event.event_id}>
-                    <p>Event Name:<br/>{event.event_name}</p>
+                    <p style={{ pointerEvents: 'none' }}>Event Name:<br/>{event.event_name}</p>
                     <StyleSpan>Time:<br/>{`${event.date} ${event.start_time}`}</StyleSpan>
                   </div>
                 </div>

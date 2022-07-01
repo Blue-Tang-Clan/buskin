@@ -113,8 +113,6 @@ export default function Home({ setPage, setPageId }) {
           <ArtistImgList ArtistArr={poplarArtist} xs={1} setPage={setPage} setPageId={setPageId} />
         </div>
       </ArtistInfo>
-      <br />
-      <br />
       <TeamInfo>
         <Title>
           <h3>Development Team</h3>
