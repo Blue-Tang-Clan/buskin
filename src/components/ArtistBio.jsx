@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FreshTalentImg, Container, ArtistInfoContainer } from './StyledComponents.js';
 
 export default function ArtistBio({ talent, setPage, setPageId }) {
-  console.log('talent info: ', talent);
   return (
     <Container>
       <div>
