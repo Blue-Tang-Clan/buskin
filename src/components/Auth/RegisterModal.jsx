@@ -38,7 +38,7 @@ export default function RegisterModal({
 
   return (
     <div>
-      <Button onClick={handleOpen}>Register / Log In</Button>
+      {anonymous ? null : <Button onClick={handleOpen}>Sign Up&nbsp;&nbsp;/&nbsp;&nbsp;Log In</Button>}
       <Modal
         open={open}
         onClose={handleClose}

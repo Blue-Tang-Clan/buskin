@@ -36,6 +36,10 @@ p {
   color: #A6ACBE;
 }
 
+audio::-webkit-media-controls-panel {
+  background-color: #FFB800;
+}
+
 .flip-card-container {
   width: 180px;
   height: 180px;
@@ -74,4 +78,168 @@ p {
   background-color: #6db6e2;
   color: #fff;
   transform: rotateY(180deg);
+}
+
+.map-div {
+  position: absolute;
+  top: 10%;
+  left:25%;
+  bottom: 0;
+  width: 40vw;
+  margin-top: 13vh;
+  margin-left: 30vw;
+  height:60vh;
+  z-index: 1000;
+  box-shadow: 0 4px 15px 0 #0094B6;
+}
+
+.home-map-div {
+  top: 0;
+  bottom: 0;
+  width: 40vw;
+  height:60vh;
+  z-index: 1000;
+  box-shadow: 0 4px 15px 0 #0094B6;
+}
+
+.mapboxgl-ctrl-group{
+  background: none;
+  margin-top: 1.2vh;
+}
+
+.mapboxgl-ctrl-group:not(:empty) {
+box-shadow: none;
+}
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
+background-color: rgba(134, 114, 17, 0.491);
+
+}
+
+.event-form {
+  width: 250px;
+  /* height: 275px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card{
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.eventLabel{
+  width: max-content;
+  color:#6F52ED;
+  font-size:20px;
+  border-bottom: 0.5px solid #6F52ED;
+  margin: 3px 0;
+}
+
+.eventLabelName{
+  width: max-content;
+  color:#6F52ED;
+  font-size:20px;
+  border-bottom: 0.5px solid #6F52ED;
+  margin: 3px 0;
+  cursor: pointer;
+}
+
+.eventLabelName:hover{
+  color:#afb1ba;
+}
+
+.event{
+  font-size: 17px;
+  margin: 0;
+}
+.address{
+  font-size 15px;
+  margin: 0;
+}
+.date{
+  font-size 15px;
+  margin: 0;
+}
+.artist{
+  font-size: 15px;
+  margin: 0;
+}
+.mapboxgl-popup{
+  z-index: 1000;
+}
+
+.artist-map{
+
+}
+
+.pin{
+  color:#0094B6;
+}
+
+.submitButton{
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 17px;
+  color: white;
+  background-color: darkgreen;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #667eea, #764ba2);
+  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+}
+
+.saveEventBtn{
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 17px;
+  color: white;
+  background-color: darkgreen;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #667eea, #764ba2);
+  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+}
+
+.mapboxgl-popup-close-button {
+color:red;
+font-size: xx-large;
+}
+
+.yesBtn{
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 17px;
+  color: white;
+  background-color: darkgreen;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #FFB800, #2ED297);
+  box-shadow: 0 4px 15px 0 #0094B6;
+}
+
+.noBtn{
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 17px;
+  color: white;
+  background-color: darkgreen;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #f74205, #c87912);
+  box-shadow: 0 4px 15px 0 #9d0101;
+}
+
+.btn-div{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2vh;
+}
+
+.warning-msg{
+  padding: 20px;
+  text-decoration: underline;
 }

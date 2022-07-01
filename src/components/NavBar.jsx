@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { TopContext } from './App.jsx';
 import SearchBar from './SearchBar.jsx';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
@@ -11,8 +11,11 @@ import {
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import ListIcon from '@mui/icons-material/List';
 
-export default function NavBar({ setUserType, setUserId }) {
+export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp, showForm }) {
   const [userName, setUserName] = useState('');
   const [userPic, setUserPic] = useState('');
   const { setPage, userType } = useContext(TopContext);
@@ -52,14 +55,33 @@ export default function NavBar({ setUserType, setUserId }) {
     setAnchorEl(null);
   };
   const goLogout = () => {
+    const cookies = document.cookie.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i];
+      let eqPos = cookie.indexOf('=');
+      let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
     setPage('home');
     setUserType('anonymous');
   };
 
+  useEffect(() => {
+    if (userNameApp) {
+      setUserName(userNameApp);
+    }
+    if (userPicApp) {
+      setUserPic(userPicApp);
+    } else {
+      setUserPic('');
+    }
+  }, [userNameApp, userPicApp, showForm]);
+
   return (
     <Nav>
       <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
-        <img src='https://i.ibb.co/kMc2nsf/Screen-Shot-2022-06-30-at-10-52-20-AM-copy.png' alt='logo' height='85px' style={{ cursor: "pointer" }} />
+        <img src='https://i.ibb.co/Dw7T0Jb/Buskin-B2-copy.png' alt='logo' height='85px' style={{ cursor: "pointer" }} />
       </div>
       <div>
         <SearchBar />
@@ -70,6 +92,7 @@ export default function NavBar({ setUserType, setUserId }) {
           setUserId={setUserId}
           setUserName={setUserName}
           setUserPic={setUserPic}
+          showFormApp={showForm}
         />
       ) : (
         <UserSettingContainer>
@@ -84,7 +107,7 @@ export default function NavBar({ setUserType, setUserId }) {
                 </div>
               </div>
               <UserImg src={userPic.length ? userPic : 'https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc='} alt='thumbnail' />
-              <ArrowDropDownIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
+              <ListIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
               <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -124,12 +147,19 @@ export default function NavBar({ setUserType, setUserId }) {
               </Menu>
             </UserSettingContainer>
           )}
-
-          <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
-          <div style={{ cursor: 'pointer' }} onmouseover='getAlert(this)'>
-            <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+          <div style={{ cursor: 'pointer' }}>
+            <Tooltip title="Alert">
+              <IconButton>
+                <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Log Out">
+              <IconButton>
+                <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+              </IconButton>
+            </Tooltip>
           </div>
-          <Alert severity="success">This is a success alert — check it out!</Alert>
+          {/* <Alert severity="success">This is a success alert — check it out!</Alert> */}
         </UserSettingContainer>
       )}
     </Nav>

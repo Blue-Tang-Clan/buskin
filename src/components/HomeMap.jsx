@@ -23,10 +23,12 @@ export default function ViewMap() {
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [pins, setPins] = useState([]);
-  const [fanId, setFanId] = useState(1);
+  const [fanId, setFanId] = useState(null);
   const [saved, setSaved] = useState(false);
   const [savedEvents, setSavedEvents] = useState([]);
-  const { setPage, setPageId, setLogin, userType, userId } = useContext(TopContext);
+  const {
+    setPage, setPageId, setLogin, userType, userId,
+  } = useContext(TopContext);
 
   useEffect(() => {
     const getPins = async () => {
@@ -34,14 +36,16 @@ export default function ViewMap() {
         const res = await apiMasters.getEvents(new Date());
         setPins(res.data);
         setFanId(Number(userId));
-        const resDos = await apiMasters.getFanDashBoard(fanId);
-        setSavedEvents(resDos.data.events);
+        if (fanId !== null && fanId !== 0) {
+          const resDos = await apiMasters.getFanDashBoard(fanId);
+          setSavedEvents(resDos.data.events);
+        }
       } catch (err) {
         console.log(err);
       }
     };
     getPins();
-  }, [fanId, userId]);
+  }, [fanId, userId, saved]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -70,7 +74,7 @@ export default function ViewMap() {
   };
 
   const handleSaveClick = (fId, eventId) => {
-    if (userType === 'anonymous') {
+    if (!fId) {
       setLogin(true);
     } else {
       apiMasters.saveEvent(fId, eventId)
@@ -152,9 +156,15 @@ export default function ViewMap() {
               offsetLeft={-viewport.zoom * 3.5}
               offsetTop={-viewport.zoom * 5.5}
             >
-              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer', color:
-              JSON.stringify(savedEvents).includes(p.street) ? 'blue' : 'tomato'
-            }} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
+              <Room
+                style={{
+                  fontSize: viewport.zoom * 5.5,
+                  cursor: 'pointer',
+                  color:
+              JSON.stringify(savedEvents).includes(p.street) ? '#FFB800' : '#0094B6',
+                }}
+                onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)}
+              />
             </Marker>
             {p.id === currentPlaceId
               ? (
@@ -209,7 +219,7 @@ export default function ViewMap() {
 
                     </span>
                     {saved ? <p style={{ color: 'green' }}> Event Saved!</p> : (
-                     <button
+                      <button
                         type='button'
                         className='saveEventBtn'
                         onClick={() => handleSaveClick(fanId, Number(p.id))}
