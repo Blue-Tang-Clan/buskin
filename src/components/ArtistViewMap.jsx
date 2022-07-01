@@ -59,7 +59,7 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
   const [artistId, setArtistId] = useState(null);
   const [artistName, setArtistName] = useState('');
   const [warning, setWarning] = useState(false);
-
+  const [confEmails, setConfEmails] = useState(null);
   useEffect(() => {
     const getPins = async () => {
       try {
@@ -105,7 +105,24 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
       .then((res) => {
         setPins([...pins, eventObj]);
       })
-      .then(() => setNewEvent(null))
+      .then(() => {
+        const receivers = 'kmzeinu@gmail.com';
+        const subject = 'You are invited!';
+        const text = artistName + ' is have throwing a buskin party at ' + startTime +  ' ' + 'in ' + street + ', ' + city + '!';
+        apiMasters.sendEmail({ receivers, subject, text });
+      })
+      .then(() => {
+        if (confEmails) {
+          const receivers = confEmails + ', kmzeinu@gmail.com';
+          const subject = 'Another event happening at your scheduled event!';
+          const text = artistName + ' has schecduled an event ' + ' at ' + start_time + ' . Do you want to reschudle?';
+          apiMasters.sendEmail({ receivers, subject, text });
+        }
+      })
+      .then(() => {
+        console.log('I am not hacked');
+        setNewEvent(null);
+      })
       .then(() => getArtistDashBoard(artistId))
       .catch((err) => console.log(err));
   };
@@ -131,6 +148,10 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
       apiMasters.checkEventRadius(newEvent.lat, newEvent.lng, formatDate, startTime)
         .then((res) => {
           if (res.data.length) {
+            console.log('DATA', res.data);
+            const arrOfEmails = res.data.join(', ');
+            setConfEmails(arrOfEmails);
+            console.log(confEmails);
             setWarning(true);
           } else {
             eventCreation(artistId, eventObj);
