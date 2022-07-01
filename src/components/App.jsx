@@ -17,8 +17,8 @@ export const TopContext = React.createContext();
 export default function App() {
   const [userType, setUserType] = useState('anonymous');
   const [login, setLogin] = useState(false);
-  const [userId, setUserId] = useState(1);
-  const [page, setPage] = useState('artistDashboard');
+  const [userId, setUserId] = useState(2);
+  const [page, setPage] = useState('fanDashboard');
   const [pageId, setPageId] = useState(1);
 
   return (
