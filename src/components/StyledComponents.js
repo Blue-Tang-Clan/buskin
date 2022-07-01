@@ -5,6 +5,21 @@ const PageContainer = styled.div`
   width: 90%;
 `;
 
+const BodyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10px;
+`;
+
+const CarouselContainer = styled.div`
+  flex: 1 0 auto;
+  max-height: 600px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+`;
+
 const HomeContainer = styled.div`
   display: grid;
   grid-template-columns: 56% auto;
@@ -238,6 +253,8 @@ const EventPageArtistPic = styled.img`
 
 export {
   PageContainer,
+  BodyContainer,
+  CarouselContainer,
   HomeContainer,
   Button,
   TagContainer,
