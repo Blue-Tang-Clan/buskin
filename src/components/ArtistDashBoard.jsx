@@ -8,8 +8,8 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 
 const TotalFollowersModified = ({number}) => {
   return (
-    <Tag>
-      <Container style={{position: 'absolute', top:'20%'}}>
+    <Tag style={{position: 'relative'}}>
+      <Container style={{position: 'absolute', top: '35px'}}>
         <TotalFollowersTag >
           <Icon>
             <PermIdentityIcon sx={{ color: "#6F52ED" }} />
@@ -53,7 +53,7 @@ const DashBoardCard = styled.div`
 
 const EventList = styled.div`
   height: 500px;
-  ${'' /* overflow: scroll; */}
+  overflow: scroll;
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 4;
@@ -83,7 +83,7 @@ const DateDiv = styled.div`
 
 const DateText = styled.h4`
   margin: 5px;
-  ${'' /* color: #259998; */}
+  color: #259998;
 `;
 
 const AddressDiv = styled.div`
@@ -181,14 +181,14 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
           <EventDiv id={event.id} onClick={clickHandler}>
             <DateDiv>
               <DateText>{`${event.date}`}</DateText>
-              <p>{`${event.start_time}`}</p>
+              <p style={{ color: '#259998' }}>{`${event.start_time}`}</p>
             </DateDiv>
             <AddressDiv>
               <EventText>{event.name}</EventText>
               <AddressText>{`${event.city}, ${event.state}`}</AddressText>
             </AddressDiv>
             <TrashBoxDiv onClick={deleteEvent} id={event.id}>
-              <FaTrashAlt style={{ pointerEvents: 'none' }} />
+              <FaTrashAlt style={{ color: '#259998', pointerEvents: 'none' }} />
             </TrashBoxDiv>
           </EventDiv>
         ))}
