@@ -130,10 +130,10 @@ const Nav = styled.div`
   background: white;
   position: fixed;
   width: 100vw;
-  height: 95px;
+  height: 100px;
   display: grid;
-  grid-template-columns: 400px auto 270px;
-  margin-top: -10px;
+  grid-template-columns: 25% auto 300px 20px;
+  margin-top: -5px;
   margin-left: -10px;
   padding-top: 10px;
   gap: 30px;
@@ -141,7 +141,7 @@ const Nav = styled.div`
 
 const NavSpacer = styled.div`
   width: 100%;
-  height: 85px;
+  height: 100px;
 `;
 
 const UserSettingContainer = styled.div`

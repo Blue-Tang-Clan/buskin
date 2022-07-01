@@ -1,9 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ViewMap from './ArtistViewMap.jsx';
-import { TotalFollowers } from './DashBoardTag.jsx';
+import {Tag, Container, Icon, TotalFollowersTag, Text, Number} from './DashBoardTag.jsx';
 import apiMasters from '../apiMasters.js';
 import { FaTrashAlt } from "react-icons/fa";
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+
+const TotalFollowersModified = ({number}) => {
+  return (
+    <Tag>
+      <Container style={{position: 'absolute', top:'20%'}}>
+        <TotalFollowersTag >
+          <Icon>
+            <PermIdentityIcon sx={{ color: "#6F52ED" }} />
+          </Icon>
+        </TotalFollowersTag>
+        <div>
+          <Number>
+            {number}
+          </Number>
+          <Text>
+            Total followers
+          </Text>
+        </div>
+      </Container>
+    </Tag>
+  );
+}
 
 const FanDashBoard = styled.div`
   display: grid;
@@ -116,7 +139,6 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     apiMasters.getArtistDetails(id)
       .then((response) => {
         const artistInfo = response.data.rows[0].json_build_object;
-        console.log(artistInfo);
         if (artistInfo.followers) {
           setFanCount(artistInfo.followers.length);
         }
@@ -132,8 +154,6 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
 
   const deleteEvent = (e) => {
     e.stopPropagation();
-    console.log(e);
-    console.log('eventId', e.target.id);
     if (e.target.id) {
       apiMasters.artistDeleteEvent(userId, e.target.id)
         .then(() => {
@@ -153,7 +173,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     <FanDashBoard>
       <DashBoardText>DashBoard</DashBoardText>
       <DashBoardCard>
-        {TotalFollowers(fanCount)}
+        <TotalFollowersModified number={fanCount} />
       </DashBoardCard>
       <EventList>
         <h4>Upcoming Events</h4>
