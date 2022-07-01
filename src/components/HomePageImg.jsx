@@ -34,6 +34,8 @@ function ArtistImgList({
   const showArtist = (e) => {
     setPage('artistProfile');
     setPageId(e.target.id);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   };
   return (
     <Grid item xs={xs}>
@@ -58,6 +60,8 @@ function EventImgList({
   const showEvent = (e) => {
     setPage('event');
     setPageId(e.target.id);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   };
 
   return (
