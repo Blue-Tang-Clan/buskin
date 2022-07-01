@@ -245,3 +245,34 @@ font-size: xx-large;
   padding: 20px;
   text-decoration: underline;
 }
+
+.bg {
+  background-image: linear-gradient(-60deg, rgba($mainLight, 0.5) 50%, $mainDark 50%,);
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  position: fixed;
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  top: 0;
+
+  z-index: -1;
+  opacity: 0.25;
+  animation: slide 13s ease-in-out infinite alternate;
+}
+.bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 14s;
+}
+.bg3 {
+  animation-duration: 15s;
+}
+@keyframes slide {
+  from {
+    transform: translate(-25%);
+  }
+  to {
+    transform: translate(25%);
+  }
+}
