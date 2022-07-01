@@ -57,7 +57,6 @@ export default function EditProfile( { artistId, artistName, setPage } ) {
     } else if (paymentOptions === 'cashapp') {
       cashapp = paymentMethod;
     }
-    console.log('here')
     apiMasters.editArtistProfile(artistId, {
       displayName,
       genre,
@@ -69,13 +68,6 @@ export default function EditProfile( { artistId, artistName, setPage } ) {
       venmo,
     }).then((photoUrl) => {
       setPage('artistDashboard');
-      apiMasters.getArtistDetails(artistId)
-        .then((response) => {
-          setUserPic(response.data.pic);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
       // set page id to something, then set image to the url
     });
   }
