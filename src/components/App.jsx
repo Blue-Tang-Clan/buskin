@@ -31,7 +31,7 @@ export default function App() {
         .map((cookie) => cookie.split('='))
         .forEach((cookie) => { cookies[cookie[0]] = cookie[1]; });
       setUserType(cookies.usertype);
-      setUserId(cookies.id);
+      setUserId(Number(cookies.userid));
       setShowForm('Register');
       setUserName(cookies.username);
       setUserPic(cookies.pic);
