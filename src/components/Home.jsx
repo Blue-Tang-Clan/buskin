@@ -33,7 +33,7 @@ export default function Home({ setPage, setPageId }) {
   const [localEvent, setLocalEvent] = useState([]);
   const [talent, setTalent] = useState({
     name: 'Monica',
-    bio: 'ssssssssssssssssssssssss',
+    bio: 'What a Wonderful World!',
     genre: 'Jazz',
     instrument: 'Piano',
   });
