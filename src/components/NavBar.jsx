@@ -7,7 +7,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {
-  GenreTag, UserImg, Nav, UserSettingContainer, UserNav,
+  GenreTag, UserImg, Nav, UserSettingContainer, UserNav, LogoutNav,
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import IconButton from '@mui/material/IconButton';
@@ -106,7 +106,7 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
                   <label>{userName}</label>
                 </div>
                 <div>
-                  <label>Artist</label>
+                  <small style={{ color: '#A6ACBE' }}>Artist</small>
                 </div>
               </UserNav>
               <div>
@@ -128,7 +128,18 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
                   <MenuItem onClick={goArtistProfile}>Edit profile</MenuItem>
                   <MenuItem onClick={goArtistDashboard}>Dashboard</MenuItem>
                 </Menu>
+                {/* <Tooltip title="Alert">
+                  <IconButton>
+                    <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Log Out">
+                  <IconButton>
+                    <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+                  </IconButton>
+                </Tooltip> */}
               </UserNav>
+
             </UserSettingContainer>
           ) : (
             <UserSettingContainer>
@@ -156,18 +167,16 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
               </Menu>
             </UserSettingContainer>
           )}
-          <div style={{ cursor: 'pointer' }}>
-            <Tooltip title="Alert">
-              <IconButton>
+          <LogoutNav>
+            <Tooltip title="Alert" style={{ cursor: 'pointer' }}>
                 <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
-              </IconButton>
             </Tooltip>
-            <Tooltip title="Log Out">
-              <IconButton>
+            </LogoutNav>
+            <LogoutNav>
+            <Tooltip title="Log Out"  style={{ cursor: 'pointer' }}>
                 <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
-              </IconButton>
             </Tooltip>
-          </div>
+          </LogoutNav>
         </UserSettingContainer>
       )}
     </Nav>

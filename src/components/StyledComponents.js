@@ -57,6 +57,7 @@ const ArtistImg = styled.img`
   height:120px;
   width: 120px;
   border-radius: 50%;
+  object-fit: cover;
   &:hover {
     cursor: pointer;
   };
@@ -73,6 +74,7 @@ const EventImg = styled.img`
   height: 120px;
   width: 120px;
   border-radius: 10px;
+  object-fit: cover;
   &:hover {
     cursor: pointer;
   };
@@ -82,6 +84,7 @@ const FreshTalentImg = styled.img`
   height: 250px;
   width: 250px;
   border-radius: 10px;
+  object-fit: cover;
   &:hover {
     cursor: pointer;
   };
@@ -112,7 +115,7 @@ const Nav = styled.div`
   width: 100vw;
   height: 90px;
   display: grid;
-  grid-template-columns: 22% auto 20%;
+  grid-template-columns: 25% auto 300px 10px;
   margin-top: -10px;
   margin-left: -10px;
   padding-top: 10px;
@@ -127,12 +130,19 @@ const NavSpacer = styled.div`
 const UserSettingContainer = styled.div`
   margin-top: 5px;
   flex-direction: row;
+  justify-content: flex-end;
   display: flex;
   gap: 20px;
 `;
 
 const UserNav = styled.div`
   margin-top: 10px;
+  right: 0px;
+  text-align: right;
+`;
+
+const LogoutNav = styled.div`
+  margin-top: 15px;
 `;
 
 const ArtistInfoContainer = styled.div`
@@ -253,4 +263,5 @@ export {
   MemberC,
   Audio,
   UserNav,
+  LogoutNav,
 };
