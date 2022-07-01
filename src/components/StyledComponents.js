@@ -5,6 +5,21 @@ const PageContainer = styled.div`
   width: 90%;
 `;
 
+const BodyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10px;
+`;
+
+const CarouselContainer = styled.div`
+  flex: 1 0 auto;
+  max-height: 600px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+`;
+
 const HomeContainer = styled.div`
   display: grid;
   grid-template-columns: 56% auto;
@@ -57,6 +72,7 @@ const ArtistImg = styled.img`
   height:120px;
   width: 120px;
   border-radius: 50%;
+  object-fit: cover;
   &:hover {
     cursor: pointer;
   };
@@ -73,6 +89,7 @@ const EventImg = styled.img`
   height: 120px;
   width: 120px;
   border-radius: 10px;
+  object-fit: cover;
   &:hover {
     cursor: pointer;
   };
@@ -82,6 +99,7 @@ const FreshTalentImg = styled.img`
   height: 250px;
   width: 250px;
   border-radius: 10px;
+  object-fit: cover;
   &:hover {
     cursor: pointer;
   };
@@ -110,9 +128,9 @@ const Nav = styled.div`
   background: white;
   position: fixed;
   width: 100vw;
-  height: 90px;
+  height: 92px;
   display: grid;
-  grid-template-columns: 22% auto 20%;
+  grid-template-columns: 25% auto 300px 20px;
   margin-top: -10px;
   margin-left: -10px;
   padding-top: 10px;
@@ -127,12 +145,23 @@ const NavSpacer = styled.div`
 const UserSettingContainer = styled.div`
   margin-top: 5px;
   flex-direction: row;
+  justify-content: flex-end;
   display: flex;
-  gap: 20px;
+  gap: 25px;
 `;
 
 const UserNav = styled.div`
   margin-top: 10px;
+  right: 0px;
+  text-align: right;
+`;
+
+const SettingNav = styled.div`
+  margin-top: 13px;
+`;
+
+const LogoutNav = styled.div`
+  margin-top: 18px;
 `;
 
 const ArtistInfoContainer = styled.div`
@@ -161,12 +190,11 @@ const Title = styled.div`
 `;
 const Line1 = styled.div`
   grid-area: a;
-  display: flex;
+  display: grid;
   gap: 10px;
-  flex-direction: row;
-  text-align: center;
-  justify-content: center;
+  grid-template-areas: "blank member blank";
 `;
+
 const Line2 = styled.div`
   grid-area: b;
   display: grid;
@@ -177,18 +205,31 @@ const MemberA = styled.div`
   grid-area: A;
   display: flex;
   text-align: center;
+  justify-content: center;
   flex-direction: row;
   gap: 10px;
 `;
+
 const MemberB = styled.div`
   grid-area: B;
   display: flex;
   text-align: center;
+  justify-content: center;
   flex-direction: row;
   gap: 10px;
 `;
+
 const MemberC = styled.div`
   grid-area: C;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+`;
+
+const MemberD = styled.div`
+  grid-area: member;
   display: flex;
   text-align: center;
   flex-direction: row;
@@ -224,6 +265,8 @@ const EventPageArtistPic = styled.img`
 
 export {
   PageContainer,
+  BodyContainer,
+  CarouselContainer,
   HomeContainer,
   Button,
   TagContainer,
@@ -251,6 +294,9 @@ export {
   MemberA,
   MemberB,
   MemberC,
+  MemberD,
   Audio,
   UserNav,
+  LogoutNav,
+  SettingNav,
 };
