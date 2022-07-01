@@ -9,7 +9,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 const TotalFollowersModified = ({number}) => {
   return (
     <Tag>
-      <Container style={{position: 'absolute', top:'23%'}}>
+      <Container style={{position: 'absolute', top:'24%'}}>
         <TotalFollowersTag >
           <Icon>
             <PermIdentityIcon sx={{ color: "#6F52ED" }} />
@@ -138,7 +138,6 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     apiMasters.getArtistDetails(id)
       .then((response) => {
         const artistInfo = response.data.rows[0].json_build_object;
-        console.log(artistInfo);
         if (artistInfo.followers) {
           setFanCount(artistInfo.followers.length);
         }
@@ -153,8 +152,6 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
 
   const deleteEvent = (e) => {
     e.stopPropagation();
-    console.log(e);
-    console.log('eventId', e.target.id);
     if (e.target.id) {
       apiMasters.artistDeleteEvent(userId, e.target.id)
         .then(() => {
