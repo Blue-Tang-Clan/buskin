@@ -6,7 +6,6 @@ import { EventColContainer, EventRowContainer, FreshTalentImg, TagContainer, Hom
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import PinDropIcon from '@mui/icons-material/PinDrop';
-import ViewMap from './HomeMap.jsx';
 import EventMap from './EventMap.jsx';
 export const ArtistContext = React.createContext();
 
