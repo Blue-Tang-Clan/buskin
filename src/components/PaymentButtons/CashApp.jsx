@@ -9,12 +9,17 @@ export default function Venmo() {
   if (artist.cashapp) {
     return (
       <div>
-        {artist.cashapp !== 'undefined'
+        {/* {artist.cashapp !== 'undefined'
           ? (
             <button type='button'>
               <a href={`https://cash.app/$${artist.cashapp}`} target='_blank' rel='noreferrer'>CASHAPP</a>
             </button>
-          ) : <></> }
+          ) : <></> } */}
+        {artist.paypal !== 'undefined'
+          ? (<button className='submitButton'
+            onClick={() => window.open(`https://cash.app/$${artist.cashapp}`, '_blank', 'noopener,noreferrer')}
+            >CASHAPP</button>)
+          : <></> }
       </div>
     );
   }
