@@ -251,11 +251,6 @@ font-size: xx-large;
   text-decoration: underline;
 }
 
-/* .carouselImg {
-  height: 600px;
-  object-fit: cover;
-} */
-
 .imgContainer {
   width: 100%;
   height: 400px;
@@ -264,4 +259,35 @@ font-size: xx-large;
 .imgContainer .ImageInside {
   height: 100%;
   width: 100%;
+}
+.bg {
+  /* background-image: linear-gradient(-60deg, rgba($mainLight, 0.5) 50%, $mainDark 50%,); */
+  background-image: linear-gradient(-60deg, rgba(102, 126, 234, 0.5) 50%, #83689d 50%);
+  width: 125%;
+  height: 100%;
+  /* background-color: lightblue; */
+  position: fixed;
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  top: 0;
+
+  z-index: -1;
+  opacity: 0.25;
+  animation: slide 13s ease-in-out infinite alternate;
+}
+.bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 14s;
+}
+.bg3 {
+  animation-duration: 15s;
+}
+@keyframes slide {
+  from {
+    transform: translate(-25%);
+  }
+  to {
+    transform: translate(25%);
+  }
 }

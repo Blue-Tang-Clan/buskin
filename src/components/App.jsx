@@ -40,6 +40,11 @@ export default function App() {
 
   return (
     <>
+      {/* background */}
+      <div className='bg' />
+      <div className='bg bg2' />
+      <div className='bg bg3' />
+
       {/* components */}
       <TopContext.Provider value={{ page, setPage, pageId, setPageId, userType, setLogin, userId, setUserId, setShowForm }}>
         <div>
