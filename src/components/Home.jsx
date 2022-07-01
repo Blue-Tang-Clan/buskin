@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import ArtistBio from './ArtistBio.jsx';
-import { HomeContainer, HomePageGenreTag, TagContainer, ArtistImg, MapInfo, ArtistInfo, TeamInfo, Title, Line1, Line2, MemberA, MemberB, MemberC, Audio } from './StyledComponents.js';
+import {
+  HomeContainer, HomePageGenreTag, TagContainer, ArtistImg, MapInfo, ArtistInfo, TeamInfo, Title, Line1, Line2, MemberA, MemberB, MemberC, Audio,
+} from './StyledComponents.js';
 import { TopContext } from './App.jsx';
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
 import { ArtistImgList, EventImgList } from './HomePageImg.jsx';
 
-export default function Home({ setPage, setPageId }) {
+export default function Home({
+  setPage, setPageId, setUserType, setUserId, setShowForm, setUserName, setUserPic,
+}) {
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
   const [artists, setArtists] = useState([]);
   const [poplarArtist, setPopolarArtist] = useState([]);
@@ -46,6 +50,18 @@ export default function Home({ setPage, setPageId }) {
             setGenres(arr);
           });
       });
+    console.log('cookies: ', document.cookie);
+    if (document.cookie) {
+      const cookies = {};
+      document.cookie.split('; ')
+        .map((cookie) => cookie.split('='))
+        .forEach((cookie) => { cookies[cookie[0]] = cookie[1]; });
+      setUserType(cookies.usertype);
+      setUserId(cookies.id);
+      setShowForm('Register');
+      setUserName(cookies.username);
+      setUserPic(cookies.pic);
+    }
   }, []);
 
   return (
@@ -67,15 +83,13 @@ export default function Home({ setPage, setPageId }) {
           <h3>Fresh Talent</h3>
           <div>
             <ArtistBio talent={talent} />
-            <Audio src="retrosoul.mp3" type="audio/mp3" controls />
+            <Audio src='retrosoul.mp3' type='audio/mp3' controls />
           </div>
         </div>
         <div>
           <h3>Popular Genres</h3>
           <TagContainer>
-            {genres.map((genre, i) =>
-              <HomePageGenreTag key={i} value={genre} onClick={handleFilterGenre}>{genre}</HomePageGenreTag>
-            )}
+            {genres.map((genre, i) => <HomePageGenreTag key={i} value={genre} onClick={handleFilterGenre}>{genre}</HomePageGenreTag>)}
           </TagContainer>
           <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
           <h3>Popular Artists</h3>
