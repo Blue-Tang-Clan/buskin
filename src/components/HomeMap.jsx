@@ -182,10 +182,10 @@ export default function ViewMap() {
                 >
                   <div className='card'>
                     <label className='eventLabel'>Artist Name</label>
-                    <p className='artist'>
+                    <h3 className='artist'>
                       {' '}
                       <b>{p.display_name}</b>
-                    </p>
+                    </h3>
                     <label className='eventLabelName' id={p.id} onClick={(e) => eventPage(e)}>Event Name</label>
                     <p className='event'>
                       {' '}
