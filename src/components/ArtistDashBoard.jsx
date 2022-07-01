@@ -161,7 +161,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
             </AddressDiv>
             <TrashBoxDiv onClick={(e) => e.stopPropagation()}>
               <Button onClick={deleteEvent} id={event.id}>
-                <DeleteIcon  style={{ color: ' #259998'}} />
+                <DeleteIcon  sx={{ color: ' #259998'}} />
               </Button>
             </TrashBoxDiv>
           </EventDiv>
