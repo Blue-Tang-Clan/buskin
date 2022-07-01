@@ -155,19 +155,23 @@ background-color: rgba(134, 114, 17, 0.491);
 }
 
 .event{
-  font-size: 17px;
+  font-size: 19px;
   margin: 0;
 }
 .address{
   font-size 15px;
   margin: 0;
+  color: #2E3B52;
+  font-weight: 600;
 }
 .date{
   font-size 15px;
   margin: 0;
+  color: #2E3B52;
+  font-weight: 600;
 }
 .artist{
-  font-size: 15px;
+  font-size: 20px;
   margin: 0;
 }
 .mapboxgl-popup{
@@ -198,6 +202,7 @@ background-color: rgba(134, 114, 17, 0.491);
   border: none;
   padding: 5px;
   border-radius: 5px;
+  margin-top:10px;
   font-size: 17px;
   color: white;
   background-color: darkgreen;
@@ -248,11 +253,11 @@ font-size: xx-large;
 
 .bg {
   /* background-image: linear-gradient(-60deg, rgba($mainLight, 0.5) 50%, $mainDark 50%,); */
-  background-image: linear-gradient(-60deg, rgba(102, 126, 234, 0.5) 50%, #83689d 50%);
+  /* background-image: linear-gradient(-60deg, rgba(102, 126, 234, 0.5) 50%, #83689d 50%);
   width: 125%;
-  height: 100%;
+  height: 100%; */
   /* background-color: lightblue; */
-  position: fixed;
+  /* position: fixed;
   left: -50%;
   right: -50%;
   bottom: 0;
@@ -260,14 +265,14 @@ font-size: xx-large;
 
   z-index: -1;
   opacity: 0.25;
-  animation: slide 13s ease-in-out infinite alternate;
+  animation: slide 13s ease-in-out infinite alternate; */
 }
 .bg2 {
-  animation-direction: alternate-reverse;
-  animation-duration: 14s;
+  /* animation-direction: alternate-reverse;
+  animation-duration: 14s; */
 }
 .bg3 {
-  animation-duration: 15s;
+  /* animation-duration: 15s; */
 }
 @keyframes slide {
   from {
@@ -276,4 +281,36 @@ font-size: xx-large;
   to {
     transform: translate(25%);
   }
+}
+/* .carouselImg {
+  height: 600px;
+  object-fit: cover;
+} */
+
+.imgContainer {
+  width: 100%;
+  height: 400px;
+}
+
+.imgContainer .ImageInside {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: linear-gradient(-45deg, #667eea, #6fb1d6, #23A6D5, #23D5AB);
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  animation: gradient 15s ease infinite;
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

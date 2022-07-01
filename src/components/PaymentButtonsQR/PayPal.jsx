@@ -11,7 +11,7 @@ export default function PayPal() {
       <div>
         {artist.paypal !== 'undefined'
           ? (
-            <button type='button'>
+            <button style={{ width: 10 + 'rem', height: 5 + 'rem' }} type='button'>
               <a href={`${artist.paypal}`} target='_blank' rel='noreferrer'>PAYPAL</a>
             </button>
           ) : <></>}

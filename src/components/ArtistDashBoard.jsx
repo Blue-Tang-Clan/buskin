@@ -1,9 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ViewMap from './ArtistViewMap.jsx';
-import { TotalFollowers } from './DashBoardTag.jsx';
+import {Tag, Container, Icon, TotalFollowersTag, Text, Number} from './DashBoardTag.jsx';
 import apiMasters from '../apiMasters.js';
 import { FaTrashAlt } from "react-icons/fa";
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+
+const TotalFollowersModified = ({number}) => {
+  return (
+    <Tag>
+      <Container style={{position: 'absolute', top:'24%'}}>
+        <TotalFollowersTag >
+          <Icon>
+            <PermIdentityIcon sx={{ color: "#6F52ED" }} />
+          </Icon>
+        </TotalFollowersTag>
+        <div>
+          <Number>
+            {number}
+          </Number>
+          <Text>
+            Total followers
+          </Text>
+        </div>
+      </Container>
+    </Tag>
+  );
+}
 
 const FanDashBoard = styled.div`
   display: grid;
@@ -55,6 +78,7 @@ const DateDiv = styled.div`
   color: #259998;
   fontWeight: bold;
   margin: auto;
+  pointer-events: none;
 `;
 
 const DateText = styled.h4`
@@ -66,6 +90,7 @@ const AddressDiv = styled.div`
   grid-column-start: 2;
   grid-column-end: 3;
   margin: auto;
+  pointer-events: none;
 `;
 
 const MapDiv = styled.div`
@@ -90,10 +115,12 @@ const EventText = styled.h4`
     font-weight: bold;
     color: #2D2D2D;
     margin: 5px;
+    pointer-events: none;
 `;
 
 const AddressText = styled.p`
     color: #8F8F8F;
+    pointer-events: none;
 `;
 
 export default function ArtistDashBoard({userId, setPage, setPageId}) {
@@ -111,7 +138,6 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     apiMasters.getArtistDetails(id)
       .then((response) => {
         const artistInfo = response.data.rows[0].json_build_object;
-        console.log(artistInfo);
         if (artistInfo.followers) {
           setFanCount(artistInfo.followers.length);
         }
@@ -125,8 +151,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
   };
 
   const deleteEvent = (e) => {
-    console.log(e.target);
-    console.log('eventId', e.target.id);
+    e.stopPropagation();
     if (e.target.id) {
       apiMasters.artistDeleteEvent(userId, e.target.id)
         .then(() => {
@@ -146,22 +171,22 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     <FanDashBoard>
       <DashBoardText>DashBoard</DashBoardText>
       <DashBoardCard>
-        {TotalFollowers(fanCount)}
+        <TotalFollowersModified number={fanCount} />
       </DashBoardCard>
       <EventList>
         <h4>Upcoming Events</h4>
         {events && events.map((event) => (
-          <EventDiv>
+          <EventDiv id={event.id} onClick={clickHandler}>
             <DateDiv>
               <DateText>{`${event.date}`}</DateText>
               <p style={{ color: '#259998' }}>{`${event.start_time}`}</p>
             </DateDiv>
-            <AddressDiv id={event.id} onClick={clickHandler}>
+            <AddressDiv>
               <EventText>{event.name}</EventText>
               <AddressText>{`${event.city}, ${event.state}`}</AddressText>
             </AddressDiv>
-            <TrashBoxDiv>
-              <FaTrashAlt onClick={deleteEvent} id={event.id} style={{ color: '#259998' }} />
+            <TrashBoxDiv onClick={deleteEvent} id={event.id}>
+              <FaTrashAlt style={{ color: '#259998', pointerEvents: 'none' }} />
             </TrashBoxDiv>
           </EventDiv>
         ))}

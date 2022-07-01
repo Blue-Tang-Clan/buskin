@@ -7,10 +7,9 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {
-  GenreTag, UserImg, Nav, UserSettingContainer, UserNav,
+  GenreTag, UserImg, Nav, UserSettingContainer, UserNav, LogoutNav, SettingNav, NotificationNav,
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
-import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import ListIcon from '@mui/icons-material/List';
 
@@ -84,7 +83,7 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
   return (
     <Nav>
       <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
-        <img src='https://i.ibb.co/Dw7T0Jb/Buskin-B2-copy.png' alt='logo' height='85px' style={{ cursor: "pointer" }} />
+        <img src='https://i.ibb.co/Dw7T0Jb/Buskin-B2-copy.png' alt='logo' height='85px' style={{ cursor: "pointer", marginLeft: '3%', marginTop: '3px' }} />
       </div>
       <div>
         <SearchBar />
@@ -106,13 +105,13 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
                   <label>{userName}</label>
                 </div>
                 <div>
-                  <label>Artist</label>
+                  <small style={{ color: '#A6ACBE' }}>Artist</small>
                 </div>
               </UserNav>
               <div>
                 <UserImg src={userPic.length ? userPic : 'https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc='} alt='thumbnail' />
               </div>
-              <UserNav style={{ cursor: 'pointer' }}>
+              <SettingNav style={{ cursor: 'pointer' }}>
                 <Tooltip title="Setting">
                   <ListIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
                 </Tooltip>
@@ -128,46 +127,50 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
                   <MenuItem onClick={goArtistProfile}>Edit profile</MenuItem>
                   <MenuItem onClick={goArtistDashboard}>Dashboard</MenuItem>
                 </Menu>
-              </UserNav>
+              </SettingNav>
             </UserSettingContainer>
           ) : (
             <UserSettingContainer>
+              <UserNav>
+                <div>
+                  <label>{userName}</label>
+                </div>
+                <div>
+                  <small style={{ color: '#A6ACBE' }}>Fan</small>
+                </div>
+              </UserNav>
               <div>
-                <div>
-                  <span>{userName}</span>
-                </div>
-                <div>
-                  <span>Fan</span>
-                </div>
+                <UserImg src={userPic.length ? userPic : 'https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg'} alt='thumbnail' />
               </div>
-              <UserImg src={userPic.length ? userPic : 'https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg'} alt='thumbnail' />
-              <ArrowDropDownIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={handleClick} />
-              <Menu
-                id='basic-menu'
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem onClick={goFanProfile}>Edit profile</MenuItem>
-                <MenuItem onClick={goFanDashboard}>Dashboard</MenuItem>
-              </Menu>
+              <SettingNav style={{ cursor: 'pointer' }}>
+                <Tooltip title="Setting">
+                  <ListIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
+                </Tooltip>
+                <Menu
+                  id='basic-menu'
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  {userType === 'artist' ? <MenuItem onClick={goFanProfile}>Edit profile</MenuItem> : null}
+                  <MenuItem onClick={goFanDashboard}>Dashboard</MenuItem>
+                </Menu>
+              </SettingNav>
             </UserSettingContainer>
           )}
-          <div style={{ cursor: 'pointer' }}>
-            <Tooltip title="Alert">
-              <IconButton>
-                <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
-              </IconButton>
+          <NotificationNav>
+            <Tooltip title="Alert" style={{ cursor: 'pointer' }}>
+              <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
             </Tooltip>
-            <Tooltip title="Log Out">
-              <IconButton>
-                <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
-              </IconButton>
+          </NotificationNav>
+          <LogoutNav>
+            <Tooltip title="Log Out" style={{ cursor: 'pointer' }}>
+              <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
             </Tooltip>
-          </div>
+          </LogoutNav>
         </UserSettingContainer>
       )}
     </Nav>

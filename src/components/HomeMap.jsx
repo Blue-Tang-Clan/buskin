@@ -182,15 +182,15 @@ export default function ViewMap() {
                 >
                   <div className='card'>
                     <label className='eventLabel'>Artist Name</label>
-                    <p className='artist'>
+                    <h2 className='artist'>
                       {' '}
-                      <b>{p.display_name}</b>
-                    </p>
+                      {p.display_name === null ? 'Anonymous' : p.display_name}
+                    </h2>
                     <label className='eventLabelName' id={p.id} onClick={(e) => eventPage(e)}>Event Name</label>
-                    <p className='event'>
+                    <h2 className='event'>
                       {' '}
-                      <b>{p.name}</b>
-                    </p>
+                      {p.name}
+                    </h2>
                     <label className='eventLabel'>Event Address</label>
                     <p className='address'>
                       {p.street}
@@ -208,11 +208,11 @@ export default function ViewMap() {
                     <p className='date'>{p.date}</p>
                     <label className='eventLabel'>Time</label>
                     <span className='startTime'>
-                      Start Time&nbsp;
+                      Start Time&nbsp;&nbsp;&nbsp;
                       <b>{p.start_time}</b>
                     </span>
                     <span className='endTime'>
-                      End Time&nbsp;
+                      End Time&nbsp;&nbsp;&nbsp;
                       <b>
                         {p.end_time}
                       </b>

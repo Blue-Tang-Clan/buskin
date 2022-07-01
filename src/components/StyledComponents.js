@@ -5,6 +5,21 @@ const PageContainer = styled.div`
   width: 90%;
 `;
 
+const BodyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10px;
+`;
+
+const CarouselContainer = styled.div`
+  flex: 1 0 auto;
+  max-height: 600px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+`;
+
 const HomeContainer = styled.div`
   display: grid;
   grid-template-columns: 56% auto;
@@ -14,17 +29,19 @@ const HomeContainer = styled.div`
 `;
 
 const Button = styled.div`
-  padding: 20px;
-  width: 150px;
-  margin-top: 10px;
-  color: #373B53;
+  padding: 16px 20px 15px 20px;
+  width: 180px;
+  margin-top: 14px;
+  color: #2E3B52;
   font-size: 18px;
+  font-weight: 400;
   box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
   border-radius: 3px;
   &:hover {
-    background-color: #0094B6;
+    background-image: linear-gradient(to right, #667eea, #764ba2);
     color: white;
     cursor: pointer;
+    font-weight: 600;
   };
 `;
 
@@ -57,6 +74,7 @@ const ArtistImg = styled.img`
   height:120px;
   width: 120px;
   border-radius: 50%;
+  object-fit: cover;
   &:hover {
     cursor: pointer;
   };
@@ -73,6 +91,7 @@ const EventImg = styled.img`
   height: 120px;
   width: 120px;
   border-radius: 10px;
+  object-fit: cover;
   &:hover {
     cursor: pointer;
   };
@@ -82,6 +101,7 @@ const FreshTalentImg = styled.img`
   height: 250px;
   width: 250px;
   border-radius: 10px;
+  object-fit: cover;
   &:hover {
     cursor: pointer;
   };
@@ -110,10 +130,10 @@ const Nav = styled.div`
   background: white;
   position: fixed;
   width: 100vw;
-  height: 90px;
+  height: 100px;
   display: grid;
-  grid-template-columns: 22% auto 20%;
-  margin-top: -10px;
+  grid-template-columns: 25% auto 300px 20px;
+  margin-top: -5px;
   margin-left: -10px;
   padding-top: 10px;
   gap: 30px;
@@ -121,18 +141,34 @@ const Nav = styled.div`
 
 const NavSpacer = styled.div`
   width: 100%;
-  height: 85px;
+  height: 100px;
 `;
 
 const UserSettingContainer = styled.div`
   margin-top: 5px;
   flex-direction: row;
+  justify-content: flex-end;
   display: flex;
-  gap: 20px;
+  gap: 25px;
 `;
 
 const UserNav = styled.div`
   margin-top: 10px;
+  right: 0px;
+  text-align: right;
+`;
+
+const SettingNav = styled.div`
+  margin-top: 13px;
+`;
+
+const NotificationNav = styled.div`
+  margin-top: 18px;
+`;
+
+const LogoutNav = styled.div`
+  margin-top: 18px;
+  margin-right: 24%;
 `;
 
 const ArtistInfoContainer = styled.div`
@@ -161,12 +197,11 @@ const Title = styled.div`
 `;
 const Line1 = styled.div`
   grid-area: a;
-  display: flex;
+  display: grid;
   gap: 10px;
-  flex-direction: row;
-  text-align: center;
-  justify-content: center;
+  grid-template-areas: "blank member blank";
 `;
+
 const Line2 = styled.div`
   grid-area: b;
   display: grid;
@@ -177,18 +212,31 @@ const MemberA = styled.div`
   grid-area: A;
   display: flex;
   text-align: center;
+  justify-content: center;
   flex-direction: row;
   gap: 10px;
 `;
+
 const MemberB = styled.div`
   grid-area: B;
   display: flex;
   text-align: center;
+  justify-content: center;
   flex-direction: row;
   gap: 10px;
 `;
+
 const MemberC = styled.div`
   grid-area: C;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+`;
+
+const MemberD = styled.div`
+  grid-area: member;
   display: flex;
   text-align: center;
   flex-direction: row;
@@ -224,6 +272,8 @@ const EventPageArtistPic = styled.img`
 
 export {
   PageContainer,
+  BodyContainer,
+  CarouselContainer,
   HomeContainer,
   Button,
   TagContainer,
@@ -251,6 +301,10 @@ export {
   MemberA,
   MemberB,
   MemberC,
+  MemberD,
   Audio,
   UserNav,
+  LogoutNav,
+  SettingNav,
+  NotificationNav,
 };

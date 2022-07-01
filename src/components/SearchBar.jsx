@@ -11,7 +11,7 @@ const Search = styled.input`
 z-index: ${({ searching }) => (searching ? '9999' : '1001')};
 position: fixed;
 width: 40%;
-height: 4rem;
+height: 3.9rem;
 background: white;
 color: #C4C4C4;
 outline: none;
@@ -20,11 +20,11 @@ border-radius: 2.1rem;
 padding: 0 3.5rem 0 3.5rem;
 font-size: 1.2rem;
 box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
-margin-top: 10px;
+margin-top: 12px;
 `;
 
 const SearchResultsModal = styled.div`
-z-index: 9998;
+z-index: 9997;
 display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: fixed;
 top: 0;
@@ -35,36 +35,37 @@ background: rgba(0,0,0,0.5);
 `;
 
 const SearchResults = styled.div`
-z-index: 9999;
+z-index: 9998;
 display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: absolute;
-width: 50%;
-background: transparent;
+top: -25px;
+width: 39.5%;
+background: #F8F8FB;
 margin-top: 5rem;
+border-radius: 10px;
 `;
 
 const ResultsSection = styled.div`
 width: 100%;
-height: 2.8rem;
+height: 5rem;
 background: lightgrey;
-border-right-style: double;
-border-left-style: double;
-border-bottom-width: 1px;
-border-bottom-style: solid;
-border-top-style: solid;
 font-size: 1.5rem;
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+background-image: linear-gradient(to right, #667eea, #764ba2);
+color: white;
 `;
 
 const IndividualResult = styled.div`
 width: 100%;
 height: 2.8rem;
-background: white;
-border-right-style: double;
-border-left-style: double;
-border-bottom-width: 1px;
-border-bottom-style: solid;
+background: transparent;
 font-size: 1.5rem;
 cursor: pointer;
+padding-top: 10px;
+&:hover {
+  background-color: #FFB800;
+}
 `;
 
 let searchId;
@@ -140,36 +141,42 @@ export default function SearchBar() {
       <SearchResultsModal searching={searching} onClick={clearResults} />
       <SearchResults searching={searching}>
         {noResults
-          ? <ResultsSection style={{ paddingLeft: '10px' }}>No search results match your criteria</ResultsSection>
+          ? <ResultsSection style={{ marginTop: '20px' }}>No search results match your criteria</ResultsSection>
           : null}
         {artistsArr.length ? (
-          <ResultsSection style={{ paddingLeft: '10px' }}>
-            <QueueMusicIcon />
-            Artists
+          <ResultsSection style={{ paddingTop: '40px' }}>
+            <span style={{ paddingLeft: '30px' }}>
+              <QueueMusicIcon sx={{ color: 'white' }} />
+            </span>
+            {' Artists'}
           </ResultsSection>
         ) : null}
         {artistsArr.length
           ? artistsArr.map((result) => (
-            <IndividualResult style={{ paddingLeft: '10px' }} key={result.id} onClick={() => handleClick('artistProfile', result.id)}>
-              <PersonOutlineIcon />
+            <IndividualResult key={result.id} onClick={() => handleClick('artistProfile', result.id)}>
+              <span style={{ paddingLeft: '30px' }}>
+                <PersonOutlineIcon />
+              </span>
               {` ${result.name}`}
             </IndividualResult>
           ))
           : null}
         {eventsArr.length ? (
-          <ResultsSection style={{ paddingLeft: '10px' }}>
-            <DateRangeIcon />
-            Events
+          <ResultsSection style={{ paddingTop: '20px' }}>
+            <span style={{ paddingLeft: '30px' }}>
+              <DateRangeIcon sx={{ color: 'white' }} />
+            </span>
+            {' Events'}
           </ResultsSection>
         ) : null}
         {eventsArr.length
           ? eventsArr.map((result) => (
-            <IndividualResult style={{ paddingLeft: '10px' }} key={result.id} onClick={() => handleClick('event', result.id)}>
-              <PinDropIcon />
+            <IndividualResult key={result.id} onClick={() => handleClick('event', result.id)}>
+              <span style={{ paddingLeft: '30px' }}>
+                <PinDropIcon />
+              </span>
               {` ${result.name} - `}
-              City:
               {` ${result.city}, `}
-              State:
               {` ${result.state}`}
             </IndividualResult>
           ))

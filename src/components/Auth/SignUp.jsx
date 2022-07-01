@@ -61,6 +61,13 @@ export default function SignUp({ setUserType, handleClose, setShowForm, setUserI
         setUserName(response.data.username);
         setUserPic(response.data.pic);
         handleClose();
+        const date = new Date();
+        date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
+        const expires = `; expires=${date.toUTCString()}`;
+        document.cookie = `username=${(response.data.username || '')}${expires}; path=/`;
+        document.cookie = `usertype=${(response.data.userType || '')}${expires}; path=/`;
+        document.cookie = `userid=${(response.data.id || '')}${expires}; path=/`;
+        document.cookie = `userpic=${(response.data.pic || '')}${expires}; path=/`;
       })
       .catch((err) => {
         console.log(err);

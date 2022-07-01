@@ -2,9 +2,56 @@ import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import styled from 'styled-components';
-import { SavedEvents, FollowedArtists } from './DashBoardTag.jsx';
+import { SavedEvents, FollowedArtists, Tag, Container, SavedEventsTag, Icon, TotalFollowersTag, Text, Number, FollowedArtistsTag } from './DashBoardTag.jsx';
 import apiMasters from '../apiMasters.js';
 import { EventImg, ArtistImg } from './StyledComponents.js';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+
+const FollowedArtistsModified = ({number}) => {
+  return (
+    <Tag>
+      <Container style={{position: 'absolute', top:'28%'}}>
+        <FollowedArtistsTag>
+          <Icon>
+            <FavoriteBorderIcon sx={{ color: "#FFB800" }} />
+          </Icon>
+        </FollowedArtistsTag>
+        <div>
+          <Number>
+            {number}
+          </Number>
+          <Text>
+            Total followed artists
+          </Text>
+        </div>
+      </Container>
+    </Tag>
+  );
+}
+
+const SavedEventsModified = ({number}) => {
+  return (
+  <Tag>
+      <Container style={{position: 'absolute', top:'48%'}}>
+        <SavedEventsTag>
+          <Icon>
+            <DateRangeIcon sx={{ color: "#2ED297" }} />
+          </Icon>
+        </SavedEventsTag>
+        <div>
+          <Number>
+            {number}
+          </Number>
+          <Text>
+            Saved events
+          </Text>
+        </div>
+      </Container>
+    </Tag>
+  );
+}
+
 
 const ArtistMImg = styled(ArtistImg)`
   margin: 5px;
@@ -27,7 +74,8 @@ const Card = styled.div`
 `;
 
 const StyleSpan = styled.span`
-  font-size: 0.75em;
+  font-size: 1em;
+  pointer-events: none;
 `;
 
 export default function FanDashBoard({ setPage, setPageId, userId }) {
@@ -62,7 +110,9 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
           <h2 style={{ color: '#373B53', fontWeight: '700' }}>DashBoard</h2>
         </Grid>
         <Grid item xs={5}>
-          {artistsFollowed ? FollowedArtists(artistsFollowed.length) : FollowedArtists(0)}
+          {artistsFollowed
+            ? <FollowedArtistsModified number={artistsFollowed.length} />
+            : <FollowedArtistsModified number={0} />}
         </Grid>
         <Grid item xs={7}>
           {artistsFollowed && artistsFollowed.map((artist) => (
@@ -73,7 +123,9 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
           ))}
         </Grid>
         <Grid item xs={5}>
-          {eventsSaved ? SavedEvents(eventsSaved.length) : SavedEvents(0)}
+          {eventsSaved
+            ? <SavedEventsModified number={eventsSaved.length} />
+            : <SavedEventsModified number={0} />}
         </Grid>
         <Grid item xs={7}>
           {eventsSaved && eventsSaved.map((event) => (
@@ -84,8 +136,15 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
                     <EventsMImg alt='event pic' src={event.event_pic ? event.event_pic : 'https://cdn.choosechicago.com/uploads/2019/05/Belmont_Sheffield_Music_Fest_c698582a-9aec-4738-807f-5f7061c698f1-1024x612.png'} />
                   </div>
                   <div className='flip-card-back' onClick={showEvent} id={event.event_id}>
-                    <p>Event Name:<br/>{event.event_name}</p>
-                    <StyleSpan>Time:<br/>{`${event.date} ${event.start_time}`}</StyleSpan>
+                    <StyleSpan style={{ pointerEvents: 'none' }}>
+                    <br />
+                    {event.event_name}
+                    <br />
+                    <br />
+                    {`${event.date}`}
+                    <br />
+                    {`${event.start_time}`}
+                  </StyleSpan>
                   </div>
                 </div>
               </div>

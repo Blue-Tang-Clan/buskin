@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ArtistBio from './ArtistBio.jsx';
 import {
+  BodyContainer,
+  CarouselContainer,
   HomeContainer,
   HomePageGenreTag,
   TagContainer,
@@ -15,11 +17,13 @@ import {
   MemberA,
   MemberB,
   MemberC,
+  MemberD,
   Audio,
 } from './StyledComponents.js';
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
 import { ArtistImgList, EventImgList } from './HomePageImg.jsx';
+import ImgCarousel from "./Carousel.jsx";
 
 export default function Home({ setPage, setPageId }) {
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
@@ -29,7 +33,7 @@ export default function Home({ setPage, setPageId }) {
   const [localEvent, setLocalEvent] = useState([]);
   const [talent, setTalent] = useState({
     name: 'Monica',
-    bio: 'ssssssssssssssssssssssss',
+    bio: 'What a Wonderful World!',
     genre: 'Jazz',
     instrument: 'Piano',
   });
@@ -47,6 +51,7 @@ export default function Home({ setPage, setPageId }) {
           genre: result.data.talent.genre,
           instrument: result.data.talent.instrument,
           pic: result.data.talent.pic,
+          id: result.data.talent.id,
         });
         setPopolarArtist(result.data.artists);
         setComingEvent(result.data.coming_events);
@@ -63,6 +68,11 @@ export default function Home({ setPage, setPageId }) {
   }, []);
 
   return (
+    <BodyContainer>
+    <CarouselContainer>
+      <ImgCarousel />
+    </CarouselContainer>
+    <br />
     <HomeContainer>
       <MapInfo>
         <h3>Find an event near you</h3>
@@ -72,8 +82,8 @@ export default function Home({ setPage, setPageId }) {
         <h3>Popular Events in New York City, NY</h3>
         <h4>What's happening around you</h4>
         <EventImgList EventArr={localEvent} xs={1} setPage={setPage} setPageId={setPageId} />
-        <br />
-        <br />
+        {/* <br />
+        <br /> */}
         <h3>Upcoming Performances</h3>
         <h4>Save these events before too late</h4>
         <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
@@ -83,7 +93,7 @@ export default function Home({ setPage, setPageId }) {
           <div>
             <h3>Fresh Talent</h3>
             {/* <div> */}
-            <ArtistBio talent={talent} setPage={setPage} />
+            <ArtistBio talent={talent} setPage={setPage} setPageId={setPageId} />
           </div>
           <Audio src='retrosoul.mp3' type='audio/mp3' controls />
           {/* </div> */}
@@ -99,6 +109,8 @@ export default function Home({ setPage, setPageId }) {
               </HomePageGenreTag>
             ))}
           </TagContainer>
+          <br />
+          <br />
           <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
           <br />
           <br />
@@ -111,16 +123,18 @@ export default function Home({ setPage, setPageId }) {
           <h3>Development Team</h3>
         </Title>
         <Line1>
-          <div>
-            <h4>PM</h4>
-            <ArtistImg src='https://avatars.githubusercontent.com/u/53981746?v=4' />
-            <p>Nikko Elliott</p>
-          </div>
-          <div>
-            <h4>DB</h4>
-            <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZBGUUBD-f8c035e2c3aa-512' />
-            <p>Yaokai Dong</p>
-          </div>
+          <MemberD>
+            <div>
+              <h4>PM</h4>
+              <ArtistImg src='https://avatars.githubusercontent.com/u/53981746?v=4' />
+              <p>Nikko Elliott</p>
+            </div>
+            <div>
+              <h4>DB</h4>
+              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZBGUUBD-f8c035e2c3aa-512' />
+              <p>Yaokai Dong</p>
+            </div>
+          </MemberD>
         </Line1>
         <Line2>
           <MemberA>
@@ -149,19 +163,20 @@ export default function Home({ setPage, setPageId }) {
           </MemberB>
           <MemberC>
             <div>
-              <h4>UI</h4>
-              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZB62PFC-338e8412806f-512' />
+              <h4>DB</h4>
+              <ArtistImg src='https://i.ibb.co/kMSrkFM/Screenshot-20220630-133617-Gallery.jpg' />
               <p>Kedir Zeinu</p>
             </div>
             <div>
-              <h4>UI</h4>
-              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZB62PFC-338e8412806f-512' />
+              <h4>DB</h4>
+              <ArtistImg src='https://i.ibb.co/G5JQPNX/image.png' />
               <p>Yuki Ogawa</p>
             </div>
           </MemberC>
         </Line2>
       </TeamInfo>
     </HomeContainer>
+    </BodyContainer>
   );
 }
 
