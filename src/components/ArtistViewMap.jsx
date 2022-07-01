@@ -39,7 +39,7 @@ const WarningMessage = styled.div`
 `;
 
 let eventObj = {};
-export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, events }) {
+export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, events, followers }) {
   const [viewport, setViewport] = useState({
     latitude: 40.7484,
     longitude: -73.9857,
@@ -106,22 +106,14 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
         setPins([...pins, eventObj]);
       })
       .then(() => {
-        const receivers = 'kmzeinu@gmail.com';
-        const subject = 'You are invited!';
-        const text = artistName + ' is have throwing a buskin party at ' + startTime +  ' ' + 'in ' + street + ', ' + city + '!';
-        apiMasters.sendEmail({ receivers, subject, text });
-      })
-      .then(() => {
-        if (confEmails) {
-          const receivers = confEmails + ', kmzeinu@gmail.com';
-          const subject = 'Another event happening at your scheduled event!';
-          const text = artistName + ' has schecduled an event ' + ' at ' + start_time + ' . Do you want to reschudle?';
-          apiMasters.sendEmail({ receivers, subject, text });
+        let receivers = 'kmzeinu@gmail.com';
+        if (followers) {
+          receivers += ', ' + followers.join(', ');
         }
-      })
-      .then(() => {
-        console.log('I am not hacked');
-        setNewEvent(null);
+        console.log(receivers);
+        const subject = 'You are invited!';
+        const text = artistName + ' is throwing a buskin party at ' + startTime +  ' in ' + street + ', ' + city + '!';
+        apiMasters.sendEmail({ receivers, subject, text });
       })
       .then(() => getArtistDashBoard(artistId))
       .catch((err) => console.log(err));
@@ -148,11 +140,18 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
       apiMasters.checkEventRadius(newEvent.lat, newEvent.lng, formatDate, startTime)
         .then((res) => {
           if (res.data.length) {
-            console.log('DATA', res.data);
+            console.log('SAta', res.data);
             const arrOfEmails = res.data.join(', ');
             setConfEmails(arrOfEmails);
             console.log(confEmails);
             setWarning(true);
+
+            const receivers = arrOfEmails + ', kmzeinu@gmail.com';
+            const subject = 'Another event happening at your scheduled event!';
+            const text = artistName + ' has schecduled an event ' + ' at ' + start_time + ' . Do you want to reschudle?';
+            console.log('ZZZZ_______________ZZZZZZ');
+            console.log(receivers, subject, text);
+            apiMasters.sendEmail({ receivers, subject, text });
           } else {
             eventCreation(artistId, eventObj);
           }
