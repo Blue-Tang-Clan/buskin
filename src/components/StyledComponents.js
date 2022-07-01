@@ -6,20 +6,21 @@ const PageContainer = styled.div`
 `;
 
 const BodyContainer = styled.div`
-  display: grid;
-  grid-template-rows: 30% 70%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10px;
 `;
 
 const CarouselContainer = styled.div`
-   ${'' /* grid-column-start: 1;
-    grid-column-end: 2; */}
-  grid-row-start: 1;
-  grid-row-end: 2;
+  flex: 1 0 auto;
+  max-height: 600px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 `;
 
 const HomeContainer = styled.div`
-  grid-row-start: 2;
-  ${'' /* grid-row-end: 2; */}
   display: grid;
   grid-template-columns: 56% auto;
   gap: 10%;

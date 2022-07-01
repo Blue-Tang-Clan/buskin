@@ -246,7 +246,17 @@ font-size: xx-large;
   text-decoration: underline;
 }
 
-.carouselImg {
-  height: 30%;
-  carouselImg
+/* .carouselImg {
+  height: 600px;
+  object-fit: cover;
+} */
+
+.imgContainer {
+  width: 100%;
+  height: 400px;
+}
+
+.imgContainer .ImageInside {
+  height: 100%;
+  width: 100%;
 }

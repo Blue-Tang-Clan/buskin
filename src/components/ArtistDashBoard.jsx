@@ -55,6 +55,7 @@ const DateDiv = styled.div`
   color: #259998;
   fontWeight: bold;
   margin: auto;
+  pointer-events: none;
 `;
 
 const DateText = styled.h4`
@@ -66,6 +67,7 @@ const AddressDiv = styled.div`
   grid-column-start: 2;
   grid-column-end: 3;
   margin: auto;
+  pointer-events: none;
 `;
 
 const MapDiv = styled.div`
