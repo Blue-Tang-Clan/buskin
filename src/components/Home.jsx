@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ArtistBio from './ArtistBio.jsx';
 import {
+  BodyContainer,
+  CarouselContainer,
   HomeContainer,
   HomePageGenreTag,
   TagContainer,
@@ -20,6 +22,7 @@ import {
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
 import { ArtistImgList, EventImgList } from './HomePageImg.jsx';
+import ImgCarousel from "./Carousel.jsx";
 
 export default function Home({ setPage, setPageId }) {
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
@@ -64,6 +67,11 @@ export default function Home({ setPage, setPageId }) {
   }, []);
 
   return (
+    <BodyContainer>
+    <CarouselContainer>
+      <ImgCarousel />
+    </CarouselContainer>
+    <br />
     <HomeContainer>
       <MapInfo>
         <h3>Find an event near you</h3>
@@ -163,6 +171,7 @@ export default function Home({ setPage, setPageId }) {
         </Line2>
       </TeamInfo>
     </HomeContainer>
+    </BodyContainer>
   );
 }
 
