@@ -1,6 +1,7 @@
 import Grid from '@mui/material/Grid';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { EventImg, ArtistImg } from './StyledComponents.js';
 
 const ArtistMImg = styled(ArtistImg)`
@@ -24,26 +25,34 @@ const StyleSpan = styled.span`
   font-size: 0.75em;
 `;
 
-function ArtistImgList({ArtistArr, xs, setPage, setPageId}) {
+function ArtistImgList({
+  ArtistArr,
+  xs,
+  setPage,
+  setPageId,
+}) {
   const showArtist = (e) => {
     setPage('artistProfile');
     setPageId(e.target.id);
   };
-
   return (
     <Grid item xs={xs}>
-      {ArtistArr ? ArtistArr.map((artist) => (
+      {ArtistArr.map((artist) => (
         <Card key={artist.pic}>
           <ArtistMImg alt='artist pic' src={artist.pic} onClick={showArtist} id={artist.id} />
           <h5>{artist.artist_name}</h5>
         </Card>
-      ))
-        : null}
+      ))}
     </Grid>
   );
 }
 
-function EventImgList({ EventArr, xs, setPage, setPageId }) {
+function EventImgList({
+  EventArr,
+  xs,
+  setPage,
+  setPageId,
+}) {
   const showEvent = (e) => {
     setPage('event');
     setPageId(e.target.id);
@@ -51,26 +60,50 @@ function EventImgList({ EventArr, xs, setPage, setPageId }) {
 
   return (
     <Grid item xs={xs}>
-      {EventArr ? EventArr.map((event) => (
-        <Card key={event.pic}>
+      {EventArr.map((event) => (
+        <Card key={event.id} pic={event.pic}>
           <div className='flip-card-container' key={event.id}>
             <div className='flip-card'>
               <div className='flip-card-front'>
                 {event.pic === null
-                  ? <EventsMImg alt='event pic' src="https://images.sampletemplates.com/wp-content/uploads/2015/04/Event-Program.jpg" />
+                  ? <EventsMImg alt='event pic' src='https://images.sampletemplates.com/wp-content/uploads/2015/04/Event-Program.jpg' />
                   : <EventsMImg alt='event pic' src={event.pic} />}
               </div>
               <div className='flip-card-back' onClick={showEvent} id={event.id}>
-                <p>Event Name:<br/>{event.event_name}</p>
-                <StyleSpan>Time:<br/>{`${event.date} ${event.start_time}`}</StyleSpan>
+                <div>
+                  <p>
+                    Event Name:
+                    <br />
+                    {event.event_name}
+                  </p>
+                  <StyleSpan>
+                    Time:
+                    <br />
+                    {`${event.date}`}
+                    {`${event.start_time}`}
+                  </StyleSpan>
+                </div>
               </div>
             </div>
           </div>
         </Card>
-      ))
-        : null}
+      ))}
     </Grid>
   );
 }
+
+ArtistImgList.propTypes = {
+  ArtistArr: PropTypes.arrayOf.isRequired,
+  xs: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
+  setPageId: PropTypes.func.isRequired,
+};
+
+EventImgList.propTypes = {
+  EventArr: PropTypes.arrayOf.isRequired,
+  xs: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
+  setPageId: PropTypes.func.isRequired,
+};
 
 export { ArtistImgList, EventImgList };
