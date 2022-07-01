@@ -248,9 +248,9 @@ font-size: xx-large;
 
 .bg {
   background-image: linear-gradient(-60deg, rgba($mainLight, 0.5) 50%, $mainDark 50%,);
-  width: 100%;
+  width: 125%;
   height: 100%;
-  background-color: black;
+  background-color: lightblue;
   position: fixed;
   left: -50%;
   right: -50%;
