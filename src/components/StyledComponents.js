@@ -141,7 +141,7 @@ const Nav = styled.div`
 
 const NavSpacer = styled.div`
   width: 100%;
-  height: 85px;
+  height: 100px;
 `;
 
 const UserSettingContainer = styled.div`
