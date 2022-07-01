@@ -69,7 +69,7 @@ const EventsMImg = styled(EventImg)`
 
 const Card = styled.div`
   text-align: center;
-  width: 25%;
+  width: 20%;
   display: inline-block;
 `;
 
