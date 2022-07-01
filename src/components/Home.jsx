@@ -20,6 +20,7 @@ import {
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
 import { ArtistImgList, EventImgList } from './HomePageImg.jsx';
+import Carousel from "./Carousel";
 
 export default function Home({ setPage, setPageId }) {
   const [genres, setGenres] = useState(['Blues', 'Classical', 'Country', 'Dance', 'Hip-Hop', 'Jazz']);
@@ -64,6 +65,7 @@ export default function Home({ setPage, setPageId }) {
 
   return (
     <HomeContainer>
+      <Carousel />
       <MapInfo>
         <h3>Find an event near you</h3>
         <HomeMap />
