@@ -184,7 +184,7 @@ export default function ViewMap() {
                     <label className='eventLabel'>Artist Name</label>
                     <h2 className='artist'>
                       {' '}
-                      {p.display_name}
+                      {p.display_name === null ? 'Anonymous' : p.display_name}
                     </h2>
                     <label className='eventLabelName' id={p.id} onClick={(e) => eventPage(e)}>Event Name</label>
                     <h2 className='event'>

@@ -250,15 +250,15 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
                 >
                   <div className='card'>
                     <label className='eventLabel'>Artist Name</label>
-                    <p className='artist'>
+                    <h2 className='artist'>
                       {' '}
-                      <b>{p.display_name}</b>
-                    </p>
+                      {p.display_name === null ? 'Anonymous' : p.display_name}
+                    </h2>
                     <label className='eventLabel'>Event Name</label>
-                    <p className='event'>
+                    <h2 className='event'>
                       {' '}
-                      <b>{p.name}</b>
-                    </p>
+                      {p.name}
+                    </h2>
                     <label className='eventLabel'>Event Address</label>
                     <p className='address'>
                       {p.street}
