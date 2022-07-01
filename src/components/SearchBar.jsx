@@ -38,8 +38,8 @@ const SearchResults = styled.div`
 z-index: 9998;
 display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: absolute;
-top: -30px;
-width: 47%;
+top: -25px;
+width: 39.5%;
 background: #F8F8FB;
 margin-top: 5rem;
 border-radius: 10px;
@@ -47,7 +47,7 @@ border-radius: 10px;
 
 const ResultsSection = styled.div`
 width: 100%;
-height: 2.8rem;
+height: 5rem;
 background: lightgrey;
 font-size: 1.5rem;
 border-bottom-right-radius: 10px;
@@ -144,33 +144,39 @@ export default function SearchBar() {
           ? <ResultsSection style={{ marginTop: '20px' }}>No search results match your criteria</ResultsSection>
           : null}
         {artistsArr.length ? (
-          <ResultsSection style={{ paddingTop: '50px' }}>
-            <QueueMusicIcon style={{ paddingLeft: '30px' }} sx={{ color: 'white' }} />
+          <ResultsSection style={{ paddingTop: '40px' }}>
+            <span style={{ paddingLeft: '30px' }}>
+              <QueueMusicIcon sx={{ color: 'white' }} />
+            </span>
             {' Artists'}
           </ResultsSection>
         ) : null}
         {artistsArr.length
           ? artistsArr.map((result) => (
             <IndividualResult key={result.id} onClick={() => handleClick('artistProfile', result.id)}>
-              <PersonOutlineIcon style={{ paddingLeft: '30px' }} />
+              <span style={{ paddingLeft: '30px' }}>
+                <PersonOutlineIcon />
+              </span>
               {` ${result.name}`}
             </IndividualResult>
           ))
           : null}
         {eventsArr.length ? (
           <ResultsSection style={{ paddingTop: '20px' }}>
-            <DateRangeIcon style={{ paddingLeft: '30px' }} sx={{ color: 'white' }} />
+            <span style={{ paddingLeft: '30px' }}>
+              <DateRangeIcon sx={{ color: 'white' }} />
+            </span>
             {' Events'}
           </ResultsSection>
         ) : null}
         {eventsArr.length
           ? eventsArr.map((result) => (
             <IndividualResult key={result.id} onClick={() => handleClick('event', result.id)}>
-              <PinDropIcon style={{ paddingLeft: '30px' }} />
+              <span style={{ paddingLeft: '30px' }}>
+                <PinDropIcon />
+              </span>
               {` ${result.name} - `}
-              City:
               {` ${result.city}, `}
-              State:
               {` ${result.state}`}
             </IndividualResult>
           ))
