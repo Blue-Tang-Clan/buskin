@@ -17,6 +17,7 @@ import {
   MemberA,
   MemberB,
   MemberC,
+  MemberD,
   Audio,
 } from './StyledComponents.js';
 import HomeMap from './HomeMap.jsx';
@@ -32,7 +33,7 @@ export default function Home({ setPage, setPageId }) {
   const [localEvent, setLocalEvent] = useState([]);
   const [talent, setTalent] = useState({
     name: 'Monica',
-    bio: 'ssssssssssssssssssssssss',
+    bio: 'What a Wonderful World!',
     genre: 'Jazz',
     instrument: 'Piano',
   });
@@ -81,8 +82,8 @@ export default function Home({ setPage, setPageId }) {
         <h3>Popular Events in New York City, NY</h3>
         <h4>What's happening around you</h4>
         <EventImgList EventArr={localEvent} xs={1} setPage={setPage} setPageId={setPageId} />
-        <br />
-        <br />
+        {/* <br />
+        <br /> */}
         <h3>Upcoming Performances</h3>
         <h4>Save these events before too late</h4>
         <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
@@ -108,6 +109,8 @@ export default function Home({ setPage, setPageId }) {
               </HomePageGenreTag>
             ))}
           </TagContainer>
+          <br />
+          <br />
           <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
           <br />
           <br />
@@ -120,16 +123,18 @@ export default function Home({ setPage, setPageId }) {
           <h3>Development Team</h3>
         </Title>
         <Line1>
-          <div>
-            <h4>PM</h4>
-            <ArtistImg src='https://avatars.githubusercontent.com/u/53981746?v=4' />
-            <p>Nikko Elliott</p>
-          </div>
-          <div>
-            <h4>DB</h4>
-            <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZBGUUBD-f8c035e2c3aa-512' />
-            <p>Yaokai Dong</p>
-          </div>
+          <MemberD>
+            <div>
+              <h4>PM</h4>
+              <ArtistImg src='https://avatars.githubusercontent.com/u/53981746?v=4' />
+              <p>Nikko Elliott</p>
+            </div>
+            <div>
+              <h4>DB</h4>
+              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZBGUUBD-f8c035e2c3aa-512' />
+              <p>Yaokai Dong</p>
+            </div>
+          </MemberD>
         </Line1>
         <Line2>
           <MemberA>

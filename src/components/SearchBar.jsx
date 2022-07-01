@@ -11,7 +11,7 @@ const Search = styled.input`
 z-index: ${({ searching }) => (searching ? '9999' : '1001')};
 position: fixed;
 width: 40%;
-height: 4rem;
+height: 3.9rem;
 background: white;
 color: #C4C4C4;
 outline: none;
@@ -20,7 +20,7 @@ border-radius: 2.1rem;
 padding: 0 3.5rem 0 3.5rem;
 font-size: 1.2rem;
 box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
-margin-top: 10px;
+margin-top: 12px;
 `;
 
 const SearchResultsModal = styled.div`
