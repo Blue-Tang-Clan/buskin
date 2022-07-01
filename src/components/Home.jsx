@@ -17,6 +17,7 @@ import {
   MemberA,
   MemberB,
   MemberC,
+  MemberD,
   Audio,
 } from './StyledComponents.js';
 import HomeMap from './HomeMap.jsx';
@@ -32,7 +33,7 @@ export default function Home({ setPage, setPageId }) {
   const [localEvent, setLocalEvent] = useState([]);
   const [talent, setTalent] = useState({
     name: 'Monica',
-    bio: 'ssssssssssssssssssssssss',
+    bio: 'What a Wonderful World!',
     genre: 'Jazz',
     instrument: 'Piano',
   });
@@ -120,16 +121,18 @@ export default function Home({ setPage, setPageId }) {
           <h3>Development Team</h3>
         </Title>
         <Line1>
-          <div>
-            <h4>PM</h4>
-            <ArtistImg src='https://avatars.githubusercontent.com/u/53981746?v=4' />
-            <p>Nikko Elliott</p>
-          </div>
-          <div>
-            <h4>DB</h4>
-            <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZBGUUBD-f8c035e2c3aa-512' />
-            <p>Yaokai Dong</p>
-          </div>
+          <MemberD>
+            <div>
+              <h4>PM</h4>
+              <ArtistImg src='https://avatars.githubusercontent.com/u/53981746?v=4' />
+              <p>Nikko Elliott</p>
+            </div>
+            <div>
+              <h4>DB</h4>
+              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZBGUUBD-f8c035e2c3aa-512' />
+              <p>Yaokai Dong</p>
+            </div>
+          </MemberD>
         </Line1>
         <Line2>
           <MemberA>
