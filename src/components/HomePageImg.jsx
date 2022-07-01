@@ -34,6 +34,8 @@ function ArtistImgList({
   const showArtist = (e) => {
     setPage('artistProfile');
     setPageId(e.target.id);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   };
   return (
     <Grid item xs={xs}>
@@ -41,7 +43,7 @@ function ArtistImgList({
         <Card key={artist.pic}>
           {artist.pic === null
             ? <ArtistMImg alt='artist pic' src={'https://images.unsplash.com/photo-1547662727-a13d37c1a1e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxtdXNpY2lhbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'} onClick={showArtist} id={artist.id} />
-            : <ArtistMImg alt='artist pic' src={artist.pic} onClick={showArtist} id={artist.id} />}
+            : <ArtistMImg alt='artist pic' src={artist.pic} onClick={(e) => showArtist(e)} id={artist.id} />}
           <h5>{artist.artist_name}</h5>
         </Card>
       ))}
@@ -55,11 +57,13 @@ function EventImgList({
   setPage,
   setPageId,
 }) {
-  const showEvent = (e) => {
+  const showEvent = (id) => {
     setPage('event');
-    setPageId(e.target.id);
+    setPageId(id);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   };
-
+  console.log(EventArr);
   return (
     <Grid item xs={xs}>
       {EventArr.map((event) => (
@@ -71,7 +75,7 @@ function EventImgList({
                   ? <EventImg alt='event pic' src='https://images.sampletemplates.com/wp-content/uploads/2015/04/Event-Program.jpg' />
                   : <EventImg alt='event pic' src={event.pic} />}
               </div>
-              <div className='flip-card-back' onClick={showEvent} id={event.id}>
+              <div className='flip-card-back' onClick={() => showEvent(event.id)} id={event.id}>
                 <div>
                   <StyleSpan>
                     <br />
