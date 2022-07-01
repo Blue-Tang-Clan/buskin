@@ -82,8 +82,8 @@ export default function Home({ setPage, setPageId }) {
         <h3>Popular Events in New York City, NY</h3>
         <h4>What's happening around you</h4>
         <EventImgList EventArr={localEvent} xs={1} setPage={setPage} setPageId={setPageId} />
-        <br />
-        <br />
+        {/* <br />
+        <br /> */}
         <h3>Upcoming Performances</h3>
         <h4>Save these events before too late</h4>
         <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
@@ -109,6 +109,8 @@ export default function Home({ setPage, setPageId }) {
               </HomePageGenreTag>
             ))}
           </TagContainer>
+          <br />
+          <br />
           <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
           <br />
           <br />
