@@ -128,6 +128,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
   const [events, setEvents] = useState([]);
   const [artistName, setArtistName] = useState('');
   const [artistId, setArtistId] = useState();
+  const [followers, setFollowers] = useState([]);
 
   const clickHandler = (e) => {
     setPage('event');
@@ -144,6 +145,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
         setEvents(artistInfo.events);
         setArtistName(artistInfo.name);
         setArtistId(artistInfo.id);
+        setFollowers(artistInfo.followers);
       })
       .catch((err) => {
         console.log('getArtistDashBoard err', err);
@@ -193,7 +195,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
       </EventList>
       <MapText>Add Your Events Here</MapText>
       <MapDiv>
-        <ViewMap ArtistName={artistName} ArtistId={artistId} getArtistDashBoard={getArtistDashBoard} events={events} />
+        <ViewMap ArtistName={artistName} ArtistId={artistId} getArtistDashBoard={getArtistDashBoard} events={events} followers={followers} />
       </MapDiv>
     </FanDashBoard>
   );

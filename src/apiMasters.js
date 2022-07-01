@@ -57,6 +57,10 @@ const registerUser = (username, password, email, userType) => (
     username, password, email, userType,
   })
 );
+// POST to send email, could be collision or new event for followers. input => receivers, text, subject
+const sendEmail = (obj) => {
+  axios.post(`${url}/eventnotification`, obj);
+};
 
 // const createEvent = (
 //   artistId,
@@ -151,6 +155,7 @@ const apiMasters = {
   search,
   checkEventRadius,
   artistDeleteEvent,
+  sendEmail,
 };
 
 export default apiMasters;
