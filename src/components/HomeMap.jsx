@@ -74,7 +74,7 @@ export default function ViewMap() {
   };
 
   const handleSaveClick = (fId, eventId) => {
-    if (!fId) {
+    if (userType === 'anonymous') {
       setLogin(true);
     } else {
       apiMasters.saveEvent(fId, eventId)

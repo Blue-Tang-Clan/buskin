@@ -68,9 +68,11 @@ export default function Home({ setPage, setPageId }) {
         <h3>Find an event near you</h3>
         <HomeMap />
         <br />
+        <br />
         <h3>Popular Events in New York City, NY</h3>
         <h4>What's happening around you</h4>
         <EventImgList EventArr={localEvent} xs={1} setPage={setPage} setPageId={setPageId} />
+        <br />
         <br />
         <h3>Upcoming Performances</h3>
         <h4>Save these events before too late</h4>
@@ -78,22 +80,28 @@ export default function Home({ setPage, setPageId }) {
       </MapInfo>
       <ArtistInfo>
         <div>
-          <h3>Fresh Talent</h3>
           <div>
+            <h3>Fresh Talent</h3>
+            {/* <div> */}
             <ArtistBio talent={talent} setPage={setPage} />
-            <Audio src='retrosoul.mp3' type='audio/mp3' controls />
           </div>
+          <Audio src='retrosoul.mp3' type='audio/mp3' controls />
+          {/* </div> */}
         </div>
         <div>
+          <br />
+          <br />
           <h3>Popular Genres</h3>
           <TagContainer>
-            { genres.map((genre) => (
+            {genres.map((genre) => (
               <HomePageGenreTag key={genre.id} value={genre} onClick={handleFilterGenre}>
                 {genre}
               </HomePageGenreTag>
             ))}
           </TagContainer>
           <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
+          <br />
+          <br />
           <h3>Popular Artists</h3>
           <ArtistImgList ArtistArr={poplarArtist} xs={1} setPage={setPage} setPageId={setPageId} />
         </div>
@@ -123,7 +131,7 @@ export default function Home({ setPage, setPageId }) {
             </div>
             <div>
               <h4>Architect</h4>
-              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AJP0K0BH-eb4e28704fac-512' />
+              <ArtistImg src='https://avatars.githubusercontent.com/u/82719099?v=4' />
               <p>Fangzhuo Xi</p>
             </div>
           </MemberA>

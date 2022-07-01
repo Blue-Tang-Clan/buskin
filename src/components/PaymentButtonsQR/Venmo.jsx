@@ -5,14 +5,20 @@ import { ArtistContext } from '../ArtistProfileQR.jsx';
 
 export default function Venmo() {
   const { artist } = useContext(ArtistContext);
+
+  if (artist.venmo) {
+    return (
+      <div>
+        {artist.venmo !== 'undefined'
+          ? (
+            <button style={{ width: 10 + 'rem', height: 5 + 'rem' }} type='button'>
+              <a href={`https://account.venmo.com/u/${artist.venmo}`} target='_blank' rel='noreferrer'>VENMO</a>
+            </button>
+          ) : <></> }
+      </div>
+    );
+  }
   return (
-    <div>
-      {artist.venmo !== undefined && artist.venmo !== 'undefined' && artist.venmo.length > 0
-        ? (
-          <button type='button'>
-            <a href={`https://account.venmo.com/u/${artist.venmo}`} target='_blank' rel='noreferrer'>VENMO</a>
-          </button>
-        ) : <></> }
-    </div>
+    <div />
   );
 }
