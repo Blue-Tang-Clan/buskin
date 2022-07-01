@@ -11,7 +11,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
-export default function EditProfile( { artistId, artistName } ) {
+export default function EditProfile( { artistId, artistName, setPage } ) {
   // We need artistId here from artist profile where the user is the artist themselves
   console.log(artistId)
   artistName = 'no name';
@@ -66,6 +66,9 @@ export default function EditProfile( { artistId, artistName } ) {
       cashapp,
       paypal,
       venmo,
+    }).then((photoUrl) => {
+      setPage('artistDashboard');
+      // set page id to something, then set image to the url
     });
   }
 
