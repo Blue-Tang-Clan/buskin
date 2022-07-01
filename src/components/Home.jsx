@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import ArtistBio from './ArtistBio.jsx';
-import { HomeContainer, HomePageGenreTag, TagContainer, ArtistImg, MapInfo, ArtistInfo, TeamInfo, Title, Line1, Line2, MemberA, MemberB, MemberC, Audio } from './StyledComponents.js';
-import { TopContext } from './App.jsx';
+import {
+  HomeContainer,
+  HomePageGenreTag,
+  TagContainer,
+  ArtistImg,
+  MapInfo,
+  ArtistInfo,
+  TeamInfo,
+  Title,
+  Line1,
+  Line2,
+  MemberA,
+  MemberB,
+  MemberC,
+  Audio,
+} from './StyledComponents.js';
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
 import { ArtistImgList, EventImgList } from './HomePageImg.jsx';
@@ -63,19 +77,21 @@ export default function Home({ setPage, setPageId }) {
         <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
       </MapInfo>
       <ArtistInfo>
-        <div onClick={() => { setPage('artistProfile'); }}>
+        <div>
           <h3>Fresh Talent</h3>
           <div>
-            <ArtistBio talent={talent} />
-            <Audio src="retrosoul.mp3" type="audio/mp3" controls />
+            <ArtistBio talent={talent} setPage={setPage} />
+            <Audio src='retrosoul.mp3' type='audio/mp3' controls />
           </div>
         </div>
         <div>
           <h3>Popular Genres</h3>
           <TagContainer>
-            {genres.map((genre, i) =>
-              <HomePageGenreTag key={i} value={genre} onClick={handleFilterGenre}>{genre}</HomePageGenreTag>
-            )}
+            { genres.map((genre) => (
+              <HomePageGenreTag key={genre.id} value={genre} onClick={handleFilterGenre}>
+                {genre}
+              </HomePageGenreTag>
+            ))}
           </TagContainer>
           <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
           <h3>Popular Artists</h3>
@@ -140,3 +156,8 @@ export default function Home({ setPage, setPageId }) {
     </HomeContainer>
   );
 }
+
+Home.propTypes = {
+  setPageId: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
+};

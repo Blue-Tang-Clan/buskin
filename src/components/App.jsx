@@ -36,7 +36,7 @@ export default function App() {
           {page === 'event' ? <Event /> : <></>}
           {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
           {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
-          {page === 'editArtistProfile' ? <EditProfile artistId={userId} /> : <></>}
+          {page === 'editArtistProfile' ? <EditProfile artistId={userId} setPage={setPage} /> : <></>}
           {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
           {login
             ? (

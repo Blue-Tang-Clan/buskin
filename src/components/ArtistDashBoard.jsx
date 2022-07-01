@@ -13,7 +13,7 @@ const FanDashBoard = styled.div`
 
 `;
 
-const DashBoardText = styled.h2`
+const DashBoardText = styled.h3`
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
@@ -161,14 +161,14 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
             </AddressDiv>
             <TrashBoxDiv onClick={(e) => e.stopPropagation()}>
               <Button onClick={deleteEvent} id={event.id}>
-                <DeleteIcon sx={{ color: ' #259998' }} />
+                <DeleteIcon  sx={{ color: ' #259998'}} />
               </Button>
             </TrashBoxDiv>
           </EventDiv>
         ))}
       </EventList>
       <MapDiv>
-        <ViewMap ArtistName={artistName} ArtistId={artistId} getArtistDashBoard={getArtistDashBoard} />
+        <ViewMap ArtistName={artistName} ArtistId={artistId} getArtistDashBoard={getArtistDashBoard} events={events} />
       </MapDiv>
     </FanDashBoard>
   );
