@@ -24,15 +24,19 @@ const paymentButton = function(payType, url) {
 export default function Venmo() {
   const { artist } = useContext(ArtistContext);
 
+  if (artist.venmo) {
+    return (
+      <div>
+        {artist.venmo !== 'undefined'
+          ? (
+            <button type='button'>
+              <a href={`https://account.venmo.com/u/${artist.venmo}`} target='_blank' rel='noreferrer'>VENMO</a>
+            </button>
+          ) : <></> }
+      </div>
+    );
+  }
   return (
-    <PaymentButton>
-      {artist.venmo !== undefined && artist.venmo !== 'undefined' && artist.venmo.length > 0
-        ? (
-          // <button type='button' className='submitButton' onClick={() => openPaymentTab(`https://account.venmo.com/u/${artist.venmo}`)}>
-          //   VENMO
-          // </button>
-          paymentButton('VENMO', `https://account.venmo.com/u/${artist.venmo}`)
-        ) : undefined }
-    </PaymentButton>
+    <div />
   );
 }
