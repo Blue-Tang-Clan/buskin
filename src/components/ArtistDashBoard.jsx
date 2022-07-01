@@ -9,7 +9,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 const TotalFollowersModified = ({number}) => {
   return (
     <Tag>
-      <Container style={{position: 'absolute', top:'23%'}}>
+      <Container style={{position: 'absolute', top:'24%'}}>
         <TotalFollowersTag >
           <Icon>
             <PermIdentityIcon sx={{ color: "#6F52ED" }} />
