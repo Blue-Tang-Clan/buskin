@@ -39,7 +39,9 @@ function ArtistImgList({
     <Grid item xs={xs}>
       {ArtistArr.map((artist) => (
         <Card key={artist.pic}>
-          <ArtistMImg alt='artist pic' src={artist.pic} onClick={showArtist} id={artist.id} />
+          {artist.pic === null
+            ? <ArtistMImg alt='artist pic' src={'https://images.unsplash.com/photo-1547662727-a13d37c1a1e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxtdXNpY2lhbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'} onClick={showArtist} id={artist.id} />
+            : <ArtistMImg alt='artist pic' src={artist.pic} onClick={showArtist} id={artist.id} />}
           <h5>{artist.artist_name}</h5>
         </Card>
       ))}
