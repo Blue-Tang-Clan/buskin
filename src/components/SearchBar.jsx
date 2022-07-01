@@ -39,7 +39,7 @@ z-index: 9998;
 display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: absolute;
 top: -25px;
-width: 40%;
+width: 39.5%;
 background: #F8F8FB;
 margin-top: 5rem;
 border-radius: 10px;
@@ -47,7 +47,7 @@ border-radius: 10px;
 
 const ResultsSection = styled.div`
 width: 100%;
-height: 2.8rem;
+height: 5rem;
 background: lightgrey;
 font-size: 1.5rem;
 border-bottom-right-radius: 10px;
@@ -144,7 +144,7 @@ export default function SearchBar() {
           ? <ResultsSection style={{ marginTop: '20px' }}>No search results match your criteria</ResultsSection>
           : null}
         {artistsArr.length ? (
-          <ResultsSection style={{ paddingTop: '30px' }}>
+          <ResultsSection style={{ paddingTop: '40px' }}>
             <QueueMusicIcon style={{ paddingLeft: '30px' }} sx={{ color: 'white' }} />
             {' Artists'}
           </ResultsSection>
