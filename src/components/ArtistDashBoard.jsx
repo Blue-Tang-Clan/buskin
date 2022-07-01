@@ -168,7 +168,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
       </EventList>
       <MapText>Add Your Events Here</MapText>
       <MapDiv>
-        <ViewMap ArtistName={artistName} ArtistId={artistId} getArtistDashBoard={getArtistDashBoard} />
+        <ViewMap ArtistName={artistName} ArtistId={artistId} getArtistDashBoard={getArtistDashBoard} events={events} />
       </MapDiv>
     </FanDashBoard>
   );
