@@ -15,9 +15,10 @@ const HomeContainer = styled.div`
 const Button = styled.div`
   padding: 20px;
   width: 150px;
+  margin-top: 10px;
   color: #373B53;
   font-size: 18px;
-  box-shadow: 0px 0px 3px 3px rgba(0,0,0, .1);
+  box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
   border-radius: 3px;
   &:hover {
     background-color: #0094B6;
@@ -27,11 +28,12 @@ const Button = styled.div`
 `;
 
 const HomePageGenreTag = styled.div`
-  padding: 10px 14px;
+  padding: 12px 16px 10px 17px;
   color: #373B53;
   font-size: 14px;
-  box-shadow: 0px 0px 3px 3px rgba(0,0,0, .1);
-  border-radius: 10px;
+  // box-shadow: 0px 0px 3px 3px rgba(0,0,0, .1);
+  border: 1.5px solid #2E3B52;
+  border-radius: 6px;
   &:hover {
     background-color: #0094B6;
     color: white;
@@ -46,7 +48,8 @@ const TagContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
 const ArtistImg = styled.img`
@@ -66,8 +69,8 @@ const ArtistImgContainer = styled.div`
 `;
 
 const EventImg = styled.img`
-  height: 180px;
-  width: 180px;
+  height: 120px;
+  width: 120px;
   border-radius: 10px;
   &:hover {
     cursor: pointer;
@@ -106,11 +109,12 @@ const Nav = styled.div`
   background: white;
   position: fixed;
   width: 100vw;
-  height: 85px;
+  height: 90px;
   display: grid;
-  grid-template-columns: 25% auto 25%;
+  grid-template-columns: 22% auto 20%;
   margin-top: -10px;
   margin-left: -10px;
+  padding-top: 10px;
   gap: 30px;
 `;
 

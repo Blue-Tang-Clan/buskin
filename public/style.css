@@ -36,6 +36,10 @@ p {
   color: #A6ACBE;
 }
 
+audio::-webkit-media-controls-panel {
+  background-color: #f4f2fe;
+}
+
 .flip-card-container {
   width: 180px;
   height: 180px;
