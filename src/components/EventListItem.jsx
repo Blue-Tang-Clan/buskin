@@ -9,7 +9,8 @@ const EventTag = styled(Tag)`
   padding-top: 50px;
   padding-bottom: 50px;
 
-  width: 500px;
+  width: 650px;
+  height: auto;
   margin-bottom: 20px;
 
   &:hover {

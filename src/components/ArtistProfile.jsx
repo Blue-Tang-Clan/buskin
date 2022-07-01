@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import { TopContext } from './App.jsx';
 import { ArtistImg } from './StyledComponents.js';
 import styled from 'styled-components';
+import Tooltip from '@mui/material/Tooltip';
 
 const ArtistProfileContainer = styled.div`
   margin: 4rem 0 20rem 0;
@@ -109,7 +110,13 @@ export default function ArtistProfile({ setPage, setPageId }) {
           <div style={{ width: 'auto', display: 'flex', flexDirection: 'row', position: 'relative', alignItems: 'center'}}>
             <div style={{position: 'relative', marginRight: '50px'}}>
               <ArtistImg src={artist.pic} alt='busker' style={{ width: '350px', height: '350px', position: 'relative' }} />
-              {follow ? <FavoriteIcon onClick={() => handleFollow('unfollow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} /> : <FavoriteBorderIcon onClick={() => handleFollow('follow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} /> }
+              {userType === 'fan'
+                ? (
+                  <Tooltip title='Follow this artist' style={{ cursor: 'pointer' }}>
+                    {follow ? <FavoriteIcon onClick={() => handleFollow('unfollow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} /> : <FavoriteBorderIcon onClick={() => handleFollow('follow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} /> }
+                  </Tooltip>
+                )
+                : null}
             </div>
             <div style={{ marginLeft: '40px' }}>
               <div style={{ width: 'auto', display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1rem'}}>
