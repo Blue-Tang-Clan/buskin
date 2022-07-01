@@ -197,12 +197,11 @@ const Title = styled.div`
 `;
 const Line1 = styled.div`
   grid-area: a;
-  display: flex;
+  display: grid;
   gap: 10px;
-  flex-direction: row;
-  text-align: center;
-  justify-content: center;
+  grid-template-areas: "blank member blank";
 `;
+
 const Line2 = styled.div`
   grid-area: b;
   display: grid;
@@ -213,18 +212,31 @@ const MemberA = styled.div`
   grid-area: A;
   display: flex;
   text-align: center;
+  justify-content: center;
   flex-direction: row;
   gap: 10px;
 `;
+
 const MemberB = styled.div`
   grid-area: B;
   display: flex;
   text-align: center;
+  justify-content: center;
   flex-direction: row;
   gap: 10px;
 `;
+
 const MemberC = styled.div`
   grid-area: C;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+`;
+
+const MemberD = styled.div`
+  grid-area: member;
   display: flex;
   text-align: center;
   flex-direction: row;
@@ -289,6 +301,7 @@ export {
   MemberA,
   MemberB,
   MemberC,
+  MemberD,
   Audio,
   UserNav,
   LogoutNav,
