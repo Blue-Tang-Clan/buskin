@@ -7,10 +7,9 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {
-  GenreTag, UserImg, Nav, UserSettingContainer, UserNav, LogoutNav, SettingNav,
+  GenreTag, UserImg, Nav, UserSettingContainer, UserNav, LogoutNav, SettingNav, NotificationNav,
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
-import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import ListIcon from '@mui/icons-material/List';
 
@@ -84,7 +83,7 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
   return (
     <Nav>
       <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
-        <img src='https://i.ibb.co/Dw7T0Jb/Buskin-B2-copy.png' alt='logo' height='85px' style={{ cursor: "pointer" }} />
+        <img src='https://i.ibb.co/Dw7T0Jb/Buskin-B2-copy.png' alt='logo' height='85px' style={{ cursor: "pointer", marginLeft: '3%', marginTop: '3px' }} />
       </div>
       <div>
         <SearchBar />
@@ -162,11 +161,11 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
               </SettingNav>
             </UserSettingContainer>
           )}
-          <LogoutNav>
+          <NotificationNav>
             <Tooltip title="Alert" style={{ cursor: 'pointer' }}>
               <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
             </Tooltip>
-          </LogoutNav>
+          </NotificationNav>
           <LogoutNav>
             <Tooltip title="Log Out" style={{ cursor: 'pointer' }}>
               <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
