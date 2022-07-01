@@ -95,7 +95,7 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
   useEffect(() => {
     apiMasters.getFanDashBoard(userId)
       .then((response) => {
-        console.log('events', response.data.events);
+        // console.log('events', response.data.events);
         setArtistsFollowed(response.data.artists);
         setEventsSaved(response.data.events);
       })
