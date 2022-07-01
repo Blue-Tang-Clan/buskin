@@ -18,6 +18,9 @@ export default function App() {
   const [userType, setUserType] = useState('anonymous');
   const [login, setLogin] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [userNameApp, setUserName] = useState('');
+  const [userPicApp, setUserPic] = useState('');
+  const [showForm, setShowForm] = React.useState('Register');
   const [page, setPage] = useState('home');
   const [pageId, setPageId] = useState(1);
 
@@ -26,11 +29,11 @@ export default function App() {
       {/* components */}
       <TopContext.Provider value={{ page, setPage, pageId, setPageId, userType, setLogin, userId, setUserId }}>
         <div>
-          <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} />
+          <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} userNameApp={userNameApp} userPicApp={userPicApp} showForm={showForm} />
         </div>
         <NavSpacer />
         <PageContainer>
-          {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : <></>}
+          {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} setUserType={setUserType} setUserId={setUserId} setShowForm={setShowForm} setUserName={setUserName} setUserPic={setUserPic} /> : <></>}
           {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
           {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
           {page === 'event' ? <Event /> : <></>}
