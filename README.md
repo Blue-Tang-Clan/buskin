@@ -1,6 +1,6 @@
 # buskin
 
-![Demo GIF](gif url here - upload gif to github repo and use its url)
+![Demo GIF](https://github.com/Blue-Tang-Clan/buskin/blob/development/public/demo_gif.gif?raw=true)
 
 # Setup
 
