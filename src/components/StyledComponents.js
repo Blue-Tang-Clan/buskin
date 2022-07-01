@@ -195,9 +195,8 @@ const Audio = styled.audio`
 `;
 
 // EVENT PAGE SPECIFIC STYLING
-const EventPageContainer = styled.div`
+const EventColContainer = styled.div`
   display: flex;
-  width: 100%;
   height: 100%;
   flex-direction: column;
   justify-content: flex-start;
@@ -205,12 +204,10 @@ const EventPageContainer = styled.div`
   padding-right: 5%;
 `;
 
-const EventHeaderContainer = styled.div`
-display: flex;
-max-height: 500px;
-flex-direction: row;
-justify-content: flex-start;
-align-items: flex-start;
+const EventRowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 `;
 
 const EventPageArtistPic = styled.img`
@@ -235,8 +232,8 @@ export {
   UserSettingContainer,
   ArtistInfoContainer,
   HomePageGenreTag,
-  EventPageContainer,
-  EventHeaderContainer,
+  EventColContainer,
+  EventRowContainer,
   EventPageArtistPic,
   FreshTalentImg,
   MapInfo,
