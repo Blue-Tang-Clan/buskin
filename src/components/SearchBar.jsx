@@ -2,6 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { TopContext } from './App.jsx';
 import apiMasters from '../apiMasters.js';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import PinDropIcon from '@mui/icons-material/PinDrop';
+import QueueMusicIcon from '@mui/icons-material/QueueMusic';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 const Search = styled.input`
 z-index: ${({ searching }) => (searching ? '9999' : '1001')};
@@ -135,29 +139,39 @@ export default function SearchBar() {
       <SearchResultsModal searching={searching} onClick={clearResults} />
       <SearchResults searching={searching}>
         {noResults
-          ? <ResultsSection>No search results match your criteria</ResultsSection>
+          ? <ResultsSection style={{ paddingLeft: '10px' }}>No search results match your criteria</ResultsSection>
           : null}
-        {artistsArr.length ? <ResultsSection>Artists</ResultsSection> : null}
+        {artistsArr.length ? (
+          <ResultsSection style={{ paddingLeft: '10px' }}>
+            <QueueMusicIcon />
+            Artists
+          </ResultsSection>
+        ) : null}
         {artistsArr.length
-          ? artistsArr.map((result) =>
-            (
-              <IndividualResult key={result.id} onClick={() => handleClick('artistProfile', result.id)}>
-                {result.name}
-              </IndividualResult>
-            ))
+          ? artistsArr.map((result) => (
+            <IndividualResult style={{ paddingLeft: '10px' }} key={result.id} onClick={() => handleClick('artistProfile', result.id)}>
+              <PersonOutlineIcon />
+              {` ${result.name}`}
+            </IndividualResult>
+          ))
           : null}
-        {eventsArr.length ? <ResultsSection>Events</ResultsSection> : null}
+        {eventsArr.length ? (
+          <ResultsSection style={{ paddingLeft: '10px' }}>
+            <DateRangeIcon />
+            Events
+          </ResultsSection>
+        ) : null}
         {eventsArr.length
-          ? eventsArr.map((result) =>
-            (
-              <IndividualResult key={result.id} onClick={() => handleClick('event', result.id)}>
-                {`${result.name} - `}
-                City:
-                {` ${result.city}, `}
-                State:
-                {` ${result.state}`}
-              </IndividualResult>
-            ))
+          ? eventsArr.map((result) => (
+            <IndividualResult style={{ paddingLeft: '10px' }} key={result.id} onClick={() => handleClick('event', result.id)}>
+              <PinDropIcon />
+              {` ${result.name} - `}
+              City:
+              {` ${result.city}, `}
+              State:
+              {` ${result.state}`}
+            </IndividualResult>
+          ))
           : null}
       </SearchResults>
     </>
