@@ -11,17 +11,6 @@ import { TopContext } from './App.jsx';
 import { ArtistImg } from './StyledComponents.js';
 import styled from 'styled-components';
 
-// const dummy = {
-//   pic: 'https://cdn.shopify.com/s/files/1/0203/9334/files/Busking_Musicians_1024x1024.jpeg?v=1521795106',
-//   display_name: 'Yau Yu',
-//   bio: 'I play music really well!',
-//   genre: 'Rock',
-//   instrument: 'Accordian',
-//   venmo: 'venmo',
-//   cashapp: 'Cashapp',
-//   paypal: 'paypal',
-// };
-
 const ArtistProfileContainer = styled.div`
   margin: 4rem 0 20rem 0;
   width: 100%;
@@ -61,9 +50,10 @@ const Schedule = styled.div`
 export const ArtistContext = React.createContext();
 
 export default function ArtistProfile({ setPage, setPageId }) {
-  const { pageId } = useContext(TopContext);
+  const { pageId, userType, setLogin, userId } = useContext(TopContext);
   const [artist, setArtist] = useState({});
   const [events, setEvents] = useState([]);
+  const [follow, setFollow] = useState(false);
   const [renderEvents, setRenderEvents] = useState(false);
 
   useEffect(() => {
@@ -94,6 +84,24 @@ export default function ArtistProfile({ setPage, setPageId }) {
     }
   }
 
+  function handleFollow(action, fanId, artistId) {
+    if (userType === 'anonymous') {
+      setLogin(true);
+    } else if (action === 'follow') {
+      apiMasters.followArtist(fanId, artistId)
+        .then(() => setFollow(true))
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      apiMasters.unfollowArtist(fanId, artistId)
+        .then(() => setFollow(false))
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
   return (
     <ArtistContext.Provider value={{events, artist}}>
       <ArtistProfileContainer>
@@ -101,7 +109,7 @@ export default function ArtistProfile({ setPage, setPageId }) {
           <div style={{ width: 'auto', display: 'flex', flexDirection: 'row', position: 'relative', alignItems: 'center'}}>
             <div style={{position: 'relative', marginRight: '50px'}}>
               <ArtistImg src={artist.pic} alt='busker' style={{ width: '350px', height: '350px', position: 'relative' }} />
-              <FavoriteIcon title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} />
+              {follow ? <FavoriteIcon onClick={() => handleFollow('unfollow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} /> : <FavoriteBorderIcon onClick={() => handleFollow('follow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} /> }
             </div>
             <div style={{ marginLeft: '40px' }}>
               <div style={{ width: 'auto', display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1rem'}}>
