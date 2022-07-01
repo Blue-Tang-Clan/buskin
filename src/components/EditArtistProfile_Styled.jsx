@@ -122,7 +122,7 @@ export default function EditProfile( { artistId, artistName, setPage } ) {
               onChange={handleInput}
             />
           </Grid>
-          <Grid item xs={12} style={{paddingBottom: '20px'}} spacing={2}>
+          <Grid item xs={12} style={{paddingBottom: '20px'}}>
             <FormControl fullWidth>
               <InputLabel id='demo-simple-select-label'>Choose a payment option*</InputLabel>
               <Select
@@ -141,7 +141,7 @@ export default function EditProfile( { artistId, artistName, setPage } ) {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container item xs={12} style={{paddingBottom: '20px'}} spacing={2}>
+        <Grid item xs={12} style={{paddingBottom: '20px'}}>
           <TextField
             required
             fullWidth
@@ -152,7 +152,7 @@ export default function EditProfile( { artistId, artistName, setPage } ) {
             onChange={handleInput}
           />
         </Grid>
-        <Grid container item xs={12} style={{paddingBottom: '20px'}} spacing={2}>
+        <Grid item xs={12} style={{paddingBottom: '20px'}}>
           <TextField
             required
             fullWidth
