@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FreshTalentImg, Container, ArtistInfoContainer } from './StyledComponents.js';
 
-export default function ArtistBio({ talent, setPage }) {
+export default function ArtistBio({ talent, setPage, setPageId }) {
+  console.log('talent info: ', talent);
   return (
     <Container>
       <div>
-        <FreshTalentImg src={talent.pic} alt='Avatar' onClick={() => { setPage('artistProfile'); }} />
+        <FreshTalentImg src={talent.pic} alt='Avatar' onClick={() => { setPage('artistProfile'); setPageId(talent.id); }} />
       </div>
       <ArtistInfoContainer>
         <h4>
@@ -24,4 +25,5 @@ export default function ArtistBio({ talent, setPage }) {
 ArtistBio.propTypes = {
   talent: PropTypes.arrayOf.isRequired,
   setPage: PropTypes.func.isRequired,
+  setPageId: PropTypes.func.isRequired,
 };
