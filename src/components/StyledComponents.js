@@ -113,7 +113,7 @@ const Nav = styled.div`
   background: white;
   position: fixed;
   width: 100vw;
-  height: 90px;
+  height: 92px;
   display: grid;
   grid-template-columns: 25% auto 300px 20px;
   margin-top: -10px;

@@ -129,42 +129,47 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
                   <MenuItem onClick={goArtistDashboard}>Dashboard</MenuItem>
                 </Menu>
               </SettingNav>
-
             </UserSettingContainer>
           ) : (
             <UserSettingContainer>
+              <UserNav>
+                <div>
+                  <label>{userName}</label>
+                </div>
+                <div>
+                  <small style={{ color: '#A6ACBE' }}>Fan</small>
+                </div>
+              </UserNav>
               <div>
-                <div>
-                  <span>{userName}</span>
-                </div>
-                <div>
-                  <span>Fan</span>
-                </div>
+                <UserImg src={userPic.length ? userPic : 'https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg'} alt='thumbnail' />
               </div>
-              <UserImg src={userPic.length ? userPic : 'https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg'} alt='thumbnail' />
-              <ArrowDropDownIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={handleClick} />
-              <Menu
-                id='basic-menu'
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                {userType === 'artist' ? <MenuItem onClick={goFanProfile}>Edit profile</MenuItem> : null}
-                <MenuItem onClick={goFanDashboard}>Dashboard</MenuItem>
-              </Menu>
+              <SettingNav style={{ cursor: 'pointer' }}>
+                <Tooltip title="Setting">
+                  <ListIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
+                </Tooltip>
+                <Menu
+                  id='basic-menu'
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  {userType === 'artist' ? <MenuItem onClick={goFanProfile}>Edit profile</MenuItem> : null}
+                  <MenuItem onClick={goFanDashboard}>Dashboard</MenuItem>
+                </Menu>
+              </SettingNav>
             </UserSettingContainer>
           )}
           <LogoutNav>
             <Tooltip title="Alert" style={{ cursor: 'pointer' }}>
-                <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
+              <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
             </Tooltip>
-            </LogoutNav>
-            <LogoutNav>
-            <Tooltip title="Log Out"  style={{ cursor: 'pointer' }}>
-                <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+          </LogoutNav>
+          <LogoutNav>
+            <Tooltip title="Log Out" style={{ cursor: 'pointer' }}>
+              <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
             </Tooltip>
           </LogoutNav>
         </UserSettingContainer>
