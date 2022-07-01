@@ -130,17 +130,10 @@ const Nav = styled.div`
   background: white;
   position: fixed;
   width: 100vw;
-<<<<<<< HEAD
   height: 100px;
   display: grid;
   grid-template-columns: 25% auto 300px 20px;
   margin-top: -5px;
-=======
-  height: 95px;
-  display: grid;
-  grid-template-columns: 400px auto 270px;
-  margin-top: -10px;
->>>>>>> 0dab6d662902e795f35cd66fe4429d9dcb9d32b0
   margin-left: -10px;
   padding-top: 10px;
   gap: 30px;
