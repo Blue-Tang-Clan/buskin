@@ -42,14 +42,11 @@ const ArtistDescription = styled.div`
   min-height: 100px;
   margin-bottom: 2rem;
 `;
-<<<<<<< HEAD
-=======
 
 const LinkText = styled.div`
   left: 50%;
   text-align: center;
 `;
->>>>>>> e889fe6fcdd99795ee62d562648192cdac09e66a
 
 export const ArtistContext = React.createContext();
 
