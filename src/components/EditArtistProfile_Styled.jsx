@@ -75,21 +75,6 @@ export default function EditProfile( { artistId, artistName, setPage } ) {
   return (
     <div>
       <label>Edit profile</label>
-      {/* <form onSubmit={handleSubmit} enctype="multipart/form-data"> */}
-      {/* <input onChange={handleInput} placeholder="stage name" name="displayname" required /> <br /> */}
-      {/* <input onChange={handleInput} placeholder="instrument you play" name="instrument" required /> <br /> */}
-      {/* <input onChange={handleInput} placeholder="your picture" type="file" accept="image/*" name="picture" required /> <br /> */}
-      {/* <input onChange={handleInput} placeholder="your sound clip" name="soundclip" required /> <br /> */}
-      {/* <label for="cars">Choose a payment option:</label>
-          <select name="paymentoptions" onChange={handleInput}>
-            <option value="venmo">venmo</option>
-            <option value="cashapp">cashapp</option>
-            <option value="paypal">paypal</option>
-          </select> <br /> */}
-      {/*
-        <input onChange={handleInput} placeholder="payment link" name="paymentmethod" required /> <br />
-        <input onChange={handleInput} placeholder="your bio" name="bio" required /> <br /> */}
-      {/* <input type="submit" /> */}
       <Box sx={{ display: 'grid', gridTemplateColumns: '(2, 2)' }}>
       <Box component='form' Validate onSubmit={handleSubmit} sx={{ mt: 3, }}>
         <Grid container spacing={2}>
@@ -116,18 +101,6 @@ export default function EditProfile( { artistId, artistName, setPage } ) {
             />
           </Grid>
           <Grid item xs={12}>
-            {/* <TextField
-              required
-              fullWidth
-              id='picture'
-              label='picture'
-              autoComplete='picture'
-              onChange={handleInput}
-              type="file"
-              accept="image/*"
-              name="picture"
-            /> */}
-
             <input
               onChange={handleInput}
               required
@@ -137,11 +110,6 @@ export default function EditProfile( { artistId, artistName, setPage } ) {
               type="file"
               name="picture"
             />
-          {/* <label htmlFor="picture">
-            <Button variant="raised" component="span">
-              Upload
-            </Button>
-          </label> */}
           </Grid>
           <Grid item xs={12}>
             <TextField
