@@ -7,7 +7,9 @@ export default function ArtistBio({ talent, setPage, setPageId }) {
   return (
     <Container>
       <div>
-        <FreshTalentImg src={talent.pic} alt='Avatar' onClick={() => { setPage('artistProfile'); setPageId(talent.id); }} />
+        {talent.pic === null
+          ? <FreshTalentImg src={'https://images.unsplash.com/photo-1494625941623-b86250a4abf2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjI4fHxtdXNpY2lhbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'} alt='Avatar' onClick={() => { setPage('artistProfile'); setPageId(talent.id); }} />
+          : <FreshTalentImg src={talent.pic} alt='Avatar' onClick={() => { setPage('artistProfile'); setPageId(talent.id); }} />}
       </div>
       <ArtistInfoContainer>
         <h4>
