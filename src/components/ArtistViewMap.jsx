@@ -149,7 +149,6 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
             const receivers = arrOfEmails + ', kmzeinu@gmail.com';
             const subject = 'Another event happening at your scheduled event!';
             const text = artistName + ' has schecduled an event ' + ' at ' + start_time + ' . Do you want to reschudle?';
-            console.log('ZZZZ_______________ZZZZZZ');
             console.log(receivers, subject, text);
             apiMasters.sendEmail({ receivers, subject, text });
           } else {
