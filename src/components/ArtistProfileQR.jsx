@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PaymentIcon from '@mui/icons-material/Payment';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
 import EventList from './EventList.jsx';
 import Payments from './PaymentsQR.jsx';
 import Qr from './Qr.jsx';
@@ -40,6 +42,14 @@ const ArtistDescription = styled.div`
   min-height: 100px;
   margin-bottom: 2rem;
 `;
+<<<<<<< HEAD
+=======
+
+const LinkText = styled.div`
+  left: 50%;
+  text-align: center;
+`;
+>>>>>>> e889fe6fcdd99795ee62d562648192cdac09e66a
 
 export const ArtistContext = React.createContext();
 
@@ -72,15 +82,15 @@ export default function ArtistProfileQR() {
   return (
     <div>
       <Link to='/'>
-        <button type='submit'>Click here to see more and follow me on Buskin'</button>
+        <Avatar variant='square' sx={{ height: '100px', width: '300px', left: '40%' }} src={'https://i.ibb.co/Dw7T0Jb/Buskin-B2-copy.png'} />
       </Link>
+      <LinkText>Click above to follow this and more artists!</LinkText>
       <ArtistContext.Provider value={{events, artist}}>
         <ArtistProfileContainer>
           <div style={{marginBottom: '4rem'}}>
             <div style={{ width: 'auto', display: 'flex', flexDirection: 'row', position: 'relative', alignItems: 'center'}}>
               <div style={{position: 'relative', marginRight: '50px'}}>
                 <ArtistImg src={artist.pic} alt='busker' style={{ width: '350px', height: '350px', position: 'relative' }} />
-                <FavoriteIcon title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} />
               </div>
               <div style={{ marginLeft: '40px' }}>
                 <div style={{ width: 'auto', display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1rem'}}>
@@ -95,10 +105,10 @@ export default function ArtistProfileQR() {
                 <ArtistDescription>
                   {artist.bio}
                 </ArtistDescription>
+                <div>Support your local artists.</div>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: '20px 0', width: '100%' }}>
-                  <Audio src="retrosoul.mp3" type="audio/mp3" controls />
+                  <Payments />
                 </div>
-                <Payments />
               </div>
 
             </div>

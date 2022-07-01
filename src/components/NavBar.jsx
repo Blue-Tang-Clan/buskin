@@ -7,10 +7,9 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {
-  GenreTag, UserImg, Nav, UserSettingContainer,
+  GenreTag, UserImg, Nav, UserSettingContainer, UserNav,
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
-import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import ListIcon from '@mui/icons-material/List';
@@ -102,28 +101,34 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
         <UserSettingContainer>
           {userType === 'artist' ? (
             <UserSettingContainer>
-              <div>
+              <UserNav>
                 <div>
                   <label>{userName}</label>
                 </div>
                 <div>
                   <label>Artist</label>
                 </div>
+              </UserNav>
+              <div>
+                <UserImg src={userPic.length ? userPic : 'https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc='} alt='thumbnail' />
               </div>
-              <UserImg src={userPic.length ? userPic : 'https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc='} alt='thumbnail' />
-              <ListIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem onClick={goArtistProfile}>Edit profile</MenuItem>
-                <MenuItem onClick={goArtistDashboard}>Dashboard</MenuItem>
-              </Menu>
+              <UserNav style={{ cursor: 'pointer' }}>
+                <Tooltip title="Setting">
+                  <ListIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
+                </Tooltip>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  <MenuItem onClick={goArtistProfile}>Edit profile</MenuItem>
+                  <MenuItem onClick={goArtistDashboard}>Dashboard</MenuItem>
+                </Menu>
+              </UserNav>
             </UserSettingContainer>
           ) : (
             <UserSettingContainer>
@@ -146,7 +151,7 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={goFanProfile}>Edit profile</MenuItem>
+                {userType === 'artist' ? <MenuItem onClick={goFanProfile}>Edit profile</MenuItem> : null}
                 <MenuItem onClick={goFanDashboard}>Dashboard</MenuItem>
               </Menu>
             </UserSettingContainer>
@@ -163,7 +168,6 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
               </IconButton>
             </Tooltip>
           </div>
-          {/* <Alert severity="success">This is a success alert — check it out!</Alert> */}
         </UserSettingContainer>
       )}
     </Nav>

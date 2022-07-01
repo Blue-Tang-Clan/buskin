@@ -32,13 +32,13 @@ const HomePageGenreTag = styled.div`
   padding: 12px 16px 10px 17px;
   color: #373B53;
   font-size: 14px;
-  // box-shadow: 0px 0px 3px 3px rgba(0,0,0, .1);
   border: 1.5px solid #2E3B52;
   border-radius: 6px;
   &:hover {
-    background-color: #0094B6;
+    background-image: linear-gradient(to right, #667eea, #764ba2);
     color: white;
     cursor: pointer;
+    border: 1.5px solid #F8F8FB;
   };
   white-space: nowrap;
   display: inline-block;
@@ -54,8 +54,8 @@ const TagContainer = styled.div`
 `;
 
 const ArtistImg = styled.img`
-  height:150px;
-  width: 150px;
+  height:120px;
+  width: 120px;
   border-radius: 50%;
   &:hover {
     cursor: pointer;
@@ -125,8 +125,14 @@ const NavSpacer = styled.div`
 `;
 
 const UserSettingContainer = styled.div`
+  margin-top: 5px;
+  flex-direction: row;
   display: flex;
   gap: 20px;
+`;
+
+const UserNav = styled.div`
+  margin-top: 10px;
 `;
 
 const ArtistInfoContainer = styled.div`
@@ -246,4 +252,5 @@ export {
   MemberB,
   MemberC,
   Audio,
+  UserNav,
 };

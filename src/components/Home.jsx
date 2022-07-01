@@ -47,6 +47,7 @@ export default function Home({ setPage, setPageId }) {
           genre: result.data.talent.genre,
           instrument: result.data.talent.instrument,
           pic: result.data.talent.pic,
+          id: result.data.talent.id,
         });
         setPopolarArtist(result.data.artists);
         setComingEvent(result.data.coming_events);
@@ -83,7 +84,7 @@ export default function Home({ setPage, setPageId }) {
           <div>
             <h3>Fresh Talent</h3>
             {/* <div> */}
-            <ArtistBio talent={talent} setPage={setPage} />
+            <ArtistBio talent={talent} setPage={setPage} setPageId={setPageId} />
           </div>
           <Audio src='retrosoul.mp3' type='audio/mp3' controls />
           {/* </div> */}
@@ -106,8 +107,6 @@ export default function Home({ setPage, setPageId }) {
           <ArtistImgList ArtistArr={poplarArtist} xs={1} setPage={setPage} setPageId={setPageId} />
         </div>
       </ArtistInfo>
-      <br />
-      <br />
       <TeamInfo>
         <Title>
           <h3>Development Team</h3>
