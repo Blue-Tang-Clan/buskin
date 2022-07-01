@@ -59,7 +59,7 @@ const Text = styled.div`
   margin-top: 10px;
 `;
 
-function SavedEvents(number) {
+function SavedEvents({number}) {
   return (
     <Tag>
       <Container>
@@ -103,7 +103,7 @@ function FollowedArtists(number) {
   );
 }
 
-function TotalFollowers(number) {
+function TotalFollowers({number}) {
   return (
     <Tag>
       <Container>
@@ -125,4 +125,4 @@ function TotalFollowers(number) {
   );
 }
 
-export { SavedEvents, FollowedArtists, TotalFollowers, Tag, Container, SavedEventsTag, Icon };
+export { SavedEvents, FollowedArtists, TotalFollowers, Tag, Container, SavedEventsTag, Icon, TotalFollowersTag, Text, Number, FollowedArtistsTag };
