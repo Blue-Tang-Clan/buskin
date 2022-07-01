@@ -180,7 +180,7 @@ export default function ViewMap() {
                     setCurrentPlaceId(null);
                   }}
                 >
-                  <div className='card'>
+                  <div className='map-card'>
                     <label className='eventLabel'>Artist Name</label>
                     <h2 className='artist'>
                       {' '}

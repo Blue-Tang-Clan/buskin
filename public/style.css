@@ -126,7 +126,7 @@ background-color: rgba(134, 114, 17, 0.491);
   justify-content: space-between;
 }
 
-.card{
+.map-card{
   width: 250px;
   display: flex;
   flex-direction: column;

@@ -248,7 +248,7 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
                   anchor='right'
                   onClose={() => setCurrentPlaceId(null)}
                 >
-                  <div className='card'>
+                  <div className='map-card'>
                     <label className='eventLabel'>Artist Name</label>
                     <h2 className='artist'>
                       {' '}
