@@ -7,7 +7,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {
-  GenreTag, UserImg, Nav, UserSettingContainer, UserNav, LogoutNav,
+  GenreTag, UserImg, Nav, UserSettingContainer, UserNav, LogoutNav, SettingNav,
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import IconButton from '@mui/material/IconButton';
@@ -112,7 +112,7 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
               <div>
                 <UserImg src={userPic.length ? userPic : 'https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc='} alt='thumbnail' />
               </div>
-              <UserNav style={{ cursor: 'pointer' }}>
+              <SettingNav style={{ cursor: 'pointer' }}>
                 <Tooltip title="Setting">
                   <ListIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
                 </Tooltip>
@@ -128,17 +128,7 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
                   <MenuItem onClick={goArtistProfile}>Edit profile</MenuItem>
                   <MenuItem onClick={goArtistDashboard}>Dashboard</MenuItem>
                 </Menu>
-                {/* <Tooltip title="Alert">
-                  <IconButton>
-                    <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Log Out">
-                  <IconButton>
-                    <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
-                  </IconButton>
-                </Tooltip> */}
-              </UserNav>
+              </SettingNav>
 
             </UserSettingContainer>
           ) : (

@@ -115,7 +115,7 @@ const Nav = styled.div`
   width: 100vw;
   height: 90px;
   display: grid;
-  grid-template-columns: 25% auto 300px 10px;
+  grid-template-columns: 25% auto 300px 20px;
   margin-top: -10px;
   margin-left: -10px;
   padding-top: 10px;
@@ -132,7 +132,7 @@ const UserSettingContainer = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   display: flex;
-  gap: 20px;
+  gap: 25px;
 `;
 
 const UserNav = styled.div`
@@ -141,8 +141,12 @@ const UserNav = styled.div`
   text-align: right;
 `;
 
+const SettingNav = styled.div`
+  margin-top: 13px;
+`;
+
 const LogoutNav = styled.div`
-  margin-top: 15px;
+  margin-top: 18px;
 `;
 
 const ArtistInfoContainer = styled.div`
@@ -264,4 +268,5 @@ export {
   Audio,
   UserNav,
   LogoutNav,
+  SettingNav,
 };

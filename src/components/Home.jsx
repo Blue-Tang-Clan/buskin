@@ -150,13 +150,13 @@ export default function Home({ setPage, setPageId }) {
           </MemberB>
           <MemberC>
             <div>
-              <h4>UI</h4>
-              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZB62PFC-338e8412806f-512' />
+              <h4>DB</h4>
+              <ArtistImg src='https://i.ibb.co/kMSrkFM/Screenshot-20220630-133617-Gallery.jpg' />
               <p>Kedir Zeinu</p>
             </div>
             <div>
-              <h4>UI</h4>
-              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZB62PFC-338e8412806f-512' />
+              <h4>DB</h4>
+              <ArtistImg src='https://i.ibb.co/G5JQPNX/image.png' />
               <p>Yuki Ogawa</p>
             </div>
           </MemberC>
