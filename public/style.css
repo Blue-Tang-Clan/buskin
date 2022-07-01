@@ -126,7 +126,7 @@ background-color: rgba(134, 114, 17, 0.491);
   justify-content: space-between;
 }
 
-.card{
+.map-card{
   width: 250px;
   display: flex;
   flex-direction: column;
@@ -251,6 +251,37 @@ font-size: xx-large;
   text-decoration: underline;
 }
 
+.bg {
+  /* background-image: linear-gradient(-60deg, rgba($mainLight, 0.5) 50%, $mainDark 50%,); */
+  /* background-image: linear-gradient(-60deg, rgba(102, 126, 234, 0.5) 50%, #83689d 50%);
+  width: 125%;
+  height: 100%; */
+  /* background-color: lightblue; */
+  /* position: fixed;
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  top: 0;
+
+  z-index: -1;
+  opacity: 0.25;
+  animation: slide 13s ease-in-out infinite alternate; */
+}
+.bg2 {
+  /* animation-direction: alternate-reverse;
+  animation-duration: 14s; */
+}
+.bg3 {
+  /* animation-duration: 15s; */
+}
+@keyframes slide {
+  from {
+    transform: translate(-25%);
+  }
+  to {
+    transform: translate(25%);
+  }
+}
 /* .carouselImg {
   height: 600px;
   object-fit: cover;
@@ -264,4 +295,22 @@ font-size: xx-large;
 .imgContainer .ImageInside {
   height: 100%;
   width: 100%;
+}
+
+body {
+  background: linear-gradient(-45deg, #667eea, #6fb1d6, #23A6D5, #23D5AB);
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  animation: gradient 15s ease infinite;
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

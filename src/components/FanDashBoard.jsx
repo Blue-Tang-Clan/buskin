@@ -11,7 +11,7 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 const FollowedArtistsModified = ({number}) => {
   return (
     <Tag>
-      <Container style={{position: 'absolute', top:'29%'}}>
+      <Container style={{position: 'absolute', top:'28%'}}>
         <FollowedArtistsTag>
           <Icon>
             <FavoriteBorderIcon sx={{ color: "#FFB800" }} />
@@ -33,7 +33,7 @@ const FollowedArtistsModified = ({number}) => {
 const SavedEventsModified = ({number}) => {
   return (
   <Tag>
-      <Container style={{position: 'absolute', top:'49%'}}>
+      <Container style={{position: 'absolute', top:'48%'}}>
         <SavedEventsTag>
           <Icon>
             <DateRangeIcon sx={{ color: "#2ED297" }} />
