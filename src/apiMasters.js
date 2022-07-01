@@ -102,7 +102,7 @@ const followArtist = (fanId, artistId) => (
 );
 
 const deleteEvent = (fanId, eventId) => (
-  axios.post(`${url}/fans/event/${fanId}/${eventId}`)
+  axios.delete(`${url}/fans/event/${fanId}/${eventId}`)
 );
 
 const artistDeleteEvent = (artistId, eventId) => (
