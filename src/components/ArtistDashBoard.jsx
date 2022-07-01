@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Button from '@mui/material/Button';
 import ViewMap from './ArtistViewMap.jsx';
 import { TotalFollowers } from './DashBoardTag.jsx';
 import apiMasters from '../apiMasters.js';
+import { FaTrashAlt } from "react-icons/fa";
 
 const FanDashBoard = styled.div`
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 15% 30% 55%;
+  grid-template-columns: 50% 5% 45%;
+  grid-template-rows: 7.5% 7.5% 30% 55%;
 
 `;
 
@@ -17,7 +16,7 @@ const DashBoardText = styled.h3`
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
-  grid-row-end: 2;
+  grid-row-end: 3;
   color: #373B53;
   font-weight: 700;
 `;
@@ -25,8 +24,8 @@ const DashBoardText = styled.h3`
 const DashBoardCard = styled.div`
   grid-column-start: 1;
   grid-column-end: 2;
-  grid-row-start: 2;
-  grid-row-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
 `;
 
 const EventList = styled.div`
@@ -34,7 +33,7 @@ const EventList = styled.div`
   overflow: scroll;
   grid-column-start: 1;
   grid-column-end: 2;
-  grid-row-start: 3;
+  grid-row-start: 4;
 `;
 
 const EventDiv = styled.div`
@@ -56,6 +55,7 @@ const DateDiv = styled.div`
   color: #259998;
   fontWeight: bold;
   margin: auto;
+  pointer-events: none;
 `;
 
 const DateText = styled.h4`
@@ -67,14 +67,18 @@ const AddressDiv = styled.div`
   grid-column-start: 2;
   grid-column-end: 3;
   margin: auto;
+  pointer-events: none;
 `;
 
 const MapDiv = styled.div`
   grid-column-start: 2;
-  grid-column-end: 3;
   grid-row-start: 2;
   margin: auto;
-  text-align: center;
+`;
+
+const MapText = styled.h4`
+  grid-column-start: 3;
+  grid-row-start: 2;
 `;
 
 const TrashBoxDiv = styled.div`
@@ -88,10 +92,12 @@ const EventText = styled.h4`
     font-weight: bold;
     color: #2D2D2D;
     margin: 5px;
+    pointer-events: none;
 `;
 
 const AddressText = styled.p`
     color: #8F8F8F;
+    pointer-events: none;
 `;
 
 export default function ArtistDashBoard({userId, setPage, setPageId}) {
@@ -123,9 +129,9 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
   };
 
   const deleteEvent = (e) => {
-    // console.log(e.target);
-    // console.log('userId', userId);
-    // console.log('eventId', e.target.id);
+    e.stopPropagation();
+    console.log(e);
+    console.log('eventId', e.target.id);
     if (e.target.id) {
       apiMasters.artistDeleteEvent(userId, e.target.id)
         .then(() => {
@@ -145,7 +151,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     <FanDashBoard>
       <DashBoardText>DashBoard</DashBoardText>
       <DashBoardCard>
-      {TotalFollowers(fanCount)}
+        {TotalFollowers(fanCount)}
       </DashBoardCard>
       <EventList>
         <h4>Upcoming Events</h4>
@@ -159,16 +165,15 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
               <EventText>{event.name}</EventText>
               <AddressText>{`${event.city}, ${event.state}`}</AddressText>
             </AddressDiv>
-            <TrashBoxDiv onClick={(e) => e.stopPropagation()}>
-              <Button onClick={deleteEvent} id={event.id}>
-                <DeleteIcon  sx={{ color: ' #259998'}} />
-              </Button>
+            <TrashBoxDiv onClick={deleteEvent} id={event.id}>
+              <FaTrashAlt style={{ color: '#259998', pointerEvents: 'none' }} />
             </TrashBoxDiv>
           </EventDiv>
         ))}
       </EventList>
+      <MapText>Add Your Events Here</MapText>
       <MapDiv>
-        <ViewMap ArtistName={artistName} ArtistId={artistId} getArtistDashBoard={getArtistDashBoard} />
+        <ViewMap ArtistName={artistName} ArtistId={artistId} getArtistDashBoard={getArtistDashBoard} events={events} />
       </MapDiv>
     </FanDashBoard>
   );

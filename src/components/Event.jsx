@@ -2,12 +2,14 @@ import React, { useState, useContext, useEffect } from 'react';
 import apiMasters from '../apiMasters.js';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { TopContext } from './App.jsx';
-import { EventPageContainer, EventHeaderContainer, FreshTalentImg, TagContainer, HomePageGenreTag, SaveEventButton, EventPageArtistPic, EventButtonContainer } from './StyledComponents.js';
+import { EventColContainer, EventRowContainer, FreshTalentImg, TagContainer, HomePageGenreTag, SaveEventButton, EventPageArtistPic, EventButtonContainer } from './StyledComponents.js';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import PinDropIcon from '@mui/icons-material/PinDrop';
-import ViewMap from './HomeMap.jsx';
+import EventMap from './EventMap.jsx';
 export const ArtistContext = React.createContext();
+
+export const EventLocationContext = React.createContext();
 
 export default function Event() {
   const { pageId, userId, userType, setLogin } = useContext(TopContext);
@@ -53,7 +55,7 @@ export default function Event() {
           cashapp: info.cashapp,
         });
       })
-      .catch((err) => console.log('aww didnt get any data? boohoo', err));
+      .catch((err) => console.log('This one ww didnt get any data? boohoo', err));
   }, [eventInfo]);
 
   const saveEvent = () => {
@@ -63,15 +65,14 @@ export default function Event() {
       apiMasters.saveEvent(userId, pageId);
     }
   };
-
+  console.log('eventInfo: ', eventInfo);
   return (
-    <EventPageContainer style={{ marginTop: '50px' }}>
-      <EventHeaderContainer>
-        <EventPageContainer>
-          <FreshTalentImg src={eventInfo.pic} alt='Event' />
-        </EventPageContainer>
+    <EventColContainer style={{ marginTop: '50px' }}>
+      <EventRowContainer>
+        {eventInfo.pic ? <FreshTalentImg src={eventInfo.pic} alt='Event' style={{ marginRight: '50px' }} />
+          : <FreshTalentImg src='https://images.sampletemplates.com/wp-content/uploads/2015/04/Event-Program.jpg' alt='Event' style={{ marginRight: '50px' }} />}
         <FavoriteBorderIcon sx={{ color: '#FFB800' }} fontSize='large' onClick={saveEvent} />
-        <EventPageContainer>
+        <div style={{ borderRightStyle: 'solid', paddingRight: '40px' }}>
           <h1 style={{ marginTop: -10 }}>{eventInfo.name}</h1>
           <p>
             <EventPageArtistPic src={artistInfo.pic} alt={artistInfo.name} />
@@ -85,8 +86,12 @@ export default function Event() {
             <DateRangeIcon />
             {` ${eventInfo.date} ${eventInfo.start_time} ~ ${eventInfo.end_time}`}
           </p>
-        </EventPageContainer>
-      </EventHeaderContainer>
+        </div>
+        <div style={{ paddingLeft: '40px' }}>
+          <h1 style={{ marginTop: -10 }}>About This Event</h1>
+          <p>{eventInfo.description}</p>
+        </div>
+      </EventRowContainer>
       <TagContainer style={{ marginTop: '30px' }}>
         <HomePageGenreTag value={artistInfo.genre}>
           {artistInfo.genre}
@@ -95,13 +100,11 @@ export default function Event() {
           {artistInfo.instrument}
         </HomePageGenreTag>
       </TagContainer>
-      <EventHeaderContainer style={{ marginTop: '50px' }}>
-        <EventPageContainer style={{ width: '250px' }}>
-          <h2>About This Event</h2>
-          <p>{eventInfo.description}</p>
-        </EventPageContainer>
-        <ViewMap />
-      </EventHeaderContainer>
-    </EventPageContainer>
+      <EventRowContainer style={{ marginTop: '50px' }}>
+        <EventLocationContext.Provider value={{eventInfo, pageId}}>
+          <EventMap />
+        </EventLocationContext.Provider>
+      </EventRowContainer>
+    </EventColContainer>
   );
 }

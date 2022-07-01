@@ -9,8 +9,8 @@ const EventTag = styled(Tag)`
   padding-top: 50px;
   padding-bottom: 50px;
 
+  width: 650px;
   height: auto;
-  width: 500px;
   margin-bottom: 20px;
 
   &:hover {
@@ -41,7 +41,7 @@ export default function EventListItem({ setPage, setPageId }) {
   return (
     <EventTag onClick={renderEventPage}>
       <Container>
-        <SavedEventsTag>
+        <SavedEventsTag style={{marginTop: '30px'}}>
           <Icon>
             <DateRangeIcon sx={{ color: '#2ED297' }} />
           </Icon>

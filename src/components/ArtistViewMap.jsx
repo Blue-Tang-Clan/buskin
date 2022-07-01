@@ -39,7 +39,7 @@ const WarningMessage = styled.div`
 `;
 
 let eventObj = {};
-export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
+export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, events }) {
   const [viewport, setViewport] = useState({
     latitude: 40.7484,
     longitude: -73.9857,
@@ -72,7 +72,7 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
     setArtistName(ArtistName);
     setArtistId(ArtistId);
     getPins();
-  }, [ArtistId,ArtistName]);
+  }, [ArtistId, ArtistName, events]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -130,9 +130,9 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
     e.preventDefault();
     if (eventName && street && city && state && date && startTime && endTime) {
       const formatDate = moment(date).format('L');
-
+      const eventNameDos = eventName.split("'").join("''");
       eventObj = {
-        name: eventName,
+        name: eventNameDos,
         street,
         city,
         state,
@@ -271,15 +271,15 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard }) {
                 >
                   <div className='card'>
                     <label className='eventLabel'>Artist Name</label>
-                    <p className='artist'>
+                    <h2 className='artist'>
                       {' '}
-                      <b>{p.display_name}</b>
-                    </p>
+                      {p.display_name === null ? 'Anonymous' : p.display_name}
+                    </h2>
                     <label className='eventLabel'>Event Name</label>
-                    <p className='event'>
+                    <h2 className='event'>
                       {' '}
-                      <b>{p.name}</b>
-                    </p>
+                      {p.name}
+                    </h2>
                     <label className='eventLabel'>Event Address</label>
                     <p className='address'>
                       {p.street}
