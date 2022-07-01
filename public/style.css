@@ -162,10 +162,13 @@ background-color: rgba(134, 114, 17, 0.491);
   font-size 15px;
   margin: 0;
   color: #2E3B52;
+  font-weight: 600;
 }
 .date{
   font-size 15px;
   margin: 0;
+  color: #2E3B52;
+  font-weight: 600;
 }
 .artist{
   font-size: 20px;
@@ -199,6 +202,7 @@ background-color: rgba(134, 114, 17, 0.491);
   border: none;
   padding: 5px;
   border-radius: 5px;
+  margin-top:10px;
   font-size: 17px;
   color: white;
   background-color: darkgreen;

@@ -192,7 +192,7 @@ export default function ViewMap() {
                       {p.name}
                     </h2>
                     <label className='eventLabel'>Event Address</label>
-                    <h3 className='address'>
+                    <p className='address'>
                       {p.street}
                       {' '}
                       -
@@ -203,16 +203,16 @@ export default function ViewMap() {
                       {' '}
                       {p.state}
                       {' '}
-                    </h3>
+                    </p>
                     <label className='eventLabel'>Date</label>
                     <p className='date'>{p.date}</p>
                     <label className='eventLabel'>Time</label>
                     <span className='startTime'>
-                      Start Time&nbsp;
+                      Start Time&nbsp;&nbsp;&nbsp;
                       <b>{p.start_time}</b>
                     </span>
                     <span className='endTime'>
-                      End Time&nbsp;
+                      End Time&nbsp;&nbsp;&nbsp;
                       <b>
                         {p.end_time}
                       </b>
