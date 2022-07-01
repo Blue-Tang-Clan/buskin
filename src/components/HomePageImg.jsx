@@ -4,16 +4,16 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { EventImg, ArtistImg } from './StyledComponents.js';
 
-// const ArtistMImg = styled(ArtistImg)`
-//   margin: 5px;
-// `;
+const ArtistMImg = styled(ArtistImg)`
+  margin: 5px;
+`;
 
-// const EventsMImg = styled(EventImg)`
-//   margin: 5px;
-//   height: 100%;
-//   width: 100%;
-//   border-radius: 10px;
-// `;
+const EventsMImg = styled(EventImg)`
+  margin: 5px;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+`;
 
 const Card = styled.div`
   text-align: center;
