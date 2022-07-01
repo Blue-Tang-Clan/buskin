@@ -145,32 +145,38 @@ export default function SearchBar() {
           : null}
         {artistsArr.length ? (
           <ResultsSection style={{ paddingTop: '40px' }}>
-            <QueueMusicIcon style={{ paddingLeft: '30px' }} sx={{ color: 'white' }} />
+            <span style={{ paddingLeft: '30px' }}>
+              <QueueMusicIcon sx={{ color: 'white' }} />
+            </span>
             {' Artists'}
           </ResultsSection>
         ) : null}
         {artistsArr.length
           ? artistsArr.map((result) => (
             <IndividualResult key={result.id} onClick={() => handleClick('artistProfile', result.id)}>
-              <PersonOutlineIcon style={{ paddingLeft: '30px' }} />
+              <span style={{ paddingLeft: '30px' }}>
+                <PersonOutlineIcon />
+              </span>
               {` ${result.name}`}
             </IndividualResult>
           ))
           : null}
         {eventsArr.length ? (
           <ResultsSection style={{ paddingTop: '20px' }}>
-            <DateRangeIcon style={{ paddingLeft: '30px' }} sx={{ color: 'white' }} />
+            <span style={{ paddingLeft: '30px' }}>
+              <DateRangeIcon sx={{ color: 'white' }} />
+            </span>
             {' Events'}
           </ResultsSection>
         ) : null}
         {eventsArr.length
           ? eventsArr.map((result) => (
             <IndividualResult key={result.id} onClick={() => handleClick('event', result.id)}>
-              <PinDropIcon style={{ paddingLeft: '30px' }} />
+              <span style={{ paddingLeft: '30px' }}>
+                <PinDropIcon />
+              </span>
               {` ${result.name} - `}
-              City:
               {` ${result.city}, `}
-              State:
               {` ${result.state}`}
             </IndividualResult>
           ))
