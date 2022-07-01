@@ -10,6 +10,7 @@ const BodyContainer = styled.div`
   flex-direction: column;
   height: 100%;
   gap: 10px;
+  margin-right: 10%;
 `;
 
 const CarouselContainer = styled.div`
@@ -67,7 +68,7 @@ const TagContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
 `;
 
 const ArtistImg = styled.img`
@@ -141,7 +142,7 @@ const Nav = styled.div`
 
 const NavSpacer = styled.div`
   width: 100%;
-  height: 85px;
+  height: 100px;
 `;
 
 const UserSettingContainer = styled.div`
@@ -186,20 +187,17 @@ const ArtistInfo = styled.div`
   grid-template-rows: auto;
 `;
 
-const TeamInfo = styled.div`
+const Development = styled.div`
   grid-area: c;
-  display: grid;
-  left: 50%;
-  grid-template-areas: "title title title" "a a a" "b b b";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-left: 5%;
 `;
-const Title = styled.div`
-  grid-area: title;
-`;
+
 const Line1 = styled.div`
-  grid-area: a;
-  display: grid;
   gap: 10px;
-  grid-template-areas: "blank member blank";
 `;
 
 const Line2 = styled.div`
@@ -208,13 +206,18 @@ const Line2 = styled.div`
   grid-template-areas: "A B C";
 `;
 
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const MemberA = styled.div`
   grid-area: A;
   display: flex;
   text-align: center;
   justify-content: center;
   flex-direction: row;
-  gap: 10px;
 `;
 
 const MemberB = styled.div`
@@ -223,7 +226,6 @@ const MemberB = styled.div`
   text-align: center;
   justify-content: center;
   flex-direction: row;
-  gap: 10px;
 `;
 
 const MemberC = styled.div`
@@ -232,7 +234,6 @@ const MemberC = styled.div`
   text-align: center;
   justify-content: center;
   flex-direction: row;
-  gap: 10px;
 `;
 
 const MemberD = styled.div`
@@ -240,7 +241,6 @@ const MemberD = styled.div`
   display: flex;
   text-align: center;
   flex-direction: row;
-  gap: 10px;
 `;
 
 const Audio = styled.audio`
@@ -294,8 +294,8 @@ export {
   FreshTalentImg,
   MapInfo,
   ArtistInfo,
-  TeamInfo,
-  Title,
+  // TeamInfo,
+  Development,
   Line1,
   Line2,
   MemberA,
@@ -307,4 +307,5 @@ export {
   LogoutNav,
   SettingNav,
   NotificationNav,
+  Title,
 };
