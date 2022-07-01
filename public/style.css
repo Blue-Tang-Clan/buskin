@@ -46,6 +46,7 @@ audio::-webkit-media-controls-panel {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .flip-card {
@@ -75,7 +76,8 @@ audio::-webkit-media-controls-panel {
 .flip-card-back {
   display: flex;
   flex-direction: column;
-  background-color: #6db6e2;
+  /* background-color: #6db6e2; */
+  background-image: linear-gradient(to right, #667eea, #764ba2);
   color: #fff;
   transform: rotateY(180deg);
 }

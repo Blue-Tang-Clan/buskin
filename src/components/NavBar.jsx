@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { TopContext } from './App.jsx';
 import SearchBar from './SearchBar.jsx';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import ListIcon from '@mui/icons-material/List';
 
-export default function NavBar({ setUserType, setUserId }) {
+export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp, showForm }) {
   const [userName, setUserName] = useState('');
   const [userPic, setUserPic] = useState('');
   const { setPage, userType } = useContext(TopContext);
@@ -54,9 +54,28 @@ export default function NavBar({ setUserType, setUserId }) {
     setAnchorEl(null);
   };
   const goLogout = () => {
+    const cookies = document.cookie.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i];
+      let eqPos = cookie.indexOf('=');
+      let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
     setPage('home');
     setUserType('anonymous');
   };
+
+  useEffect(() => {
+    if (userNameApp) {
+      setUserName(userNameApp);
+    }
+    if (userPicApp) {
+      setUserPic(userPicApp);
+    } else {
+      setUserPic('');
+    }
+  }, [userNameApp, userPicApp, showForm]);
 
   return (
     <Nav>
@@ -72,6 +91,7 @@ export default function NavBar({ setUserType, setUserId }) {
           setUserId={setUserId}
           setUserName={setUserName}
           setUserPic={setUserPic}
+          showFormApp={showForm}
         />
       ) : (
         <UserSettingContainer>

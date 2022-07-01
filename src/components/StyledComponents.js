@@ -32,15 +32,14 @@ const HomePageGenreTag = styled.div`
   padding: 12px 16px 10px 17px;
   color: #373B53;
   font-size: 14px;
-  // box-shadow: 0px 0px 3px 3px rgba(0,0,0, .1);
   border: 1.5px solid #2E3B52;
   border-radius: 6px;
   &:hover {
-    background-color: #0094B6;
+    // background-color: #0094B6;
     background-image: linear-gradient(to right, #667eea, #764ba2);
     color: white;
     cursor: pointer;
-    border:  1.5px transparent;
+    border:  1.5px #F8F8FB;
   };
   white-space: nowrap;
   display: inline-block;
@@ -56,8 +55,8 @@ const TagContainer = styled.div`
 `;
 
 const ArtistImg = styled.img`
-  height:150px;
-  width: 150px;
+  height:120px;
+  width: 120px;
   border-radius: 50%;
   &:hover {
     cursor: pointer;
@@ -203,9 +202,8 @@ const Audio = styled.audio`
 `;
 
 // EVENT PAGE SPECIFIC STYLING
-const EventPageContainer = styled.div`
+const EventColContainer = styled.div`
   display: flex;
-  width: 100%;
   height: 100%;
   flex-direction: column;
   justify-content: flex-start;
@@ -213,12 +211,10 @@ const EventPageContainer = styled.div`
   padding-right: 5%;
 `;
 
-const EventHeaderContainer = styled.div`
-display: flex;
-max-height: 500px;
-flex-direction: row;
-justify-content: flex-start;
-align-items: flex-start;
+const EventRowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 `;
 
 const EventPageArtistPic = styled.img`
@@ -243,8 +239,8 @@ export {
   UserSettingContainer,
   ArtistInfoContainer,
   HomePageGenreTag,
-  EventPageContainer,
-  EventHeaderContainer,
+  EventColContainer,
+  EventRowContainer,
   EventPageArtistPic,
   FreshTalentImg,
   MapInfo,
