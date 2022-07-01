@@ -162,7 +162,7 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={goFanProfile}>Edit profile</MenuItem>
+                {userType === 'artist' ? <MenuItem onClick={goFanProfile}>Edit profile</MenuItem> : null}
                 <MenuItem onClick={goFanDashboard}>Dashboard</MenuItem>
               </Menu>
             </UserSettingContainer>

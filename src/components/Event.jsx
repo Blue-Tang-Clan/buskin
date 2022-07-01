@@ -6,7 +6,6 @@ import { EventColContainer, EventRowContainer, FreshTalentImg, TagContainer, Hom
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import PinDropIcon from '@mui/icons-material/PinDrop';
-import ViewMap from './HomeMap.jsx';
 import EventMap from './EventMap.jsx';
 export const ArtistContext = React.createContext();
 
@@ -56,7 +55,7 @@ export default function Event() {
           cashapp: info.cashapp,
         });
       })
-      .catch((err) => console.log('aww didnt get any data? boohoo', err));
+      .catch((err) => console.log('This one ww didnt get any data? boohoo', err));
   }, [eventInfo]);
 
   const saveEvent = () => {
@@ -66,11 +65,12 @@ export default function Event() {
       apiMasters.saveEvent(userId, pageId);
     }
   };
-
+  console.log('eventInfo: ', eventInfo);
   return (
     <EventColContainer style={{ marginTop: '50px' }}>
       <EventRowContainer>
-        <FreshTalentImg src={eventInfo.pic} alt='Event' style={{ marginRight: '50px' }} />
+        {eventInfo.pic ? <FreshTalentImg src={eventInfo.pic} alt='Event' style={{ marginRight: '50px' }} />
+          : <FreshTalentImg src='https://images.sampletemplates.com/wp-content/uploads/2015/04/Event-Program.jpg' alt='Event' style={{ marginRight: '50px' }} />}
         <FavoriteBorderIcon sx={{ color: '#FFB800' }} fontSize='large' onClick={saveEvent} />
         <div style={{ borderRightStyle: 'solid', paddingRight: '40px' }}>
           <h1 style={{ marginTop: -10 }}>{eventInfo.name}</h1>
