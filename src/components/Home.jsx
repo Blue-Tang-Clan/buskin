@@ -10,8 +10,8 @@ import {
   ArtistImg,
   MapInfo,
   ArtistInfo,
-  TeamInfo,
-  Title,
+  // TeamInfo,
+  Development,
   Line1,
   Line2,
   MemberA,
@@ -19,6 +19,7 @@ import {
   MemberC,
   MemberD,
   Audio,
+  Title,
 } from './StyledComponents.js';
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
@@ -69,113 +70,114 @@ export default function Home({ setPage, setPageId }) {
 
   return (
     <BodyContainer>
-    <CarouselContainer>
-      <ImgCarousel />
-    </CarouselContainer>
-    <br />
-    <HomeContainer>
-      <MapInfo>
-        <h3>Find an event near you</h3>
-        <HomeMap />
-        <br />
-        <br />
-        <h3>Popular Events in New York City, NY</h3>
-        <h4>What's happening around you</h4>
-        <EventImgList EventArr={localEvent} xs={1} setPage={setPage} setPageId={setPageId} />
-        {/* <br />
+      <CarouselContainer>
+        <ImgCarousel />
+      </CarouselContainer>
+      <br />
+      <HomeContainer>
+        <MapInfo>
+          <h3>Find an event near you</h3>
+          <HomeMap />
+          <br />
+          <br />
+          <h3>Popular Events in New York City, NY</h3>
+          <h4>What's happening around you</h4>
+          <EventImgList EventArr={localEvent} xs={1} setPage={setPage} setPageId={setPageId} />
+          {/* <br />
         <br /> */}
-        <h3>Upcoming Performances</h3>
-        <h4>Save these events before too late</h4>
-        <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
-      </MapInfo>
-      <ArtistInfo>
-        <div>
+          <h3>Upcoming Performances</h3>
+          <h4>Save these events before too late</h4>
+          <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
+        </MapInfo>
+        <ArtistInfo>
           <div>
-            <h3>Fresh Talent</h3>
-            {/* <div> */}
-            <ArtistBio talent={talent} setPage={setPage} setPageId={setPageId} />
+            <div>
+              <h3>Fresh Talent</h3>
+              {/* <div> */}
+              <ArtistBio talent={talent} setPage={setPage} setPageId={setPageId} />
+            </div>
+            <Audio src='retrosoul.mp3' type='audio/mp3' controls />
+            {/* </div> */}
           </div>
-          <Audio src='retrosoul.mp3' type='audio/mp3' controls />
-          {/* </div> */}
-        </div>
-        <div>
-          <br />
-          <br />
-          <h3>Popular Genres</h3>
-          <TagContainer>
-            {genres.map((genre) => (
-              <HomePageGenreTag key={genre.id} value={genre} onClick={handleFilterGenre}>
-                {genre}
-              </HomePageGenreTag>
-            ))}
-          </TagContainer>
-          <br />
-          <br />
-          <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
-          <br />
-          <br />
-          <h3>Popular Artists</h3>
-          <ArtistImgList ArtistArr={poplarArtist} xs={1} setPage={setPage} setPageId={setPageId} />
-        </div>
-      </ArtistInfo>
-      <TeamInfo>
-        <Title>
+          <div>
+            <br />
+            <br />
+            <h3>Popular Genres</h3>
+            <TagContainer>
+              {genres.map((genre) => (
+                <HomePageGenreTag key={genre.id} value={genre} onClick={handleFilterGenre}>
+                  {genre}
+                </HomePageGenreTag>
+              ))}
+            </TagContainer>
+            <br />
+            <br />
+            <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
+            <br />
+            <br />
+            <h3>Popular Artists</h3>
+            <ArtistImgList ArtistArr={poplarArtist} xs={1} setPage={setPage} setPageId={setPageId} />
+          </div>
+        </ArtistInfo>
+        <Development>
           <h3>Development Team</h3>
-        </Title>
-        <Line1>
-          <MemberD>
-            <div>
-              <h4>PM</h4>
-              <ArtistImg src='https://avatars.githubusercontent.com/u/53981746?v=4' />
-              <p>Nikko Elliott</p>
-            </div>
-            <div>
-              <h4>DB</h4>
-              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZBGUUBD-f8c035e2c3aa-512' />
-              <p>Yaokai Dong</p>
-            </div>
-          </MemberD>
-        </Line1>
-        <Line2>
-          <MemberA>
-            <div>
+          <Line1>
+            <MemberD>
+              <div>
+                <h4>PM</h4>
+                <ArtistImg src='https://avatars.githubusercontent.com/u/53981746?v=4' style={{ margin: '20px' }} />
+                <p>Nikko Elliott</p>
+              </div>
+              <div>
+                <h4>DB</h4>
+                <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZBGUUBD-f8c035e2c3aa-512' style={{ margin: '20px' }} />
+                <p>Yaokai Dong</p>
+              </div>
+            </MemberD>
+          </Line1>
+          <Line2>
+            <Title>
               <h4>Architect</h4>
-              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AJP0K0BH-eb4e28704fac-512' />
-              <p>Utku Ozkan</p>
-            </div>
-            <div>
-              <h4>Architect</h4>
-              <ArtistImg src='https://avatars.githubusercontent.com/u/82719099?v=4' />
-              <p>Fangzhuo Xi</p>
-            </div>
-          </MemberA>
-          <MemberB>
-            <div>
+              <MemberA>
+                <div>
+                  <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AJP0K0BH-eb4e28704fac-512' style={{ margin: '20px' }} />
+                  <p>Utku Ozkan</p>
+                </div>
+                <div>
+                  <ArtistImg src='https://avatars.githubusercontent.com/u/82719099?v=4' style={{ margin: '20px' }} />
+                  <p>Fangzhuo Xi</p>
+                </div>
+              </MemberA>
+            </Title>
+            <Title>
+              <h4>Fullstack</h4>
+              <MemberB>
+                <div>
+                  <ArtistImg src='https://i.ibb.co/kMSrkFM/Screenshot-20220630-133617-Gallery.jpg' style={{ margin: '20px' }} />
+                  <p>Kedir Zeinu</p>
+                </div>
+                <div>
+                  <ArtistImg src='https://i.ibb.co/G5JQPNX/image.png' style={{ margin: '20px' }} />
+                  <p>Yuki Ogawa</p>
+                </div>
+              </MemberB>
+            </Title>
+            <Title>
               <h4>UI</h4>
-              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03BBV9T3LZ-64df3c9dd915-512' />
-              <p>Yao Yu</p>
-            </div>
-            <div>
-              <h4>UI</h4>
-              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZB62PFC-338e8412806f-512' />
-              <p>Val Pizzo</p>
-            </div>
-          </MemberB>
-          <MemberC>
-            <div>
-              <h4>DB</h4>
-              <ArtistImg src='https://i.ibb.co/kMSrkFM/Screenshot-20220630-133617-Gallery.jpg' />
-              <p>Kedir Zeinu</p>
-            </div>
-            <div>
-              <h4>DB</h4>
-              <ArtistImg src='https://i.ibb.co/G5JQPNX/image.png' />
-              <p>Yuki Ogawa</p>
-            </div>
-          </MemberC>
-        </Line2>
-      </TeamInfo>
-    </HomeContainer>
+              <MemberC>
+                <div>
+                  <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AZB62PFC-338e8412806f-512' style={{ margin: '20px' }} />
+                  <p>Val Pizzo</p>
+                </div>
+                <div>
+                  <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03BBV9T3LZ-64df3c9dd915-512' style={{ margin: '20px' }} />
+                  <p>Yao Yu</p>
+                </div>
+              </MemberC>
+            </Title>
+          </Line2>
+        </Development>
+      </HomeContainer>
     </BodyContainer>
   );
 }
