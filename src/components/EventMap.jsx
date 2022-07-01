@@ -16,7 +16,7 @@ import apiMasters from '../apiMasters.js';
 const config = require('../../config.js');
 
 export default function ViewMap() {
-  const { eventInfo, pageId } = useContext(EventLocationContext);
+  const { eventInfo, pageId, userId } = useContext(EventLocationContext);
   const [viewport, setViewport] = useState({
     latitude: eventInfo.latitude,
     longitude: eventInfo.longitude,
@@ -25,24 +25,24 @@ export default function ViewMap() {
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [pins, setPins] = useState([]);
-  const [fanId, setFanId] = useState(1);
   const [saved, setSaved] = useState(false);
-  const [savedEvents, setSavedEvents] = useState([]);
 
   useEffect(() => {
     const getPins = async () => {
       try {
         const res = await apiMasters.getEvent(pageId);
-        setPins(res.data);
-        setFanId(Number(userId));
-        const resDos = await apiMasters.getFanDashBoard(fanId);
-        setSavedEvents(resDos.data.events);
+        setPins(res.data.rows);
+        setViewport({
+          latitude: Number(pins[0].latitude),
+          longitude: Number(pins[0].longitude),
+          zoom: 13,
+        });
       } catch (err) {
         console.log(err);
       }
     };
     getPins();
-  }, [fanId, userId]);
+  }, [eventInfo, pageId]);
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -68,23 +68,6 @@ export default function ViewMap() {
       ...viewport, latitude: Number(lat), longitude: Number(long),
     });
     setShowPopup(true);
-  };
-
-  const handleSaveClick = (fId, eventId) => {
-    if (userType === 'anonymous') {
-      setLogin(true);
-    } else {
-      apiMasters.saveEvent(fId, eventId)
-        .then(() => {
-          setSaved(true);
-        })
-        .catch(((err) => console.log(err)));
-    }
-  };
-
-  const eventPage = (e) => {
-    setPageId(e.target.id);
-    setPage('event');
   };
 
   const parkLayer = {
@@ -153,8 +136,7 @@ export default function ViewMap() {
               offsetLeft={-viewport.zoom * 3.5}
               offsetTop={-viewport.zoom * 5.5}
             >
-              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer', color:
-              JSON.stringify(savedEvents).includes(p.street) ? 'blue' : 'tomato'
+              <Room style={{ fontSize: viewport.zoom * 5.5, cursor: 'pointer', color:'#0094B6'
             }} onClick={(event) => handleMarkerClick(p.id, event, p.latitude, p.longitude)} />
             </Marker>
             {p.id === currentPlaceId
@@ -209,18 +191,6 @@ export default function ViewMap() {
                       </b>
 
                     </span>
-                    {saved ? <p style={{ color: 'green' }}> Event Saved!</p> : (
-                     <button
-                        type='button'
-                        className='saveEventBtn'
-                        onClick={() => handleSaveClick(fanId, Number(p.id))}
-                      >
-                        {' '}
-                        Save Event
-                        {' '}
-
-                      </button>
-                    )}
                   </div>
                 </Popup>
               )
