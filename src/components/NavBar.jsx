@@ -62,7 +62,7 @@ export default function NavBar({ setUserType, setUserId }) {
   return (
     <Nav>
       <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
-        <img src='https://i.ibb.co/kMc2nsf/Screen-Shot-2022-06-30-at-10-52-20-AM-copy.png' alt='logo' height='85px' style={{ cursor: "pointer" }} />
+        <img src='https://i.ibb.co/Dw7T0Jb/Buskin-B2-copy.png' alt='logo' height='85px' style={{ cursor: "pointer" }} />
       </div>
       <div>
         <SearchBar />
