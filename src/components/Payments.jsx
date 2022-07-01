@@ -2,13 +2,21 @@ import React from 'react';
 import Venmo from './PaymentButtons/Venmo.jsx';
 import PayPal from './PaymentButtons/PayPal.jsx';
 import CashApp from './PaymentButtons/CashApp.jsx';
+import styled from 'styled-components';
+
+const Payment = styled.div`
+  display: flex;
+  flex-direction: row;
+  max-width: 350px;
+  justify-content: space-between;
+`;
 
 export default function Payments() {
   return (
-    <div>
+    <Payment>
       <Venmo />
       <PayPal />
       <CashApp />
-    </div>
+    </Payment>
   );
 }
