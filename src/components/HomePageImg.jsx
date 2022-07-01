@@ -4,16 +4,16 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { EventImg, ArtistImg } from './StyledComponents.js';
 
-const ArtistMImg = styled(ArtistImg)`
-  margin: 5px;
-`;
+// const ArtistMImg = styled(ArtistImg)`
+//   margin: 5px;
+// `;
 
-const EventsMImg = styled(EventImg)`
-  margin: 5px;
-  height: 100%;
-  width: 100%;
-  border-radius: 10px;
-`;
+// const EventsMImg = styled(EventImg)`
+//   margin: 5px;
+//   height: 100%;
+//   width: 100%;
+//   border-radius: 10px;
+// `;
 
 const Card = styled.div`
   text-align: center;
@@ -22,7 +22,7 @@ const Card = styled.div`
 `;
 
 const StyleSpan = styled.span`
-  font-size: 0.75em;
+  font-size: 1em;
 `;
 
 function ArtistImgList({
@@ -39,7 +39,7 @@ function ArtistImgList({
     <Grid item xs={xs}>
       {ArtistArr.map((artist) => (
         <Card key={artist.pic}>
-          <ArtistMImg alt='artist pic' src={artist.pic} onClick={showArtist} id={artist.id} />
+          <ArtistImg alt='artist pic' src={artist.pic} onClick={showArtist} id={artist.id} />
           <h5>{artist.artist_name}</h5>
         </Card>
       ))}
@@ -66,20 +66,18 @@ function EventImgList({
             <div className='flip-card'>
               <div className='flip-card-front'>
                 {event.pic === null
-                  ? <EventsMImg alt='event pic' src='https://images.sampletemplates.com/wp-content/uploads/2015/04/Event-Program.jpg' />
-                  : <EventsMImg alt='event pic' src={event.pic} />}
+                  ? <EventImg alt='event pic' src='https://images.sampletemplates.com/wp-content/uploads/2015/04/Event-Program.jpg' />
+                  : <EventImg alt='event pic' src={event.pic} />}
               </div>
               <div className='flip-card-back' onClick={showEvent} id={event.id}>
                 <div>
-                  <p>
-                    Event Name:
+                  <StyleSpan>
                     <br />
                     {event.event_name}
-                  </p>
-                  <StyleSpan>
-                    Time:
+                    <br />
                     <br />
                     {`${event.date}`}
+                    <br />
                     {`${event.start_time}`}
                   </StyleSpan>
                 </div>
