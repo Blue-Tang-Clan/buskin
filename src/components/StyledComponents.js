@@ -29,17 +29,19 @@ const HomeContainer = styled.div`
 `;
 
 const Button = styled.div`
-  padding: 20px;
-  width: 150px;
-  margin-top: 10px;
-  color: #373B53;
+  padding: 16px 20px 15px 20px;
+  width: 180px;
+  margin-top: 14px;
+  color: #2E3B52;
   font-size: 18px;
+  font-weight: 400;
   box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
   border-radius: 3px;
   &:hover {
-    background-color: #0094B6;
+    background-image: linear-gradient(to right, #667eea, #764ba2);
     color: white;
     cursor: pointer;
+    font-weight: 600;
   };
 `;
 
@@ -128,9 +130,9 @@ const Nav = styled.div`
   background: white;
   position: fixed;
   width: 100vw;
-  height: 92px;
+  height: 95px;
   display: grid;
-  grid-template-columns: 25% auto 300px 20px;
+  grid-template-columns: 400px auto 270px;
   margin-top: -10px;
   margin-left: -10px;
   padding-top: 10px;
@@ -160,8 +162,13 @@ const SettingNav = styled.div`
   margin-top: 13px;
 `;
 
+const NotificationNav = styled.div`
+  margin-top: 18px;
+`;
+
 const LogoutNav = styled.div`
   margin-top: 18px;
+  margin-right: 24%;
 `;
 
 const ArtistInfoContainer = styled.div`
@@ -286,4 +293,5 @@ export {
   UserNav,
   LogoutNav,
   SettingNav,
+  NotificationNav,
 };
