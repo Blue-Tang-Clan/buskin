@@ -113,9 +113,9 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
     e.preventDefault();
     if (eventName && street && city && state && date && startTime && endTime) {
       const formatDate = moment(date).format('L');
-
+      const eventNameDos = eventName.split("'").join("''");
       eventObj = {
-        name: eventName,
+        name: eventNameDos,
         street,
         city,
         state,
