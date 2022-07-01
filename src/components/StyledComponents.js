@@ -7,7 +7,8 @@ const PageContainer = styled.div`
 
 const HomeContainer = styled.div`
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 56% auto;
+  gap: 10%;
   grid-template-areas: "a b" "c c";
   grid-template-rows: 1fr min-content;
 `;
@@ -89,7 +90,7 @@ const FreshTalentImg = styled.img`
 const Container = styled.div`
   display: flex;
   gap: 30px;
-  margin-bottom: 100px;
+  margin-bottom: 40px;
 `;
 
 const InfoContainer = styled.div`
