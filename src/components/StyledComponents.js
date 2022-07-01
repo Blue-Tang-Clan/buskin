@@ -35,11 +35,10 @@ const HomePageGenreTag = styled.div`
   border: 1.5px solid #2E3B52;
   border-radius: 6px;
   &:hover {
-    // background-color: #0094B6;
     background-image: linear-gradient(to right, #667eea, #764ba2);
     color: white;
     cursor: pointer;
-    border:  1.5px #F8F8FB;
+    border: 1.5px solid #F8F8FB;
   };
   white-space: nowrap;
   display: inline-block;
