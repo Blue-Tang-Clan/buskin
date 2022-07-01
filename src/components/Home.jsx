@@ -1,10 +1,22 @@
-import React, { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import ArtistBio from './ArtistBio.jsx';
 import {
-  HomeContainer, HomePageGenreTag, TagContainer, ArtistImg, MapInfo, ArtistInfo, TeamInfo, Title, Line1, Line2, MemberA, MemberB, MemberC, Audio,
+  HomeContainer,
+  HomePageGenreTag,
+  TagContainer,
+  ArtistImg,
+  MapInfo,
+  ArtistInfo,
+  TeamInfo,
+  Title,
+  Line1,
+  Line2,
+  MemberA,
+  MemberB,
+  MemberC,
+  Audio,
 } from './StyledComponents.js';
-import { TopContext } from './App.jsx';
 import HomeMap from './HomeMap.jsx';
 import apiMasters from '../apiMasters.js';
 import { ArtistImgList, EventImgList } from './HomePageImg.jsx';
@@ -56,32 +68,46 @@ export default function Home({ setPage, setPageId }) {
         <h3>Find an event near you</h3>
         <HomeMap />
         <br />
+        <br />
         <h3>Popular Events in New York City, NY</h3>
         <h4>What's happening around you</h4>
         <EventImgList EventArr={localEvent} xs={1} setPage={setPage} setPageId={setPageId} />
+        <br />
         <br />
         <h3>Upcoming Performances</h3>
         <h4>Save these events before too late</h4>
         <EventImgList EventArr={comingEvent} xs={1} setPage={setPage} setPageId={setPageId} />
       </MapInfo>
       <ArtistInfo>
-        <div onClick={() => { setPage('artistProfile'); }}>
-          <h3>Fresh Talent</h3>
+        <div>
           <div>
-            <ArtistBio talent={talent} />
-            <Audio src='retrosoul.mp3' type='audio/mp3' controls />
+            <h3>Fresh Talent</h3>
+            {/* <div> */}
+            <ArtistBio talent={talent} setPage={setPage} />
           </div>
+          <Audio src='retrosoul.mp3' type='audio/mp3' controls />
+          {/* </div> */}
         </div>
         <div>
+          <br />
+          <br />
           <h3>Popular Genres</h3>
           <TagContainer>
-            {genres.map((genre, i) => <HomePageGenreTag key={i} value={genre} onClick={handleFilterGenre}>{genre}</HomePageGenreTag>)}
+            {genres.map((genre) => (
+              <HomePageGenreTag key={genre.id} value={genre} onClick={handleFilterGenre}>
+                {genre}
+              </HomePageGenreTag>
+            ))}
           </TagContainer>
           <ArtistImgList ArtistArr={artists} xs={1} setPage={setPage} setPageId={setPageId} />
+          <br />
+          <br />
           <h3>Popular Artists</h3>
           <ArtistImgList ArtistArr={poplarArtist} xs={1} setPage={setPage} setPageId={setPageId} />
         </div>
       </ArtistInfo>
+      <br />
+      <br />
       <TeamInfo>
         <Title>
           <h3>Development Team</h3>
@@ -107,7 +133,7 @@ export default function Home({ setPage, setPageId }) {
             </div>
             <div>
               <h4>Architect</h4>
-              <ArtistImg src='https://ca.slack-edge.com/T01J1BRG8E4-U03AJP0K0BH-eb4e28704fac-512' />
+              <ArtistImg src='https://avatars.githubusercontent.com/u/82719099?v=4' />
               <p>Fangzhuo Xi</p>
             </div>
           </MemberA>
@@ -140,3 +166,8 @@ export default function Home({ setPage, setPageId }) {
     </HomeContainer>
   );
 }
+
+Home.propTypes = {
+  setPageId: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
+};
