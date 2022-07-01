@@ -11,6 +11,9 @@ import {
 } from './StyledComponents.js';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import ListIcon from '@mui/icons-material/List';
 
 export default function NavBar({ setUserType, setUserId }) {
   const [userName, setUserName] = useState('');
@@ -84,7 +87,7 @@ export default function NavBar({ setUserType, setUserId }) {
                 </div>
               </div>
               <UserImg src={userPic.length ? userPic : 'https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc='} alt='thumbnail' />
-              <ArrowDropDownIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
+              <ListIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
               <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -124,10 +127,17 @@ export default function NavBar({ setUserType, setUserId }) {
               </Menu>
             </UserSettingContainer>
           )}
-
-          <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
-          <div style={{ cursor: 'pointer' }} onmouseover='getAlert(this)'>
-            <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+          <div style={{ cursor: 'pointer' }}>
+            <Tooltip title="Alert">
+              <IconButton>
+                <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Log Out">
+              <IconButton>
+                <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+              </IconButton>
+            </Tooltip>
           </div>
           {/* <Alert severity="success">This is a success alert — check it out!</Alert> */}
         </UserSettingContainer>
