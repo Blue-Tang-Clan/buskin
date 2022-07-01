@@ -39,7 +39,7 @@ z-index: 9998;
 display: ${({ searching }) => (searching ? 'block' : 'none')};
 position: absolute;
 top: -30px;
-width: 50%;
+width: 47%;
 background: #F8F8FB;
 margin-top: 5rem;
 border-radius: 10px;
@@ -54,7 +54,6 @@ border-bottom-right-radius: 10px;
 border-bottom-left-radius: 10px;
 background-image: linear-gradient(to right, #667eea, #764ba2);
 color: white;
-padding-top: 35px;
 `;
 
 const IndividualResult = styled.div`
@@ -63,6 +62,7 @@ height: 2.8rem;
 background: transparent;
 font-size: 1.5rem;
 cursor: pointer;
+padding-top: 10px;
 &:hover {
   background-color: #FFB800;
 }
@@ -144,7 +144,7 @@ export default function SearchBar() {
           ? <ResultsSection style={{ marginTop: '20px' }}>No search results match your criteria</ResultsSection>
           : null}
         {artistsArr.length ? (
-          <ResultsSection>
+          <ResultsSection style={{ paddingTop: '50px' }}>
             <QueueMusicIcon style={{ paddingLeft: '30px' }} sx={{ color: 'white' }} />
             {' Artists'}
           </ResultsSection>
@@ -158,7 +158,7 @@ export default function SearchBar() {
           ))
           : null}
         {eventsArr.length ? (
-          <ResultsSection>
+          <ResultsSection style={{ paddingTop: '20px' }}>
             <DateRangeIcon style={{ paddingLeft: '30px' }} sx={{ color: 'white' }} />
             {' Events'}
           </ResultsSection>
