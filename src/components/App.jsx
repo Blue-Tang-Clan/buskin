@@ -41,7 +41,7 @@ export default function App() {
   return (
     <>
       {/* components */}
-      <TopContext.Provider value={{ page, setPage, pageId, setPageId, userType, setLogin, userId, setUserId }}>
+      <TopContext.Provider value={{ page, setPage, pageId, setPageId, userType, setLogin, userId, setUserId, setShowForm }}>
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} userNameApp={userNameApp} userPicApp={userPicApp} showForm={showForm} />
         </div>
