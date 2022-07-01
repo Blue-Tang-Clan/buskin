@@ -31,7 +31,7 @@ export default function App() {
         .map((cookie) => cookie.split('='))
         .forEach((cookie) => { cookies[cookie[0]] = cookie[1]; });
       setUserType(cookies.usertype);
-      setUserId(cookies.id);
+      setUserId(Number(cookies.userid));
       setShowForm('Register');
       setUserName(cookies.username);
       setUserPic(cookies.pic);
@@ -41,7 +41,7 @@ export default function App() {
   return (
     <>
       {/* components */}
-      <TopContext.Provider value={{ page, setPage, pageId, setPageId, userType, setLogin, userId, setUserId }}>
+      <TopContext.Provider value={{ page, setPage, pageId, setPageId, userType, setLogin, userId, setUserId, setShowForm }}>
         <div>
           <NavBar userType={userType} setUserId={setUserId} setUserType={setUserType} userNameApp={userNameApp} userPicApp={userPicApp} showForm={showForm} />
         </div>

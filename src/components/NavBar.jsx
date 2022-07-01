@@ -17,7 +17,7 @@ import ListIcon from '@mui/icons-material/List';
 export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp, showForm }) {
   const [userName, setUserName] = useState('');
   const [userPic, setUserPic] = useState('');
-  const { setPage, userType } = useContext(TopContext);
+  const { setPage, userType, setShowForm } = useContext(TopContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [alert, setAlert] = useState(false);
 
@@ -62,6 +62,10 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
       let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
       document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
+    setUserId(null);
+    setShowForm('Register');
+    setUserName('');
+    setUserPic('');
     setPage('home');
     setUserType('anonymous');
   };
