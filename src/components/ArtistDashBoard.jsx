@@ -53,7 +53,7 @@ const DashBoardCard = styled.div`
 
 const EventList = styled.div`
   height: 500px;
-  overflow: scroll;
+  ${'' /* overflow: scroll; */}
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 4;
@@ -83,7 +83,7 @@ const DateDiv = styled.div`
 
 const DateText = styled.h4`
   margin: 5px;
-  color: #259998;
+  ${'' /* color: #259998; */}
 `;
 
 const AddressDiv = styled.div`
@@ -99,7 +99,7 @@ const MapDiv = styled.div`
   margin: auto;
 `;
 
-const MapText = styled.h4`
+const MapText = styled.h3`
   grid-column-start: 3;
   grid-row-start: 2;
 `;
@@ -176,19 +176,19 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
         <TotalFollowersModified number={fanCount} />
       </DashBoardCard>
       <EventList>
-        <h4>Upcoming Events</h4>
+        <h3>Upcoming Events</h3>
         {events && events.map((event) => (
           <EventDiv id={event.id} onClick={clickHandler}>
             <DateDiv>
               <DateText>{`${event.date}`}</DateText>
-              <p style={{ color: '#259998' }}>{`${event.start_time}`}</p>
+              <p>{`${event.start_time}`}</p>
             </DateDiv>
             <AddressDiv>
               <EventText>{event.name}</EventText>
               <AddressText>{`${event.city}, ${event.state}`}</AddressText>
             </AddressDiv>
             <TrashBoxDiv onClick={deleteEvent} id={event.id}>
-              <FaTrashAlt style={{ color: '#259998', pointerEvents: 'none' }} />
+              <FaTrashAlt style={{ pointerEvents: 'none' }} />
             </TrashBoxDiv>
           </EventDiv>
         ))}
