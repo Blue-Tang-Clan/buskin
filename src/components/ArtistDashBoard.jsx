@@ -8,8 +8,8 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 
 const TotalFollowersModified = ({number}) => {
   return (
-    <Tag>
-      <Container style={{position: 'absolute', top:'23%'}}>
+    <Tag style={{position: 'relative'}}>
+      <Container style={{position: 'absolute', top: '35px'}}>
         <TotalFollowersTag >
           <Icon>
             <PermIdentityIcon sx={{ color: "#6F52ED" }} />
@@ -99,7 +99,7 @@ const MapDiv = styled.div`
   margin: auto;
 `;
 
-const MapText = styled.h4`
+const MapText = styled.h3`
   grid-column-start: 3;
   grid-row-start: 2;
 `;
@@ -128,6 +128,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
   const [events, setEvents] = useState([]);
   const [artistName, setArtistName] = useState('');
   const [artistId, setArtistId] = useState();
+  const [followers, setFollowers] = useState([]);
 
   const clickHandler = (e) => {
     setPage('event');
@@ -138,13 +139,13 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
     apiMasters.getArtistDetails(id)
       .then((response) => {
         const artistInfo = response.data.rows[0].json_build_object;
-        console.log(artistInfo);
         if (artistInfo.followers) {
           setFanCount(artistInfo.followers.length);
         }
         setEvents(artistInfo.events);
         setArtistName(artistInfo.name);
         setArtistId(artistInfo.id);
+        setFollowers(artistInfo.followers);
       })
       .catch((err) => {
         console.log('getArtistDashBoard err', err);
@@ -153,8 +154,6 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
 
   const deleteEvent = (e) => {
     e.stopPropagation();
-    console.log(e);
-    console.log('eventId', e.target.id);
     if (e.target.id) {
       apiMasters.artistDeleteEvent(userId, e.target.id)
         .then(() => {
@@ -177,7 +176,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
         <TotalFollowersModified number={fanCount} />
       </DashBoardCard>
       <EventList>
-        <h4>Upcoming Events</h4>
+        <h3>Upcoming Events</h3>
         {events && events.map((event) => (
           <EventDiv id={event.id} onClick={clickHandler}>
             <DateDiv>
@@ -196,7 +195,7 @@ export default function ArtistDashBoard({userId, setPage, setPageId}) {
       </EventList>
       <MapText>Add Your Events Here</MapText>
       <MapDiv>
-        <ViewMap ArtistName={artistName} ArtistId={artistId} getArtistDashBoard={getArtistDashBoard} events={events} />
+        <ViewMap ArtistName={artistName} ArtistId={artistId} getArtistDashBoard={getArtistDashBoard} events={events} followers={followers} />
       </MapDiv>
     </FanDashBoard>
   );

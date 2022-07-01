@@ -55,7 +55,6 @@ export default function ArtistProfile({ setPage, setPageId }) {
   const [artist, setArtist] = useState({});
   const [events, setEvents] = useState([]);
   const [follow, setFollow] = useState(false);
-  const [renderEvents, setRenderEvents] = useState(false);
 
   useEffect(() => {
     apiMasters.getArtistDetails(pageId)
@@ -74,16 +73,23 @@ export default function ArtistProfile({ setPage, setPageId }) {
         });
         setEvents(info.events);
       })
+      .then(() => {
+        if (userId && userType === 'fan') {
+          apiMasters.getFanDashBoard(userId)
+            .then((response) => {
+              const following = response.data.artists.reduce((flag, fArtist) => {
+                if (flag) {
+                  return flag;
+                }
+                return fArtist.id === artist.id;
+              }, false);
+              setFollow(following);
+            })
+            .catch((err) => console.log('Get Fan Events Error: ', err));
+        }
+      })
       .catch((err) => console.log('aww didnt get any data? boohoo', err));
   }, [pageId]);
-
-  function toggleRenderEvents() {
-    if (renderEvents) {
-      setRenderEvents(false);
-    } else {
-      setRenderEvents(true);
-    }
-  }
 
   function handleFollow(action, fanId, artistId) {
     if (userType === 'anonymous') {
@@ -110,12 +116,15 @@ export default function ArtistProfile({ setPage, setPageId }) {
           <div style={{ width: 'auto', display: 'flex', flexDirection: 'row', position: 'relative', alignItems: 'center'}}>
             <div style={{position: 'relative', marginRight: '50px'}}>
               <ArtistImg src={artist.pic} alt='busker' style={{ width: '350px', height: '350px', position: 'relative' }} />
-              {userType === 'fan'
-                ? (
-                  <Tooltip title='Follow this artist' style={{ cursor: 'pointer' }}>
-                    {follow ? <FavoriteIcon onClick={() => handleFollow('unfollow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} /> : <FavoriteBorderIcon onClick={() => handleFollow('follow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} /> }
+              {userType !== 'artist'
+                ? follow ? (
+                  <Tooltip title='Unfollow this artist' style={{ cursor: 'pointer' }}>
+                    <FavoriteIcon onClick={() => handleFollow('unfollow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} />
                   </Tooltip>
-                )
+                ) :
+                  <Tooltip title='Follow this artist' style={{ cursor: 'pointer' }}>
+                    <FavoriteBorderIcon onClick={() => handleFollow('follow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} />
+                  </Tooltip>
                 : null}
             </div>
             <div style={{ marginLeft: '40px' }}>

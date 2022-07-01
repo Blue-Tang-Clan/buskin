@@ -25,6 +25,12 @@ const StyleSpan = styled.span`
   font-size: 1em;
 `;
 
+const Container = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+
 function ArtistImgList({
   ArtistArr,
   xs,
@@ -65,7 +71,7 @@ function EventImgList({
   };
   console.log(EventArr);
   return (
-    <Grid item xs={xs}>
+    <Container>
       {EventArr.map((event) => (
         <Card key={event.id} pic={event.pic}>
           <div className='flip-card-container' key={event.id}>
@@ -92,7 +98,7 @@ function EventImgList({
           </div>
         </Card>
       ))}
-    </Grid>
+    </Container>
   );
 }
 

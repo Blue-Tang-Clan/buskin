@@ -39,7 +39,7 @@ const WarningMessage = styled.div`
 `;
 
 let eventObj = {};
-export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, events }) {
+export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, events, followers }) {
   const [viewport, setViewport] = useState({
     latitude: 40.7484,
     longitude: -73.9857,
@@ -59,7 +59,7 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
   const [artistId, setArtistId] = useState(null);
   const [artistName, setArtistName] = useState('');
   const [warning, setWarning] = useState(false);
-
+  const [confEmails, setConfEmails] = useState(null);
   useEffect(() => {
     const getPins = async () => {
       try {
@@ -105,7 +105,16 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
       .then((res) => {
         setPins([...pins, eventObj]);
       })
-      .then(() => setNewEvent(null))
+      .then(() => {
+        let receivers = 'kmzeinu@gmail.com';
+        if (followers) {
+          receivers += ', ' + followers.join(', ');
+        }
+        console.log(receivers);
+        const subject = 'You are invited!';
+        const text = artistName + ' is throwing a buskin party at ' + startTime +  ' in ' + street + ', ' + city + '!';
+        apiMasters.sendEmail({ receivers, subject, text });
+      })
       .then(() => getArtistDashBoard(artistId))
       .catch((err) => console.log(err));
   };
@@ -131,7 +140,17 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
       apiMasters.checkEventRadius(newEvent.lat, newEvent.lng, formatDate, startTime)
         .then((res) => {
           if (res.data.length) {
+            console.log('SAta', res.data);
+            const arrOfEmails = res.data.join(', ');
+            setConfEmails(arrOfEmails);
+            console.log(confEmails);
             setWarning(true);
+
+            const receivers = arrOfEmails + ', kmzeinu@gmail.com';
+            const subject = 'Another event happening at your scheduled event!';
+            const text = artistName + ' has schecduled an event ' + ' at ' + start_time + ' . Do you want to reschudle?';
+            console.log(receivers, subject, text);
+            apiMasters.sendEmail({ receivers, subject, text });
           } else {
             eventCreation(artistId, eventObj);
           }
@@ -248,39 +267,39 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
                   anchor='right'
                   onClose={() => setCurrentPlaceId(null)}
                 >
-                  <div className='card'>
+                  <div className='map-card'>
                     <label className='eventLabel'>Artist Name</label>
                     <h2 className='artist'>
                       {' '}
-                      {p.display_name === null ? 'Anonymous' : p.display_name}
+                      {p.display_name === null ? 'ANONYMOUS' : p.display_name.toUpperCase()}
                     </h2>
                     <label className='eventLabel'>Event Name</label>
                     <h2 className='event'>
                       {' '}
-                      {p.name}
+                      {p.name.toUpperCase()}
                     </h2>
                     <label className='eventLabel'>Event Address</label>
                     <p className='address'>
-                      {p.street}
+                    {p.street.toUpperCase()}
                       {' '}
                       -
                       {' '}
-                      {p.city}
+                      {p.city.toUpperCase()}
                       {' '}
                       /
                       {' '}
-                      {p.state}
+                      {p.state.toUpperCase()}
                       {' '}
                     </p>
                     <label className='eventLabel'>Date</label>
                     <p className='date'>{p.date}</p>
                     <label className='eventLabel'>Time</label>
                     <span className='startTime'>
-                      Start Time&nbsp;
+                      START TIME&nbsp;&nbsp;&nbsp;
                       <b>{p.start_time}</b>
                     </span>
                     <span className='endTime'>
-                      End Time&nbsp;
+                      END TIME&nbsp;&nbsp;&nbsp;
                       <b>
                         {p.end_time}
                       </b>
