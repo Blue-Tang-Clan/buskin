@@ -6,14 +6,20 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 export default function Venmo() {
   const { artist } = useContext(ArtistContext);
+
+  if (artist.venmo) {
+    return (
+      <div>
+        {artist.venmo !== 'undefined'
+          ? (
+            <button type='button'>
+              <a href={`https://account.venmo.com/u/${artist.venmo}`} target='_blank' rel='noreferrer'>VENMO</a>
+            </button>
+          ) : <></> }
+      </div>
+    );
+  }
   return (
-    <div>
-      {artist.venmo !== undefined && artist.venmo !== 'undefined' && artist.venmo.length > 0
-        ? (
-          <a href={`https://account.venmo.com/u/${artist.venmo}`} target='_blank' rel='noreferrer'>
-            <AttachMoneyIcon style={{ width: '40px', height: '40px', marginTop: '10px', marginLeft: '10px' }} />
-          </a>
-        ) : undefined }
-    </div>
+    <div />
   );
 }
