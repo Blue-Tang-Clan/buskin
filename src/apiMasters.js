@@ -122,13 +122,13 @@ const editFanProfile = (fanId, fanProfile) => (
   axios.put(`${url}/fan/profile/${fanId}`, fanProfile)
 );
 
-const editArtistProfile = (artistId, artistProfile) => (
-  axios.put(`${url}/artist/profile/${artistId}`, artistProfile, {
+const editArtistProfile = (artistId, artistProfile) => {
+  return axios.put(`${url}/artist/profile/${artistId}`, artistProfile, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   })
-);
+};
 
 const search = (query) => (
   axios.get(`${url}/search?query=${query}`)
