@@ -7,12 +7,15 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import EventMap from './EventMap.jsx';
+import Tooltip from '@mui/material/Tooltip';
+
 export const ArtistContext = React.createContext();
 
 export const EventLocationContext = React.createContext();
 
 export default function Event() {
-  const { pageId, userId, userType, setLogin } = useContext(TopContext);
+  const {pageId, userId, userType, setLogin} = useContext(TopContext);
+  const [follow, setFollow] = useState(false);
   const [eventInfo, setEventInfo] = useState({});
   const [artistInfo, setArtistInfo] = useState({});
 
@@ -21,6 +24,7 @@ export default function Event() {
       .then((data) => {
         const info = data.data.rows[0];
         setEventInfo({
+          id: info.id,
           art_id: info.art_id,
           city: info.city,
           date: info.date,
@@ -35,43 +39,77 @@ export default function Event() {
           state: info.state,
           street: info.street,
         });
+
+        if (userId && userType === 'fan') {
+          apiMasters.getFanDashBoard(userId)
+            .then((response) => {
+              const following = response.data.events.reduce((flag, fEvent) => {
+                if (flag) {
+                  return flag;
+                }
+                return Number(fEvent.event_id) === Number(info.id);
+              }, false);
+              setFollow(following);
+            })
+            .then(() => console.log('are we following', follow))
+            .catch((err) => console.log('Get Fan Events Error: ', err));
+        }
+
+        apiMasters.getArtistDetails(info.art_id)
+          .then((data) => {
+            const info2 = data.data.rows[0].json_build_object;
+            setArtistInfo({
+              id: info2.id,
+              name: info2.name,
+              bio: info2.bio,
+              genre: info2.genre,
+              instrument: info2.instrument,
+              pic: info2.pic,
+              venmo: info2.venmo,
+              paypal: info2.paypal,
+              cashapp: info2.cashapp,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => console.log('aww didnt get any data? boohoo', err));
   }, [pageId]);
 
-  useEffect(() => {
-    apiMasters.getArtistDetails(eventInfo.art_id)
-      .then((data) => {
-        const info = data.data.rows[0].json_build_object;
-        setArtistInfo({
-          id: info.id,
-          name: info.name,
-          bio: info.bio,
-          genre: info.genre,
-          instrument: info.instrument,
-          pic: info.pic,
-          venmo: info.venmo,
-          paypal: info.paypal,
-          cashapp: info.cashapp,
-        });
-      })
-      .catch((err) => console.log('This one ww didnt get any data? boohoo', err));
-  }, [eventInfo]);
-
-  const saveEvent = () => {
+  function handleFollow(action, fanId, eventId) {
     if (userType === 'anonymous') {
       setLogin(true);
+    } else if (action === 'follow') {
+      apiMasters.saveEvent(fanId, eventId)
+        .then(() => setFollow(true))
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
-      apiMasters.saveEvent(userId, pageId);
+      apiMasters.deleteEvent(fanId, eventId)
+        .then(() => setFollow(false))
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  };
-  console.log('eventInfo: ', eventInfo);
+  }
+
   return (
     <EventColContainer style={{ marginTop: '50px' }}>
       <EventRowContainer>
         {eventInfo.pic ? <FreshTalentImg src={eventInfo.pic} alt='Event' style={{ marginRight: '50px' }} />
           : <FreshTalentImg src='https://images.sampletemplates.com/wp-content/uploads/2015/04/Event-Program.jpg' alt='Event' style={{ marginRight: '50px' }} />}
-        <FavoriteBorderIcon sx={{ color: '#FFB800' }} fontSize='large' onClick={saveEvent} />
+        {userType !== 'artist' ?
+          follow ? (
+            <Tooltip title='Remove Event' style={{ cursor: 'pointer' }}>
+              <FavoriteIcon sx={{ color: '#FFB800' }} fontSize='large' onClick={() => handleFollow('unfollow', userId, eventInfo.id)} />
+            </Tooltip>
+          ) : (
+            <Tooltip title='Save Event' style={{ cursor: 'pointer' }}>
+              <FavoriteBorderIcon sx={{ color: '#FFB800' }} fontSize='large' onClick={() => handleFollow('follow', userId, eventInfo.id)} />
+            </Tooltip>
+          ) : null}
         <div style={{ borderRightStyle: 'solid', paddingRight: '40px' }}>
           <h1 style={{ marginTop: -10 }}>{eventInfo.name}</h1>
           <p>
