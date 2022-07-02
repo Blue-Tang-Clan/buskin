@@ -1,37 +1,178 @@
-import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import styled from 'styled-components';
-import { GenreTag } from './StyledComponents.js';
+import React, { useState, useContext, useEffect } from 'react';
+import { TopContext } from './App.jsx';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Tooltip from '@mui/material/Tooltip';
+import ListIcon from '@mui/icons-material/List';
+import RegisterModal from './Auth/RegisterModal.jsx';
+import SearchBar from './SearchBar.jsx';
+import {
+UserImg, Nav, UserSettingContainer, UserNav, LogoutNav, SettingNav, NotificationNav,
+} from './StyledComponents.js';
 
-const Nav = styled.div`
-  background: white;
-  height: 50px;
-  display: flex;
-  // grid-template-columns: 30px 30px auto 50px;
-  margin-top: 70px;
-  gap: 30px;
-`;
+export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp, showForm }) {
+  const [userName, setUserName] = useState('');
+  const [userPic, setUserPic] = useState('');
+  const { setPage, userType, setShowForm } = useContext(TopContext);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [alert, setAlert] = useState(false);
 
-const Search = styled.input`
-  width: 60%;
-  height: 2.8rem;
-  background: white;
-  outline: none;
-  border: none;
-  border-radius: 1.625rem;
-  padding: 0 3.5rem 0 1.5rem;
-  font-size: 1rem;
-  box-shadow: 0px 0px 6px 6px rgba(0,0,0, .1);
-`;
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-export default function NavBar() {
+  const goHome = () => {
+    setPage('home');
+  };
+  const keyDown = (e) => {
+    if (e.keyCode === 13) {
+      goHome();
+    }
+  };
+  const goArtistProfile = () => {
+    setPage('editArtistProfile');
+    setAnchorEl(null);
+  };
+  const goArtistDashboard = () => {
+    setPage('artistDashboard');
+    setAnchorEl(null);
+  };
+  const goFanProfile = () => {
+    setPage('editFanProfile');
+    setAnchorEl(null);
+  };
+  const goFanDashboard = () => {
+    setPage('fanDashboard');
+    setAnchorEl(null);
+  };
+  const goLogout = () => {
+    const cookies = document.cookie.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i];
+      const eqPos = cookie.indexOf('=');
+      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    }
+    setUserId(null);
+    setShowForm('Register');
+    setUserName('');
+    setUserPic('');
+    setPage('home');
+    setUserType('anonymous');
+  };
+
+  useEffect(() => {
+    if (userNameApp) {
+      setUserName(userNameApp);
+    }
+    if (userPicApp) {
+      setUserPic(userPicApp);
+    } else {
+      setUserPic('');
+    }
+  }, [userNameApp, userPicApp, showForm]);
 
   return (
     <Nav>
-      <div>logo</div>
-      <div>BUSKIN'</div>
-      <div><Search type="text" name="searchQueryInput" placeholder="Search for new artists, events..." value="" /></div>
-      <GenreTag>SignUp</GenreTag>
+      <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
+        <img src='https://i.ibb.co/Dw7T0Jb/Buskin-B2-copy.png' alt='logo' height='85px' style={{ cursor: 'pointer', marginLeft: '3%', marginTop: '3px' }} />
+      </div>
+      <div>
+        <SearchBar />
+      </div>
+      {userType === 'anonymous' ? (
+        <RegisterModal
+          setUserType={setUserType}
+          setUserId={setUserId}
+          setUserName={setUserName}
+          setUserPic={setUserPic}
+          showFormApp={showForm}
+        />
+      ) : (
+        <UserSettingContainer>
+          {userType === 'artist' ? (
+            <UserSettingContainer>
+              <UserNav>
+                <div>
+                  <label>{userName}</label>
+                </div>
+                <div>
+                  <small style={{ color: '#A6ACBE' }}>Artist</small>
+                </div>
+              </UserNav>
+              <div>
+                <UserImg src={userPic.length ? userPic : 'https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc='} alt='thumbnail' />
+              </div>
+              <SettingNav style={{ cursor: 'pointer' }}>
+                <Tooltip title='Setting'>
+                  <ListIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={handleClick} />
+                </Tooltip>
+                <Menu
+                  id='basic-menu'
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  <MenuItem onClick={goArtistProfile}>Edit profile</MenuItem>
+                  <MenuItem onClick={goArtistDashboard}>Dashboard</MenuItem>
+                </Menu>
+              </SettingNav>
+            </UserSettingContainer>
+          ) : (
+            <UserSettingContainer>
+              <UserNav>
+                <div>
+                  <label>{userName}</label>
+                </div>
+                <div>
+                  <small style={{ color: '#A6ACBE' }}>Fan</small>
+                </div>
+              </UserNav>
+              <div>
+                <UserImg src={userPic.length ? userPic : 'https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg'} alt='thumbnail' />
+              </div>
+              <SettingNav style={{ cursor: 'pointer' }}>
+                <Tooltip title='Setting'>
+                  <ListIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={handleClick} />
+                </Tooltip>
+                <Menu
+                  id='basic-menu'
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  {userType === 'artist' ? <MenuItem onClick={goFanProfile}>Edit profile</MenuItem> : null}
+                  <MenuItem onClick={goFanDashboard}>Dashboard</MenuItem>
+                </Menu>
+              </SettingNav>
+            </UserSettingContainer>
+          )}
+          <NotificationNav>
+            <Tooltip title='Alert' style={{ cursor: 'pointer' }}>
+              <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
+            </Tooltip>
+          </NotificationNav>
+          <LogoutNav>
+            <Tooltip title='Log Out' style={{ cursor: 'pointer' }}>
+              <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
+            </Tooltip>
+          </LogoutNav>
+        </UserSettingContainer>
+      )}
     </Nav>
   );
 }

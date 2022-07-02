@@ -15,5 +15,6 @@ module.exports = {
   rules: {
     'import/extensions': ['error', 'always', { ignorePackages: true }],
     'jsx-quotes': ['error', 'prefer-single'],
+    'no-console': 'off',
   },
 };

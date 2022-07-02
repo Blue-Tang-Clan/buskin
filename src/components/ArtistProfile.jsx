@@ -1,78 +1,160 @@
-import React, { useState, useContext } from 'react';
-import EventListItem from './EventListItem.jsx';
+import React, { useState, useContext, useEffect } from 'react';
+import EventList from './EventList.jsx';
+import Payments from './Payments.jsx';
+import apiMasters from '../apiMasters.js';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import PaymentIcon from '@mui/icons-material/Payment';
+import { TagContainer, HomePageGenreTag, Audio } from './StyledComponents.js';
+import Divider from '@mui/material/Divider';
+import { TopContext } from './App.jsx';
+import { ArtistImg } from './StyledComponents.js';
+import styled from 'styled-components';
+import Tooltip from '@mui/material/Tooltip';
 
-const dummy = {
-  picture: 'https://cdn.shopify.com/s/files/1/0203/9334/files/Busking_Musicians_1024x1024.jpeg?v=1521795106',
-  display_name: 'Yau Yu',
-  bio: 'I play music really well!',
-  genre: 'Rock',
-  instrument: 'Accordian',
-  venmo: 'venmo',
-  cashapp: 'Cashapp',
-  paypal: 'paypal',
-};
+const ArtistProfileContainer = styled.div`
+  margin: 4rem 0 20rem 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
-const dumEvents = [
-  {
-    name: 'Event 1',
-    street: '123 St',
-    city: 'Baltimore',
-    state: 'MD',
-    date: 'July 19, 2022',
-    start_time: '7:00pm',
-    end_time: '8:00pm',
-  },
-  {
-    name: 'Event 2',
-    street: '123 St',
-    city: 'Baltimore',
-    state: 'MD',
-    date: 'July 19, 2022',
-    start_time: '7:00pm',
-    end_time: '8:00pm',
-  },
-  {
-    name: 'Event 3',
-    street: '123 St',
-    city: 'Baltimore',
-    state: 'MD',
-    date: 'July 19, 2022',
-    start_time: '7:00pm',
-    end_time: '8:00pm',
-  },
-];
+const ArtistTag = styled(HomePageGenreTag)`
+  &:hover {
+    cursor: default;
+    background-color: #F7F8FB;
+    color: black;
+  }
+`;
 
-export const EventContext = React.createContext();
+const ArtistDescription = styled.div`
+  width: 32rem;
+  padding: 40px;
+  background-color: white;
+  box-shadow: 4px 4px 5px 5px rgba(0,0,0, .08);
+  border-radius: 10px;
+  min-height: 100px;
+  margin-bottom: 2rem;
+`;
 
-export default function ArtistProfile() {
-  const [eventView, setEventView] = useState();
+const Schedule = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  marginTop: 80px;
+  width: auto;
+`;
 
-  function eventClick(view) {
-    setEventView(view);
+export const ArtistContext = React.createContext();
+
+export default function ArtistProfile({ setPage, setPageId }) {
+  const { pageId, userType, setLogin, userId } = useContext(TopContext);
+  const [artist, setArtist] = useState({});
+  const [events, setEvents] = useState([]);
+  const [follow, setFollow] = useState(false);
+
+  useEffect(() => {
+    apiMasters.getArtistDetails(pageId)
+      .then((data) => {
+        const info = data.data.rows[0].json_build_object;
+        setArtist({
+          id: info.id,
+          name: info.name,
+          bio: info.bio,
+          genre: info.genre,
+          instrument: info.instrument,
+          pic: info.pic,
+          venmo: info.venmo,
+          paypal: info.paypal,
+          cashapp: info.cashapp,
+        });
+        setEvents(info.events);
+      })
+      .then(() => {
+        if (userId && userType === 'fan') {
+          apiMasters.getFanDashBoard(userId)
+            .then((response) => {
+              const following = response.data.artists.reduce((flag, fArtist) => {
+                if (flag) {
+                  return flag;
+                }
+                return fArtist.id === artist.id;
+              }, false);
+              setFollow(following);
+            })
+            .catch((err) => console.log('Get Fan Events Error: ', err));
+        }
+      })
+      .catch((err) => console.log('aww didnt get any data? boohoo', err));
+  }, [pageId]);
+
+  function handleFollow(action, fanId, artistId) {
+    if (userType === 'anonymous') {
+      setLogin(true);
+    } else if (action === 'follow') {
+      apiMasters.followArtist(fanId, artistId)
+        .then(() => setFollow(true))
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      apiMasters.unfollowArtist(fanId, artistId)
+        .then(() => setFollow(false))
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   return (
-    <div>
-      <img src={dummy.picture} alt='busker' style={{height: '100px'}} />
-      <h1>{dummy.name}</h1>
-      <p>Heart icon goes here</p>
-      <p>{dummy.bio}</p>
-      <p>{dummy.genre}</p>
-      <p>{dummy.instrument}</p>
-      {/* music clip */}
-      <button type='button' onClick={() => { eventClick('upcoming'); }}>Upcoming Events</button>
-      <button type='button' onClick={() => { eventClick('past'); }}>Past Events</button>
-      {dumEvents.map((event) => (
-        <EventContext.Provider value={{ event }}>
-          {eventView === 'upcoming' ? <EventListItem /> : <> </>}
-        </EventContext.Provider>
-      ))}
-      {/* eventView === 'upcoming'
-        ? dumEvents.map((event) => <EventListItem event={event} />)
-      : dumEvents.map((event) => <EventListItem event={event} />) */}
-      <p>{dummy.venmo}</p>
-      <p>{dummy.cashapp}</p>
-      <p>{dummy.paypal}</p>
-    </div>
+    <ArtistContext.Provider value={{events, artist}}>
+      <ArtistProfileContainer>
+        <div style={{marginBottom: '4rem'}}>
+          <div style={{ width: 'auto', display: 'flex', flexDirection: 'row', position: 'relative', alignItems: 'center'}}>
+            <div style={{position: 'relative', marginRight: '50px'}}>
+              <ArtistImg src={artist.pic} alt='busker' style={{ width: '350px', height: '350px', position: 'relative' }} />
+              {userType !== 'artist'
+                ? follow ? (
+                  <Tooltip title='Unfollow this artist' style={{ cursor: 'pointer' }}>
+                    <FavoriteIcon onClick={() => handleFollow('unfollow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} />
+                  </Tooltip>
+                ) :
+                  <Tooltip title='Follow this artist' style={{ cursor: 'pointer' }}>
+                    <FavoriteBorderIcon onClick={() => handleFollow('follow', userId, artist.id)} title='follow' sx={{ color: '#FFB800' }} style={{ width: '50px', height: '50px', position: 'absolute', right: 0 }} />
+                  </Tooltip>
+                : null}
+            </div>
+            <div style={{ marginLeft: '40px' }}>
+              <div style={{ width: 'auto', display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1rem'}}>
+                <h1 style={{ margin: '0' }}>
+                  {artist.name}
+                </h1>
+                <TagContainer style={{marginLeft: '20px'}}>
+                  <ArtistTag style={{cursor: 'default'}} value={artist.genre}>{artist.genre}</ArtistTag>
+                  <ArtistTag style={{cursor: 'default'}} value={artist.instrument}>{artist.instrument}</ArtistTag>
+                </TagContainer>
+              </div>
+              <ArtistDescription>
+                {artist.bio}
+              </ArtistDescription>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: '20px 0', width: '100%' }}>
+                <Audio src="retrosoul.mp3" type="audio/mp3" controls />
+              </div>
+              <Payments />
+            </div>
+
+          </div>
+        </div>
+        <Schedule>
+          <h1>Upcoming Events</h1>
+          {events
+            ? <EventList setPage={setPage} setPageId={setPageId} />
+            : undefined}
+        </Schedule>
+      </ArtistProfileContainer>
+    </ArtistContext.Provider>
   );
 }
