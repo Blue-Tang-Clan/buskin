@@ -62,34 +62,9 @@ const sendEmail = (obj) => {
   axios.post(`${url}/eventnotification`, obj);
 };
 
-// const createEvent = (
-//   artistId,
-//   name,
-//   street,
-//   city,
-//   state,
-//   longitude,
-//   latitude,
-//   date,
-//   startTime,
-//   endTime,
-// ) => (
-//   axios.post(`${url}/artists/event/${artistId}`, {
-//     name,
-//     street,
-//     city,
-//     state,
-//     longitude,
-//     latitude,
-//     date,
-//     start_time: startTime,
-//     end_time: endTime,
-//   })
-// );
-
-const createEvent = (artistId, eventObj) => {
-  return axios.post(`${url}/artist/event/${artistId}`, eventObj);
-};
+const createEvent = (artistId, eventObj) => (
+  axios.post(`${url}/artist/event/${artistId}`, eventObj)
+);
 
 const saveEvent = (fanId, eventId) => (
   axios.post(`${url}/fans/event`, {

@@ -14,7 +14,7 @@ export default function Venmo() {
             <button style={{ width: 10 + 'rem', height: 5 + 'rem' }} type='button'>
               <a href={`https://cash.app/$${artist.cashapp}`} target='_blank' rel='noreferrer'>CASHAPP</a>
             </button>
-          ) : <></> }
+          ) : null }
       </div>
     );
   }

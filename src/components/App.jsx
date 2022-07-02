@@ -7,7 +7,6 @@ import ArtistUpdate from './ArtistUpdate.jsx';
 import FanDashBoard from './FanDashBoard.jsx';
 import EditFanProfile from './EditFanProfile.jsx';
 import EditProfile from './EditArtistProfile_styled.jsx';
-import EditArtistProfile from './EditArtistProfile.jsx';
 import RegisterModal from './Auth/RegisterModal.jsx';
 import ArtistDashBoard from './ArtistDashBoard.jsx';
 import { PageContainer, NavSpacer } from './StyledComponents.js';
@@ -52,14 +51,14 @@ export default function App() {
         </div>
         <NavSpacer />
         <PageContainer>
-          {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : <></>}
-          {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : <></>}
-          {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : <></>}
-          {page === 'event' ? <Event /> : <></>}
-          {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : <></>}
-          {page === 'artistUpdate' ? <ArtistUpdate /> : <></>}
-          {page === 'editArtistProfile' ? <EditProfile artistId={userId} setPage={setPage} /> : <></>}
-          {page === 'editFanProfile' ? <EditFanProfile /> : <></>}
+          {page === 'home' ? <Home setPage={setPage} setPageId={setPageId} /> : null}
+          {page === 'artistProfile' ? <ArtistProfile setPage={setPage} setPageId={setPageId} /> : null}
+          {page === 'fanDashboard' ? <FanDashBoard setPage={setPage} setPageId={setPageId} userId={userId} /> : null}
+          {page === 'event' ? <Event /> : null}
+          {page === 'artistDashboard' ? <ArtistDashBoard pageId={pageId} userId={userId} setPage={setPage} setPageId={setPageId} /> : null}
+          {page === 'artistUpdate' ? <ArtistUpdate /> : null}
+          {page === 'editArtistProfile' ? <EditProfile artistId={userId} setPage={setPage} /> : null}
+          {page === 'editFanProfile' ? <EditFanProfile /> : null}
           {login
             ? (
               <RegisterModal

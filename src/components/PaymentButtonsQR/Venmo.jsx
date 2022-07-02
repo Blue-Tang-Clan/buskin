@@ -14,7 +14,7 @@ export default function Venmo() {
             <button style={{ width: 10 + 'rem', height: 5 + 'rem' }} type='button'>
               <a href={`https://account.venmo.com/u/${artist.venmo}`} target='_blank' rel='noreferrer'>VENMO</a>
             </button>
-          ) : <></> }
+          ) : null }
       </div>
     );
   }

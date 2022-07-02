@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ViewMap from './ArtistViewMap.jsx';
-import {Tag, Container, Icon, TotalFollowersTag, Text, Number} from './DashBoardTag.jsx';
-import apiMasters from '../apiMasters.js';
-import { FaTrashAlt } from "react-icons/fa";
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import ViewMap from './ArtistViewMap.jsx';
+import {
+  Tag,
+  Container,
+  Icon,
+  TotalFollowersTag,
+  Text,
+  Number,
+} from './DashBoardTag.jsx';
+import { FaTrashAlt } from 'react-icons/fa';
+import apiMasters from '../apiMasters.js';
 
 const TotalFollowersModified = ({number}) => {
   return (

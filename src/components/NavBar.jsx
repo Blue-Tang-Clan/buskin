@@ -1,17 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { TopContext } from './App.jsx';
-import SearchBar from './SearchBar.jsx';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import {
-  GenreTag, UserImg, Nav, UserSettingContainer, UserNav, LogoutNav, SettingNav, NotificationNav,
-} from './StyledComponents.js';
-import RegisterModal from './Auth/RegisterModal.jsx';
 import Tooltip from '@mui/material/Tooltip';
 import ListIcon from '@mui/icons-material/List';
+import RegisterModal from './Auth/RegisterModal.jsx';
+import SearchBar from './SearchBar.jsx';
+import {
+UserImg, Nav, UserSettingContainer, UserNav, LogoutNav, SettingNav, NotificationNav,
+} from './StyledComponents.js';
 
 export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp, showForm }) {
   const [userName, setUserName] = useState('');
@@ -56,10 +56,10 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
     const cookies = document.cookie.split(';');
 
     for (let i = 0; i < cookies.length; i++) {
-      let cookie = cookies[i];
-      let eqPos = cookie.indexOf('=');
-      let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      const cookie = cookies[i];
+      const eqPos = cookie.indexOf('=');
+      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
     }
     setUserId(null);
     setShowForm('Register');
@@ -83,7 +83,7 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
   return (
     <Nav>
       <div onClick={goHome} onKeyDown={(e) => keyDown(e)} role='button' tabIndex={0}>
-        <img src='https://i.ibb.co/Dw7T0Jb/Buskin-B2-copy.png' alt='logo' height='85px' style={{ cursor: "pointer", marginLeft: '3%', marginTop: '3px' }} />
+        <img src='https://i.ibb.co/Dw7T0Jb/Buskin-B2-copy.png' alt='logo' height='85px' style={{ cursor: 'pointer', marginLeft: '3%', marginTop: '3px' }} />
       </div>
       <div>
         <SearchBar />
@@ -112,11 +112,11 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
                 <UserImg src={userPic.length ? userPic : 'https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc='} alt='thumbnail' />
               </div>
               <SettingNav style={{ cursor: 'pointer' }}>
-                <Tooltip title="Setting">
-                  <ListIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
+                <Tooltip title='Setting'>
+                  <ListIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={handleClick} />
                 </Tooltip>
                 <Menu
-                  id="basic-menu"
+                  id='basic-menu'
                   anchorEl={anchorEl}
                   open={open}
                   onClose={handleClose}
@@ -143,8 +143,8 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
                 <UserImg src={userPic.length ? userPic : 'https://i.natgeofe.com/n/02ed6887-d7a3-4f95-b42b-6c2ad57c5e48/giraffes-standoff_3x4.jpg'} alt='thumbnail' />
               </div>
               <SettingNav style={{ cursor: 'pointer' }}>
-                <Tooltip title="Setting">
-                  <ListIcon fontSize="large" sx={{ color: "#C9CED6" }} onClick={handleClick} />
+                <Tooltip title='Setting'>
+                  <ListIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={handleClick} />
                 </Tooltip>
                 <Menu
                   id='basic-menu'
@@ -162,12 +162,12 @@ export default function NavBar({ setUserType, setUserId, userNameApp, userPicApp
             </UserSettingContainer>
           )}
           <NotificationNav>
-            <Tooltip title="Alert" style={{ cursor: 'pointer' }}>
+            <Tooltip title='Alert' style={{ cursor: 'pointer' }}>
               <NotificationsNoneIcon fontSize='large' sx={{ color: '#C9CED6' }} />
             </Tooltip>
           </NotificationNav>
           <LogoutNav>
-            <Tooltip title="Log Out" style={{ cursor: 'pointer' }}>
+            <Tooltip title='Log Out' style={{ cursor: 'pointer' }}>
               <ExitToAppIcon fontSize='large' sx={{ color: '#C9CED6' }} onClick={goLogout} />
             </Tooltip>
           </LogoutNav>

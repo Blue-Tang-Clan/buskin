@@ -10,10 +10,16 @@ export default function PayPal() {
     return (
       <div>
         {artist.paypal !== 'undefined'
-          ? (<button className='submitButton'
-            onClick={() => window.open(`https://account.venmo.com/u/${artist.venmo}`, '_blank', 'noopener,noreferrer')}
-            >PAYPAL</button>)
-          : <></> }
+          ? (
+            <button
+              type='button'
+              className='submitButton'
+              onClick={() => window.open(`https://account.venmo.com/u/${artist.venmo}`, '_blank', 'noopener,noreferrer')}
+            >
+              PAYPAL
+            </button>
+          )
+          : null }
       </div>
     );
   }

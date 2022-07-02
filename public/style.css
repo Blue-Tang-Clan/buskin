@@ -159,13 +159,13 @@ background-color: rgba(134, 114, 17, 0.491);
   margin: 0;
 }
 .address{
-  font-size 15px;
+  font-size: 15px;
   margin: 0;
   color: #2E3B52;
   font-weight: 600;
 }
 .date{
-  font-size 15px;
+  font-size: 15px;
   margin: 0;
   color: #2E3B52;
   font-weight: 600;
@@ -176,10 +176,6 @@ background-color: rgba(134, 114, 17, 0.491);
 }
 .mapboxgl-popup{
   z-index: 1000;
-}
-
-.artist-map{
-
 }
 
 .pin{
@@ -250,42 +246,6 @@ font-size: xx-large;
   padding: 20px;
   text-decoration: underline;
 }
-
-.bg {
-  /* background-image: linear-gradient(-60deg, rgba($mainLight, 0.5) 50%, $mainDark 50%,); */
-  /* background-image: linear-gradient(-60deg, rgba(102, 126, 234, 0.5) 50%, #83689d 50%);
-  width: 125%;
-  height: 100%; */
-  /* background-color: lightblue; */
-  /* position: fixed;
-  left: -50%;
-  right: -50%;
-  bottom: 0;
-  top: 0;
-
-  z-index: -1;
-  opacity: 0.25;
-  animation: slide 13s ease-in-out infinite alternate; */
-}
-.bg2 {
-  /* animation-direction: alternate-reverse;
-  animation-duration: 14s; */
-}
-.bg3 {
-  /* animation-duration: 15s; */
-}
-@keyframes slide {
-  from {
-    transform: translate(-25%);
-  }
-  to {
-    transform: translate(25%);
-  }
-}
-/* .carouselImg {
-  height: 600px;
-  object-fit: cover;
-} */
 
 .imgContainer {
   width: 100%;

@@ -10,14 +10,12 @@ export default function Qr({ artistId, artistName }) {
     canvas !== null && QrCode.toCanvas(canvas, artistUrl, {
       width: 250,
     });
-    setImg(canvas.toDataURL("image/png"));
-    console.log(img);
+    setImg(canvas.toDataURL('image/png'));
   }, []);
 
   return (
-    <div className="qrcode">
-      <canvas id="qr" style={{height: '250px', width: '250px'}}>
-      </canvas>
+    <div className='qrcode'>
+      <canvas id='qr' style={{ height: '250px', width: '250px' }} />
       {
         img && <a href={img} download={artistName}>Download</a>
       }

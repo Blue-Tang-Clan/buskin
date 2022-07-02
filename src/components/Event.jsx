@@ -74,7 +74,7 @@ export default function Event() {
             console.log(err);
           });
       })
-      .catch((err) => console.log('aww didnt get any data? boohoo', err));
+      .catch((err) => console.log(err));
   }, [pageId]);
 
   function handleFollow(action, fanId, eventId) {

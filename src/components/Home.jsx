@@ -10,7 +10,6 @@ import {
   ArtistImg,
   MapInfo,
   ArtistInfo,
-  // TeamInfo,
   Development,
   Line1,
   Line2,
