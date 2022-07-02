@@ -57,6 +57,10 @@ const registerUser = (username, password, email, userType) => (
     username, password, email, userType,
   })
 );
+// POST to send email, could be collision or new event for followers. input => receivers, text, subject
+const sendEmail = (obj) => {
+  axios.post(`${url}/eventnotification`, obj);
+};
 
 const createEvent = (artistId, eventObj) => (
   axios.post(`${url}/artist/event/${artistId}`, eventObj)
@@ -77,7 +81,7 @@ const followArtist = (fanId, artistId) => (
 );
 
 const deleteEvent = (fanId, eventId) => (
-  axios.post(`${url}/fans/event/${fanId}/${eventId}`)
+  axios.delete(`${url}/fans/event/${fanId}/${eventId}`)
 );
 
 const artistDeleteEvent = (artistId, eventId) => (
@@ -93,13 +97,13 @@ const editFanProfile = (fanId, fanProfile) => (
   axios.put(`${url}/fan/profile/${fanId}`, fanProfile)
 );
 
-const editArtistProfile = (artistId, artistProfile) => (
-  axios.put(`${url}/artist/profile/${artistId}`, artistProfile, {
+const editArtistProfile = (artistId, artistProfile) => {
+  return axios.put(`${url}/artist/profile/${artistId}`, artistProfile, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   })
-);
+};
 
 const search = (query) => (
   axios.get(`${url}/search?query=${query}`)
@@ -126,6 +130,7 @@ const apiMasters = {
   search,
   checkEventRadius,
   artistDeleteEvent,
+  sendEmail,
 };
 
 export default apiMasters;

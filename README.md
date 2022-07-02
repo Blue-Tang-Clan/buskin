@@ -1,266 +1,470 @@
-# buskin'
+# buskin
 
-![Demo GIF](gif url here - upload gif to github repo and use its url)
+![Demo GIF](https://github.com/Blue-Tang-Clan/buskin/blob/development/public/demo_gif.gif?raw=true)
 
 # Setup
 
-Fork and clone the repo.
+Fork and clone the [backend repo](https://github.com/Blue-Tang-Clan/buskin-Backend) and follow setup instructions there.
+
+Fork and clone this repo.
 
 Install all dependencies:
 
 >$npm install
 
-Create new `.env` file and copy contents of `example.env` into `.env` file. Fill in data as necessary.
+Create new `config.js` file and copy contents of `example.config.js` into `config.js` file. Fill in data as necessary.
 
 Start server and client:
 
->$npm run [whatever the script ends up being]
+>$npm run prod
 
-Navigate to: http://localhost:PORTHERE/
+Navigate to: http://localhost:3000/
 
-# Project
+# About Buskin
 
-The purpose of this app is to give street performers, also known as 'buskers', a place to create a central, online profile through which fans can follow them, their performances, and send digital tips. It also allows buskers to warn and inform one another of scheduling conflicts with chosen performance locations and times.
+### Problem
 
-[MORE INFO TO BE ADDED LATER]
+Busking is the act of performing music in public with the short term hope of earning tips from passerby and, for some, a long term goal of gaining attention and perhaps a following that leads to something more. In today’s increasingly cashless world, this short term goal is hindered by fewer passerby with money to tip, which makes sustaining the lifestyle harder and makes reaching the long term goal more difficult. And as cities become more crowded, so too grows the potential fighting for busking space amongst the busking community.
 
-The app is composed of X main sections and their subcomponents/features:
+### How Buskin solves it
 
-### [SECTION 1 HERE]
-> - [Subsection 1]
-> - [Subsection 2]
+Buskin seeks to solve these problems by connecting artists to each other, to their fans, and providing a space for digitally seeking and receiving support. Both artists and fans can create profiles. Artists can then schedule and delete events and update their profile accordingly. Artists are also notified if an event they wish to schedule is 30 yards from another artist's performance at the same time, warns them, and, if they choose to schedule, notifies the other artist(s). Fans can follow and unfollow artists, save and delete events, and search for artists/events based on keywords.
 
-### [SECTION 2 HERE]
-> - [Subsection 1]
-> - [Subsection 2]
-> - [Subsection 3]
+The app is composed of seven main sections and their subcomponents/features:
 
-# REST API for Store of Zeus
+### Navigation Bar
+> - Search Bar
+> - Registration - Sign Up/Login
+> - Logged In User Menu
 
-## GET Products
+### Home Page
+> - Image Carousel
+> - Local Events Map
+> - Popular Events
+> - Upcoming Performances
+> - Popular Genre Filter/Search
+> - Popular Artists
 
-`/products`
+### Artist Profile Page
+> - Artist information
+> - Payment/tip buttons
+> - Upcoming Events
+
+### Event Page
+> - Event information
+> - Event specific map
+
+### Fan Dashboard
+> - Followed Artists
+> - Saved Events
+
+### Artist Dashboard
+> - Follower Count
+> - Scheduled Events list
+> - Map for viewing event locations
+>> - Schedule event subcomponent in map
+> - Edit Profile Page with QR code download
+
+### QR Focused Artist Profile
+> - Artist information
+> - Payment/tip buttons
+> - Logo redirect to main site
+
+# REST API for Buskin
+
+## GET Artist Details
+
+`/artist/details/:artist_id`
+
+#### Example Response
+
+    {
+        "id": 1,
+        "name": "Wei",
+        "bio": "I check on groups",
+        "genre": "vocal",
+        "instrument": "guitar",
+        "pic": "https://imagesbluetang.s3.amazonaws.com/1656606794630",
+        "venmo": "[accountname]",
+        "cashapp": "[accountname]",
+        "paypal": "[accountname]",
+        "fan_num": 5,
+        "events": [
+            {
+                "id": 153,
+                "name": "[event name]",
+                "street": "[event street]",
+                "city": "[event city]",
+                "state": "[event state]",
+                "latitude": 40.75609790590052,
+                "longitude": -73.99574219055113,
+                "date": "06/30/2022",
+                "start_time": "10:00",
+                "end_time": "10:00"
+            },
+            //...
+        ],
+        "followers": [
+            "bgoodhand0@ow.ly",
+            "aedinboro1@flavors.me",
+            "ljirus2@mozilla.org",
+            "ajohnigan3@desdev.cn",
+            "sbrito4@cnet.com",
+            //...
+        ]
+    }
+
+## GET Fan Details
+
+`/fan/dashboard/:fanId`
+
+#### Example Response
+
+    {
+        "username":"jgeraldi0",
+        "address": {
+            "city":"Saint Paul",
+            "state":"MN",
+            "street":"1 Mesta Place"
+            },
+        "events": [
+            {
+                "event_id":16,
+                "event_name":"Mercury",
+                "event_street":"9 Park Meadow Lane",
+                "event_city":"Bowie",
+                "event_state":"MD",
+                "event_longitude":-76.8777,
+                "event_latitude":38.8336,
+                "event_date":"08/13/2022",
+                "event_start_time":"12:42 PM",
+                "event_end_time":"5:56 AM",
+                "event_pic":"https://images.unsplash.com/....."
+            },
+            //...
+        ],
+        "artists": [
+            {
+                "artist_id":1,
+                "artist_display_name":"Wei",
+                "artist_instrument":"guitar",
+                "artist_genre":"vocal",
+                "artist_bio":"I check on groups",
+                "artist_pic":"https://imagesbluetang.s3.amazonaws.com/1656606794630",
+                "artist_venmo":"[accountname]",
+                "artist_paypal":"[accountname]",
+                "artist_cashapp":"[accountname]",
+                "artist_fan_num":6
+            },
+            //...
+        ]
+    }
+
+## GET Events
+
+`/events/:date`
 
 #### Example Response
 
     [
         {
-          "id": 37311,
-          "campus": "hr-rfe",
-          "name": "Camo Onesie",
-          "slogan": "Blend in to your crowd",
-          "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
-          "category": "Jackets",
-          "default_price": "140.00",
-          "created_at": "2021-08-13T14:37:33.145Z",
-          "updated_at": "2021-08-13T14:37:33.145Z"
-        }
-        // ..
+            "id":"167",
+            "name":"Val's Guitar Party",
+            "street":"Val St",
+            "city":"NYC",
+            "state":"NY",
+            "longitude":"-73.98711249023387",
+            "latitude":"40.729348106242135",
+            "art_id":"76",
+            "date":"07/03/2022",
+            "start_time":"22:00",
+            "end_time":"23:00",
+            "description":"The best guitar party Val has ever thrown!",
+            "pic":"https://images.unsplash.com/...",
+            "display_name":"Blue Tang Clan"
+        },
+        //...
     ]
 
-## GET Single Product
+## GET One Event
 
-`/products/:product_id`
-
-#### Example Response
-
-    {
-      "id": 37311,
-      "campus": "hr-rfe",
-      "name": "Camo Onesie",
-      "slogan": "Blend in to your crowd",
-      "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
-      "category": "Jackets",
-      "default_price": "140.00",
-      "created_at": "2021-08-13T14:37:33.145Z",
-      "updated_at": "2021-08-13T14:37:33.145Z",
-      "features": [
-          {
-              "feature": "Fabric",
-              "value": "Canvas"
-          },
-          {
-              "feature": "Buttons",
-              "value": "Brass"
-          }
-          // ..
-      ]
-    }
-
-## GET Styles
-
-`/products/:product_id/styles`
-
-#### Example Response
-
-    {
-      "product_id": "37311",
-      "results": [
-          {
-            "style_id": 220998,
-            "name": "Forest Green & Black",
-            "original_price": "140.00",
-            "sale_price": null,
-            "default?": true,
-            "photos": [
-                {
-                    "thumbnail_url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-                    "url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
-                }
-                // ..
-            ],
-            "skus": {
-                "1281032": {
-                    "quantity": 8,
-                    "size": "XS"
-              }
-              // ..
-          }
-          // ..
-      ]
-    }
-
-## GET Related Items
-
-`/products/:product_id/related`
+`/events/:date`
 
 #### Example Response
 
     [
-        37312,
-        37313,
-        37318,
-        37317
+        {
+            "id":"167",
+            "name":"Val's Guitar Party",
+            "street":"Val St",
+            "city":"NYC",
+            "state":"NY",
+            "longitude":"-73.98711249023387",
+            "latitude":"40.729348106242135",
+            "art_id":"76","date":"07/03/2022",
+            "start_time":"22:00",
+            "end_time":"23:00",
+            "description":"The best guitar party Val has ever thrown!",
+            "pic":"https://imagesbluetang.s3.amazonaws.com/1656689803358",
+            "display_name":"Blue Tang Clan",
+            "instrument":"Piano",
+            "genre":"Classical",
+            "bio":"Best Piano Player Ever",
+            "venmo":"[accountname]",
+            "paypal":"[accountname]",
+            "cashapp":"[accountname]",
+            "fan_num":6,
+            "auth_id":"165"
+        }
     ]
 
-## GET Reviews
+## GET Check Events
 
-`/reviews?product_id=[product_id]`
+`/check/events?latitude=[integer]&longitude=[integer]&date=[string]&start_time=[string]`
 
-#### Example Response
+#### Example Response (array of emails to notify)
 
-    {
-        "product": "37311",
-        "page": 0,
-        "count": 5,
-        "results": [
-              {
-                  "review_id": 1135806,
-                  "rating": 3,
-                  "summary": "I don't like the model's attitude in the camo picture",
-                  "recommend": false,
-                  "response": null,
-                  "body": "she grouchy",
-                  "date": "2022-02-21T00:00:00.000Z",
-                  "reviewer_name": "Jenny",
-                  "helpfulness": 24,
-                  "photos": []
-              }
-              // ..
-        ]
-    }
+    [
+        "bgoodhand0@ow.ly",
+        "aedinboro1@flavors.me",
+        "ljirus2@mozilla.org",
+        "ajohnigan3@desdev.cn",
+        "sbrito4@cnet.com",
+        //...
+    ]
 
-## GET Reviews Meta Data
+## GET Homepage Display Info
 
-`/reviews/meta?product_id=[product_id]`
+`/homepage/:latitude/:longitude`
 
 #### Example Response
 
     {
-        "product_id": "37311",
-        "ratings": {
-            "1": "34",
-            "2": "19",
-            "3": "55",
-            "4": "59",
-            "5": "164"
-        },
-        "recommended": {
-            "false": "71",
-            "true": "260"
-        },
-        "characteristics": {
-            "Fit": {
-                "id": 125031,
-                "value": "3.1693121693121693"
+        "coming_events": [
+            {
+                "id": 78,
+                "event_name": "Maybach",
+                "street": "0249 Shasta Circle",
+                "city": "Detroit",
+                "state": "MI",
+                "longitude": -83.1508,
+                "latitude": 42.2399,
+                "date": "07/01/2022",
+                "start_time": "3:22 PM",
+                "end_time": "4:03 PM",
+                "description": "streamline distributed platforms",
+                "pic": "https://media.istockphoto.com/photos/..."
             },
-            "Length": {
-                "id": 125032,
-                "value": "3.0990099009900990"
-            }
-            // ..
+            //...
+        ],
+        "local_events": [
+            {
+                "id": 78,
+                "event_name": "Maybach",
+                "street": "0249 Shasta Circle",
+                "city": "Detroit",
+                "state": "MI",
+                "longitude": -83.1508,
+                "latitude": 42.2399,
+                "date": "07/01/2022",
+                "start_time": "3:22 PM",
+                "end_time": "4:03 PM",
+                "description": "streamline distributed platforms",
+                "pic": "https://media.istockphoto.com/photos/..."
+            },
+            //...
+        ],
+        "artists": [
+            {
+                "id": 2,
+                "artist_name": "Andres Greally",
+                "instrument": "Harmonica",
+                "genre": "jazz",
+                "bio": "Loves to chill and jam",
+                "pic": "https://imagesbluetang.s3.amazonaws.com/1656504386286",
+                "venmo": "[accountname]",
+                "paypal": "[accountname]",
+                "cashapp": "[accountname]",
+                "fan_num": 1
+            },
+            //...
+        ],
+        "talent": {
+            "id": 30,
+            "artist_name": "Pierre Carmo",
+            "instrument": "Ghatam",
+            "genre": "Country",
+            "bio": "transform clicks-and-mortar partnerships",
+            "pic": "https://images.unsplash.com/photo...",
+            "venmo": "[accountname]",
+            "paypal": "[accountname]",
+            "cashapp": "[accountname]",
+            "fan_num": 8
         }
     }
 
-## POST Review
+## GET Homepage Genre Info
 
-`/reviews`
+`/homepage/genre`
 
-#### Example Post
+#### Example Response
+
+    [
+        {
+            "genres": "COUNTRY"
+        },
+        {
+            "genres": "CLASSICAL"
+        },
+        {
+            "genres": "FUNK"
+        },
+        //...
+    ]
+
+## GET Homepage Specific Genre Info
+
+`/homepage/:genre`
+
+#### Example Response
+
+    [
+        {
+            "id": "31",
+            "artist_name": "Christos Longmire",
+            "instrument": "guitar",
+            "genre": "Country",
+            "bio": "enable revolutionary action-items",
+            "pic": "https://images.unsplash.com/photo...",
+            "venmo": "[accountname]",
+            "paypal": "[accountname]",
+            "cashapp": "[accountname]",
+            "fan_num": 4
+        },
+        //...
+    ]
+
+## GET Search Artist/Events by Keyword
+
+`/search?query=[string]`
+
+#### Example Response
 
     {
-      product_id: [integer],
-      rating: [integer],
-      summary: [text],
-      recommend: [bool],
-      name: [text],
-      email: [text],
-      photos: [[text]],
-      body: [text],
-      characteristics: [object]
+        "artists": [
+            {
+                "id": 13,
+                "name": "Rosamond Fellgett",
+                "pic": "https://images.unsplash.com/photo..."
+            },
+            //...
+        ],
+        "event": [
+            {
+                "id": 167,
+                "name": "Val's Guitar Party",
+                "city": "NYC",
+                "state": "NY",
+                "pic": "https://images.unsplash.com/photo..."
+            },
+            //...
+        ]
     }
 
-#### Example Response
-    Status 201 CREATED
-
-## PUT Mark Review Helpful
-
-`/reviews/:review_id/helpful`
-
-#### Example Response
-    Status 204 NO CONTENT
-
-## PUT Report Review
-
-`/reviews/:review_id/report`
-
-#### Example Response
-    Status 204 NO CONTENT
-
 # Technology Choices
+
+### Frontend
 
 #### Framework
 
 - React
+- Mapbox
+- React-Router-Dom
+- axios
 
 #### CSS
 
 - styled-components
+- Material-UI
 
-# Collaborators
+### Backend
+
+#### Server
+
+- Node.js
+- Express
+
+# Fullstack Collaborators
 
 ### Yaokai Dong
 
- - Section: Ratings & Reviews
+ - Main role: Database Owner
 
  - Github: <a href='https://github.com/ykdong'>ykdong</a>
 
-  - LinkedIn: <a href='https://www.linkedin.com/mwlite/in/yaokai-dong-44ab15178'>https://www.linkedin.com/mwlite/in/yaokai-dong-44ab15178</a>
+ - LinkedIn: <a href='https://www.linkedin.com/mwlite/in/yaokai-dong-44ab15178'>https://www.linkedin.com/mwlite/in/yaokai-dong-44ab15178</a>
 
 ### Nikko Elliott
 
- - Section: Overview
+ - Main role: Project Manager
 
  - Github: <a href='https://github.com/nelliott82'>nelliott82</a>
 
  - LinkedIn: <a href='https://www.linkedin.com/in/nelliott3482/'>https://www.linkedin.com/in/nikkoelliott/</a>
 
+ ### Yuki Ogawa
+
+ - Main role: Fullstack Extraordinaire
+
+ - Github: <a href='https://github.com/Yuki-OG'>Yuki-OG</a>
+
+ - LinkedIn: <a href='https://www.linkedin.com/in/yuki-ogawa/'>https://www.linkedin.com/in/yuki-ogawa/</a>
+
+ ### Utku Ozkan
+
+ - Main role: Architect Co-Owner
+
+ - Github: <a href='https://github.com/utkucanozkan1'>utkucanozkan1</a>
+
+ - LinkedIn: <a href='https://www.linkedin.com/in/utku-can-ozkan/'>https://www.linkedin.com/in/utku-can-ozkan/</a>
+
+ ### Val Pizzo
+
+ - Main role: UI Co-Owner
+
+ - Github: <a href='https://github.com/valpizzo'>valpizzo</a>
+
+ - LinkedIn: <a href='https://www.linkedin.com/in/valpizzo/'>https://www.linkedin.com/in/valpizzo/</a>
+
+ ### Fangzhuo Xi
+
+ - Main role: Architect Co-Owner
+
+ - Github: <a href='https://github.com/FangzhuoXi'>FangzhuoXi</a>
+
+ - LinkedIn: <a href='https://www.linkedin.com/in/fangzhuoxi/'>https://www.linkedin.com/in/fangzhuoxi/</a>
+
+ ### Yao Yu
+
+ - Main role: UI Owner
+
+ - Github: <a href='https://github.com/amyyuyao'>amyyuyao</a>
+
+ - LinkedIn: <a href='https://www.linkedin.com/in/yao-yu-08ab1971/'>https://www.linkedin.com/in/yao-yu-08ab1971/</a>
+
+  ### Kedir Zeinu
+
+ - Main role: Fullstack Extraordinaire
+
+ - Github: <a href='https://github.com/Kedirz'>Kedirz</a>
+
+ - LinkedIn: <a href='https://www.linkedin.com/in/kedirzeinu'>https://www.linkedin.com/in/kedirzeinu</a>
+
 # MIT License
 
 MIT License
 
-Copyright (c) 2022 Y. Dong, N. Elliott, Y. Ogawa, U. Ozkan, V. Pizzo, F. Xi, Y. Yu, K. Zeinu
-
+Copyright (c) 2022 Blue Tang Clan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

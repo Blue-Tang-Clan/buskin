@@ -69,7 +69,7 @@ export default function EditProfile( { artistId, artistName, setPage } ) {
       // set page id to something, then set image to the url
     });
   }
-
+  console.log('easdfasdf')
   return (
     <div>
       <label>Edit profile</label>

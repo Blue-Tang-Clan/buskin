@@ -10,8 +10,8 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 
 const FollowedArtistsModified = ({number}) => {
   return (
-    <Tag>
-      <Container style={{position: 'absolute', top:'24%'}}>
+    <Tag style={{position: 'relative'}}>
+      <Container style={{position: 'absolute', top:'35px'}}>
         <FollowedArtistsTag>
           <Icon>
             <FavoriteBorderIcon sx={{ color: "#FFB800" }} />
@@ -30,9 +30,10 @@ const FollowedArtistsModified = ({number}) => {
   );
 }
 
-const SavedEventsModified = ({ number }) => { (
-  <Tag>
-      <Container style={{position: 'absolute', top:'40%'}}>
+const SavedEventsModified = ({number}) => {
+  return (
+  <Tag style={{position: 'relative'}}>
+      <Container style={{position: 'absolute', top:'35px'}}>
         <SavedEventsTag>
           <Icon>
             <DateRangeIcon sx={{ color: "#2ED297" }} />
@@ -68,7 +69,7 @@ const EventsMImg = styled(EventImg)`
 
 const Card = styled.div`
   text-align: center;
-  width: 25%;
+  width: 20%;
   display: inline-block;
 `;
 
@@ -104,7 +105,7 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
 
   return (
     <Box sx={{ width: '100%', margin: '5%' }}>
-      <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12}>
           <h2 style={{ color: '#373B53', fontWeight: '700' }}>DashBoard</h2>
         </Grid>

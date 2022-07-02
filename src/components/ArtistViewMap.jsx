@@ -39,7 +39,7 @@ const WarningMessage = styled.div`
 `;
 
 let eventObj = {};
-export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, events }) {
+export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, events, followers }) {
   const [viewport, setViewport] = useState({
     latitude: 40.7484,
     longitude: -73.9857,
@@ -59,7 +59,7 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
   const [artistId, setArtistId] = useState(null);
   const [artistName, setArtistName] = useState('');
   const [warning, setWarning] = useState(false);
-
+  let conflictingEmails;
   useEffect(() => {
     const getPins = async () => {
       try {
@@ -105,7 +105,24 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
       .then((res) => {
         setPins([...pins, eventObj]);
       })
-      .then(() => setNewEvent(null))
+      .then(() => {
+        let receivers = '';
+        if (followers) {
+          receivers += ', ' + followers.join(', ');
+        }
+        console.log(receivers);
+        const subject = 'You are invited!';
+        const text = artistName + ' is throwing a buskin party at ' + startTime +  ' in ' + street + ', ' + city + '!';
+        apiMasters.sendEmail({ receivers, subject, text });
+      })
+      .then(() => {
+        const subject = 'Another event happening at your scheduled event!';
+        const text = artistName + ' has schecduled an event ' + ' at ' + startTime + ' . Do you want to reschudle?';
+        console.log(receivers, subject, text);
+        console.log('Val Says Hi:', receivers);
+        apiMasters.sendEmail({ receivers, subject, text });
+        setConfEmails(arrOfEmails);
+      })
       .then(() => getArtistDashBoard(artistId))
       .catch((err) => console.log(err));
   };
@@ -131,6 +148,8 @@ export default function ViewMap({ ArtistName, ArtistId, getArtistDashBoard, even
       apiMasters.checkEventRadius(newEvent.lat, newEvent.lng, formatDate, startTime)
         .then((res) => {
           if (res.data.length) {
+            conflictingEmails = res.data.join(', ');
+            console.log('SAta', conflictingEmails);
             setWarning(true);
           } else {
             eventCreation(artistId, eventObj);
