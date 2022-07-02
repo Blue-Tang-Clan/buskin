@@ -27,7 +27,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function LogIn({ setUserType, handleClose, setShowForm, setUserId, setUserName, setUserPic }) {
+export default function LogIn({
+  setUserType, handleClose, setShowForm, setUserId, setUserName, setUserPic 
+}) {
   const [failed, setFailed] = React.useState(false);
 
   const ChangeForm = () => {

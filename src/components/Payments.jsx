@@ -1,8 +1,8 @@
 import React from 'react';
+import styled from 'styled-components';
 import Venmo from './PaymentButtons/Venmo.jsx';
 import PayPal from './PaymentButtons/PayPal.jsx';
 import CashApp from './PaymentButtons/CashApp.jsx';
-import styled from 'styled-components';
 
 const Payment = styled.div`
   display: flex;

@@ -30,8 +30,7 @@ const FollowedArtistsModified = ({number}) => {
   );
 }
 
-const SavedEventsModified = ({number}) => {
-  return (
+const SavedEventsModified = ({ number }) => { (
   <Tag>
       <Container style={{position: 'absolute', top:'40%'}}>
         <SavedEventsTag>
@@ -95,7 +94,6 @@ export default function FanDashBoard({ setPage, setPageId, userId }) {
   useEffect(() => {
     apiMasters.getFanDashBoard(userId)
       .then((response) => {
-        // console.log('events', response.data.events);
         setArtistsFollowed(response.data.artists);
         setEventsSaved(response.data.events);
       })

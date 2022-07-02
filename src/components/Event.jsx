@@ -36,7 +36,7 @@ export default function Event() {
           street: info.street,
         });
       })
-      .catch((err) => console.log('aww didnt get any data? boohoo', err));
+      .catch((err) => console.log(err));
   }, [pageId]);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function Event() {
           cashapp: info.cashapp,
         });
       })
-      .catch((err) => console.log('This one ww didnt get any data? boohoo', err));
+      .catch((err) => console.log(err));
   }, [eventInfo]);
 
   const saveEvent = () => {
@@ -65,7 +65,6 @@ export default function Event() {
       apiMasters.saveEvent(userId, pageId);
     }
   };
-  console.log('eventInfo: ', eventInfo);
   return (
     <EventColContainer style={{ marginTop: '50px' }}>
       <EventRowContainer>

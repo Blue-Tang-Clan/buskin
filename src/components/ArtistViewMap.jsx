@@ -3,10 +3,10 @@ import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import React, {
-  useState, useRef, useCallback, useEffect, useTheme,
+  useState, useRef, useCallback, useEffect,
 } from 'react';
 import MapGL, { Marker, Popup, GeolocateControl, Layer } from 'react-map-gl';
-import { Room, Cancel } from '@mui/icons-material';
+import { Room } from '@mui/icons-material';
 import Geocoder from 'react-map-gl-geocoder';
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';

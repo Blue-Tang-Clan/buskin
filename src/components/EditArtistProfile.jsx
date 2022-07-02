@@ -2,20 +2,15 @@ import React, { useState } from 'react';
 import Qr from './Qr.jsx';
 import apiMasters from '../apiMasters.js';
 
-export default function EditProfile () {
-  // We need artistId here from artist profile where the user is the artist themselves
+export default function EditProfile() {
   const artistId = 6;
   const artistName = 'Luke';
-  //
 
-
-
-  const [displayName, setDisplayName ] = useState('');
-  const [genre, setGenre ] = useState('');
-  const [instrument, setInstrument ] = useState('');
-  const [bio, setBio ] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [genre, setGenre] = useState('');
+  const [instrument, setInstrument] = useState('');
+  const [bio, setBio] = useState('');
   const [pic, setPicture] = useState(null);
-  // const [soundClip, setSoundClip ] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [paymentOptions, setPaymentOptions] = useState('');
 
@@ -73,7 +68,6 @@ export default function EditProfile () {
         <input onChange={handleInput} placeholder="stage name" name="displayname" required /> <br />
         <input onChange={handleInput} placeholder="instrument you play" name="instrument" required /> <br />
         <input onChange={handleInput} placeholder="your picture" type="file" accept="image/*" name="picture" required /> <br />
-        {/* <input onChange={handleInput} placeholder="your sound clip" name="soundclip" required /> <br /> */}
         <label for="payment">Choose a payment option:</label>
         <select name="paymentoptions" onChange={handleInput}>
           <option value="venmo">venmo</option>

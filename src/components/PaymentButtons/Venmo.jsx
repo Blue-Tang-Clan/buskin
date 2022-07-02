@@ -7,12 +7,17 @@ export default function Venmo() {
   if (artist.venmo) {
     return (
       <div>
-        {artist.venmo !== 'undefined' ?
-          <button
-            className='submitButton'
-            onClick={() => window.open(`https://account.venmo.com/u/${artist.venmo}`, '_blank', 'noopener,noreferrer')}
-            >VENMO</button>
-          : <></> }
+        {artist.venmo !== 'undefined'
+          ? (
+            <button
+              type='button'
+              className='submitButton'
+              onClick={() => window.open(`https://account.venmo.com/u/${artist.venmo}`, '_blank', 'noopener,noreferrer')}
+            >
+              VENMO
+            </button>
+          )
+          : null }
       </div>
     );
   }
